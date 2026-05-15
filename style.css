@@ -161,3 +161,19 @@ footer {
 .hero h1, .hero p, .hero button {
   position: relative; /* keeps text above overlay */
 }
+
+.about {
+  background: url('images/about-bg.jpg') no-repeat center center/cover;
+  color: #fff;
+  padding: 60px 20px;
+  position: relative;
+}
+.about::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+.about h2, .about p {
+  position: relative;
+}
