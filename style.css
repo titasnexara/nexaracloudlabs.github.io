@@ -148,4 +148,77 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+/* Shared section container */
+section {
+  padding: 60px 20px;
+}
+
+/* About Us */
+.about {
+  text-align: center;
+  background-color: #f9fafc;
+}
+
+.about h2 {
+  margin-bottom: 20px;
+}
+
+.about p {
+  max-width: 800px;   /* keeps text centered and readable */
+  margin: 0 auto;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Contact Us */
+.contact {
+  text-align: center;
+  background-color: #eef2f7;
+}
+
+.contact h2 {
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  max-width: 600px;   /* centers the form */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.form-group input {
+  flex: 1;            /* makes name and email sit side by side */
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
   
