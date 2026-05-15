@@ -177,3 +177,25 @@ footer {
 .about h2, .about p {
   position: relative;
 }
+
+.about {
+  background: url('images/about-bg.jpg') no-repeat center center/cover;
+  color: #fff;
+  position: relative;
+}
+.about::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4); /* overlay */
+}
+.services {
+  background: url('images/services-bg.jpg') no-repeat center center/cover;
+  color: #fff;
+  position: relative;
+}
+.contact {
+  background: url('images/contact-bg.jpg') no-repeat center center/cover;
+  color: #fff;
+  position: relative;
+}
