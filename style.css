@@ -147,9 +147,11 @@ button.cta:hover {
   z-index: 1; /* ensures cards sit above overlay */
 }
 
-.service-card h3, .service-card p {
+.service-card h3,
+.service-card p {
   position: relative;
   z-index: 1;
+  color: #333;
 }
 
 /* Contact Section */
