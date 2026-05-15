@@ -163,3 +163,20 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+}
+
+.logo span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
