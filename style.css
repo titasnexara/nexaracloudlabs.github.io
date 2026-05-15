@@ -155,3 +155,52 @@ footer {
   text-align: center;
   padding: 20px;
 }
+/* Navigation */
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  transition: border-bottom 0.3s ease;
+}
+
+.nav-links li a:hover {
+  border-bottom: 2px solid #fff;
+}
+
+/* Hero Section */
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Buttons */
+button.cta {
+  background: #fff;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.cta:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* Service Cards */
+.service-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
