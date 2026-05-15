@@ -1,4 +1,4 @@
-/* Global Styles */
+/* --- Global Reset --- */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
@@ -6,7 +6,12 @@ body {
   color: #333;
 }
 
-/* Navbar */
+section {
+  padding: 60px 20px;
+  position: relative;
+}
+
+/* --- Navbar --- */
 .navbar {
   background: #0b2c5f;
   color: #fff;
@@ -27,7 +32,7 @@ body {
   font-weight: 500;
 }
 
-/* Hero Section */
+/* --- Hero Section --- */
 .hero {
   background: url('images/hero-bg.jpg') no-repeat center center/cover;
   color: #fff;
@@ -58,17 +63,11 @@ body {
   font-weight: bold;
 }
 
-/* Services Section */
-
- /* --- Global Section Styling --- */
-section {
-  padding: 60px 20px;
-  background-color: #f4f6fb;
-}
-
 /* --- Services Section --- */
 .services {
   text-align: center;
+  background-color: #f4f6fb;
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
 }
 
 .service-grid {
@@ -98,6 +97,12 @@ section {
 /* --- About Section --- */
 .about {
   text-align: center;
+  background-color: #f9fafc;
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
+}
+
+.about h2 {
+  margin-bottom: 20px;
 }
 
 .about p {
@@ -110,6 +115,12 @@ section {
 /* --- Contact Section --- */
 .contact {
   text-align: center;
+  background-color: #eef2f7;
+  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
+}
+
+.contact h2 {
+  margin-bottom: 20px;
 }
 
 .contact-form {
@@ -126,77 +137,8 @@ section {
   flex-wrap: wrap;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Shared section container */
-section {
-  padding: 60px 20px;
-}
-
-/* About Us */
-.about {
-  text-align: center;
-  background-color: #f9fafc;
-}
-
-.about h2 {
-  margin-bottom: 20px;
-}
-
-.about p {
-  max-width: 800px;   /* keeps text centered and readable */
-  margin: 0 auto;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Contact Us */
-.contact {
-  text-align: center;
-  background-color: #eef2f7;
-}
-
-.contact h2 {
-  margin-bottom: 20px;
-}
-
-.contact-form {
-  max-width: 600px;   /* centers the form */
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-group {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
 .form-group input {
-  flex: 1;            /* makes name and email sit side by side */
+  flex: 1;
 }
 
 input, textarea {
@@ -221,4 +163,3 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-  
