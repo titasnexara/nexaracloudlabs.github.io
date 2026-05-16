@@ -132,22 +132,48 @@ section {
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-/* --- About Section --- */
+/* --- About Us Section --- */
 .about {
   text-align: center;
   background-color: #f9fafc;
   clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
+  padding: 80px 20px;
 }
 
 .about h2 {
+  font-size: 32px;
   margin-bottom: 20px;
+  color: #000;
 }
 
 .about p {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
   line-height: 1.6;
   color: #333;
+  font-size: 18px;
+}
+
+.about-services {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 700px;
+  text-align: left;
+}
+
+.about-services li {
+  background: #f0f0f0db; /* light grey background for each service */
+  margin: 10px 0;
+  padding: 15px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-services li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 /* --- Contact Section --- */
