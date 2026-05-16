@@ -107,7 +107,7 @@ section {
   background: linear-gradient(180deg, #001f3f 0%, #003366 100%);
   clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
   color: #fff;
-  padding-bottom: 80px;
+  padding: 60px 20px 40px; /* reduced bottom padding */
 }
 
 .service-grid {
@@ -143,9 +143,9 @@ section {
   gap: 40px;
   background: linear-gradient(180deg, #003366 0%, #001f3f 100%);
   color: #fff;
-  padding: 80px 40px 100px;
+  padding: 60px 40px 80px; /* reduced top padding */
   box-sizing: border-box;
-  margin-top: -40px; /* closes the gap between sections */
+  margin-top: -20px; /* smaller overlap to close gap */
 }
 
 /* --- About Us Section --- */
@@ -255,6 +255,7 @@ button:hover {
   .about-contact-container {
     flex-direction: column;
     align-items: center;
+    margin-top: 0; /* remove overlap on small screens */
   }
 
   .about, .contact-fixed {
