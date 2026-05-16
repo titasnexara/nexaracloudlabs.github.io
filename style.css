@@ -104,7 +104,7 @@ section {
 /* --- Services Section --- */
 .services {
   text-align: center;
-  background-color: #001f3f; /* navy blue background */
+  background: linear-gradient(180deg, #001f3f 0%, #003366 100%); /* navy gradient */
   clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
   color: #fff;
 }
@@ -133,13 +133,25 @@ section {
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
+/* --- About + Contact Container --- */
+.about-contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  background: linear-gradient(180deg, #001f3f 0%, #003366 100%); /* navy gradient */
+  color: #fff;
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
 /* --- About Us Section --- */
 .about {
+  flex: 1 1 60%;
   text-align: left;
-  background-color: #001f3f; /* navy blue background */
-  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
-  padding: 80px 20px;
-  color: #fff;
+  overflow-y: auto;
+  height: auto;
 }
 
 .about h2 {
@@ -180,21 +192,22 @@ section {
 }
 
 /* --- Contact Section --- */
-.contact {
-  text-align: center;
-  background-color: #001f3f; /* navy blue background */
-  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
-  color: #fff;
+.contact-fixed {
+  flex: 1 1 35%;
+  background: #eef2f7;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+  color: #001f3f;
+  min-width: 300px;
 }
 
-.contact h2 {
+.contact-fixed h2 {
   margin-bottom: 20px;
-  color: #fff;
+  text-align: center;
 }
 
 .contact-form {
-  max-width: 600px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -236,6 +249,18 @@ button:hover {
 }
 
 /* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .about-contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about, .contact-fixed {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -263,46 +288,4 @@ button:hover {
 .hero .cta {
   display: none;
   margin-top: 0;
-}
-
-/* --- About + Contact Alignment Fix --- */
-.about-contact-container {
-  display: flex;
-  align-items: stretch; /* ensures both sections match height */
-  justify-content: space-between;
-  gap: 40px; /* space between sections */
-  background-color: #001f3f; /* navy blue background */
-  color: #fff;
-  padding: 60px 40px;
-  box-sizing: border-box;
-}
-
-/* About Us Section */
-.about {
-  flex: 1;
-  text-align: left;
-  overflow-y: auto;
-  height: auto;
-}
-
-/* Contact Form Section */
-.contact-fixed {
-  width: 400px;
-  background: #eef2f7;
-  padding: 40px 20px;
-  border-radius: 8px;
-  box-shadow: -4px 0 10px rgba(0,0,0,0.1);
-  align-self: flex-start; /* keeps form aligned to top */
-}
-
-.contact-fixed h2 {
-  margin-bottom: 20px;
-  text-align: center;
-  color: #001f3f;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
