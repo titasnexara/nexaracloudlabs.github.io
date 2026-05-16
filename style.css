@@ -224,8 +224,9 @@ button:hover {
   .logo img {
     height: 70px;
   }
-  
+
 }/* --- Remove Get Started button from Hero Section --- */
 .hero .cta {
   display: none;
+  margin-top: 0; /* reset spacing so text stays centered */
 }
