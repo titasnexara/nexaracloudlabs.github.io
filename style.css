@@ -309,3 +309,8 @@ button:hover {
 .contact-fixed:empty {
   display: none;
 }
+
+/* Or force-hide the specific box if it’s outside the main container */
+.about-contact-container + .contact-fixed {
+  display: none;
+}
