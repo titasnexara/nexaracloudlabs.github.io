@@ -104,9 +104,10 @@ section {
 /* --- Services Section --- */
 .services {
   text-align: center;
-  background: linear-gradient(180deg, #001f3f 0%, #003366 100%); /* navy gradient */
-  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  background: linear-gradient(180deg, #001f3f 0%, #003366 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
   color: #fff;
+  padding-bottom: 80px;
 }
 
 .service-grid {
@@ -140,10 +141,11 @@ section {
   justify-content: space-between;
   align-items: flex-start;
   gap: 40px;
-  background: linear-gradient(180deg, #001f3f 0%, #003366 100%); /* navy gradient */
+  background: linear-gradient(180deg, #003366 0%, #001f3f 100%);
   color: #fff;
-  padding: 60px 40px;
+  padding: 80px 40px 100px;
   box-sizing: border-box;
+  margin-top: -40px; /* closes the gap between sections */
 }
 
 /* --- About Us Section --- */
