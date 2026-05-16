@@ -17,10 +17,10 @@ section {
   background: #000000;
   color: #fff;
   display: flex;
-  align-items: center;          /* keeps logo, links, and button vertically aligned */
+  align-items: center;
   justify-content: space-between;
   padding: 10px 50px;
-  height: 100px;                /* taller navbar for larger logo */
+  height: 100px;
   box-sizing: border-box;
 }
 
@@ -32,9 +32,9 @@ section {
 }
 
 .logo img {
-  height: 200px;                 /* larger logo size */
+  height: 200px;
   width: auto;
-  filter: drop-shadow(0 2px 6px rgba(255,255,255,0.4)); /* subtle glow for contrast */
+  filter: drop-shadow(0 2px 6px rgba(255,255,255,0.4));
 }
 
 /* --- Navigation Links --- */
@@ -60,7 +60,7 @@ section {
 
 /* --- CTA Button --- */
 .cta {
-  background: #429d91;;
+  background: #429d91;
   border: none;
   color: #fff;
   padding: 8px 17px;
@@ -104,11 +104,10 @@ section {
 /* --- Services Section --- */
 .services {
   text-align: center;
-  background-color: #001f3f;
+  background-color: #001f3f; /* navy blue background */
   clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-  color: #fff; /* ensures text and headings stay readable */
+  color: #fff;
 }
-
 
 .service-grid {
   display: grid;
@@ -136,23 +135,24 @@ section {
 
 /* --- About Us Section --- */
 .about {
-  text-align: center;
-  background-color: #f9fafc;
+  text-align: left;
+  background-color: #001f3f; /* navy blue background */
   clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
   padding: 80px 20px;
+  color: #fff;
 }
 
 .about h2 {
   font-size: 32px;
   margin-bottom: 20px;
-  color: #000;
+  color: #fff;
 }
 
 .about p {
   max-width: 800px;
   margin: 0 auto 30px auto;
   line-height: 1.6;
-  color: #333;
+  color: #f0f0f0;
   font-size: 18px;
 }
 
@@ -165,28 +165,31 @@ section {
 }
 
 .about-services li {
-  background: #f0f0f0db; /* light grey background for each service */
+  background: rgba(255,255,255,0.1);
   margin: 10px 0;
   padding: 15px 20px;
   border-radius: 6px;
   font-size: 16px;
+  color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about-services li:hover {
   transform: translateX(5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(255,255,255,0.2);
 }
 
 /* --- Contact Section --- */
 .contact {
   text-align: center;
-  background-color: #eef2f7;
+  background-color: #001f3f; /* navy blue background */
   clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
+  color: #fff;
 }
 
 .contact h2 {
   margin-bottom: 20px;
+  color: #fff;
 }
 
 .contact-form {
@@ -213,10 +216,12 @@ input, textarea {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 16px;
+  background: #f9fafc;
+  color: #333;
 }
 
 button {
-  background-color: #007bff;
+  background-color: #429d91;
   color: #fff;
   border: none;
   padding: 12px;
@@ -227,7 +232,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #1f7c70;
 }
 
 /* --- Responsive Adjustments --- */
@@ -252,17 +257,10 @@ button:hover {
   .logo img {
     height: 70px;
   }
+}
 
-}/* --- Remove Get Started button from Hero Section --- */
+/* --- Remove Get Started button from Hero Section --- */
 .hero .cta {
   display: none;
-  margin-top: 0; /* reset spacing so text stays centered */
+  margin-top: 0;
 }
-
-/* --- Split Layout: About Us + Contact --- */
-.about-contact-container {
-  display: flex;
-  align-items: flex-start;
-}
-
-/* About Us Section (scrollable, left-aligned) */
