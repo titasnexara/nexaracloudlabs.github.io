@@ -105,10 +105,10 @@ section {
 .services {
   text-align: center;
   background: linear-gradient(180deg, #001f3f 0%, #003366 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 99%, 0 100%);
   color: #fff;
   padding: 60px 20px 0;
-  margin-bottom: -5px; /* removes white gap */
+  margin-bottom: -6px; /* removes white gap */
   border: none;
 }
 
@@ -147,7 +147,7 @@ section {
   color: #fff;
   padding: 60px 40px 80px;
   box-sizing: border-box;
-  margin-top: -5px; /* seamless overlap */
+  margin-top: -6px; /* seamless overlap */
   border: none;
 }
 
@@ -220,6 +220,7 @@ section {
   color: #001f3f;
 }
 
+/* --- Contact Form --- */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -228,12 +229,13 @@ section {
 
 input, textarea {
   width: 100%;
-  padding: 12px;
+  padding: 12px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 15px;
   background: #fff;
   color: #333;
+  box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
