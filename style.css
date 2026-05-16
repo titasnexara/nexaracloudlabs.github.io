@@ -304,3 +304,8 @@ button:hover {
   display: none;
   margin-top: 0;
 }
+
+/* Hide any empty or stray contact box */
+.contact-fixed:empty {
+  display: none;
+}
