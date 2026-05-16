@@ -32,7 +32,7 @@ section {
 }
 
 .logo img {
-  height: 85px;                 /* larger logo size */
+  height: 110px;                 /* larger logo size */
   width: auto;
   filter: drop-shadow(0 2px 6px rgba(255,255,255,0.4)); /* subtle glow for contrast */
 }
