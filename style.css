@@ -105,9 +105,10 @@ section {
 .services {
   text-align: center;
   background: linear-gradient(180deg, #001f3f 0%, #003366 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
   color: #fff;
-  padding: 60px 20px 40px; /* reduced bottom padding */
+  padding: 60px 20px 20px;
+  margin-bottom: -2px; /* closes white gap */
 }
 
 .service-grid {
@@ -143,9 +144,9 @@ section {
   gap: 40px;
   background: linear-gradient(180deg, #003366 0%, #001f3f 100%);
   color: #fff;
-  padding: 60px 40px 80px; /* reduced top padding */
+  padding: 60px 40px 80px;
   box-sizing: border-box;
-  margin-top: -20px; /* smaller overlap to close gap */
+  margin-top: -1px; /* seamless overlap */
 }
 
 /* --- About Us Section --- */
@@ -196,11 +197,11 @@ section {
 /* --- Contact Section --- */
 .contact-fixed {
   flex: 1 1 35%;
-  background: #f0f0f0c7;            /* same semi-light background as service cards */
+  background: #f0f0f0c7; /* matches service cards */
   padding: 30px 25px;
-  border-radius: 10px;              /* rounded corners */
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15); /* subtle shadow like cards */
-  color: #333;                      /* consistent text color */
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  color: #333;
   min-width: 320px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -214,7 +215,7 @@ section {
   margin-bottom: 20px;
   text-align: center;
   font-size: 26px;
-  color: #001f3f;                   /* navy heading for consistency */
+  color: #001f3f;
 }
 
 .contact-form {
@@ -229,19 +230,19 @@ input, textarea {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
-  background: #fff;                 /* clean white inputs */
+  background: #fff;
   color: #333;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus, textarea:focus {
-  border-color: #429d91;            /* teal accent */
+  border-color: #429d91;
   box-shadow: 0 0 6px rgba(66,157,145,0.4);
   outline: none;
 }
 
 button {
-  background-color: #429d91;        /* teal accent button */
+  background-color: #429d91;
   color: #fff;
   border: none;
   padding: 14px;
@@ -262,7 +263,7 @@ button:hover {
   .about-contact-container {
     flex-direction: column;
     align-items: center;
-    margin-top: 0; /* remove overlap on small screens */
+    margin-top: 0;
   }
 
   .about, .contact-fixed {
