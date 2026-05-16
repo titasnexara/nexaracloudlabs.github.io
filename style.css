@@ -105,10 +105,11 @@ section {
 .services {
   text-align: center;
   background: linear-gradient(180deg, #001f3f 0%, #003366 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
   color: #fff;
-  padding: 60px 20px 20px;
-  margin-bottom: -2px; /* closes white gap */
+  padding: 60px 20px 0;
+  margin-bottom: -5px; /* removes white gap */
+  border: none;
 }
 
 .service-grid {
@@ -146,7 +147,8 @@ section {
   color: #fff;
   padding: 60px 40px 80px;
   box-sizing: border-box;
-  margin-top: -1px; /* seamless overlap */
+  margin-top: -5px; /* seamless overlap */
+  border: none;
 }
 
 /* --- About Us Section --- */
@@ -196,13 +198,13 @@ section {
 
 /* --- Contact Section --- */
 .contact-fixed {
-  flex: 1 1 35%;
-  background: #f0f0f0c7; /* matches service cards */
-  padding: 30px 25px;
+  flex: 0 0 320px;
+  max-width: 340px;
+  background: #f0f0f0c7;
+  padding: 25px 20px;
   border-radius: 10px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.15);
   color: #333;
-  min-width: 320px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -214,22 +216,22 @@ section {
 .contact-fixed h2 {
   margin-bottom: 20px;
   text-align: center;
-  font-size: 26px;
+  font-size: 24px;
   color: #001f3f;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 15px;
 }
 
 input, textarea {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 15px;
   background: #fff;
   color: #333;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -245,11 +247,11 @@ button {
   background-color: #429d91;
   color: #fff;
   border: none;
-  padding: 14px;
+  padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
