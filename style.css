@@ -264,3 +264,45 @@ button:hover {
   display: none;
   margin-top: 0;
 }
+
+/* --- About + Contact Alignment Fix --- */
+.about-contact-container {
+  display: flex;
+  align-items: stretch; /* ensures both sections match height */
+  justify-content: space-between;
+  gap: 40px; /* space between sections */
+  background-color: #001f3f; /* navy blue background */
+  color: #fff;
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+/* About Us Section */
+.about {
+  flex: 1;
+  text-align: left;
+  overflow-y: auto;
+  height: auto;
+}
+
+/* Contact Form Section */
+.contact-fixed {
+  width: 400px;
+  background: #eef2f7;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+  align-self: flex-start; /* keeps form aligned to top */
+}
+
+.contact-fixed h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #001f3f;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
