@@ -104,9 +104,11 @@ section {
 /* --- Services Section --- */
 .services {
   text-align: center;
-  background-color: #f4f6fb;
+  background-color: #001f3f;
   clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  color: #fff; /* ensures text and headings stay readable */
 }
+
 
 .service-grid {
   display: grid;
@@ -264,33 +266,3 @@ button:hover {
 }
 
 /* About Us Section (scrollable, left-aligned) */
-.about {
-  flex: 1;
-  background-color: #f0f0f0; /* light grey background */
-  padding: 60px 40px;
-  overflow-y: auto; /* scrollable */
-  height: 100vh;    /* full viewport height */
-  text-align: left; /* left aligned */
-}
-
-/* Contact Form Fixed on Right */
-.contact-fixed {
-  width: 400px;
-  background: #eef2f7;
-  padding: 40px 20px;
-  position: sticky;
-  top: 0;           /* stays fixed while scrolling */
-  height: 100vh;
-  box-shadow: -4px 0 10px rgba(0,0,0,0.1);
-}
-
-.contact-fixed h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
