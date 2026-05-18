@@ -9,21 +9,20 @@
 <body>
   <!-- Header -->
   <header class="navbar">
-  <div class="logo">
-    <img src="images/logo.png" alt="Nexara Cloud Labs Logo">
-  </div>
-  <nav>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-  <button class="cta">Get Started</button>
-</header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Nexara Cloud Labs Logo">
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="cta">Get Started</button>
+  </header>
   
-
   <!-- Hero Section -->
   <section id="hero" class="hero">
     <div class="hero-content">
@@ -35,54 +34,50 @@
 
   <!-- Services Section -->
   <section id="services" class="services">
-  <h2>Our Services</h2>
-  <div class="service-grid">
-    <div class="service-card"><h3>IT Consulting & Strategy</h3><p>Guiding your IT roadmap with expert strategy.</p></div>
-    <div class="service-card"><h3>Cloud Migration & Management</h3><p>Seamless transition and optimized cloud solutions.</p></div>
-    <div class="service-card"><h3>Cybersecurity Services</h3><p>Protecting your business from digital threats.</p></div>
-    <div class="service-card"><h3>Website Development</h3><p>Modern, responsive websites tailored to your brand.</p></div>
-    <div class="service-card"><h3>Data Analytics</h3><p>Turning data into actionable insights.</p></div>
-    <div class="service-card"><h3>Software Testing</h3><p>Ensuring quality with manual & automated testing.</p></div>
-    <div class="service-card"><h3>CI/CD Pipeline</h3><p>Accelerating delivery with continuous integration.</p></div>
-    <div class="service-card"><h3>IT Support & Management</h3><p>Reliable 24/7 support for your IT infrastructure.</p></div>
-    <div class="service-card"><h3>Cloud FinOps</h3><p>Optimizing cloud costs and performance through financial operations.</p></div>
-    <div class="service-card"><h3>AI Strategy</h3><p>Leveraging artificial intelligence to drive innovation and efficiency.</p></div>
-  </div>
-</section>
-
-  <div class="about-contact-container">
-  <section class="about" id="about">
-    <div class="about-content">
-      <h2>About Us</h2>
-      <p>
-        At <strong>Nexara Cloud Labs</strong>, we believe technology should be a catalyst for growth, not a barrier.
-        Our mission is to help businesses harness the full potential of the cloud, streamline operations, and accelerate innovation.
-      </p>
-      <ul class="about-services">
-        <li><strong>Cloud Infrastructure</strong> — scalable, secure, and future‑ready solutions.</li>
-        <li><strong>AI‑Driven Automation</strong> — intelligent workflows that reduce costs and boost efficiency.</li>
-        <li><strong>Cybersecurity Services</strong> — advanced monitoring and defense strategies.</li>
-        <li><strong>Data Analytics</strong> — turning raw data into actionable insights.</li>
-        <li><strong>IT Consulting</strong> — guiding organizations through digital transformation.</li>
-      </ul>
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service-card"><h3>IT Consulting & Strategy</h3><p>Guiding your IT roadmap with expert strategy.</p></div>
+      <div class="service-card"><h3>Cloud Migration & Management</h3><p>Seamless transition and optimized cloud solutions.</p></div>
+      <div class="service-card"><h3>Cybersecurity Services</h3><p>Protecting your business from digital threats.</p></div>
+      <div class="service-card"><h3>Website Development</h3><p>Modern, responsive websites tailored to your brand.</p></div>
+      <div class="service-card"><h3>Data Analytics</h3><p>Turning data into actionable insights.</p></div>
+      <div class="service-card"><h3>Software Testing</h3><p>Ensuring quality with manual & automated testing.</p></div>
+      <div class="service-card"><h3>CI/CD Pipeline</h3><p>Accelerating delivery with continuous integration.</p></div>
+      <div class="service-card"><h3>IT Support & Management</h3><p>Reliable 24/7 support for your IT infrastructure.</p></div>
+      <div class="service-card"><h3>Cloud FinOps</h3><p>Optimizing cloud costs and performance through financial operations.</p></div>
+      <div class="service-card"><h3>AI Strategy</h3><p>Leveraging artificial intelligence to drive innovation and efficiency.</p></div>
     </div>
   </section>
 
-  <aside class="contact-fixed">
-    <h2>Contact Us</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </aside>
-</div>
+  <!-- About + Contact Section -->
+  <div class="about-contact-container">
+    <section class="about" id="about">
+      <div class="about-content">
+        <h2>About Us</h2>
+        <p>
+          At <strong>Nexara Cloud Labs</strong>, we believe technology should be a catalyst for growth, not a barrier.
+          Our mission is to help businesses harness the full potential of the cloud, streamline operations, and accelerate innovation.
+        </p>
+        <ul class="about-services">
+          <li><strong>Cloud Infrastructure</strong> — scalable, secure, and future‑ready solutions.</li>
+          <li><strong>AI‑Driven Automation</strong> — intelligent workflows that reduce costs and boost efficiency.</li>
+          <li><strong>Cybersecurity Services</strong> — advanced monitoring and defense strategies.</li>
+          <li><strong>Data Analytics</strong> — turning raw data into actionable insights.</li>
+          <li><strong>IT Consulting</strong> — guiding organizations through digital transformation.</li>
+        </ul>
+      </div>
+    </section>
 
-  <aside class="contact-fixed">
-    <!-- Contact Form -->
-  </aside>
-</div>
+    <aside class="contact-fixed" id="contact">
+      <h2>Contact Us</h2>
+      <form action="https://formspree.io/f/meedoqao" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </aside>
+  </div>
 
   <!-- Footer -->
   <footer>
