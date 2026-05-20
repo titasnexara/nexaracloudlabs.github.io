@@ -57,17 +57,16 @@
       </div>
       <div class="service-card">
         <h3>Software Testing</h3>
-        <p>Ensuring reliability and performance through automated and manual testing.<p>
+        <p>Ensuring reliability and performance through automated and manual testing.</p>
       </div>
       <div class="service-card">
-      <h3>Website Creation</h3>
-      <p>Designing and developing responsive, user‑friendly websites tailored to your brand.</p>
-    </div>
-
-    <div class="service-card">
-      <h3>FinOps</h3>
-      <p>Optimizing cloud financial operations to maximize cost efficiency and transparency.</p>
-    </div>
+        <h3>Website Creation</h3>
+        <p>Designing and developing responsive, user‑friendly websites tailored to your brand.</p>
+      </div>
+      <div class="service-card">
+        <h3>FinOps</h3>
+        <p>Optimizing cloud financial operations to maximize cost efficiency and transparency.</p>
+      </div>
     </div>
   </section>
 
@@ -92,13 +91,10 @@
 
     <aside class="contact-fixed" id="contact">
       <h2>Contact Us</h2>
-      <form action="https://formspree.io/f/meedoqao" method="POST" class="contact-form">
+      <form id="contactForm" class="contact-form">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-        
-        <!-- Redirect to thank-you page after submission -->
-        <input type="hidden" name="_redirect" value="https://yourwebsite.com/thank-you.html">
         
         <button type="submit">Send Message</button>
       </form>
@@ -109,5 +105,34 @@
   <footer>
     <p>&copy; 2026 Nexara IT Consultancy. All Rights Reserved.</p>
   </footer>
+
+  <!-- Contact Form Script -->
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = {
+        name: e.target.name.value,
+        email: e.target.email.value,
+        message: e.target.message.value
+      };
+
+      try {
+        const response = await fetch("http://localhost:3000/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          alert("Message sent successfully!");
+          e.target.reset();
+        } else {
+          alert("Error sending message.");
+        }
+      } catch (error) {
+        alert("Server not reachable. Is backend running?");
+      }
+    });
+  </script>
 </body>
 </html>
