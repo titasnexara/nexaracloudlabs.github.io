@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | Nexara Cloud Labs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html#home">
+      <img src="images/logo.png" alt="Nexara Cloud Labs logo" class="logo">
+      <div>
+        <span class="eyebrow">Nexara Cloud Labs</span>
+        <p class="brand-name">Cloud · AI · Security</p>
+      </div>
+    </a>
+
+    <nav class="nav-menu" aria-label="Primary navigation">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#about">About</a>
+      <a href="career.html">Career</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a id="authButton" href="login.html" class="button button-secondary">Admin Login</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow">Join our team</span>
+        <h1>Find your next role at Nexara Cloud Labs</h1>
+        <p class="hero-text">View open positions, learn what makes our team different, and apply directly from this page.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <span class="eyebrow">Open roles</span>
+        <h2>Current job opportunities</h2>
+      </div>
+
+      <div id="jobGrid" class="job-grid"></div>
+      <p id="noJobs" class="form-message" style="display:none;">No job postings are live right now. Please check back soon.</p>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <span class="eyebrow">Apply now</span>
+        <h2>Submit your application</h2>
+        <p>Complete the form below and we’ll prepare a direct application email to support@nexaracloudlabs.com.</p>
+      </div>
+
+      <form id="applyForm" class="contact-form">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <input type="text" name="position" placeholder="Position you are applying for" required>
+        <textarea name="message" placeholder="Tell us why you're a great fit" rows="6" required></textarea>
+        <button type="submit" class="button button-primary">Prepare Application</button>
+        <p id="applyMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Nexara Cloud Labs. Designed for cloud-first growth.</p>
+  </footer>
+
+  <script>
+    const jobGrid = document.getElementById('jobGrid');
+    const noJobs = document.getElementById('noJobs');
+    const jobs = JSON.parse(localStorage.getItem('jobAds') || '[]');
+
+    function renderJobs() {
+      jobGrid.innerHTML = '';
+      if (!jobs.length) {
+        noJobs.style.display = 'block';
+        return;
+      }
+      noJobs.style.display = 'none';
+      jobs.forEach((job) => {
+        const card = document.createElement('article');
+        card.className = 'job-card';
+        card.innerHTML = `
+          <div>
+            <span class="job-tag">${job.type}</span>
+            <h3>${job.title}</h3>
+            <p>${job.location}</p>
+            <p>${job.description}</p>
+          </div>
+          <button class="button button-secondary" type="button" data-title="${job.title}">Apply</button>
+        `;
+        card.querySelector('button').addEventListener('click', () => {
+          const recipient = 'support@nexaracloudlabs.com';
+          const subject = encodeURIComponent(`Job application: ${job.title}`);
+          const body = encodeURIComponent(`Position: ${job.title}\nLocation: ${job.location}\n\nPlease include your application details here.`);
+          window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        });
+        jobGrid.appendChild(card);
+      });
+    }
+
+    renderJobs();
+
+    const applyForm = document.getElementById('applyForm');
+    const applyMessage = document.getElementById('applyMessage');
+
+    applyForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const name = applyForm.name.value.trim();
+      const email = applyForm.email.value.trim();
+      const position = applyForm.position.value.trim();
+      const message = applyForm.message.value.trim();
+      const recipient = 'support@nexaracloudlabs.com';
+      const subject = encodeURIComponent(`Job application: ${position}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPosition: ${position}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      applyMessage.textContent = 'Your application draft is ready in your mail app.';
+      applyMessage.classList.add('form-message--success');
+      applyForm.reset();
+    });
+
+    function isAuthenticated() {
+      return sessionStorage.getItem('adminAuth') === 'true';
+    }
+
+    function setupHeaderAuth() {
+      const authButton = document.getElementById('authButton');
+      if (!authButton) return;
+      if (isAuthenticated()) {
+        authButton.textContent = 'Logout';
+        authButton.href = '#';
+        authButton.classList.remove('button-secondary');
+        authButton.classList.add('button-primary');
+        authButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          sessionStorage.removeItem('adminAuth');
+          window.location.href = 'login.html';
+        });
+      }
+    }
+
+    setupHeaderAuth();
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+    revealElements.forEach((element, index) => {
+      element.style.transitionDelay = `${index * 80}ms`;
+      revealObserver.observe(element);
+    });
+  </script>
+</body>
+</html>

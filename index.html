@@ -3,135 +3,234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexara IT Consultancy</title>
+  <title>Nexara Cloud Labs | Cloud, AI & Security</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
   <header class="navbar">
-    <div class="logo">
-      <img src="images/logo.png" alt="Nexara Cloud Labs Logo">
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    <a class="brand" href="#home">
+      <img src="images/logo.png" alt="Nexara Cloud Labs logo" class="logo">
+      <div>
+        <span class="eyebrow">Nexara Cloud Labs</span>
+        <p class="brand-name">Cloud · AI · Security</p>
+      </div>
+    </a>
+
+    <nav class="nav-menu" aria-label="Primary navigation">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="career.html">Career</a>
     </nav>
-    <button class="cta">Get Started</button>
+
+    <div class="nav-actions">
+      <a href="career.html" class="button button-secondary">Careers</a>
+      <a id="authButton" href="login.html" class="button button-primary">Admin Login</a>
+    </div>
   </header>
-  
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="hero-content">
-      <h1>Empowering Businesses with IT Excellence</h1>
-      <p>Your trusted partner for digital transformation</p>
-    </div>
-  </section>
 
-  <!-- Services Section -->
-  <section id="services" class="services">
-    <h2>Our Services</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>Cloud Infrastructure</h3>
-        <p>Scalable, secure, and future‑ready cloud solutions.</p>
+  <main>
+    <section id="home" class="hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow">Modern IT consultancy for ambitious teams</span>
+        <h1>Build secure cloud systems, automate with AI, and unlock growth with data.</h1>
+        <p class="hero-text">We design the infrastructure, security, and analytics your business needs to scale confidently in the cloud.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="button button-primary">Start Your Project</a>
+          <a href="#services" class="button button-secondary">Explore Services</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>10+</strong> years experience</div>
+          <div><strong>50+</strong> projects delivered</div>
+          <div><strong>99.9%</strong> uptime practices</div>
+        </div>
       </div>
-      <div class="service-card">
-        <h3>AI‑Driven Automation</h3>
-        <p>Intelligent workflows that reduce costs and boost efficiency.</p>
-      </div>
-      <div class="service-card">
-        <h3>Cybersecurity Services</h3>
-        <p>Advanced monitoring and defense strategies.</p>
-      </div>
-      <div class="service-card">
-        <h3>Data Analytics</h3>
-        <p>Turning raw data into actionable insights.</p>
-      </div>
-      <div class="service-card">
-        <h3>IT Consulting</h3>
-        <p>Guiding organizations through digital transformation.</p>
-      </div>
-      <div class="service-card">
-        <h3>Software Testing</h3>
-        <p>Ensuring reliability and performance through automated and manual testing.</p>
-      </div>
-      <div class="service-card">
-        <h3>Website Creation</h3>
-        <p>Designing and developing responsive, user‑friendly websites tailored to your brand.</p>
-      </div>
-      <div class="service-card">
-        <h3>FinOps</h3>
-        <p>Optimizing cloud financial operations to maximize cost efficiency and transparency.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- About + Contact Section -->
-  <div class="about-contact-container">
-    <section class="about" id="about">
-      <div class="about-content">
-        <h2>About Us</h2>
-        <p>
-          At <strong>Nexara Cloud Labs</strong>, we believe technology should be a catalyst for growth, not a barrier.
-          Our mission is to help businesses harness the full potential of the cloud, streamline operations, and accelerate innovation.
-        </p>
-        <ul class="about-services">
-          <li><strong>Cloud Infrastructure</strong> — scalable, secure, and future‑ready solutions.</li>
-          <li><strong>AI‑Driven Automation</strong> — intelligent workflows that reduce costs and boost efficiency.</li>
-          <li><strong>Cybersecurity Services</strong> — advanced monitoring and defense strategies.</li>
-          <li><strong>Data Analytics</strong> — turning raw data into actionable insights.</li>
-          <li><strong>IT Consulting</strong> — guiding organizations through digital transformation.</li>
-        </ul>
+      <div class="hero-cards">
+        <article class="glass-card">
+          <p>Trusted by startups and enterprises for secure cloud transformation.</p>
+        </article>
+        <article class="glass-card highlight-card">
+          <h2>Cloud Migration</h2>
+          <p>Secure, scalable, and optimized for long-term growth.</p>
+        </article>
       </div>
     </section>
 
-    <aside class="contact-fixed" id="contact">
-      <h2>Contact Us</h2>
-      <form id="contactForm" class="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-        
-        <button type="submit">Send Message</button>
-      </form>
-    </aside>
-  </div>
+    <section id="services" class="section services reveal">
+      <div class="section-header">
+        <span class="eyebrow">What we do</span>
+        <h2>Full-stack IT services that move your business forward</h2>
+        <p>From cloud strategy and AI automation to security and FinOps, we deliver practical solutions that reduce risk and accelerate results.</p>
+      </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Nexara IT Consultancy. All Rights Reserved.</p>
+      <div class="service-grid">
+        <div class="service-card">
+          <h3>Cloud Infrastructure</h3>
+          <p>Build resilient cloud foundations with architecture designed for scale and availability.</p>
+        </div>
+        <div class="service-card">
+          <h3>AI Automation</h3>
+          <p>Automate routine operations and accelerate decisions through smart workflows.</p>
+        </div>
+        <div class="service-card">
+          <h3>Cybersecurity</h3>
+          <p>Protect data and systems with proactive monitoring, response, and compliance support.</p>
+        </div>
+        <div class="service-card">
+          <h3>Data Analytics</h3>
+          <p>Turn raw data into actionable insights that improve performance and outcomes.</p>
+        </div>
+        <div class="service-card">
+          <h3>FinOps</h3>
+          <p>Optimize cloud spending and boost ROI with disciplined cost management.</p>
+        </div>
+        <div class="service-card">
+          <h3>Software QA</h3>
+          <p>Deliver dependable products with end-to-end testing and performance validation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section process reveal">
+      <div class="section-header">
+        <span class="eyebrow">How we work</span>
+        <h2>A clear process for predictable digital transformation</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <span>1</span>
+          <h3>Discover</h3>
+          <p>We map your goals, systems, and risks to design the right digital strategy.</p>
+        </div>
+        <div class="process-step">
+          <span>2</span>
+          <h3>Design</h3>
+          <p>Modern architecture, security controls, and automation workflows are crafted for your business.</p>
+        </div>
+        <div class="process-step">
+          <span>3</span>
+          <h3>Deliver</h3>
+          <p>We implement cloud services, deploy solutions, and validate performance quickly.</p>
+        </div>
+        <div class="process-step">
+          <span>4</span>
+          <h3>Optimize</h3>
+          <p>Continuous improvement, cost efficiency, and measurable outcomes keep your solution effective.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about reveal">
+      <div class="about-grid">
+        <div class="about-copy">
+          <span class="eyebrow">About Nexara</span>
+          <h2>Tech strategy built around your business and outcomes.</h2>
+          <p>We partner with leaders who need practical IT decisions, not buzzwords. Our team combines cloud engineering, automation, security, and analytics to reduce complexity and accelerate delivery.</p>
+          <ul>
+            <li>Enterprise-grade security with accessible execution</li>
+            <li>Cloud systems designed for reliability and cost control</li>
+            <li>AI workflows that free teams to focus on business value</li>
+          </ul>
+        </div>
+        <div class="about-highlights">
+          <div class="highlight-card">
+            <h3>Trusted Infrastructure</h3>
+            <p>Secure cloud operations that support high availability and scale.</p>
+          </div>
+          <div class="highlight-card">
+            <h3>Analytics-led Decisions</h3>
+            <p>Insights from data that improve performance and speed up outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact reveal">
+      <div class="contact-panel">
+        <div class="contact-copy">
+          <span class="eyebrow">Let's talk</span>
+          <h2>Ready to start your next cloud or security initiative?</h2>
+          <p>Send us a quick message and we’ll follow up with a tailored plan and next steps.</p>
+          <div class="contact-details">
+            <div><strong>Email</strong><a href="mailto:support@nexaracloudlabs.com">support@nexaracloudlabs.com</a></div>
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact-form">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <textarea name="message" placeholder="Tell us about your project" rows="5" required></textarea>
+          <button type="submit" class="button button-primary">Send Message</button>
+          <p id="formMessage" class="form-message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Nexara Cloud Labs. Designed for cloud-first growth.</p>
   </footer>
 
-  <!-- Contact Form Script -->
   <script>
-    document.getElementById("contactForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = {
-        name: e.target.name.value,
-        email: e.target.email.value,
-        message: e.target.message.value
-      };
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
 
-      try {
-        const response = await fetch("http://localhost:3000/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
 
-        if (response.ok) {
-          alert("Message sent successfully!");
-          e.target.reset();
-        } else {
-          alert("Error sending message.");
+      const name = contactForm.querySelector('input[name="name"]').value.trim();
+      const email = contactForm.querySelector('input[name="email"]').value.trim();
+      const message = contactForm.querySelector('textarea[name="message"]').value.trim();
+      const recipient = 'support@nexaracloudlabs.com';
+      const subject = encodeURIComponent('Website inquiry from ' + name);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+      window.location.href = mailtoLink;
+      contactForm.reset();
+      formMessage.textContent = 'Your email draft is ready. Send it from your mail app to contact support.';
+      formMessage.classList.add('form-message--success');
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
         }
-      } catch (error) {
-        alert("Server not reachable. Is backend running?");
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    function isAuthenticated() {
+      return sessionStorage.getItem('adminAuth') === 'true';
+    }
+
+    function setupHeaderAuth() {
+      const authButton = document.getElementById('authButton');
+      if (!authButton) return;
+      if (isAuthenticated()) {
+        authButton.textContent = 'Logout';
+        authButton.href = '#';
+        authButton.classList.remove('button-secondary');
+        authButton.classList.add('button-primary');
+        authButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          sessionStorage.removeItem('adminAuth');
+          window.location.href = 'login.html';
+        });
       }
+    }
+
+    setupHeaderAuth();
+    revealElements.forEach((element, index) => {
+      element.style.transitionDelay = `${index * 80}ms`;
+      revealObserver.observe(element);
     });
   </script>
 </body>
