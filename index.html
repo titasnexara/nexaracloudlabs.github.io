@@ -236,14 +236,9 @@
       const name = contactForm.querySelector('input[name="name"]').value.trim();
       const email = contactForm.querySelector('input[name="email"]').value.trim();
       const message = contactForm.querySelector('textarea[name="message"]').value.trim();
-      const recipient = 'support@nexaracloudlabs.com';
-      const subject = encodeURIComponent('Website inquiry from ' + name);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-      const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
-      window.location.href = mailtoLink;
       contactForm.reset();
-      formMessage.textContent = 'Your email draft is ready. Send it from your mail app to contact support.';
+      formMessage.textContent = 'Thanks, ' + (name || 'there') + '! Your message has been received. We will respond to ' + email + ' soon.';
       formMessage.classList.add('form-message--success');
     });
 
