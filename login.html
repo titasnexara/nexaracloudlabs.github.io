@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Nexara Cloud Labs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html#home">
+      <img src="images/logo.png" alt="Nexara Cloud Labs logo" class="logo">
+      <div>
+        <span class="eyebrow">Nexara Cloud Labs</span>
+        <p class="brand-name">Cloud · AI · Security</p>
+      </div>
+    </a>
+
+    <nav class="nav-menu" aria-label="Primary navigation">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#about">About</a>
+      <a href="career.html">Career</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="career.html" class="button button-primary">View Career</a>
+      <a id="authButton" href="login.html" class="button button-secondary">Admin Login</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow">Admin access</span>
+        <h1>Secure admin login</h1>
+        <p class="hero-text">Enter your credentials to manage job postings. This page uses secure password verification before granting access.</p>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <span class="eyebrow">Admin login</span>
+        <h2>Enter your username and password</h2>
+      </div>
+
+      <form id="loginForm" class="contact-form admin-panel">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="button button-primary">Login</button>
+        <p id="loginMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Nexara Cloud Labs. Designed for cloud-first growth.</p>
+  </footer>
+
+  <script>
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD_HASH = '5c766ce70cce0bb6c177e313c1596d176a52ab5b1544eff810c85023f7e90ae1';
+    const loginForm = document.getElementById('loginForm');
+    const loginMessage = document.getElementById('loginMessage');
+
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hashBuffer)).map((b) => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function createSession() {
+      sessionStorage.setItem('adminAuth', 'true');
+    }
+
+    function isAuthenticated() {
+      return sessionStorage.getItem('adminAuth') === 'true';
+    }
+
+    function setupHeaderAuth() {
+      const authButton = document.getElementById('authButton');
+      if (!authButton) return;
+      if (isAuthenticated()) {
+        authButton.textContent = 'Logout';
+        authButton.href = '#';
+        authButton.classList.remove('button-secondary');
+        authButton.classList.add('button-primary');
+        authButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          sessionStorage.removeItem('adminAuth');
+          window.location.href = 'login.html';
+        });
+      }
+    }
+
+    window.addEventListener('load', () => {
+      if (isAuthenticated()) {
+        window.location.href = 'admin.html';
+      }
+      setupHeaderAuth();
+    });
+
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const username = loginForm.username.value.trim();
+      const password = loginForm.password.value.trim();
+      const hashed = await hashPassword(password);
+
+      if (username === ADMIN_USERNAME && hashed === ADMIN_PASSWORD_HASH) {
+        createSession();
+        window.location.href = 'admin.html';
+      } else {
+        loginMessage.textContent = 'Invalid credentials. Please try again.';
+        loginMessage.classList.remove('form-message--success');
+      }
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealElements.forEach((element, index) => {
+      element.style.transitionDelay = `${index * 80}ms`;
+      revealObserver.observe(element);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Nexara Cloud Labs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html#home">
+      <img src="images/logo.png" alt="Nexara Cloud Labs logo" class="logo">
+      <div>
+        <span class="eyebrow">Nexara Cloud Labs</span>
+        <p class="brand-name">Cloud · AI · Security</p>
+      </div>
+    </a>
+
+    <nav class="nav-menu" aria-label="Primary navigation">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#about">About</a>
+      <a href="career.html">Career</a>
+    </nav>
+
+    <button id="logoutButton" class="button button-secondary">Logout</button>
+  </header>
+
+  <main>
+    <section class="section hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow">Admin dashboard</span>
+        <h1>Manage career postings securely</h1>
+        <p class="hero-text">Add, edit, and remove job posts from a protected admin area.</p>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <span class="eyebrow">Job management</span>
+        <h2>Add a new job posting</h2>
+      </div>
+
+      <form id="jobForm" class="contact-form admin-panel">
+        <input type="text" name="title" placeholder="Job title" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="text" name="type" placeholder="Employment type (Full-time / Part-time)" required>
+        <textarea name="description" placeholder="Short description" rows="4" required></textarea>
+        <button type="submit" class="button button-primary">Save Job</button>
+        <p id="jobMessage" class="form-message" aria-live="polite"></p>
+      </form>
+
+      <div class="job-grid" id="adminJobs"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Nexara Cloud Labs. Designed for cloud-first growth.</p>
+  </footer>
+
+  <script>
+    function isAuthenticated() {
+      return sessionStorage.getItem('adminAuth') === 'true';
+    }
+
+    function requireAuth() {
+      if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+      }
+    }
+
+    const logoutButton = document.getElementById('logoutButton');
+    const jobForm = document.getElementById('jobForm');
+    const jobMessage = document.getElementById('jobMessage');
+    const adminJobs = document.getElementById('adminJobs');
+    let jobs = JSON.parse(localStorage.getItem('jobAds') || '[]');
+
+    function renderAdminJobs() {
+      adminJobs.innerHTML = '';
+      if (!jobs.length) {
+        adminJobs.innerHTML = '<p class="form-message">No job ads yet. Add one to publish it on the career page.</p>';
+        return;
+      }
+
+      jobs.forEach((job, index) => {
+        const card = document.createElement('article');
+        card.className = 'job-card';
+        card.innerHTML = `
+          <div>
+            <span class="job-tag">${job.type}</span>
+            <h3>${job.title}</h3>
+            <p>${job.location}</p>
+            <p>${job.description}</p>
+          </div>
+          <button class="button button-secondary" type="button" data-index="${index}">Delete</button>
+        `;
+        card.querySelector('button').addEventListener('click', () => {
+          jobs.splice(index, 1);
+          localStorage.setItem('jobAds', JSON.stringify(jobs));
+          renderAdminJobs();
+        });
+        adminJobs.appendChild(card);
+      });
+    }
+
+    window.addEventListener('load', () => {
+      requireAuth();
+      renderAdminJobs();
+    });
+
+    logoutButton.addEventListener('click', () => {
+      sessionStorage.removeItem('adminAuth');
+      window.location.href = 'login.html';
+    });
+
+    jobForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const title = jobForm.title.value.trim();
+      const location = jobForm.location.value.trim();
+      const type = jobForm.type.value.trim();
+      const description = jobForm.description.value.trim();
+      jobs.unshift({ title, location, type, description });
+      localStorage.setItem('jobAds', JSON.stringify(jobs));
+      renderAdminJobs();
+      jobForm.reset();
+      jobMessage.textContent = 'Job posting saved and published to the career page.';
+      jobMessage.classList.add('form-message--success');
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealElements.forEach((element, index) => {
+      element.style.transitionDelay = `${index * 80}ms`;
+      revealObserver.observe(element);
+    });
+  </script>
+</body>
+</html>
