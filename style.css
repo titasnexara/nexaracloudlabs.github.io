@@ -306,10 +306,85 @@ main {
   border-radius: 24px;
   padding: 2rem;
   min-height: 220px;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(91,211,200,0.4);
+  background: rgba(255,255,255,0.12);
+  outline: none;
 }
 
 .service-card h3 {
   margin-top: 0;
+}
+
+.service-pitch {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin-top: auto;
+}
+
+.service-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.service-modal--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.service-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.service-modal-panel {
+  position: relative;
+  width: min(760px, calc(100% - 40px));
+  background: rgba(6, 11, 23, 0.98);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 28px;
+  padding: 2.5rem;
+  z-index: 1;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
+}
+
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  background: rgba(255,255,255,0.12);
 }
 
 .process {
@@ -582,9 +657,7 @@ textarea:focus {
     padding-top: 80px;
   }
 }
-  }
 
-  .section-header {
-    text-align: left;
-  }
+.section-header {
+  text-align: left;
 }

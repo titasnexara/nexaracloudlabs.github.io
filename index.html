@@ -41,7 +41,7 @@
           <a href="#services" class="button button-secondary">Explore Services</a>
         </div>
         <div class="hero-stats">
-          <div><strong>10+</strong> years experience</div>
+          <div><strong>10+</strong> years IT experience</div>
           <div><strong>50+</strong> projects delivered</div>
           <div><strong>99.9%</strong> uptime practices</div>
         </div>
@@ -66,32 +66,49 @@
       </div>
 
       <div class="service-grid">
-        <div class="service-card">
+        <button class="service-card" type="button" data-service="cloud-infrastructure">
           <h3>Cloud Infrastructure</h3>
           <p>Build resilient cloud foundations with architecture designed for scale and availability.</p>
-        </div>
-        <div class="service-card">
+          <p class="service-pitch">Accelerate delivery with secure infrastructure that keeps teams productive and downtime minimal.</p>
+        </button>
+        <button class="service-card" type="button" data-service="ai-automation">
           <h3>AI Automation</h3>
           <p>Automate routine operations and accelerate decisions through smart workflows.</p>
-        </div>
-        <div class="service-card">
+          <p class="service-pitch">Free your team from manual work while boosting consistency, speed, and business agility.</p>
+        </button>
+        <button class="service-card" type="button" data-service="cybersecurity">
           <h3>Cybersecurity</h3>
           <p>Protect data and systems with proactive monitoring, response, and compliance support.</p>
-        </div>
-        <div class="service-card">
-          <h3>Data Analytics</h3>
-          <p>Turn raw data into actionable insights that improve performance and outcomes.</p>
-        </div>
-        <div class="service-card">
+          <p class="service-pitch">Reduce risk with rapid threat detection, hardened infrastructure, and continuous protection.</p>
+        </button>
+        <button class="service-card" type="button" data-service="data-engineering-bi">
+          <h3>Data Engineering &amp; BI</h3>
+          <p>Build data pipelines and dashboards that turn raw information into timely business value.</p>
+          <p class="service-pitch">Streamline data flows, improve reporting, and empower teams with trusted intelligence.</p>
+        </button>
+        <button class="service-card" type="button" data-service="finops">
           <h3>FinOps</h3>
           <p>Optimize cloud spending and boost ROI with disciplined cost management.</p>
-        </div>
-        <div class="service-card">
-          <h3>Software QA</h3>
-          <p>Deliver dependable products with end-to-end testing and performance validation.</p>
-        </div>
+          <p class="service-pitch">Align budgets to business outcomes so you spend smarter and scale without surprise costs.</p>
+        </button>
+        <button class="service-card" type="button" data-service="ai-governance">
+          <h3>AI Governance</h3>
+          <p>Establish responsible AI practices, policy guardrails, and compliance-ready oversight.</p>
+          <p class="service-pitch">Build trust in intelligent systems with controls that keep AI safe, transparent, and aligned.</p>
+        </button>
       </div>
     </section>
+
+    <div id="serviceModal" class="service-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
+      <div class="service-modal-backdrop"></div>
+      <div class="service-modal-panel">
+        <button class="modal-close" type="button" aria-label="Close service details">×</button>
+        <span class="eyebrow">Service spotlight</span>
+        <h3 id="serviceModalTitle"></h3>
+        <p id="serviceModalDesc"></p>
+        <p id="serviceModalPitch"></p>
+      </div>
+    </div>
 
     <section id="process" class="section process reveal">
       <div class="section-header">
@@ -231,6 +248,78 @@
     revealElements.forEach((element, index) => {
       element.style.transitionDelay = `${index * 80}ms`;
       revealObserver.observe(element);
+    });
+
+    const serviceDetails = {
+      'cloud-infrastructure': {
+        title: 'Cloud Infrastructure',
+        desc: 'We design resilient cloud architectures with secure networking, scalable compute, and high-availability deployments tailored to your needs.',
+        pitch: 'Launch faster with infrastructure that supports growth, reduces outages, and protects mission-critical operations.'
+      },
+      'ai-automation': {
+        title: 'AI Automation',
+        desc: 'We deploy intelligent automation that streamlines workflows, improves accuracy, and turns repetitive tasks into business advantages.',
+        pitch: 'Transform manual processes into smart, self-operating systems that boost productivity and free your team for strategic work.'
+      },
+      'cybersecurity': {
+        title: 'Cybersecurity',
+        desc: 'We secure your digital ecosystem with proactive monitoring, incident response, and compliance controls that protect your data and users.',
+        pitch: 'Stay ahead of threats with defenses designed to reduce risk, maintain trust, and meet regulatory expectations.'
+      },
+      'data-engineering-bi': {
+        title: 'Data Engineering & BI',
+        desc: 'We build reliable data pipelines, analytics platforms, and dashboards so teams can act on insights with confidence.',
+        pitch: 'Turn scattered data into single-source truth, faster reporting, and better decisions across the business.'
+      },
+      'finops': {
+        title: 'FinOps',
+        desc: 'We align cloud costs with business value through visibility, optimization, and governance of your spending patterns.',
+        pitch: 'Keep your cloud budget under control while scaling capacity with confidence and lower waste.'
+      },
+      'ai-governance': {
+        title: 'AI Governance',
+        desc: 'We help you establish policies, oversight, and ethical guardrails for AI systems across development and deployment.',
+        pitch: 'Create responsible AI practices that protect stakeholders, preserve trust, and support compliance.'
+      }
+    };
+
+    const modal = document.getElementById('serviceModal');
+    const modalTitle = document.getElementById('serviceModalTitle');
+    const modalDesc = document.getElementById('serviceModalDesc');
+    const modalPitch = document.getElementById('serviceModalPitch');
+    const closeModalButton = modal.querySelector('.modal-close');
+
+    function openServiceModal(key) {
+      const service = serviceDetails[key];
+      if (!service) return;
+      modalTitle.textContent = service.title;
+      modalDesc.textContent = service.desc;
+      modalPitch.textContent = service.pitch;
+      modal.classList.add('service-modal--visible');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeServiceModal() {
+      modal.classList.remove('service-modal--visible');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    document.querySelectorAll('.service-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        openServiceModal(card.dataset.service);
+      });
+    });
+
+    closeModalButton.addEventListener('click', closeServiceModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal || event.target.classList.contains('service-modal-backdrop')) {
+        closeServiceModal();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('service-modal--visible')) {
+        closeServiceModal();
+      }
     });
   </script>
 </body>
