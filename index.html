@@ -3,371 +3,2330 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexara Cloud Labs | Cloud, AI & Security</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Nexara Cloud Labs — India's AI-First IT Consultancy delivering AI solutions, data engineering, and full-stack expertise.">
+  <title>Nexara Cloud Labs | India's AI-First IT Consultancy</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ncl-bg':    '#0A0F1E',
+            'ncl-blue':  '#2563EB',
+            'ncl-teal':  '#06B6D4',
+            'ncl-text':  '#F0F4FF',
+            'ncl-muted': '#64748B',
+            'ncl-panel': '#0F1629',
+          },
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- Keyframes --- */
+    @keyframes float-card {
+      from { transform: translateY(0px); }
+      to   { transform: translateY(-12px); }
+    }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+      70%  { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .card-float { animation: float-card 4s ease-in-out infinite alternate; }
+    .dot-pulse  { animation: pulse-ring 1.8s ease-out infinite; }
+
+    /* --- Gradient text --- */
+    .text-gradient {
+      background: linear-gradient(90deg, #2563EB, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* --- Hero --- */
+    .hero-bg {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 50%, #0e7490 100%);
+    }
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* --- Glassmorphism card --- */
+    .glass-metrics {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    /* --- Metric cell --- */
+    .metric-cell {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    /* --- Service icon tile --- */
+    .svc-tile {
+      background: linear-gradient(135deg, rgba(37,99,235,.13), rgba(6,182,212,.13));
+      border: 1px solid rgba(37, 99, 235, 0.28);
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* --- Status fill bar --- */
+    .status-fill {
+      height: 100%;
+      width: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #2563EB, #06B6D4);
+    }
+
+    /* --- Dropdown transition --- */
+    #mega-dropdown {
+      transform-origin: top center;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    #mega-dropdown.dd-closed {
+      opacity: 0;
+      transform: scaleY(0.96);
+      pointer-events: none;
+    }
+    #mega-dropdown.dd-open {
+      opacity: 1;
+      transform: scaleY(1);
+      pointer-events: auto;
+    }
+
+    /* --- Mobile drawer initial state --- */
+    .drawer-hidden { display: none; }
+
+    @keyframes typingDot {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+  </style>
 </head>
-<body>
-  <header class="navbar">
-    <a class="brand" href="#home">
-      <img src="images/logo.png" alt="Nexara Cloud Labs logo" class="logo">
-      <div>
-        <span class="eyebrow">Nexara Cloud Labs</span>
-        <p class="brand-name">Cloud · AI · Security</p>
+
+<body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
+
+<!-- ============================================================
+     SECTION 1 — NAVBAR
+============================================================= -->
+<header id="navbar" class="sticky top-0 z-50 w-full bg-ncl-bg border-b border-white/[.06] relative">
+
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
+
+    <!-- Brand -->
+    <a href="#" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#2563EB"/>
+            <stop offset="100%" stop-color="#06B6D4"/>
+          </linearGradient>
+        </defs>
+        <rect width="44" height="44" rx="10" fill="url(#ng1)"/>
+        <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2"
+              stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="13" cy="13" r="2.5" fill="white"/>
+        <circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="13" cy="31" r="2.5" fill="white"/>
+        <circle cx="31" cy="31" r="2.5" fill="white"/>
+        <circle cx="22" cy="22" r="2.5" fill="white"/>
+      </svg>
+      <div class="flex flex-col leading-none gap-[3px]">
+        <span class="font-jakarta font-bold text-white text-[20px]">Nexara</span>
+        <span class="font-jakarta text-ncl-teal text-[11px] tracking-wide">Cloud Labs</span>
       </div>
     </a>
 
-    <nav class="nav-menu" aria-label="Primary navigation">
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#about">About</a>
-      <a href="career.html">Career</a>
+    <!-- Center nav (desktop) -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+      <a href="#" class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Home</a>
+
+      <button id="services-trigger"
+              aria-haspopup="true" aria-expanded="false"
+              class="flex items-center gap-1 text-white text-[14px] hover:text-ncl-teal transition-colors duration-150 bg-transparent border-none cursor-pointer p-0">
+        Services
+        <svg id="dd-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none"
+             class="transition-transform duration-200 mt-[1px]">
+          <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <a href="#about"         class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">About</a>
+      <a href="#case-studies"  class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Case Studies</a>
+      <a href="#blog"          class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Blog</a>
+      <a href="career.html"    class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Careers</a>
     </nav>
 
-    <div class="nav-actions">
-      <a href="career.html" class="button button-secondary">Careers</a>
-      <a id="authButton" href="login.html" class="button button-primary">Admin Login</a>
-    </div>
-  </header>
-
-  <main>
-    <section id="home" class="hero reveal">
-      <div class="hero-copy">
-        <span class="eyebrow">Modern IT consultancy for ambitious teams</span>
-        <h1>Build secure cloud systems, automate with AI, and unlock growth with data.</h1>
-        <p class="hero-text">We design the infrastructure, security, and analytics your business needs to scale confidently in the cloud.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="button button-primary">Start Your Project</a>
-          <a href="#services" class="button button-secondary">Explore Services</a>
-        </div>
-        <div class="hero-stats">
-          <div><strong>10+</strong> years of IT experience</div>
-          <div><strong>50+</strong> projects delivered</div>
-          <div><strong>99.9%</strong> uptime practices</div>
-        </div>
-      </div>
-
-      <div class="hero-cards">
-        <article class="glass-card">
-          <p>Trusted by startups and enterprises for secure cloud transformation.</p>
-        </article>
-        <article class="glass-card highlight-card">
-          <h2>Cloud Migration</h2>
-          <p>Secure, scalable, and optimized for long-term growth.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="services" class="section services reveal">
-      <div class="section-header">
-        <span class="eyebrow">What we do</span>
-        <h2>Full-stack IT services that move your business forward</h2>
-        <p>From cloud strategy and AI automation to security and FinOps, we deliver practical solutions that reduce risk and accelerate results.</p>
-      </div>
-
-      <div class="service-grid">
-        <button class="service-card" type="button" data-service="cloud-infrastructure">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17.5 16a4.5 4.5 0 0 0 0-9 5.5 5.5 0 0 0-10.94 1.42A4 4 0 1 0 6 18h11.5" />
-            </svg>
-          </span>
-          <h3>Cloud Infrastructure</h3>
-          <p>Build resilient cloud foundations with architecture designed for scale and availability.</p>
-          <p class="service-pitch">Accelerate delivery with secure infrastructure that keeps teams productive and downtime minimal.</p>
-        </button>
-        <button class="service-card" type="button" data-service="ai-automation">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 6h8M8 18h8M12 6v12" />
-              <rect x="4" y="8" width="16" height="8" rx="2" />
-            </svg>
-          </span>
-          <h3>AI Automation</h3>
-          <p>Automate routine operations and accelerate decisions through smart workflows.</p>
-          <p class="service-pitch">Free your team from manual work while boosting consistency, speed, and business agility.</p>
-        </button>
-        <button class="service-card" type="button" data-service="cybersecurity">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z" />
-              <path d="M10 12l2 2 4-4" />
-            </svg>
-          </span>
-          <h3>Cybersecurity</h3>
-          <p>Protect data and systems with proactive monitoring, response, and compliance support.</p>
-          <p class="service-pitch">Reduce risk with rapid threat detection, hardened infrastructure, and continuous protection.</p>
-        </button>
-        <button class="service-card" type="button" data-service="data-engineering-bi">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 7h16M4 12h16M4 17h10" />
-              <path d="M6 5v4M18 11v4M14 15v4" />
-            </svg>
-          </span>
-          <h3>Data Engineering &amp; BI</h3>
-          <p>Build data pipelines and dashboards that turn raw information into timely business value.</p>
-          <p class="service-pitch">Streamline data flows, improve reporting, and empower teams with trusted intelligence.</p>
-        </button>
-        <button class="service-card" type="button" data-service="finops">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 19h12M8 15l4-4 4 4" />
-              <path d="M14 5h4a2 2 0 0 1 2 2v3H4V7a2 2 0 0 1 2-2h4" />
-            </svg>
-          </span>
-          <h3>FinOps</h3>
-          <p>Optimize cloud spending and boost ROI with disciplined cost management.</p>
-          <p class="service-pitch">Align budgets to business outcomes so you spend smarter and scale without surprise costs.</p>
-        </button>
-        <button class="service-card" type="button" data-service="ai-governance">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3l7 4-1.5 9.5a1 1 0 0 1-.99.84H7.49a1 1 0 0 1-.99-.84L5 7l7-4z" />
-              <path d="M9 10h6M10 14h4" />
-            </svg>
-          </span>
-          <h3>AI Governance</h3>
-          <p>Establish responsible AI practices, policy guardrails, and compliance-ready oversight.</p>
-          <p class="service-pitch">Build trust in intelligent systems with controls that keep AI safe, transparent, and aligned.</p>
-        </button>
-        <button class="service-card" type="button" data-service="ai-academy">
-          <span class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2z" />
-              <circle cx="8" cy="9" r="3" />
-              <path d="M14 9h6M14 13h6" />
-            </svg>
-          </span>
-          <h3>AI Academy</h3>
-          <p>Upskill your workforce with hands-on AI training designed for modern business teams.</p>
-          <p class="service-pitch">Empower your employees to lead AI initiatives with practical knowledge, building internal expertise and competitive advantage.</p>
-        </button>
-      </div>
-    </section>
-
-    <div id="serviceModal" class="service-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
-      <div class="service-modal-backdrop"></div>
-      <div class="service-modal-panel">
-        <button class="modal-close" type="button" aria-label="Close service details">×</button>
-        <span class="eyebrow">Service spotlight</span>
-        <h3 id="serviceModalTitle"></h3>
-        <p id="serviceModalDesc"></p>
-        <p id="serviceModalPitch"></p>
-      </div>
+    <!-- Right actions (desktop) -->
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
+      <a href="#contact"
+         class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium
+                hover:bg-white/10 transition-colors duration-150">
+        Contact
+      </a>
+      <a href="#contact"
+         class="px-4 py-[9px] rounded-lg bg-ncl-blue text-white text-[14px] font-semibold
+                hover:bg-blue-700 transition-colors duration-150">
+        Get Free Quote
+      </a>
     </div>
 
-    <section id="process" class="section process reveal">
-      <div class="section-header">
-        <span class="eyebrow">How we work</span>
-        <h2>A clear process for predictable digital transformation</h2>
+    <!-- Hamburger (mobile) -->
+    <button id="hamburger"
+            aria-label="Open menu" aria-expanded="false"
+            class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9
+                   rounded-lg hover:bg-white/10 transition-colors">
+      <span class="block w-5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+      <span class="block w-5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+      <span class="block w-3.5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <!-- Mega Dropdown -->
+  <div id="mega-dropdown"
+       class="dd-closed absolute left-0 right-0 top-full bg-ncl-panel border-b border-white/[.08] shadow-2xl">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 py-7">
+      <div class="grid grid-cols-2 gap-2">
+
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">🤖</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">AI Solutions &amp; Automation</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">LLMs, ML pipelines, automation</p>
+          </div>
+        </a>
+
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">🗄️</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Data Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Pipelines, warehouses, analytics</p>
+          </div>
+        </a>
+
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">💻</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Full Stack Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Web, mobile, cloud-native</p>
+          </div>
+        </a>
+
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">✅</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Quality Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Test automation, CI/CD quality</p>
+          </div>
+        </a>
+
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">⚡</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Digital Transformation</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Legacy modernisation, roadmaps</p>
+          </div>
+        </a>
+
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">💰</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">FinOps Consulting</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Cloud cost optimisation</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile full-screen drawer -->
+<div id="mobile-drawer" class="drawer-hidden fixed inset-0 z-[200]">
+  <div id="drawer-bg" class="absolute inset-0 bg-ncl-bg/95 backdrop-blur-md"></div>
+  <div class="relative z-10 flex flex-col h-full px-6 pt-6 pb-10 overflow-y-auto">
+
+    <!-- Drawer header -->
+    <div class="flex items-center justify-between mb-10">
+      <a href="#" class="flex items-center gap-3" aria-label="Nexara Cloud Labs">
+        <svg width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ng2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <rect width="44" height="44" rx="10" fill="url(#ng2)"/>
+          <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="13" cy="13" r="2.5" fill="white"/>
+          <circle cx="31" cy="13" r="2.5" fill="white"/>
+          <circle cx="13" cy="31" r="2.5" fill="white"/>
+          <circle cx="31" cy="31" r="2.5" fill="white"/>
+          <circle cx="22" cy="22" r="2.5" fill="white"/>
+        </svg>
+        <div class="flex flex-col leading-none gap-[3px]">
+          <span class="font-jakarta font-bold text-white text-xl">Nexara</span>
+          <span class="font-jakarta text-ncl-teal text-xs tracking-wide">Cloud Labs</span>
+        </div>
+      </a>
+      <button id="close-drawer" aria-label="Close menu"
+              class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer links -->
+    <nav class="flex flex-col divide-y divide-white/[.08]">
+      <a href="#"            class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Home</a>
+      <a href="#services"    class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Services</a>
+      <a href="#about"       class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">About</a>
+      <a href="#case-studies" class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Case Studies</a>
+      <a href="#blog"        class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Blog</a>
+      <a href="career.html"  class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Careers</a>
+    </nav>
+
+    <div class="flex flex-col gap-3 mt-8">
+      <a href="#contact"
+         class="py-3 px-6 rounded-xl border border-white text-white text-base font-jakarta font-semibold
+                text-center hover:bg-white/10 transition-colors">
+        Contact
+      </a>
+      <a href="#contact"
+         class="py-3 px-6 rounded-xl bg-ncl-blue text-white text-base font-jakarta font-semibold
+                text-center hover:bg-blue-700 transition-colors">
+        Get Free Quote
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 2 — HERO
+============================================================= -->
+<section id="home" class="hero-bg relative min-h-screen flex items-center overflow-hidden">
+
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 py-24">
+    <div class="flex flex-col lg:flex-row items-center gap-14 lg:gap-0">
+
+      <!-- LEFT 55% -->
+      <div class="w-full lg:w-[55%] lg:pr-16 text-center lg:text-left">
+
+        <!-- Eyebrow pill -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6
+                    border border-ncl-teal/50 text-ncl-teal text-sm font-medium font-inter">
+          🚀 India's AI-First IT Consultancy
+        </div>
+
+        <!-- H1 -->
+        <h1 class="font-jakarta font-extrabold text-white mb-5 leading-[1.1]
+                   text-[38px] sm:text-[52px] lg:text-[64px]">
+          Transform Your Business<br class="hidden sm:block">
+          With&nbsp;<span class="text-gradient">Intelligent Technology</span>
+        </h1>
+
+        <!-- Sub-copy -->
+        <p class="font-inter text-[#93c5fd] mb-8 leading-relaxed text-base sm:text-lg
+                  max-w-[500px] mx-auto lg:mx-0">
+          We deliver AI solutions, data engineering, and full-stack expertise that turns
+          your vision into production-ready reality.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6">
+          <a href="#contact"
+             class="px-6 py-3 rounded-xl bg-white text-[#1e3a8a] font-jakarta font-bold text-[15px]
+                    hover:bg-white/90 transition-colors shadow-lg">
+            Start Your Project →
+          </a>
+          <a href="#services"
+             class="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/60 text-white
+                    font-inter text-[15px] hover:bg-white/10 transition-colors">
+            <span class="text-ncl-teal text-xs">▶</span> See Our Work
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-5">
+          <span class="flex items-center gap-1.5 text-white/75 text-sm font-inter">
+            <span class="text-green-400 font-bold text-base leading-none">✓</span> 50+ Projects
+          </span>
+          <span class="flex items-center gap-1.5 text-white/75 text-sm font-inter">
+            <span class="text-green-400 font-bold text-base leading-none">✓</span> Enterprise Grade
+          </span>
+          <span class="flex items-center gap-1.5 text-white/75 text-sm font-inter">
+            <span class="text-green-400 font-bold text-base leading-none">✓</span> India Based
+          </span>
+        </div>
       </div>
 
-      <div class="process-grid">
-        <div class="process-step">
-          <span>1</span>
-          <h3>Discover</h3>
-          <p>We map your goals, systems, and risks to design the right digital strategy.</p>
-        </div>
-        <div class="process-step">
-          <span>2</span>
-          <h3>Design</h3>
-          <p>Modern architecture, security controls, and automation workflows are crafted for your business.</p>
-        </div>
-        <div class="process-step">
-          <span>3</span>
-          <h3>Deliver</h3>
-          <p>We implement cloud services, deploy solutions, and validate performance quickly.</p>
-        </div>
-        <div class="process-step">
-          <span>4</span>
-          <h3>Optimize</h3>
-          <p>Continuous improvement, cost efficiency, and measurable outcomes keep your solution effective.</p>
+      <!-- RIGHT 45% -->
+      <div class="w-full lg:w-[45%] flex justify-center lg:justify-end">
+
+        <!-- Floating glassmorphism card -->
+        <div class="glass-metrics card-float w-full max-w-[360px]">
+
+          <!-- Card header -->
+          <div class="flex items-center gap-2.5 mb-5">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-400 dot-pulse shrink-0"></span>
+            <span class="font-inter text-white/75 text-[11px] font-medium tracking-widest uppercase">
+              Live Platform Metrics
+            </span>
+          </div>
+
+          <!-- 2×2 grid -->
+          <div class="grid grid-cols-2 gap-3">
+
+            <div class="metric-cell">
+              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">24</p>
+              <p class="font-inter text-ncl-muted text-xs">AI Models</p>
+            </div>
+
+            <div class="metric-cell">
+              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">99.9%</p>
+              <p class="font-inter text-ncl-muted text-xs">Uptime SLA</p>
+            </div>
+
+            <div class="metric-cell">
+              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">50+</p>
+              <p class="font-inter text-ncl-muted text-xs">Projects</p>
+            </div>
+
+            <div class="metric-cell">
+              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">4.9★</p>
+              <p class="font-inter text-ncl-muted text-xs">Client Rating</p>
+            </div>
+
+          </div>
+
+          <!-- Status strip -->
+          <div class="mt-5 pt-4 border-t border-white/10">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-inter text-white/50 text-xs">All Systems Operational</span>
+              <span class="font-inter text-green-400 text-xs font-semibold">● Live</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div class="status-fill"></div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
 
-    <section id="about" class="section about reveal">
-      <div class="about-grid">
-        <div class="about-copy">
-          <span class="eyebrow">About Nexara</span>
-          <h2>Tech strategy built around your business and outcomes.</h2>
-          <p>We partner with leaders who need practical IT decisions, not buzzwords. Our team combines cloud engineering, automation, security, and analytics to reduce complexity and accelerate delivery.</p>
-          <ul>
-            <li>Enterprise-grade security with accessible execution</li>
-            <li>Cloud systems designed for reliability and cost control</li>
-            <li>AI workflows that free teams to focus on business value</li>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== STATS + SERVICES (new sections) ===== */
+.tab-btn {
+  padding: 14px 22px; font-family: 'Inter', sans-serif; font-size: 14px;
+  font-weight: 500; border: none; border-bottom: 3px solid transparent;
+  background: transparent; cursor: pointer; color: #64748B;
+  white-space: nowrap; transition: color .2s, border-color .2s, background .2s;
+}
+.tab-btn:hover { color: #F0F4FF; }
+.tab-btn.tab-active { color: #ffffff; background: transparent; border-bottom-color: #2563EB; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: svc-fadein .3s ease forwards; }
+@keyframes svc-fadein { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+@keyframes nn-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.78)} }
+.nn-node { animation: nn-pulse 2.6s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+.nn-d1   { animation-delay:.55s; }
+.nn-d2   { animation-delay:1.1s; }
+
+@keyframes dash-flow { to { stroke-dashoffset:-80; } }
+.flow-dash { stroke-dasharray:8 5; animation:dash-flow 1.8s linear infinite; }
+
+@keyframes draw-check { from{stroke-dashoffset:30} to{stroke-dashoffset:0} }
+.check-path           { stroke-dasharray:30; stroke-dashoffset:30; }
+.check-path.drawn     { animation:draw-check .4s ease-out forwards; }
+.check-path.c2.drawn  { animation-delay:.35s; }
+.check-path.c3.drawn  { animation-delay:.70s; }
+.check-path.c4.drawn  { animation-delay:1.05s; }
+
+.bar-rect { transform-box:fill-box; transform-origin:bottom; transform:scaleY(0);
+            transition:transform .65s cubic-bezier(.23,1,.32,1); }
+.bar-rect.grown { transform:scaleY(1); }
+.bar-rect.b2 { transition-delay:.08s; }
+.bar-rect.b3 { transition-delay:.16s; }
+.bar-rect.b4 { transition-delay:.24s; }
+.bar-rect.b5 { transition-delay:.32s; }
+.bar-rect.b6 { transition-delay:.40s; }
+</style>
+
+
+<!-- ============================================================
+     STATS BAR
+============================================================= -->
+<section id="stats" class="bg-[#0F1629] py-20">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[#1E2D4A]">
+
+      <div class="flex flex-col items-center py-8 px-6 text-center">
+        <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
+          <span class="stat-num" data-target="50">0</span>+
+        </p>
+        <p class="font-inter text-[16px] text-ncl-muted mt-3">Clients Served</p>
+      </div>
+
+      <div class="flex flex-col items-center py-8 px-6 text-center">
+        <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
+          <span class="stat-num" data-target="100">0</span>+
+        </p>
+        <p class="font-inter text-[16px] text-ncl-muted mt-3">Projects Delivered</p>
+      </div>
+
+      <div class="flex flex-col items-center py-8 px-6 text-center">
+        <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
+          <span class="stat-num" data-target="5">0</span>+
+        </p>
+        <p class="font-inter text-[16px] text-ncl-muted mt-3">Years Experience</p>
+      </div>
+
+      <div class="flex flex-col items-center py-8 px-6 text-center">
+        <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
+          <span class="stat-num" data-target="98">0</span>%
+        </p>
+        <p class="font-inter text-[16px] text-ncl-muted mt-3">Client Satisfaction</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SERVICES TABBED
+============================================================= -->
+<section id="services" class="bg-[#0A0F1E] py-[100px]">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <p class="font-inter text-[11px] text-ncl-blue font-semibold tracking-[3px] uppercase mb-3">WHAT WE DO</p>
+      <h2 class="font-jakarta font-extrabold text-[#0f172a] mb-4 text-[32px] sm:text-[44px] leading-tight">
+        End-to-End Technology Services
+      </h2>
+      <p class="font-inter text-ncl-muted text-base max-w-[560px] mx-auto leading-relaxed">
+        From AI strategy to production deployment — we cover every layer of your tech stack
+      </p>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="overflow-x-auto -mx-5 sm:-mx-8 px-5 sm:px-8 mb-14 bg-[#0F1629]">
+      <div class="flex border-b border-[#1E2D4A] min-w-max">
+        <button class="tab-btn tab-active" data-tab="0">AI Solutions</button>
+        <button class="tab-btn" data-tab="1">Data Engineering</button>
+        <button class="tab-btn" data-tab="2">Full Stack</button>
+        <button class="tab-btn" data-tab="3">Quality Eng</button>
+        <button class="tab-btn" data-tab="4">Digital Transform</button>
+        <button class="tab-btn" data-tab="5">FinOps</button>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 0 – AI Solutions ===== -->
+    <div class="tab-panel active" data-panel="0">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-center">
+        <div>
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-ncl-blue to-ncl-teal flex items-center justify-center text-2xl mb-6">🤖</div>
+          <h3 class="font-jakarta font-bold text-[28px] text-[#0f172a] mb-4">AI Solutions &amp; Automation</h3>
+          <p class="font-inter text-ncl-muted text-[16px] leading-[1.8] mb-6">
+            We design and deploy intelligent systems using cutting-edge LLMs, computer vision, and ML pipelines that automate complex workflows and create new revenue streams.
+          </p>
+          <p class="font-inter font-semibold text-[#0f172a] text-sm mb-3">Key capabilities:</p>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Custom LLM fine-tuning &amp; RAG systems</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Intelligent process automation</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Real-time ML inference</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>AI strategy &amp; roadmapping</li>
           </ul>
+          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
         </div>
-        <div class="about-highlights">
-          <div class="highlight-card">
-            <h3>Trusted Infrastructure</h3>
-            <p>Secure cloud operations that support high availability and scale.</p>
-          </div>
-          <div class="highlight-card">
-            <h3>Analytics-led Decisions</h3>
-            <p>Insights from data that improve performance and speed up outcomes.</p>
-          </div>
+        <!-- Neural network SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[340px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="svgNN" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <text x="40"  y="13" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">Input</text>
+            <text x="150" y="13" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">Hidden</text>
+            <text x="260" y="13" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">Output</text>
+            <!-- input→hidden connections -->
+            <line x1="40" y1="70"  x2="150" y2="70"  stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="70"  x2="150" y2="125" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="70"  x2="150" y2="180" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="125" x2="150" y2="70"  stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="125" x2="150" y2="125" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="125" x2="150" y2="180" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="180" x2="150" y2="70"  stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="180" x2="150" y2="125" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="40" y1="180" x2="150" y2="180" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <!-- hidden→output connections -->
+            <line x1="150" y1="70"  x2="260" y2="70"  stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="70"  x2="260" y2="125" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="70"  x2="260" y2="180" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="125" x2="260" y2="70"  stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="125" x2="260" y2="125" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="125" x2="260" y2="180" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="180" x2="260" y2="70"  stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="180" x2="260" y2="125" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <line x1="150" y1="180" x2="260" y2="180" stroke="#06B6D4" stroke-opacity=".22" stroke-width="1.2"/>
+            <!-- nodes -->
+            <circle cx="40"  cy="70"  r="16" fill="url(#svgNN)" class="nn-node"/>
+            <circle cx="40"  cy="125" r="16" fill="url(#svgNN)" class="nn-node nn-d1"/>
+            <circle cx="40"  cy="180" r="16" fill="url(#svgNN)" class="nn-node nn-d2"/>
+            <circle cx="150" cy="70"  r="16" fill="url(#svgNN)" class="nn-node nn-d2"/>
+            <circle cx="150" cy="125" r="16" fill="url(#svgNN)" class="nn-node"/>
+            <circle cx="150" cy="180" r="16" fill="url(#svgNN)" class="nn-node nn-d1"/>
+            <circle cx="260" cy="70"  r="16" fill="url(#svgNN)" class="nn-node nn-d1"/>
+            <circle cx="260" cy="125" r="16" fill="url(#svgNN)" class="nn-node nn-d2"/>
+            <circle cx="260" cy="180" r="16" fill="url(#svgNN)" class="nn-node"/>
+          </svg>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section id="contact" class="section contact reveal">
-      <div class="contact-panel">
-        <div class="contact-copy">
-          <span class="eyebrow">Let's talk</span>
-          <h2>Ready to start your next cloud or security initiative?</h2>
-          <p>Send us a quick message and we’ll follow up with a tailored plan and next steps.</p>
-          <div class="contact-details">
-            <div><strong>Email</strong><a href="mailto:support@nexaracloudlabs.com">support@nexaracloudlabs.com</a></div>
+    <!-- ===== PANEL 1 – Data Engineering ===== -->
+    <div class="tab-panel" data-panel="1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-center">
+        <div>
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-ncl-blue to-ncl-teal flex items-center justify-center text-2xl mb-6">🗄️</div>
+          <h3 class="font-jakarta font-bold text-[28px] text-[#0f172a] mb-4">Data Engineering</h3>
+          <p class="font-inter text-ncl-muted text-[16px] leading-[1.8] mb-6">
+            Turn raw data into business intelligence with robust pipelines, modern data warehouses, and real-time analytics that scale with your business.
+          </p>
+          <p class="font-inter font-semibold text-[#0f172a] text-sm mb-3">Key capabilities:</p>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>ETL/ELT pipeline design</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Cloud data warehouse (Snowflake, BigQuery)</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Real-time streaming (Kafka, Flink)</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>dbt transformations &amp; data quality</li>
+          </ul>
+          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+        </div>
+        <!-- Pipeline flow SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[340px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="svgDEh" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+              <linearGradient id="svgDEv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563EB" stop-opacity=".18"/><stop offset="100%" stop-color="#06B6D4" stop-opacity=".08"/></linearGradient>
+              <marker id="arDE" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0 0L6 3L0 6Z" fill="#06B6D4"/>
+              </marker>
+            </defs>
+            <!-- 4 boxes -->
+            <rect x="8"   y="44" width="58" height="48" rx="8" fill="url(#svgDEv)"/>
+            <rect x="8"   y="44" width="58" height="48" rx="8" stroke="url(#svgDEh)" stroke-width="1.5"/>
+            <rect x="82"  y="44" width="58" height="48" rx="8" fill="url(#svgDEv)"/>
+            <rect x="82"  y="44" width="58" height="48" rx="8" stroke="url(#svgDEh)" stroke-width="1.5"/>
+            <rect x="156" y="44" width="58" height="48" rx="8" fill="url(#svgDEv)"/>
+            <rect x="156" y="44" width="58" height="48" rx="8" stroke="url(#svgDEh)" stroke-width="1.5"/>
+            <rect x="230" y="44" width="58" height="48" rx="8" fill="url(#svgDEv)"/>
+            <rect x="230" y="44" width="58" height="48" rx="8" stroke="url(#svgDEh)" stroke-width="1.5"/>
+            <!-- labels -->
+            <text x="37"  y="64"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">Raw</text>
+            <text x="37"  y="76"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">Data</text>
+            <text x="37"  y="104" text-anchor="middle" fill="#94a3b8" font-size="8"  font-family="Inter,sans-serif">S3 / GCS</text>
+            <text x="111" y="64"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">Trans-</text>
+            <text x="111" y="76"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">form</text>
+            <text x="111" y="104" text-anchor="middle" fill="#94a3b8" font-size="8"  font-family="Inter,sans-serif">dbt / Spark</text>
+            <text x="185" y="64"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">Ware-</text>
+            <text x="185" y="76"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">house</text>
+            <text x="185" y="104" text-anchor="middle" fill="#94a3b8" font-size="8"  font-family="Inter,sans-serif">Snowflake</text>
+            <text x="259" y="64"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">Analyt-</text>
+            <text x="259" y="76"  text-anchor="middle" fill="#2563EB" font-size="9"  font-family="Inter,sans-serif" font-weight="700">ics</text>
+            <text x="259" y="104" text-anchor="middle" fill="#94a3b8" font-size="8"  font-family="Inter,sans-serif">Tableau</text>
+            <!-- arrows -->
+            <line x1="66"  y1="68" x2="80"  y2="68" stroke="#06B6D4" stroke-width="1.5" marker-end="url(#arDE)"/>
+            <line x1="140" y1="68" x2="154" y2="68" stroke="#06B6D4" stroke-width="1.5" marker-end="url(#arDE)"/>
+            <line x1="214" y1="68" x2="228" y2="68" stroke="#06B6D4" stroke-width="1.5" marker-end="url(#arDE)"/>
+            <!-- animated flow baseline -->
+            <line x1="8" y1="128" x2="288" y2="128" stroke="#e2e8f0" stroke-width="1"/>
+            <line class="flow-dash" x1="8" y1="128" x2="288" y2="128" stroke="url(#svgDEh)" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 2 – Full Stack ===== -->
+    <div class="tab-panel" data-panel="2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-center">
+        <div>
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-ncl-blue to-ncl-teal flex items-center justify-center text-2xl mb-6">💻</div>
+          <h3 class="font-jakarta font-bold text-[28px] text-[#0f172a] mb-4">Full Stack Engineering</h3>
+          <p class="font-inter text-ncl-muted text-[16px] leading-[1.8] mb-6">
+            End-to-end web and mobile applications built with React, Next.js, Node.js, and cloud-native architecture that scales from MVP to millions of users.
+          </p>
+          <p class="font-inter font-semibold text-[#0f172a] text-sm mb-3">Key capabilities:</p>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>React / Next.js / TypeScript</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Node.js / Python backends</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Cloud-native microservices</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>API design &amp; integration</li>
+          </ul>
+          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+        </div>
+        <!-- Stack layers SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[340px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="svgFS1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2563EB" stop-opacity=".2"/><stop offset="100%" stop-color="#3b82f6" stop-opacity=".1"/></linearGradient>
+              <linearGradient id="svgFS2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0891b2" stop-opacity=".2"/><stop offset="100%" stop-color="#06B6D4" stop-opacity=".1"/></linearGradient>
+              <linearGradient id="svgFS3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1e3a8a" stop-opacity=".2"/><stop offset="100%" stop-color="#2563EB" stop-opacity=".1"/></linearGradient>
+              <marker id="arFS" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0 1L5 3L0 5Z" fill="#94a3b8"/>
+              </marker>
+            </defs>
+            <rect x="20" y="18"  width="260" height="54" rx="10" fill="url(#svgFS1)"/>
+            <rect x="20" y="18"  width="260" height="54" rx="10" stroke="#2563EB" stroke-width="1.5"/>
+            <text x="150" y="40"  text-anchor="middle" fill="#1d4ed8" font-size="13" font-family="Inter,sans-serif" font-weight="700">Frontend</text>
+            <text x="150" y="57"  text-anchor="middle" fill="#64748B" font-size="11" font-family="Inter,sans-serif">React · Next.js · TypeScript</text>
+            <line x1="150" y1="72"  x2="150" y2="87"  stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arFS)"/>
+            <rect x="20" y="90"  width="260" height="54" rx="10" fill="url(#svgFS2)"/>
+            <rect x="20" y="90"  width="260" height="54" rx="10" stroke="#06B6D4" stroke-width="1.5"/>
+            <text x="150" y="112" text-anchor="middle" fill="#0e7490" font-size="13" font-family="Inter,sans-serif" font-weight="700">Backend API</text>
+            <text x="150" y="129" text-anchor="middle" fill="#64748B" font-size="11" font-family="Inter,sans-serif">Node.js · Python · REST / GraphQL</text>
+            <line x1="150" y1="144" x2="150" y2="159" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arFS)"/>
+            <rect x="20" y="162" width="260" height="54" rx="10" fill="url(#svgFS3)"/>
+            <rect x="20" y="162" width="260" height="54" rx="10" stroke="#1d4ed8" stroke-width="1.5"/>
+            <text x="150" y="184" text-anchor="middle" fill="#1d4ed8" font-size="13" font-family="Inter,sans-serif" font-weight="700">Database</text>
+            <text x="150" y="201" text-anchor="middle" fill="#64748B" font-size="11" font-family="Inter,sans-serif">PostgreSQL · Redis · MongoDB</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 3 – Quality Engineering ===== -->
+    <div class="tab-panel" data-panel="3">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-center">
+        <div>
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-ncl-blue to-ncl-teal flex items-center justify-center text-2xl mb-6">✅</div>
+          <h3 class="font-jakarta font-bold text-[28px] text-[#0f172a] mb-4">Quality Engineering</h3>
+          <p class="font-inter text-ncl-muted text-[16px] leading-[1.8] mb-6">
+            Ship with confidence using automated testing that catches bugs early and reduces QA cycles from weeks to hours.
+          </p>
+          <p class="font-inter font-semibold text-[#0f172a] text-sm mb-3">Key capabilities:</p>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Playwright / Cypress automation</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>API &amp; performance testing</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>CI/CD quality gates</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Test strategy &amp; framework design</li>
+          </ul>
+          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+        </div>
+        <!-- Checklist SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[320px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="svgQE" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+            </defs>
+            <!-- row 1 -->
+            <rect x="20" y="22" width="28" height="28" rx="6" fill="url(#svgQE)" fill-opacity=".14"/>
+            <rect x="20" y="22" width="28" height="28" rx="6" stroke="url(#svgQE)" stroke-width="1.5"/>
+            <path class="check-path c1" d="M26 36L33 43L44 28" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="31" fill="#0f172a" font-size="12" font-family="Inter,sans-serif" font-weight="600">Unit &amp; Integration Tests</text>
+            <text x="62" y="46" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">Playwright · Jest · PyTest</text>
+            <!-- row 2 -->
+            <rect x="20" y="72" width="28" height="28" rx="6" fill="url(#svgQE)" fill-opacity=".14"/>
+            <rect x="20" y="72" width="28" height="28" rx="6" stroke="url(#svgQE)" stroke-width="1.5"/>
+            <path class="check-path c2" d="M26 86L33 93L44 78" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="81" fill="#0f172a" font-size="12" font-family="Inter,sans-serif" font-weight="600">API Testing</text>
+            <text x="62" y="96" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">Postman · RestAssured · k6</text>
+            <!-- row 3 -->
+            <rect x="20" y="122" width="28" height="28" rx="6" fill="url(#svgQE)" fill-opacity=".14"/>
+            <rect x="20" y="122" width="28" height="28" rx="6" stroke="url(#svgQE)" stroke-width="1.5"/>
+            <path class="check-path c3" d="M26 136L33 143L44 128" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="131" fill="#0f172a" font-size="12" font-family="Inter,sans-serif" font-weight="600">CI/CD Quality Gates</text>
+            <text x="62" y="146" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">GitHub Actions · Jenkins</text>
+            <!-- row 4 -->
+            <rect x="20" y="172" width="28" height="28" rx="6" fill="url(#svgQE)" fill-opacity=".14"/>
+            <rect x="20" y="172" width="28" height="28" rx="6" stroke="url(#svgQE)" stroke-width="1.5"/>
+            <path class="check-path c4" d="M26 186L33 193L44 178" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="181" fill="#0f172a" font-size="12" font-family="Inter,sans-serif" font-weight="600">Performance Testing</text>
+            <text x="62" y="196" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">JMeter · Locust · k6</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 4 – Digital Transformation ===== -->
+    <div class="tab-panel" data-panel="4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-center">
+        <div>
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-ncl-blue to-ncl-teal flex items-center justify-center text-2xl mb-6">⚡</div>
+          <h3 class="font-jakarta font-bold text-[28px] text-[#0f172a] mb-4">Digital Transformation</h3>
+          <p class="font-inter text-ncl-muted text-[16px] leading-[1.8] mb-6">
+            Strategic consulting to modernise legacy systems and build the technology roadmap your organisation needs to compete in the digital economy.
+          </p>
+          <p class="font-inter font-semibold text-[#0f172a] text-sm mb-3">Key capabilities:</p>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Legacy system assessment</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Cloud adoption strategy</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Digital operating model</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Change management &amp; training</li>
+          </ul>
+          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+        </div>
+        <!-- Before/After SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[340px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="svgDT" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+              <marker id="arDT" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                <path d="M0 1L7 4L0 7Z" fill="#2563EB"/>
+              </marker>
+            </defs>
+            <text x="58"  y="14" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif">Legacy</text>
+            <text x="240" y="14" text-anchor="middle" fill="#2563EB" font-size="11" font-family="Inter,sans-serif" font-weight="600">Modern</text>
+            <!-- old blocks -->
+            <rect x="10" y="25"  width="98" height="36" rx="6" fill="#f1f5f9"/>
+            <text x="59" y="47"  text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif">Monolith App</text>
+            <rect x="10" y="73"  width="98" height="36" rx="6" fill="#f1f5f9"/>
+            <text x="59" y="95"  text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif">On-Premise DB</text>
+            <rect x="10" y="121" width="98" height="36" rx="6" fill="#f1f5f9"/>
+            <text x="59" y="143" text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif">Manual Deploys</text>
+            <rect x="10" y="171" width="98" height="24" rx="6" fill="#e2e8f0"/>
+            <text x="59" y="187" text-anchor="middle" fill="#94a3b8" font-size="9"  font-family="Inter,sans-serif">❌ Slow · Costly</text>
+            <!-- center arrow -->
+            <line x1="120" y1="106" x2="156" y2="106" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arDT)"/>
+            <!-- new blocks -->
+            <rect x="162" y="25"  width="128" height="36" rx="6" fill="url(#svgDT)" fill-opacity=".15"/>
+            <rect x="162" y="25"  width="128" height="36" rx="6" stroke="url(#svgDT)" stroke-width="1.5"/>
+            <text x="226" y="47"  text-anchor="middle" fill="#2563EB" font-size="10" font-family="Inter,sans-serif" font-weight="600">Microservices</text>
+            <rect x="162" y="73"  width="128" height="36" rx="6" fill="url(#svgDT)" fill-opacity=".15"/>
+            <rect x="162" y="73"  width="128" height="36" rx="6" stroke="url(#svgDT)" stroke-width="1.5"/>
+            <text x="226" y="95"  text-anchor="middle" fill="#2563EB" font-size="10" font-family="Inter,sans-serif" font-weight="600">Cloud DB</text>
+            <rect x="162" y="121" width="128" height="36" rx="6" fill="url(#svgDT)" fill-opacity=".15"/>
+            <rect x="162" y="121" width="128" height="36" rx="6" stroke="url(#svgDT)" stroke-width="1.5"/>
+            <text x="226" y="143" text-anchor="middle" fill="#2563EB" font-size="10" font-family="Inter,sans-serif" font-weight="600">CI/CD Pipeline</text>
+            <rect x="162" y="171" width="128" height="24" rx="6" fill="url(#svgDT)" fill-opacity=".3"/>
+            <text x="226" y="187" text-anchor="middle" fill="#06B6D4" font-size="9"  font-family="Inter,sans-serif" font-weight="600">✅ Fast · Scalable · Secure</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANEL 5 – FinOps ===== -->
+    <div class="tab-panel" data-panel="5">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-center">
+        <div>
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-ncl-blue to-ncl-teal flex items-center justify-center text-2xl mb-6">💰</div>
+          <h3 class="font-jakarta font-bold text-[28px] text-[#0f172a] mb-4">FinOps Consulting</h3>
+          <p class="font-inter text-ncl-muted text-[16px] leading-[1.8] mb-6">
+            Optimise cloud spend, eliminate waste, and save 30–40% on infrastructure costs within 90 days.
+          </p>
+          <p class="font-inter font-semibold text-[#0f172a] text-sm mb-3">Key capabilities:</p>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Cloud cost analysis &amp; rightsizing</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>FinOps framework implementation</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Multi-cloud governance</li>
+            <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Engineering cost culture</li>
+          </ul>
+          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+        </div>
+        <!-- Bar chart SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[340px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="svgFO" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <line x1="30" y1="15"  x2="30"  y2="175" stroke="#e2e8f0" stroke-width="1"/>
+            <line x1="30" y1="175" x2="290" y2="175" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- bars (all bottom at y=175): heights 148,136,124,113,101,89 -->
+            <rect class="bar-rect"    x="40"  y="27"  width="32" height="148" rx="4" fill="url(#svgFO)"/>
+            <rect class="bar-rect b2" x="82"  y="39"  width="32" height="136" rx="4" fill="url(#svgFO)" opacity=".9"/>
+            <rect class="bar-rect b3" x="124" y="51"  width="32" height="124" rx="4" fill="url(#svgFO)" opacity=".8"/>
+            <rect class="bar-rect b4" x="166" y="62"  width="32" height="113" rx="4" fill="url(#svgFO)" opacity=".7"/>
+            <rect class="bar-rect b5" x="208" y="74"  width="32" height="101" rx="4" fill="url(#svgFO)" opacity=".6"/>
+            <rect class="bar-rect b6" x="250" y="86"  width="32" height="89"  rx="4" fill="url(#svgFO)" opacity=".55"/>
+            <!-- month labels -->
+            <text x="56"  y="190" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter,sans-serif">Jan</text>
+            <text x="98"  y="190" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter,sans-serif">Feb</text>
+            <text x="140" y="190" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter,sans-serif">Mar</text>
+            <text x="182" y="190" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter,sans-serif">Apr</text>
+            <text x="224" y="190" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter,sans-serif">May</text>
+            <text x="266" y="190" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter,sans-serif">Jun</text>
+            <!-- 40% saved badge above bar 6 -->
+            <rect x="228" y="58" width="76" height="22" rx="5" fill="#06B6D4" fill-opacity=".12"/>
+            <rect x="228" y="58" width="76" height="22" rx="5" stroke="#06B6D4" stroke-width="1"/>
+            <text x="266" y="73" text-anchor="middle" fill="#06B6D4" font-size="10" font-family="Inter,sans-serif" font-weight="700">↓ 40% saved</text>
+            <line x1="266" y1="80" x2="266" y2="86" stroke="#06B6D4" stroke-width="1" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+/* ===== AI Insights / Why Nexara / How We Work ===== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+.insight-card {
+  background: #0A0F1E;
+  border: 1px solid #1E2D4A;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.insight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
+.insight-card h3 { color: #ffffff; transition: color .2s; cursor: pointer; }
+.insight-card h3:hover { color: #2563EB; }
+
+.step-card {
+  background: #0A0F1E;
+  border: 1px solid #1E2D4A;
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+  flex: 1;
+}
+.step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
+.step-num-bg {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  font-size: 120px;
+  font-weight: 800;
+  color: #1E2D4A;
+  z-index: 0;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.step-content { position: relative; z-index: 1; }
+.step-connector {
+  width: 32px;
+  flex-shrink: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 768px) { .step-connector { display: flex; } }
+
+/* ===== DARK SECTION COLOR OVERRIDES ===== */
+#stats p.font-inter { color: #94A3B8; }
+#services h2 { color: #ffffff; }
+#services .text-center > p.font-inter { color: #94A3B8; }
+#services .tab-panel h3 { color: #ffffff; }
+#services .tab-panel > div > div > p.font-semibold { color: #ffffff; }
+#services .tab-panel > div > div > p:not(.font-semibold) { color: #94A3B8; }
+#services .tab-panel li { color: #94A3B8; }
+#ai-insights h2 { color: #ffffff; }
+#ai-insights .insight-card span { color: #475569; }
+#why-nexara h2 { color: #ffffff; }
+#why-nexara p.font-jakarta { color: #ffffff; }
+#why-nexara p.font-inter:not(.font-semibold) { color: #94A3B8; }
+#how-we-work h2 { color: #ffffff; }
+#how-we-work .step-content h3 { color: #ffffff; }
+#how-we-work .step-content p { color: #94A3B8; }
+</style>
+
+
+<!-- ============================================================
+     AI INSIGHTS
+============================================================= -->
+<section id="ai-insights" class="bg-[#0F1629] py-20">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-10 fade-in-up">
+      <div>
+        <p class="font-inter text-[11px] text-[#2563EB] font-semibold tracking-[3px] uppercase mb-3">THOUGHT LEADERSHIP</p>
+        <h2 class="font-jakarta font-bold text-[#0f172a] leading-tight text-[32px] sm:text-[44px]">AI &amp; Technology Insights</h2>
+      </div>
+      <a href="#" class="font-inter text-sm text-[#06B6D4] hover:underline shrink-0">View all articles →</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <article class="insight-card fade-in-up">
+        <div style="height:160px;background:linear-gradient(135deg,#1e3a8a,#0e7490);display:flex;align-items:center;justify-content:center;font-size:48px;">🧠</div>
+        <div class="p-6">
+          <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#EFF6FF;color:#1d4ed8;letter-spacing:1px;">AI TRENDS</span>
+          <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug">How LLMs Are Reshaping Enterprise Data in 2025</h3>
+          <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]" style="display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+            Large language models are fundamentally changing how enterprises process and act on data at scale.
+          </p>
+          <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #F1F5F9;">
+            <span class="font-inter text-[13px] text-[#64748B]">5 min read</span>
+            <a href="#" class="font-inter text-[13px] text-[#2563EB] hover:underline">Read More →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="insight-card fade-in-up">
+        <div style="height:160px;background:linear-gradient(135deg,#0e7490,#059669);display:flex;align-items:center;justify-content:center;font-size:48px;">☁️</div>
+        <div class="p-6">
+          <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#F0FDFA;color:#0f766e;letter-spacing:1px;">FINOPS</span>
+          <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug">Cut Cloud Costs by 40% with FinOps Automation</h3>
+          <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]" style="display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+            Most teams are leaving significant cloud savings on the table. Here is a proven 90-day framework.
+          </p>
+          <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #F1F5F9;">
+            <span class="font-inter text-[13px] text-[#64748B]">5 min read</span>
+            <a href="#" class="font-inter text-[13px] text-[#2563EB] hover:underline">Read More →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="insight-card fade-in-up">
+        <div style="height:160px;background:linear-gradient(135deg,#7c3aed,#1e3a8a);display:flex;align-items:center;justify-content:center;font-size:48px;">⚡</div>
+        <div class="p-6">
+          <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#F5F3FF;color:#6d28d9;letter-spacing:1px;">ENGINEERING</span>
+          <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug">Why Test Automation Is Non-Negotiable for Scale</h3>
+          <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]" style="display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+            Manual QA is a hidden tax on engineering velocity. Here is how leading teams eliminated it entirely.
+          </p>
+          <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #F1F5F9;">
+            <span class="font-inter text-[13px] text-[#64748B]">5 min read</span>
+            <a href="#" class="font-inter text-[13px] text-[#2563EB] hover:underline">Read More →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     WHY NEXARA
+============================================================= -->
+<section id="why-nexara" class="bg-[#0A0F1E] py-20">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+    <div class="flex flex-col lg:flex-row items-center gap-20">
+
+      <div class="w-full lg:w-[40%] fade-in-up">
+        <p class="font-inter text-[11px] text-[#2563EB] font-semibold tracking-[3px] uppercase mb-3">WHY CHOOSE US</p>
+        <h2 class="font-jakarta font-bold text-[36px] text-[#0f172a] leading-tight mb-4">Why 50+ Companies Trust Nexara</h2>
+        <p class="font-inter text-[16px] text-[#64748B] leading-relaxed mb-8">
+          We combine startup agility with enterprise-grade quality — delivering production-ready solutions that create measurable business impact.
+        </p>
+        <a href="#contact" class="inline-block font-inter font-semibold text-white bg-[#2563EB] hover:bg-blue-700 rounded-lg px-6 py-3 text-[15px] transition-colors">
+          Schedule a Free Call →
+        </a>
+      </div>
+
+      <div class="w-full lg:w-[60%] fade-in-up">
+
+        <div class="flex items-start gap-5 py-6">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#2563EB,#1d4ed8);">⚡</div>
+          <div>
+            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">AI-First by Design</p>
+            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">We embed AI into every engagement from day one — not as an afterthought but as the strategic foundation.</p>
           </div>
         </div>
 
-        <form id="contactForm" class="contact-form">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Your email" required>
-          <textarea name="message" placeholder="Tell us about your project" rows="5" required></textarea>
-          <button type="submit" class="button button-primary">Send Message</button>
-          <p id="formMessage" class="form-message" aria-live="polite"></p>
-        </form>
+        <div class="flex items-start gap-5 py-6" style="border-top:1px solid #1E2D4A;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#0e7490,#059669);">🚀</div>
+          <div>
+            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">Startup Speed, Enterprise Quality</p>
+            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">Agile sprints, daily updates, transparent delivery. Production-ready code shipped in weeks not months.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5 py-6" style="border-top:1px solid #1E2D4A;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#7c3aed,#2563EB);">🌍</div>
+          <div>
+            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">India-Based, Global Standards</p>
+            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">World-class engineering talent at competitive rates with zero compromise on quality or communication.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5 py-6" style="border-top:1px solid #1E2D4A;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#0e7490,#06B6D4);">🤝</div>
+          <div>
+            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">True Partnership Model</p>
+            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">We work as an embedded extension of your team. Your success metrics are our success metrics.</p>
+          </div>
+        </div>
+
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
+</section>
 
-  <footer class="footer">
-    <p>© 2026 Nexara Cloud Labs. Designed for cloud-first growth.</p>
-  </footer>
 
-  <script>
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('formMessage');
+<!-- ============================================================
+     HOW WE WORK
+============================================================= -->
+<section id="how-we-work" class="bg-[#0F1629] py-20">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
 
-    contactForm.addEventListener('submit', (event) => {
-      event.preventDefault();
+    <div class="text-center mb-14 fade-in-up">
+      <p class="font-inter text-[11px] text-[#2563EB] font-semibold tracking-[3px] uppercase mb-3">OUR PROCESS</p>
+      <h2 class="font-jakarta font-bold text-[#0f172a] leading-tight text-[32px] sm:text-[44px]">From Idea to Production in Weeks</h2>
+    </div>
 
-      const name = contactForm.querySelector('input[name="name"]').value.trim();
-      const email = contactForm.querySelector('input[name="email"]').value.trim();
-      const message = contactForm.querySelector('textarea[name="message"]').value.trim();
+    <div class="flex flex-col md:flex-row items-stretch gap-8 md:gap-0">
 
-      contactForm.reset();
-      formMessage.textContent = 'Thanks, ' + (name || 'there') + '! Your message has been received. We will respond to ' + email + ' soon.';
-      formMessage.classList.add('form-message--success');
+      <div class="step-card fade-in-up">
+        <span class="step-num-bg">01</span>
+        <div class="step-content">
+          <div class="flex items-start justify-between mb-1">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center text-2xl" style="background:linear-gradient(135deg,#2563EB,#1d4ed8);">🔍</div>
+            <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#1E2D4A;color:#06B6D4;">Week 1–2</span>
+          </div>
+          <h3 class="font-jakarta font-bold text-[20px] text-[#0f172a] mt-4 mb-3">Discover &amp; Design</h3>
+          <p class="font-inter text-[14px] text-[#64748B] leading-[1.7]">We audit your systems, understand business goals, identify quick wins, and design the right solution.</p>
+        </div>
+      </div>
+
+      <div class="step-connector">
+        <div style="border-top:2px dashed #334155;width:32px;"></div>
+      </div>
+
+      <div class="step-card fade-in-up">
+        <span class="step-num-bg">02</span>
+        <div class="step-content">
+          <div class="flex items-start justify-between mb-1">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center text-2xl" style="background:linear-gradient(135deg,#0e7490,#06B6D4);">⚙️</div>
+            <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#1E2D4A;color:#06B6D4;">Week 3–8</span>
+          </div>
+          <h3 class="font-jakarta font-bold text-[20px] text-[#0f172a] mt-4 mb-3">Build &amp; Iterate</h3>
+          <p class="font-inter text-[14px] text-[#64748B] leading-[1.7]">Agile two-week sprints with daily progress updates. You see every commit — no black boxes ever.</p>
+        </div>
+      </div>
+
+      <div class="step-connector">
+        <div style="border-top:2px dashed #334155;width:32px;"></div>
+      </div>
+
+      <div class="step-card fade-in-up">
+        <span class="step-num-bg">03</span>
+        <div class="step-content">
+          <div class="flex items-start justify-between mb-1">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center text-2xl" style="background:linear-gradient(135deg,#7c3aed,#2563EB);">📈</div>
+            <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#1E2D4A;color:#06B6D4;">Week 8+</span>
+          </div>
+          <h3 class="font-jakarta font-bold text-[20px] text-[#0f172a] mt-4 mb-3">Launch &amp; Scale</h3>
+          <p class="font-inter text-[14px] text-[#64748B] leading-[1.7]">We deploy, monitor, optimise, and scale with you. We don't ship and disappear — we stay.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<script>
+/* ---- Fade-in-up scroll reveal ---- */
+(function () {
+  const revEls = document.querySelectorAll('.fade-in-up');
+  if (!revEls.length) return;
+  const revObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revObs.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.12 });
+  revEls.forEach(el => revObs.observe(el));
+})();
+</script>
 
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+
+<script>
+/* ---- Stats Counter (Intersection Observer + easeOutQuad) ---- */
+(function () {
+  function easeOutQuad(t) { return t * (2 - t); }
+  const els = document.querySelectorAll('.stat-num');
+  if (!els.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const t0 = performance.now();
+      const dur = 2000;
+      (function step(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = Math.floor(easeOutQuad(p) * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      })(t0);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ---- Services Tab Switcher ---- */
+(function () {
+  const btns   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  function activate(idx) {
+    btns.forEach(b => b.classList.remove('tab-active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btns[idx].classList.add('tab-active');
+    panels[idx].classList.add('active');
+
+    /* Quality Eng: redraw checklist strokes */
+    if (idx === 3) {
+      panels[idx].querySelectorAll('.check-path').forEach(c => {
+        c.style.animation = 'none';
+        void c.offsetWidth;
+        c.style.animation = '';
+        c.classList.remove('drawn');
+        void c.offsetWidth;
+        c.classList.add('drawn');
+      });
+    }
+
+    /* FinOps: grow bars from bottom */
+    if (idx === 5) {
+      panels[idx].querySelectorAll('.bar-rect').forEach(b => {
+        b.style.transition = 'none';
+        b.classList.remove('grown');
+        void b.offsetWidth;
+        b.style.transition = '';
+        b.classList.add('grown');
+      });
+    }
+  }
+
+  btns.forEach((btn, i) => btn.addEventListener('click', () => activate(i)));
+  activate(0);
+})();
+</script>
+
+
+<script>
+/* ---- Mega Dropdown ---- */
+const ddTrigger = document.getElementById('services-trigger');
+const ddPanel   = document.getElementById('mega-dropdown');
+const ddChevron = document.getElementById('dd-chevron');
+
+function ddIsOpen() { return ddPanel.classList.contains('dd-open'); }
+
+function ddOpen() {
+  ddPanel.classList.remove('dd-closed');
+  ddPanel.classList.add('dd-open');
+  ddChevron.style.transform = 'rotate(180deg)';
+  ddTrigger.setAttribute('aria-expanded', 'true');
+}
+function ddClose() {
+  ddPanel.classList.remove('dd-open');
+  ddPanel.classList.add('dd-closed');
+  ddChevron.style.transform = '';
+  ddTrigger.setAttribute('aria-expanded', 'false');
+}
+
+ddTrigger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  ddIsOpen() ? ddClose() : ddOpen();
+});
+document.addEventListener('click', (e) => {
+  if (ddIsOpen() && !ddPanel.contains(e.target) && e.target !== ddTrigger) ddClose();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') ddClose(); });
+
+
+/* ---- Mobile Drawer ---- */
+const hamburger    = document.getElementById('hamburger');
+const mobileDrawer = document.getElementById('mobile-drawer');
+const closeDrawer  = document.getElementById('close-drawer');
+const drawerBg     = document.getElementById('drawer-bg');
+
+function drawerOpen() {
+  mobileDrawer.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  hamburger.setAttribute('aria-expanded', 'true');
+}
+function drawerClose() {
+  mobileDrawer.style.display = 'none';
+  document.body.style.overflow = '';
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+
+hamburger.addEventListener('click', drawerOpen);
+closeDrawer.addEventListener('click', drawerClose);
+drawerBg.addEventListener('click', drawerClose);
+mobileDrawer.querySelectorAll('nav a').forEach(a => a.addEventListener('click', drawerClose));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClose(); });
+
+
+/* ---- Particle Canvas ---- */
+(function () {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx    = canvas.getContext('2d');
+  const COUNT  = 70;
+  const RADIUS = 1.5;
+  const LINK   = 120;
+  let pts = [];
+
+  function resize() {
+    const hero  = canvas.parentElement;
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  function init() {
+    pts = Array.from({ length: COUNT }, () => ({
+      x:  Math.random() * canvas.width,
+      y:  Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.7,
+      vy: (Math.random() - 0.5) * 0.7,
+    }));
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const p of pts) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx = -p.vx;
+      if (p.y < 0 || p.y > canvas.height) p.vy = -p.vy;
+    }
+
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        if (dx * dx + dy * dy < LINK * LINK) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+          ctx.lineWidth   = 0.6;
+          ctx.stroke();
         }
-      });
-    }, {
-      threshold: 0.15
-    });
-
-    function isAuthenticated() {
-      return sessionStorage.getItem('adminAuth') === 'true';
-    }
-
-    function setupHeaderAuth() {
-      const authButton = document.getElementById('authButton');
-      if (!authButton) return;
-      if (isAuthenticated()) {
-        authButton.textContent = 'Logout';
-        authButton.href = '#';
-        authButton.classList.remove('button-secondary');
-        authButton.classList.add('button-primary');
-        authButton.addEventListener('click', (event) => {
-          event.preventDefault();
-          sessionStorage.removeItem('adminAuth');
-          window.location.href = 'login.html';
-        });
       }
     }
 
-    setupHeaderAuth();
-    revealElements.forEach((element, index) => {
-      element.style.transitionDelay = `${index * 80}ms`;
-      revealObserver.observe(element);
-    });
-
-    const serviceDetails = {
-      'cloud-infrastructure': {
-        title: 'Cloud Infrastructure',
-        desc: 'We design resilient cloud architectures with secure networking, scalable compute, and high-availability deployments tailored to your needs.',
-        pitch: 'Launch faster with infrastructure that supports growth, reduces outages, and protects mission-critical operations.'
-      },
-      'ai-automation': {
-        title: 'AI Automation',
-        desc: 'We deploy intelligent automation that streamlines workflows, improves accuracy, and turns repetitive tasks into business advantages.',
-        pitch: 'Transform manual processes into smart, self-operating systems that boost productivity and free your team for strategic work.'
-      },
-      'cybersecurity': {
-        title: 'Cybersecurity',
-        desc: 'We secure your digital ecosystem with proactive monitoring, incident response, and compliance controls that protect your data and users.',
-        pitch: 'Stay ahead of threats with defenses designed to reduce risk, maintain trust, and meet regulatory expectations.'
-      },
-      'data-engineering-bi': {
-        title: 'Data Engineering & BI',
-        desc: 'We build reliable data pipelines, analytics platforms, and dashboards so teams can act on insights with confidence.',
-        pitch: 'Turn scattered data into single-source truth, faster reporting, and better decisions across the business.'
-      },
-      'finops': {
-        title: 'FinOps',
-        desc: 'We align cloud costs with business value through visibility, optimization, and governance of your spending patterns.',
-        pitch: 'Keep your cloud budget under control while scaling capacity with confidence and lower waste.'
-      },
-      'ai-governance': {
-        title: 'AI Governance',
-        desc: 'We help you establish policies, oversight, and ethical guardrails for AI systems across development and deployment.',
-        pitch: 'Create responsible AI practices that protect stakeholders, preserve trust, and support compliance.'
-      },
-      'ai-academy': {
-        title: 'AI Academy',
-        desc: 'We deliver hands-on AI training programs that equip your workforce with practical skills in machine learning, automation, and intelligent systems—building internal expertise for long-term competitive advantage.',
-        pitch: 'Transform your team with persona-based learning programs tailored to each role—from engineers to business leaders—building expertise that drives AI innovation.'
-      }
-    };
-
-    const modal = document.getElementById('serviceModal');
-    const modalTitle = document.getElementById('serviceModalTitle');
-    const modalDesc = document.getElementById('serviceModalDesc');
-    const modalPitch = document.getElementById('serviceModalPitch');
-    const closeModalButton = modal.querySelector('.modal-close');
-
-    function openServiceModal(key) {
-      const service = serviceDetails[key];
-      if (!service) return;
-      modalTitle.textContent = service.title;
-      modalDesc.textContent = service.desc;
-      modalPitch.textContent = service.pitch;
-      modal.classList.add('service-modal--visible');
-      modal.setAttribute('aria-hidden', 'false');
+    for (const p of pts) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.fill();
     }
 
-    function closeServiceModal() {
-      modal.classList.remove('service-modal--visible');
-      modal.setAttribute('aria-hidden', 'true');
-    }
+    requestAnimationFrame(tick);
+  }
 
-    document.querySelectorAll('.service-card').forEach((card) => {
-      card.addEventListener('click', () => {
-        openServiceModal(card.dataset.service);
-      });
-    });
+  resize();
+  init();
+  tick();
+  window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
+})();
+</script>
 
-    closeModalButton.addEventListener('click', closeServiceModal);
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal || event.target.classList.contains('service-modal-backdrop')) {
-        closeServiceModal();
-      }
+
+<style>
+/* ===== TECH STACK MARQUEE ===== */
+@keyframes marqueeLeft  { from { transform: translateX(0);    } to { transform: translateX(-50%); } }
+@keyframes marqueeRight { from { transform: translateX(-50%); } to { transform: translateX(0);    } }
+.marquee-track        { display: flex; width: max-content; align-items: center; }
+.marquee-track-left   { animation: marqueeLeft  30s linear infinite; }
+.marquee-track-right  { animation: marqueeRight 30s linear infinite; }
+.marquee-viewport:hover .marquee-track { animation-play-state: paused; }
+.tech-pill {
+  background: #0F1629;
+  border: 1px solid #1E2D4A;
+  border-radius: 999px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  margin: 0 8px;
+  display: inline-block;
+}
+
+/* ===== CASE STUDY CARDS ===== */
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+@media (max-width: 1024px) { .cs-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .cs-grid { grid-template-columns: 1fr; } }
+
+.cs-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+  background: #fff;
+}
+.cs-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0,0,0,.10);
+}
+
+/* ===== TESTIMONIALS CAROUSEL ===== */
+.testi-slide { display: none; }
+.testi-slide.active { display: block; animation: testiFade .4s ease; }
+@keyframes testiFade { from { opacity: 0; } to { opacity: 1; } }
+
+.testi-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: width .3s ease, background .3s ease, border-radius .3s ease;
+}
+.testi-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #2563EB;
+}
+.testi-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+.testi-arrow:hover { background: #F8FAFC; }
+</style>
+
+
+<!-- ============================================================
+     TECH STACK
+============================================================= -->
+<section id="tech-stack" style="background:#0A0F1E;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="text-center" style="margin-bottom:56px;">
+      <h2 class="font-jakarta font-bold text-white" style="font-size:44px;margin:0 0 12px 0;">Technologies We Master</h2>
+      <p class="font-inter" style="color:#64748B;font-size:16px;margin:0;">Certified experts across the modern cloud and data ecosystem</p>
+    </div>
+
+    <!-- Row 1 – scrolls left -->
+    <div class="marquee-viewport" style="overflow:hidden;position:relative;margin-bottom:20px;-webkit-mask:linear-gradient(to right,transparent,black 10%,black 90%,transparent);mask:linear-gradient(to right,transparent,black 10%,black 90%,transparent);">
+      <div class="marquee-track marquee-track-left">
+        <span class="tech-pill font-inter">AWS</span>
+        <span class="tech-pill font-inter">Azure</span>
+        <span class="tech-pill font-inter">Google Cloud</span>
+        <span class="tech-pill font-inter">Kubernetes</span>
+        <span class="tech-pill font-inter">Docker</span>
+        <span class="tech-pill font-inter">Terraform</span>
+        <span class="tech-pill font-inter">Python</span>
+        <span class="tech-pill font-inter">React</span>
+        <span class="tech-pill font-inter">TypeScript</span>
+        <span class="tech-pill font-inter">Next.js</span>
+        <span class="tech-pill font-inter">AWS</span>
+        <span class="tech-pill font-inter">Azure</span>
+        <span class="tech-pill font-inter">Google Cloud</span>
+        <span class="tech-pill font-inter">Kubernetes</span>
+        <span class="tech-pill font-inter">Docker</span>
+        <span class="tech-pill font-inter">Terraform</span>
+        <span class="tech-pill font-inter">Python</span>
+        <span class="tech-pill font-inter">React</span>
+        <span class="tech-pill font-inter">TypeScript</span>
+        <span class="tech-pill font-inter">Next.js</span>
+      </div>
+    </div>
+
+    <!-- Row 2 – scrolls right -->
+    <div class="marquee-viewport" style="overflow:hidden;position:relative;-webkit-mask:linear-gradient(to right,transparent,black 10%,black 90%,transparent);mask:linear-gradient(to right,transparent,black 10%,black 90%,transparent);">
+      <div class="marquee-track marquee-track-right">
+        <span class="tech-pill font-inter">Node.js</span>
+        <span class="tech-pill font-inter">PostgreSQL</span>
+        <span class="tech-pill font-inter">MongoDB</span>
+        <span class="tech-pill font-inter">Apache Spark</span>
+        <span class="tech-pill font-inter">Kafka</span>
+        <span class="tech-pill font-inter">Airflow</span>
+        <span class="tech-pill font-inter">FastAPI</span>
+        <span class="tech-pill font-inter">Redis</span>
+        <span class="tech-pill font-inter">Playwright</span>
+        <span class="tech-pill font-inter">dbt</span>
+        <span class="tech-pill font-inter">Node.js</span>
+        <span class="tech-pill font-inter">PostgreSQL</span>
+        <span class="tech-pill font-inter">MongoDB</span>
+        <span class="tech-pill font-inter">Apache Spark</span>
+        <span class="tech-pill font-inter">Kafka</span>
+        <span class="tech-pill font-inter">Airflow</span>
+        <span class="tech-pill font-inter">FastAPI</span>
+        <span class="tech-pill font-inter">Redis</span>
+        <span class="tech-pill font-inter">Playwright</span>
+        <span class="tech-pill font-inter">dbt</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CASE STUDIES
+============================================================= -->
+<section id="case-studies" style="background:#fff;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="flex items-center justify-between" style="margin-bottom:40px;">
+      <h2 class="font-jakarta font-bold text-[#0f172a]" style="font-size:44px;margin:0;">Results We Have Delivered</h2>
+      <a href="#" class="font-inter" style="font-size:14px;color:#06B6D4;text-decoration:none;white-space:nowrap;flex-shrink:0;margin-left:24px;">View all →</a>
+    </div>
+
+    <div class="cs-grid">
+
+      <!-- Card 1 -->
+      <div class="cs-card">
+        <div style="height:200px;position:relative;background:linear-gradient(135deg,#1e3a8a,#2563EB);display:flex;align-items:center;justify-content:center;font-size:48px;">
+          🤖
+          <span style="position:absolute;top:16px;right:16px;background:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#0f172a;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:'Inter',sans-serif;">67% Fraud Reduction</span>
+        </div>
+        <div style="padding:24px;">
+          <span class="font-inter font-bold" style="font-size:11px;background:#EFF6FF;color:#2563EB;padding:4px 10px;border-radius:999px;letter-spacing:1px;display:inline-block;">FINTECH</span>
+          <h3 class="font-jakarta font-bold" style="font-size:18px;color:#0f172a;margin:8px 0;">AI-Powered Fraud Detection System</h3>
+          <p class="font-inter" style="font-size:14px;color:#64748B;line-height:1.6;margin:0;">Real-time ML pipeline processing 50,000 transactions per second with 99.2% accuracy.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">ML</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Python</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">AWS</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Kafka</span>
+          </div>
+          <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="cs-card">
+        <div style="height:200px;position:relative;background:linear-gradient(135deg,#0e7490,#059669);display:flex;align-items:center;justify-content:center;font-size:48px;">
+          📊
+          <span style="position:absolute;top:16px;right:16px;background:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#0f172a;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:'Inter',sans-serif;">5x Query Performance</span>
+        </div>
+        <div style="padding:24px;">
+          <span class="font-inter font-bold" style="font-size:11px;background:#F0FDFA;color:#0e7490;padding:4px 10px;border-radius:999px;letter-spacing:1px;display:inline-block;">E-COMMERCE</span>
+          <h3 class="font-jakarta font-bold" style="font-size:18px;color:#0f172a;margin:8px 0;">Enterprise Data Warehouse Migration</h3>
+          <p class="font-inter" style="font-size:14px;color:#64748B;line-height:1.6;margin:0;">Migrated 10TB Oracle warehouse to Snowflake. Query time dropped from 4 hours to 45 minutes.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Snowflake</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">dbt</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Airflow</span>
+          </div>
+          <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="cs-card">
+        <div style="height:200px;position:relative;background:linear-gradient(135deg,#7c3aed,#1e3a8a);display:flex;align-items:center;justify-content:center;font-size:48px;">
+          ✅
+          <span style="position:absolute;top:16px;right:16px;background:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#0f172a;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:'Inter',sans-serif;">80% Faster QA</span>
+        </div>
+        <div style="padding:24px;">
+          <span class="font-inter font-bold" style="font-size:11px;background:#F5F3FF;color:#7c3aed;padding:4px 10px;border-radius:999px;letter-spacing:1px;display:inline-block;">SAAS</span>
+          <h3 class="font-jakarta font-bold" style="font-size:18px;color:#0f172a;margin:8px 0;">End-to-End Test Automation Framework</h3>
+          <p class="font-inter" style="font-size:14px;color:#64748B;line-height:1.6;margin:0;">Reduced QA cycle from 2 weeks to 6 hours using Playwright across 400+ test scenarios.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Playwright</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">TypeScript</span>
+            <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">CI/CD</span>
+          </div>
+          <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================= -->
+<section id="testimonials" style="background:#F8FAFC;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="text-center" style="margin-bottom:56px;">
+      <h2 class="font-jakarta font-bold text-[#0f172a]" style="font-size:44px;margin:0;">What Our Clients Say</h2>
+    </div>
+
+    <div style="position:relative;display:flex;align-items:center;gap:16px;max-width:920px;margin:0 auto;">
+
+      <button class="testi-arrow" id="testi-prev" aria-label="Previous testimonial">&#8592;</button>
+
+      <div style="flex:1;min-width:0;">
+
+        <!-- Slide 1 -->
+        <div class="testi-slide active" data-index="0">
+          <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
+            <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
+            <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
+            <p class="font-inter" style="font-size:18px;color:#0f172a;font-style:italic;line-height:1.8;margin:0;">"Nexara transformed our data infrastructure in just 8 weeks. Real-time insights that used to take days now happen instantly. The ROI was visible within the first month."</p>
+            <div style="margin-top:28px;display:flex;align-items:center;gap:16px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#2563EB;font-weight:700;font-size:16px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;">RS</div>
+              <div>
+                <p class="font-jakarta font-bold" style="font-size:16px;color:#0f172a;margin:0 0 2px;">Rahul Sharma</p>
+                <p class="font-inter" style="font-size:14px;color:#64748B;margin:0;">CTO, FinTech Startup · Mumbai</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="testi-slide" data-index="1">
+          <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
+            <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
+            <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
+            <p class="font-inter" style="font-size:18px;color:#0f172a;font-style:italic;line-height:1.8;margin:0;">"Their AI automation reduced our manual processing by 80%. We went from 3 FTEs doing data entry to full automation. Professional, fast, and genuinely invested."</p>
+            <div style="margin-top:28px;display:flex;align-items:center;gap:16px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#0e7490;font-weight:700;font-size:16px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;">PM</div>
+              <div>
+                <p class="font-jakarta font-bold" style="font-size:16px;color:#0f172a;margin:0 0 2px;">Priya Mehta</p>
+                <p class="font-inter" style="font-size:14px;color:#64748B;margin:0;">VP Operations, E-commerce · Bangalore</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="testi-slide" data-index="2">
+          <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
+            <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
+            <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
+            <p class="font-inter" style="font-size:18px;color:#0f172a;font-style:italic;line-height:1.8;margin:0;">"Best technology partner we have worked with in 10 years. Our QA cycle dropped from 2 weeks to 6 hours. Would recommend without hesitation."</p>
+            <div style="margin-top:28px;display:flex;align-items:center;gap:16px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#7c3aed;font-weight:700;font-size:16px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;">JK</div>
+              <div>
+                <p class="font-jakarta font-bold" style="font-size:16px;color:#0f172a;margin:0 0 2px;">James Kowalski</p>
+                <p class="font-inter" style="font-size:14px;color:#64748B;margin:0;">CEO, SaaS Platform · London</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="testi-arrow" id="testi-next" aria-label="Next testimonial">&#8594;</button>
+
+    </div>
+
+    <!-- Dot navigation -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:32px;" id="testi-dots">
+      <button class="testi-dot active" data-dot="0" aria-label="Go to slide 1"></button>
+      <button class="testi-dot" data-dot="1" aria-label="Go to slide 2"></button>
+      <button class="testi-dot" data-dot="2" aria-label="Go to slide 3"></button>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+/* ---- Testimonials Carousel ---- */
+(function () {
+  const slides  = document.querySelectorAll('.testi-slide');
+  const dots    = document.querySelectorAll('#testi-dots .testi-dot');
+  const btnPrev = document.getElementById('testi-prev');
+  const btnNext = document.getElementById('testi-next');
+  const TOTAL   = slides.length;
+  let current   = 0;
+  let timer     = null;
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + TOTAL) % TOTAL;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function startTimer() { timer = setInterval(function () { goTo(current + 1); }, 4000); }
+  function stopTimer()  { clearInterval(timer); }
+
+  btnPrev.addEventListener('click', function () { stopTimer(); goTo(current - 1); startTimer(); });
+  btnNext.addEventListener('click', function () { stopTimer(); goTo(current + 1); startTimer(); });
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      stopTimer();
+      goTo(parseInt(dot.dataset.dot, 10));
+      startTimer();
     });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('service-modal--visible')) {
-        closeServiceModal();
-      }
-    });
-  </script>
+  });
+
+  document.getElementById('testimonials').addEventListener('mouseenter', stopTimer);
+  document.getElementById('testimonials').addEventListener('mouseleave', startTimer);
+
+  startTimer();
+})();
+</script>
+
+
+<style>
+/* ===== CONTACT FORM ===== */
+.contact-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  color: #0f172a;
+  background: #fff;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  box-sizing: border-box;
+}
+.contact-input:focus {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.contact-input.field-error { border-color: #EF4444; }
+.field-error-msg { display: none; font-size: 12px; color: #EF4444; margin-top: 4px; font-family: 'Inter', sans-serif; }
+.field-error-msg.visible { display: block; }
+
+.select-styled {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* ===== CONTACT SOCIAL BUTTONS ===== */
+.contact-social-btn {
+  width: 40px; height: 40px;
+  border: 1px solid #E2E8F0; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #64748B; font-size: 13px; font-weight: 700;
+  text-decoration: none; background: #fff; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.contact-social-btn:hover { background: #2563EB; color: #fff; border-color: #2563EB; }
+
+/* ===== FOOTER ===== */
+.footer-link {
+  display: block; font-family: 'Inter', sans-serif; font-size: 13px;
+  color: #64748B; text-decoration: none; margin-bottom: 10px;
+  transition: color .2s;
+}
+.footer-link:hover { color: #06B6D4; }
+
+.footer-social-btn {
+  width: 32px; height: 32px;
+  border: 1px solid #1E2D4A; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #64748B; font-size: 12px; font-weight: 700;
+  text-decoration: none; font-family: 'Inter', sans-serif;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.footer-social-btn:hover { background: #fff; color: #0f172a; border-color: #fff; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #1E2D4A;
+}
+.contact-cols {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 60px;
+  align-items: start;
+}
+.cf-name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+@media (max-width: 1100px) {
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .contact-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .cf-name-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+
+<!-- ============================================================
+     CONTACT
+============================================================= -->
+<section id="contact" style="background:#ffffff; padding:80px 0;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 40px;
+  display:grid; grid-template-columns:2fr 3fr; gap:60px;
+  align-items:start;">
+
+    <div>
+      <p style="font-size:11px; color:#2563EB;
+      letter-spacing:3px; font-weight:600;
+      margin-bottom:12px;">GET IN TOUCH</p>
+      <h2 style="font-size:36px; font-weight:800;
+      color:#0f172a; margin-bottom:16px;
+      font-family:'Plus Jakarta Sans',sans-serif;">
+      Start Your Project Today</h2>
+      <p style="font-size:16px; color:#64748B;
+      line-height:1.7; margin-bottom:32px;">
+      Tell us about your project and we will get back
+      to you within 24 hours.</p>
+
+      <div style="margin-bottom:20px; display:flex;
+      gap:12px; align-items:center;">
+        <div style="width:40px; height:40px;
+        border-radius:50%; background:linear-gradient(
+        135deg,#2563EB,#06B6D4); display:flex;
+        align-items:center; justify-content:center;
+        flex-shrink:0; font-size:18px;">📧</div>
+        <div>
+          <div style="font-size:12px;color:#64748B;">Email</div>
+          <div style="font-size:14px;color:#0f172a;
+          font-weight:600;">hello@nexaracloudlabs.com</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px; display:flex;
+      gap:12px; align-items:center;">
+        <div style="width:40px; height:40px;
+        border-radius:50%; background:linear-gradient(
+        135deg,#0e7490,#06B6D4); display:flex;
+        align-items:center; justify-content:center;
+        flex-shrink:0; font-size:18px;">📍</div>
+        <div>
+          <div style="font-size:12px;color:#64748B;">
+          Location</div>
+          <div style="font-size:14px;color:#0f172a;
+          font-weight:600;">Bangalore, India
+          (Remote-first)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:32px; display:flex;
+      gap:12px; align-items:center;">
+        <div style="width:40px; height:40px;
+        border-radius:50%; background:linear-gradient(
+        135deg,#7c3aed,#2563EB); display:flex;
+        align-items:center; justify-content:center;
+        flex-shrink:0; font-size:18px;">🕐</div>
+        <div>
+          <div style="font-size:12px;color:#64748B;">
+          Response Time</div>
+          <div style="font-size:14px;color:#0f172a;
+          font-weight:600;">Within 24 hours
+          guaranteed</div>
+        </div>
+      </div>
+
+      <p style="font-size:13px; color:#94A3B8;">
+      🔒 Your information is safe.
+      We never share your data.</p>
+    </div>
+
+    <div>
+      <form id="contactForm" style="display:flex;
+      flex-direction:column; gap:20px;">
+
+        <div style="display:grid;
+        grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <label style="display:block; font-size:13px;
+            color:#64748B; font-weight:500;
+            margin-bottom:6px;">Full Name *</label>
+            <input type="text" id="contactName"
+            placeholder="John Smith"
+            style="width:100%; padding:12px 16px;
+            border:1px solid #E2E8F0; border-radius:10px;
+            font-size:15px; outline:none;
+            font-family:Inter,sans-serif;
+            transition:border-color 0.2s; box-sizing:border-box;">
+          </div>
+          <div>
+            <label style="display:block; font-size:13px;
+            color:#64748B; font-weight:500;
+            margin-bottom:6px;">Company Name</label>
+            <input type="text" placeholder="Acme Corp"
+            style="width:100%; padding:12px 16px;
+            border:1px solid #E2E8F0; border-radius:10px;
+            font-size:15px; outline:none;
+            font-family:Inter,sans-serif; box-sizing:border-box;">
+          </div>
+        </div>
+
+        <div>
+          <label style="display:block; font-size:13px;
+          color:#64748B; font-weight:500;
+          margin-bottom:6px;">Work Email *</label>
+          <input type="email" id="contactEmail"
+          placeholder="john@company.com"
+          style="width:100%; padding:12px 16px;
+          border:1px solid #E2E8F0; border-radius:10px;
+          font-size:15px; outline:none;
+          font-family:Inter,sans-serif; box-sizing:border-box;">
+        </div>
+
+        <div style="display:grid;
+        grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <label style="display:block; font-size:13px;
+            color:#64748B; font-weight:500;
+            margin-bottom:6px;">Service *</label>
+            <select id="contactService"
+            style="width:100%; padding:12px 16px;
+            border:1px solid #E2E8F0; border-radius:10px;
+            font-size:15px; outline:none;
+            background:white; color:#0f172a;
+            font-family:Inter,sans-serif; box-sizing:border-box;">
+              <option value="">Select a service</option>
+              <option>AI Solutions &amp; Automation</option>
+              <option>Data Engineering</option>
+              <option>Full Stack Engineering</option>
+              <option>Quality Engineering</option>
+              <option>Digital Transformation</option>
+              <option>FinOps Consulting</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:13px;
+            color:#64748B; font-weight:500;
+            margin-bottom:6px;">Budget</label>
+            <select style="width:100%; padding:12px 16px;
+            border:1px solid #E2E8F0; border-radius:10px;
+            font-size:15px; outline:none; background:white;
+            font-family:Inter,sans-serif; box-sizing:border-box;">
+              <option>Select budget range</option>
+              <option>Under $5,000</option>
+              <option>$5,000 – $20,000</option>
+              <option>$20,000 – $50,000</option>
+              <option>$50,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label style="display:block; font-size:13px;
+          color:#64748B; font-weight:500;
+          margin-bottom:6px;">Tell us about your
+          project *</label>
+          <textarea id="contactMessage" rows="4"
+          placeholder="Describe your project, goals,
+          and timeline..."
+          style="width:100%; padding:12px 16px;
+          border:1px solid #E2E8F0; border-radius:10px;
+          font-size:15px; outline:none; resize:vertical;
+          font-family:Inter,sans-serif; box-sizing:border-box;"></textarea>
+        </div>
+
+        <button type="submit"
+        onclick="submitContactForm(event)"
+        style="width:100%; padding:14px;
+        background:#2563EB; color:white; border:none;
+        border-radius:10px; font-size:16px;
+        font-weight:600; cursor:pointer;
+        transition:background 0.2s;
+        font-family:'Plus Jakarta Sans',sans-serif;">
+        Send Message →</button>
+
+      </form>
+
+      <div id="contactSuccess" style="display:none;
+      text-align:center; padding:48px 24px;">
+        <div style="width:60px; height:60px;
+        background:#ECFDF5; border-radius:50%;
+        display:flex; align-items:center;
+        justify-content:center; font-size:28px;
+        margin:0 auto 20px;">✅</div>
+        <h3 style="font-size:24px; font-weight:700;
+        color:#0f172a; margin-bottom:8px;">
+        Message Sent!</h3>
+        <p style="color:#64748B; margin-bottom:24px;">
+        Thank you! We will get back to you
+        within 24 hours.</p>
+        <button onclick="resetContactForm()"
+        style="padding:10px 24px; border:1px solid #E2E8F0;
+        background:white; border-radius:8px;
+        cursor:pointer; color:#64748B;">
+        Send Another Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================= -->
+<footer id="footer" style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <!-- Top 5-column grid -->
+    <div class="footer-grid">
+
+      <!-- Col 1: Brand -->
+      <div style="max-width:260px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <svg width="36" height="36" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="ng-ft" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2563EB"/>
+                <stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <rect width="44" height="44" rx="10" fill="url(#ng-ft)"/>
+            <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="13" cy="13" r="2.5" fill="white"/>
+            <circle cx="31" cy="13" r="2.5" fill="white"/>
+            <circle cx="13" cy="31" r="2.5" fill="white"/>
+            <circle cx="31" cy="31" r="2.5" fill="white"/>
+            <circle cx="22" cy="22" r="2.5" fill="white"/>
+          </svg>
+          <div>
+            <p class="font-jakarta font-bold text-white" style="font-size:18px;margin:0;">Nexara</p>
+            <p class="font-inter" style="font-size:12px;color:#64748B;margin:0;">Cloud Labs Pvt. Ltd.</p>
+          </div>
+        </div>
+        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">India's AI-first IT services and consultancy. Building intelligent technology for forward-thinking businesses worldwide.</p>
+        <div style="display:flex;gap:8px;">
+          <a href="#" class="footer-social-btn" aria-label="LinkedIn">L</a>
+          <a href="#" class="footer-social-btn" aria-label="Twitter">T</a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub">G</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Services -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Services</p>
+        <a href="#services" class="footer-link">AI Solutions</a>
+        <a href="#services" class="footer-link">Data Engineering</a>
+        <a href="#services" class="footer-link">Full Stack Engineering</a>
+        <a href="#services" class="footer-link">Quality Engineering</a>
+        <a href="#services" class="footer-link">Digital Transformation</a>
+        <a href="#services" class="footer-link">FinOps</a>
+      </div>
+
+      <!-- Col 3: Company -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Company</p>
+        <a href="#about" class="footer-link">About Us</a>
+        <a href="#case-studies" class="footer-link">Case Studies</a>
+        <a href="#blog" class="footer-link">Blog</a>
+        <a href="career.html" class="footer-link">Careers</a>
+        <a href="#contact" class="footer-link">Contact Us</a>
+      </div>
+
+      <!-- Col 4: Resources -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Resources</p>
+        <a href="#" class="footer-link">Documentation</a>
+        <a href="#" class="footer-link">API Docs</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">Cookie Policy</a>
+      </div>
+
+      <!-- Col 5: Contact -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
+        <a href="mailto:hello@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;transition:text-decoration .2s;word-break:break-word;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">hello@nexaracloudlabs.com</a>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
+        <a href="#contact" class="font-inter font-bold" style="display:inline-block;margin-top:16px;font-size:13px;color:#06B6D4;text-decoration:none;">Get a Free Quote →</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Cookie Policy</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<script>
+function submitContactForm(e) {
+  e.preventDefault();
+  var name = document.getElementById('contactName').value;
+  var email = document.getElementById('contactEmail').value;
+  var service = document.getElementById('contactService').value;
+  var message = document.getElementById('contactMessage').value;
+  if(!name || !email || !service || !message) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  if(!email.includes('@') || !email.includes('.')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('contactSuccess').style.display='block';
+}
+function resetContactForm() {
+  document.getElementById('contactForm').style.display='flex';
+  document.getElementById('contactSuccess').style.display='none';
+  document.getElementById('contactForm').reset();
+}
+</script>
+
+
+<div id="chatWidget" style="position:fixed; bottom:28px;
+right:28px; z-index:9999; font-family:Inter,sans-serif;">
+
+  <div id="chatPanel" style="display:none; position:absolute;
+  bottom:70px; right:0; width:360px; height:500px;
+  background:#0A0F1E; border:1px solid #1E2D4A;
+  border-radius:20px; overflow:hidden;
+  box-shadow:0 25px 50px rgba(0,0,0,0.5);
+  flex-direction:column;">
+
+    <div style="padding:16px 20px;
+    border-bottom:1px solid #1E2D4A;
+    display:flex; align-items:center;
+    justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:36px; height:36px; border-radius:50%;
+        background:linear-gradient(135deg,#2563EB,#06B6D4);
+        display:flex; align-items:center; justify-content:center;
+        font-size:16px;">N</div>
+        <div>
+          <div style="color:white; font-weight:600;
+          font-size:14px;">Nexara AI</div>
+          <div style="color:#64748B; font-size:11px;">
+          Cloud Labs Assistant</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:5px;">
+          <div id="onlineDot" style="width:8px; height:8px;
+          border-radius:50%; background:#22c55e;"></div>
+          <span style="color:#22c55e; font-size:11px;">
+          Online</span>
+        </div>
+        <button onclick="toggleChat()"
+        style="background:none; border:none; color:#64748B;
+        cursor:pointer; font-size:20px; line-height:1;">
+        ×</button>
+      </div>
+    </div>
+
+    <div id="chatMessages" style="flex:1; overflow-y:auto;
+    padding:16px; display:flex; flex-direction:column;
+    gap:12px; height:360px;">
+      <div style="background:#0F1629; border:1px solid #1E2D4A;
+      border-radius:16px; border-top-left-radius:4px;
+      padding:12px 16px; max-width:85%;">
+        <p style="color:#E2E8F0; font-size:13px;
+        line-height:1.5; margin:0;">
+        👋 Hi! I am Nexara's AI assistant. I can answer
+        questions about our services, team, and how we can
+        help your business. What would you like to know?
+        </p>
+        <div style="color:#475569; font-size:10px;
+        margin-top:6px;">Just now</div>
+      </div>
+
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button onclick="sendQuick('What services do you offer?')"
+        style="background:#0F1629; border:1px solid #1E2D4A;
+        color:#06B6D4; font-size:12px; padding:6px 12px;
+        border-radius:20px; cursor:pointer;">
+        Our services</button>
+        <button onclick="sendQuick('What is your pricing?')"
+        style="background:#0F1629; border:1px solid #1E2D4A;
+        color:#06B6D4; font-size:12px; padding:6px 12px;
+        border-radius:20px; cursor:pointer;">
+        Pricing</button>
+        <button onclick="sendQuick('I want to book a call')"
+        style="background:#0F1629; border:1px solid #1E2D4A;
+        color:#06B6D4; font-size:12px; padding:6px 12px;
+        border-radius:20px; cursor:pointer;">
+        Book a call</button>
+      </div>
+    </div>
+
+    <div style="padding:12px 16px;
+    border-top:1px solid #1E2D4A;
+    display:flex; gap:8px; align-items:center;">
+      <input id="chatInput" type="text"
+      placeholder="Ask me anything about Nexara..."
+      onkeydown="if(event.key==='Enter')sendMessage()"
+      style="flex:1; background:#0F1629;
+      border:1px solid #1E2D4A; border-radius:10px;
+      padding:10px 14px; color:white; font-size:13px;
+      outline:none; font-family:Inter,sans-serif;">
+      <button onclick="sendMessage()"
+      style="width:36px; height:36px; border-radius:50%;
+      background:#2563EB; border:none; color:white;
+      cursor:pointer; font-size:16px; display:flex;
+      align-items:center; justify-content:center;">→</button>
+    </div>
+  </div>
+
+  <button onclick="toggleChat()"
+  id="chatToggleBtn"
+  style="width:56px; height:56px; border-radius:50%;
+  background:#2563EB; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; box-shadow:0 4px 20px rgba(37,99,235,0.4);
+  position:relative;">
+  💬
+  <span style="position:absolute; top:-2px; right:-2px;
+  width:14px; height:14px; background:#22c55e;
+  border-radius:50%; border:2px solid #0A0F1E;"></span>
+  </button>
+</div>
+
+<script>
+function toggleChat() {
+  var panel = document.getElementById('chatPanel');
+  var isOpen = panel.style.display === 'flex';
+  panel.style.display = isOpen ? 'none' : 'flex';
+}
+
+function sendQuick(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
+}
+
+function sendMessage() {
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if (!text) return;
+
+  var messages = document.getElementById('chatMessages');
+  var time = new Date().toLocaleTimeString([],
+    {hour:'2-digit', minute:'2-digit'});
+
+  messages.innerHTML += '<div style="display:flex; justify-content:flex-end;">' +
+    '<div style="background:#2563EB; border-radius:16px;' +
+    'border-top-right-radius:4px; padding:12px 16px; max-width:85%;">' +
+    '<p style="color:white; font-size:13px; line-height:1.5; margin:0;">' + text + '</p>' +
+    '<div style="color:rgba(255,255,255,0.5); font-size:10px; margin-top:6px; text-align:right;">' + time + '</div>' +
+    '</div></div>';
+
+  input.value = '';
+  messages.scrollTop = messages.scrollHeight;
+
+  setTimeout(function() {
+    messages.innerHTML += '<div style="background:#0F1629; border:1px solid #1E2D4A;' +
+      'border-radius:16px; border-top-left-radius:4px;' +
+      'padding:12px 16px; max-width:85%;">' +
+      '<div style="display:flex; gap:4px; align-items:center; height:20px;">' +
+      '<div style="width:6px; height:6px; background:#64748B; border-radius:50%;' +
+      'animation:typingDot 1s infinite;"></div>' +
+      '<div style="width:6px; height:6px; background:#64748B; border-radius:50%;' +
+      'animation:typingDot 1s infinite 0.2s;"></div>' +
+      '<div style="width:6px; height:6px; background:#64748B; border-radius:50%;' +
+      'animation:typingDot 1s infinite 0.4s;"></div>' +
+      '</div></div>';
+    messages.scrollTop = messages.scrollHeight;
+
+    setTimeout(function() {
+      var lastTyping = messages.querySelector('div:last-child');
+      if (lastTyping) lastTyping.remove();
+
+      var reply = getReply(text.toLowerCase());
+      messages.innerHTML += '<div style="background:#0F1629; border:1px solid #1E2D4A;' +
+        'border-radius:16px; border-top-left-radius:4px; padding:12px 16px; max-width:85%;">' +
+        '<p style="color:#E2E8F0; font-size:13px; line-height:1.5; margin:0;">' + reply + '</p>' +
+        '<div style="color:#475569; font-size:10px; margin-top:6px;">' + time + '</div>' +
+        '</div>';
+      messages.scrollTop = messages.scrollHeight;
+    }, 1200);
+  }, 500);
+}
+
+function getReply(msg) {
+  if (msg.includes('service') || msg.includes('offer') || msg.includes('do you')) {
+    return 'We offer 6 core services: AI Solutions & Automation, Data Engineering, Full Stack Engineering, Quality Engineering, Digital Transformation, and FinOps Consulting. Which would you like to know more about?';
+  } else if (msg.includes('price') || msg.includes('cost') || msg.includes('pricing') || msg.includes('budget')) {
+    return 'Our engagements typically start from $5,000 for focused projects. We offer fixed-price and time-and-materials models. Would you like a free consultation to discuss your specific needs?';
+  } else if (msg.includes('call') || msg.includes('meet') || msg.includes('book') || msg.includes('contact')) {
+    return 'You can book a free 30-min consultation or reach us at hello@nexaracloudlabs.com. We respond within 24 hours. Want me to scroll you to the contact form?';
+  } else if (msg.includes('ai') || msg.includes('llm') || msg.includes('machine learning')) {
+    return 'Our AI team specialises in custom LLM deployment, RAG systems, ML pipelines, and intelligent automation. We have delivered AI solutions for FinTech, E-commerce, and SaaS companies. Want to see a case study?';
+  } else if (msg.includes('data') || msg.includes('pipeline') || msg.includes('warehouse')) {
+    return 'Our data engineering team builds robust ETL pipelines, cloud data warehouses (Snowflake, BigQuery), and real-time streaming systems using Kafka and Spark. What is your data challenge?';
+  } else if (msg.includes('finops') || msg.includes('cloud cost') || msg.includes('aws cost')) {
+    return 'Our FinOps practice typically saves clients 30-40% on cloud infrastructure within 90 days. We work with AWS, Azure, and GCP. Would you like a free cloud cost assessment?';
+  } else {
+    return 'Great question! For the most accurate answer I recommend speaking with our team directly at hello@nexaracloudlabs.com or using the contact form on this page. Can I help with anything else?';
+  }
+}
+</script>
+
 </body>
 </html>

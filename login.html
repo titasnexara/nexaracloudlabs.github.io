@@ -117,7 +117,7 @@
       }
     });
 
-    const revealElements = document.querySelectorAll('.reveal');
+    const revealElements = document.querySelectorAll('.reveal, .fade-in-up, .stagger-children');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -130,6 +130,11 @@
       element.style.transitionDelay = `${index * 80}ms`;
       revealObserver.observe(element);
     });
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar')
+        ?.classList.toggle('navbar--scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>

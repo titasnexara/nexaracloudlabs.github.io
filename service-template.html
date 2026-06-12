@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nexara Cloud Labs — AI Solutions & Automation. Intelligent systems that automate workflows, reduce costs, and unlock new revenue streams.">
+  <title>AI Solutions & Automation | Nexara Cloud Labs</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ncl-bg':    '#0A0F1E',
+            'ncl-blue':  '#2563EB',
+            'ncl-teal':  '#06B6D4',
+            'ncl-text':  '#F0F4FF',
+            'ncl-muted': '#64748B',
+            'ncl-panel': '#0F1629',
+          },
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    .text-gradient {
+      background: linear-gradient(90deg, #2563EB, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-bg {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 50%, #0e7490 100%);
+    }
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    #mega-dropdown {
+      transform-origin: top center;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    #mega-dropdown.dd-closed {
+      opacity: 0;
+      transform: scaleY(0.96);
+      pointer-events: none;
+    }
+    #mega-dropdown.dd-open {
+      opacity: 1;
+      transform: scaleY(1);
+      pointer-events: auto;
+    }
+    .drawer-hidden { display: none; }
+    .svc-tile {
+      background: linear-gradient(135deg, rgba(37,99,235,.13), rgba(6,182,212,.13));
+      border: 1px solid rgba(37,99,235,0.28);
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+
+    /* ---- Capability cards ---- */
+    .cap-card {
+      background: #0A0F1E;
+      border: 1px solid #1E2D4A;
+      border-radius: 16px;
+      padding: 28px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .cap-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,.25);
+    }
+    .cap-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563EB, #06B6D4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+
+    /* ---- Timeline ---- */
+    .timeline-step { flex: 1; text-align: center; position: relative; }
+    .timeline-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(50% + 24px);
+      width: calc(100% - 48px);
+      height: 2px;
+      border-top: 2px dashed #E2E8F0;
+    }
+    .step-circle {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563EB, #06B6D4);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 15px;
+      position: relative; z-index: 1;
+    }
+
+    /* ---- Tech pills ---- */
+    .tech-row-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #64748B;
+      margin-bottom: 12px;
+    }
+    .svc-tech-pill {
+      background: #0A0F1E;
+      border: 1px solid #1E2D4A;
+      border-radius: 999px;
+      padding: 8px 16px;
+      color: #06B6D4;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    /* ---- FAQ accordion ---- */
+    .faq-item { border-bottom: 1px solid #E2E8F0; }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      cursor: pointer;
+      gap: 16px;
+    }
+    .faq-question-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #0f172a;
+    }
+    .faq-toggle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #EFF6FF;
+      color: #2563EB;
+      font-size: 18px;
+      font-weight: 400;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s, transform .2s;
+    }
+    .faq-answer {
+      display: none;
+      font-size: 14px;
+      color: #64748B;
+      line-height: 1.7;
+      padding-bottom: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+    .faq-answer.open { display: block; }
+
+    /* ---- Scroll reveal ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---- Footer ---- */
+    .footer-link {
+      display: block; font-family: 'Inter', sans-serif; font-size: 13px;
+      color: #64748B; text-decoration: none; margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .footer-link:hover { color: #06B6D4; }
+    .footer-social-btn {
+      width: 32px; height: 32px;
+      border: 1px solid #1E2D4A; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #64748B; font-size: 12px; font-weight: 700;
+      text-decoration: none; font-family: 'Inter', sans-serif;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .footer-social-btn:hover { background: #fff; color: #0f172a; border-color: #fff; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #1E2D4A;
+    }
+    @media (max-width: 1100px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+    @media (max-width: 900px)  { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (max-width: 640px)  { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px)  { .footer-grid { grid-template-columns: 1fr; } }
+
+    /* ---- Mobile timeline ---- */
+    @media (max-width: 767px) {
+      .timeline-step::after { display: none; }
+      .timeline-step { text-align: left; display: flex; gap: 16px; align-items: flex-start; }
+      .timeline-step-inner { text-align: left; }
+    }
+  </style>
+</head>
+
+<body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
+
+<!-- ============================================================
+     NAVBAR
+============================================================= -->
+<header id="navbar" class="sticky top-0 z-50 w-full bg-ncl-bg border-b border-white/[.06] relative">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
+
+    <!-- Brand -->
+    <a href="index.html" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#2563EB"/>
+            <stop offset="100%" stop-color="#06B6D4"/>
+          </linearGradient>
+        </defs>
+        <rect width="44" height="44" rx="10" fill="url(#ng1)"/>
+        <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="13" cy="13" r="2.5" fill="white"/>
+        <circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="13" cy="31" r="2.5" fill="white"/>
+        <circle cx="31" cy="31" r="2.5" fill="white"/>
+        <circle cx="22" cy="22" r="2.5" fill="white"/>
+      </svg>
+      <div class="flex flex-col leading-none gap-[3px]">
+        <span class="font-jakarta font-bold text-white text-[20px]">Nexara</span>
+        <span class="font-jakarta text-ncl-teal text-[11px] tracking-wide">Cloud Labs</span>
+      </div>
+    </a>
+
+    <!-- Center nav (desktop) -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+      <a href="index.html" class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Home</a>
+      <button id="services-trigger"
+              aria-haspopup="true" aria-expanded="false"
+              class="flex items-center gap-1 text-ncl-teal text-[14px] transition-colors duration-150 bg-transparent border-none cursor-pointer p-0 font-semibold">
+        Services
+        <svg id="dd-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none"
+             class="transition-transform duration-200 mt-[1px]">
+          <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <a href="index.html#about"        class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">About</a>
+      <a href="index.html#case-studies" class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Case Studies</a>
+      <a href="index.html#blog"         class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Blog</a>
+      <a href="career.html"             class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Careers</a>
+    </nav>
+
+    <!-- Right actions (desktop) -->
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
+      <a href="index.html#contact"
+         class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium
+                hover:bg-white/10 transition-colors duration-150">
+        Contact
+      </a>
+      <a href="index.html#contact"
+         class="px-4 py-[9px] rounded-lg bg-ncl-blue text-white text-[14px] font-semibold
+                hover:bg-blue-700 transition-colors duration-150">
+        Get Free Quote
+      </a>
+    </div>
+
+    <!-- Hamburger (mobile) -->
+    <button id="hamburger"
+            aria-label="Open menu" aria-expanded="false"
+            class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9
+                   rounded-lg hover:bg-white/10 transition-colors">
+      <span class="block w-5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+      <span class="block w-5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+      <span class="block w-3.5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <!-- Mega Dropdown -->
+  <div id="mega-dropdown"
+       class="dd-closed absolute left-0 right-0 top-full bg-ncl-panel border-b border-white/[.08] shadow-2xl">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 py-7">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">🤖</div>
+          <div>
+            <p class="font-jakarta font-semibold text-ncl-teal text-[13px]">AI Solutions &amp; Automation</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">LLMs, ML pipelines, automation</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">🗄️</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Data Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Pipelines, warehouses, analytics</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">💻</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Full Stack Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Web, mobile, cloud-native</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">✅</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Quality Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Test automation, CI/CD quality</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">⚡</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Digital Transformation</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Legacy modernisation, roadmaps</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">💰</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">FinOps Consulting</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Cloud cost optimisation</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile full-screen drawer -->
+<div id="mobile-drawer" class="drawer-hidden fixed inset-0 z-[200]">
+  <div id="drawer-bg" class="absolute inset-0 bg-ncl-bg/95 backdrop-blur-md"></div>
+  <div class="relative z-10 flex flex-col h-full px-6 pt-6 pb-10 overflow-y-auto">
+    <div class="flex items-center justify-between mb-10">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Nexara Cloud Labs">
+        <svg width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ng2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <rect width="44" height="44" rx="10" fill="url(#ng2)"/>
+          <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="13" cy="13" r="2.5" fill="white"/>
+          <circle cx="31" cy="13" r="2.5" fill="white"/>
+          <circle cx="13" cy="31" r="2.5" fill="white"/>
+          <circle cx="31" cy="31" r="2.5" fill="white"/>
+          <circle cx="22" cy="22" r="2.5" fill="white"/>
+        </svg>
+        <div class="flex flex-col leading-none gap-[3px]">
+          <span class="font-jakarta font-bold text-white text-xl">Nexara</span>
+          <span class="font-jakarta text-ncl-teal text-xs tracking-wide">Cloud Labs</span>
+        </div>
+      </a>
+      <button id="close-drawer" aria-label="Close menu"
+              class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col divide-y divide-white/[.08]">
+      <a href="index.html"             class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Home</a>
+      <a href="#"                      class="py-4 font-jakarta font-semibold text-ncl-teal text-lg">Services</a>
+      <a href="index.html#about"       class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">About</a>
+      <a href="index.html#case-studies" class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Case Studies</a>
+      <a href="index.html#blog"        class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Blog</a>
+      <a href="career.html"            class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Careers</a>
+    </nav>
+    <div class="flex flex-col gap-3 mt-8">
+      <a href="index.html#contact"
+         class="py-3 px-6 rounded-xl border border-white text-white text-base font-jakarta font-semibold
+                text-center hover:bg-white/10 transition-colors">
+        Contact
+      </a>
+      <a href="index.html#contact"
+         class="py-3 px-6 rounded-xl bg-ncl-blue text-white text-base font-jakarta font-semibold
+                text-center hover:bg-blue-700 transition-colors">
+        Get Free Quote
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 1 — SERVICE HERO
+============================================================= -->
+<section class="hero-bg relative min-h-screen flex items-center overflow-hidden">
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Breadcrumb -->
+  <div class="absolute top-[100px] left-10 z-10 hidden lg:block">
+    <span class="font-inter text-[13px]" style="color:#64748B;">
+      <a href="index.html" class="hover:text-white transition-colors">Home</a>
+      <span class="mx-2">→</span>
+      <a href="#" class="hover:text-white transition-colors">Services</a>
+      <span class="mx-2">→</span>
+      <span style="color:#93c5fd;">AI Solutions</span>
+    </span>
+  </div>
+
+  <div class="relative z-10 w-full max-w-[900px] mx-auto px-5 sm:px-8 py-32 flex flex-col items-center text-center">
+
+    <!-- Service icon -->
+    <div class="mb-8" style="width:120px;height:120px;border-radius:50%;
+         background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);
+         display:flex;align-items:center;justify-content:center;font-size:56px;">
+      🤖
+    </div>
+
+    <!-- H1 -->
+    <h1 class="font-jakarta font-extrabold text-white mb-5 leading-[1.1]"
+        style="font-size:clamp(36px,5vw,56px);">
+      AI Solutions &amp; Automation
+    </h1>
+
+    <!-- Subheading -->
+    <p class="font-inter mb-10 text-center leading-relaxed"
+       style="font-size:20px;color:#93c5fd;max-width:600px;">
+      Intelligent systems that automate workflows, reduce costs, and unlock new revenue streams
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="index.html#contact"
+         class="px-7 py-3 rounded-xl bg-white font-jakarta font-bold text-[15px]
+                hover:bg-white/90 transition-colors shadow-lg"
+         style="color:#1e3a8a;">
+        Start a Project →
+      </a>
+      <a href="#case-study"
+         class="px-7 py-3 rounded-xl border border-white text-white font-inter text-[15px]
+                hover:bg-white/10 transition-colors">
+        View Case Studies
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2 — PROBLEM STATEMENT
+============================================================= -->
+<section style="background:#ffffff;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: SVG illustration -->
+      <div class="flex items-center justify-center reveal">
+        <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg"
+             class="w-full max-w-[420px]" aria-hidden="true">
+          <!-- Background boxes representing manual process steps -->
+          <rect x="20"  y="30"  width="80" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+          <text x="60"  y="52"  text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif" font-weight="600">Receive</text>
+          <text x="60"  y="66"  text-anchor="middle" fill="#94A3B8" font-size="9"  font-family="Inter,sans-serif">Request</text>
+
+          <rect x="170" y="30"  width="80" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+          <text x="210" y="52"  text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif" font-weight="600">Manual</text>
+          <text x="210" y="66"  text-anchor="middle" fill="#94A3B8" font-size="9"  font-family="Inter,sans-serif">Review</text>
+
+          <rect x="320" y="30"  width="80" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+          <text x="360" y="52"  text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif" font-weight="600">Data</text>
+          <text x="360" y="66"  text-anchor="middle" fill="#94A3B8" font-size="9"  font-family="Inter,sans-serif">Entry</text>
+
+          <rect x="20"  y="130" width="80" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+          <text x="60"  y="152" text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif" font-weight="600">Approval</text>
+          <text x="60"  y="166" text-anchor="middle" fill="#94A3B8" font-size="9"  font-family="Inter,sans-serif">Queue</text>
+
+          <rect x="170" y="130" width="80" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+          <text x="210" y="152" text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif" font-weight="600">Re-check</text>
+          <text x="210" y="166" text-anchor="middle" fill="#94A3B8" font-size="9"  font-family="Inter,sans-serif">Errors</text>
+
+          <rect x="320" y="130" width="80" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+          <text x="360" y="152" text-anchor="middle" fill="#64748B" font-size="10" font-family="Inter,sans-serif" font-weight="600">Report</text>
+          <text x="360" y="166" text-anchor="middle" fill="#94A3B8" font-size="9"  font-family="Inter,sans-serif">Generate</text>
+
+          <!-- Messy crossing lines -->
+          <line x1="100" y1="55"  x2="170" y2="155" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="250" y1="55"  x2="320" y2="155" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="100" y1="55"  x2="320" y2="55"  stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="100" y1="155" x2="320" y2="155" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="250" y1="155" x2="100" y2="55"  stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5"/>
+          <line x1="100" y1="155" x2="320" y2="55"  stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5"/>
+
+          <!-- Red X marks -->
+          <text x="148" y="42"  fill="#EF4444" font-size="18" font-family="Inter,sans-serif" font-weight="700">✕</text>
+          <text x="298" y="42"  fill="#EF4444" font-size="18" font-family="Inter,sans-serif" font-weight="700">✕</text>
+          <text x="148" y="142" fill="#EF4444" font-size="18" font-family="Inter,sans-serif" font-weight="700">✕</text>
+          <text x="298" y="142" fill="#EF4444" font-size="18" font-family="Inter,sans-serif" font-weight="700">✕</text>
+
+          <!-- Bottom label -->
+          <rect x="80" y="230" width="260" height="36" rx="8" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.5"/>
+          <text x="210" y="253" text-anchor="middle" fill="#DC2626" font-size="12" font-family="Inter,sans-serif" font-weight="600">Disconnected · Slow · Error-prone</text>
+        </svg>
+      </div>
+
+      <!-- Right: text -->
+      <div class="reveal">
+        <p class="font-inter font-bold text-[11px] mb-4"
+           style="color:#2563EB;letter-spacing:3px;text-transform:uppercase;">
+          THE CHALLENGE
+        </p>
+        <h2 class="font-jakarta font-bold mb-5 leading-tight"
+            style="font-size:36px;color:#0f172a;">
+          Manual Processes Are Costing You More Than You Think
+        </h2>
+        <p class="font-inter mb-8 leading-[1.8]"
+           style="font-size:16px;color:#64748B;">
+          Most businesses are leaving significant value on the table through repetitive manual work, slow data processing, and disconnected systems. Every hour your team spends on manual tasks is an hour not spent on growth.
+        </p>
+
+        <!-- Pain point pills -->
+        <div class="flex flex-wrap gap-3">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-inter font-medium text-[13px]"
+                style="background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;">
+            ⚠️ High operational costs
+          </span>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-inter font-medium text-[13px]"
+                style="background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;">
+            ⚠️ Slow manual workflows
+          </span>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-inter font-medium text-[13px]"
+                style="background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;">
+            ⚠️ Inconsistent data quality
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3 — WHAT WE DELIVER
+============================================================= -->
+<section style="background:#0F1629;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="text-center mb-14 reveal">
+      <p class="font-inter font-bold text-[11px] mb-3"
+         style="color:#2563EB;letter-spacing:3px;text-transform:uppercase;">
+        OUR SERVICES
+      </p>
+      <h2 class="font-jakarta font-extrabold text-white" style="font-size:44px;">
+        What We Build For You
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">🧠</div>
+        <h3 class="font-jakarta font-bold text-white mt-4 mb-2" style="font-size:16px;">Custom LLM Development</h3>
+        <p class="font-inter leading-[1.7]" style="font-size:14px;color:#94A3B8;">
+          Fine-tune and deploy large language models tailored to your business domain and data
+        </p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">🔄</div>
+        <h3 class="font-jakarta font-bold text-white mt-4 mb-2" style="font-size:16px;">Intelligent Process Automation</h3>
+        <p class="font-inter leading-[1.7]" style="font-size:14px;color:#94A3B8;">
+          Replace repetitive manual tasks with smart workflows that learn and improve over time
+        </p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">🔍</div>
+        <h3 class="font-jakarta font-bold text-white mt-4 mb-2" style="font-size:16px;">RAG Systems &amp; Knowledge Bases</h3>
+        <p class="font-inter leading-[1.7]" style="font-size:14px;color:#94A3B8;">
+          Connect your documents and data to AI for instant, accurate answers and insights
+        </p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">📊</div>
+        <h3 class="font-jakarta font-bold text-white mt-4 mb-2" style="font-size:16px;">ML Pipeline Engineering</h3>
+        <p class="font-inter leading-[1.7]" style="font-size:14px;color:#94A3B8;">
+          End-to-end machine learning pipelines from data ingestion to model serving at scale
+        </p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">👁️</div>
+        <h3 class="font-jakarta font-bold text-white mt-4 mb-2" style="font-size:16px;">Computer Vision Solutions</h3>
+        <p class="font-inter leading-[1.7]" style="font-size:14px;color:#94A3B8;">
+          Image recognition, object detection, and visual quality control for your operations
+        </p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">🎯</div>
+        <h3 class="font-jakarta font-bold text-white mt-4 mb-2" style="font-size:16px;">AI Strategy &amp; Roadmapping</h3>
+        <p class="font-inter leading-[1.7]" style="font-size:14px;color:#94A3B8;">
+          Define your AI transformation journey with a clear, prioritised, achievable roadmap
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4 — OUR APPROACH
+============================================================= -->
+<section style="background:#ffffff;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="text-center mb-16 reveal">
+      <h2 class="font-jakarta font-extrabold" style="font-size:44px;color:#0f172a;">
+        How We Deliver AI Solutions
+      </h2>
+    </div>
+
+    <!-- Desktop timeline / Mobile vertical -->
+    <div class="hidden md:flex items-start gap-0 reveal">
+
+      <div class="timeline-step">
+        <div class="flex flex-col items-center gap-4">
+          <div class="step-circle">1</div>
+          <h4 class="font-jakarta font-bold text-[15px]" style="color:#0f172a;">Discovery</h4>
+          <p class="font-inter text-center px-2" style="font-size:13px;color:#64748B;line-height:1.6;">
+            Audit your current processes and identify highest-value AI opportunities
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="flex flex-col items-center gap-4">
+          <div class="step-circle">2</div>
+          <h4 class="font-jakarta font-bold text-[15px]" style="color:#0f172a;">Data Assessment</h4>
+          <p class="font-inter text-center px-2" style="font-size:13px;color:#64748B;line-height:1.6;">
+            Evaluate your data quality, quantity, and readiness for AI
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="flex flex-col items-center gap-4">
+          <div class="step-circle">3</div>
+          <h4 class="font-jakarta font-bold text-[15px]" style="color:#0f172a;">Solution Design</h4>
+          <p class="font-inter text-center px-2" style="font-size:13px;color:#64748B;line-height:1.6;">
+            Architect the right AI approach for your specific use case
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="flex flex-col items-center gap-4">
+          <div class="step-circle">4</div>
+          <h4 class="font-jakarta font-bold text-[15px]" style="color:#0f172a;">Build &amp; Train</h4>
+          <p class="font-inter text-center px-2" style="font-size:13px;color:#64748B;line-height:1.6;">
+            Develop, train, and validate models with your real business data
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="flex flex-col items-center gap-4">
+          <div class="step-circle">5</div>
+          <h4 class="font-jakarta font-bold text-[15px]" style="color:#0f172a;">Deploy &amp; Monitor</h4>
+          <p class="font-inter text-center px-2" style="font-size:13px;color:#64748B;line-height:1.6;">
+            Production deployment with monitoring, retraining, and support
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile: vertical steps -->
+    <div class="flex flex-col gap-8 md:hidden reveal">
+      <div class="flex items-start gap-5">
+        <div class="step-circle shrink-0">1</div>
+        <div>
+          <h4 class="font-jakarta font-bold text-[15px] mb-1" style="color:#0f172a;">Discovery</h4>
+          <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.6;">Audit your current processes and identify highest-value AI opportunities</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-5">
+        <div class="step-circle shrink-0">2</div>
+        <div>
+          <h4 class="font-jakarta font-bold text-[15px] mb-1" style="color:#0f172a;">Data Assessment</h4>
+          <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.6;">Evaluate your data quality, quantity, and readiness for AI</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-5">
+        <div class="step-circle shrink-0">3</div>
+        <div>
+          <h4 class="font-jakarta font-bold text-[15px] mb-1" style="color:#0f172a;">Solution Design</h4>
+          <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.6;">Architect the right AI approach for your specific use case</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-5">
+        <div class="step-circle shrink-0">4</div>
+        <div>
+          <h4 class="font-jakarta font-bold text-[15px] mb-1" style="color:#0f172a;">Build &amp; Train</h4>
+          <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.6;">Develop, train, and validate models with your real business data</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-5">
+        <div class="step-circle shrink-0">5</div>
+        <div>
+          <h4 class="font-jakarta font-bold text-[15px] mb-1" style="color:#0f172a;">Deploy &amp; Monitor</h4>
+          <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.6;">Production deployment with monitoring, retraining, and support</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5 — TECH STACK
+============================================================= -->
+<section style="background:#0F1629;padding:60px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <h2 class="font-jakarta font-extrabold text-white" style="font-size:40px;">Technologies We Use</h2>
+    </div>
+
+    <div class="flex flex-col gap-8 reveal">
+
+      <!-- Row 1: AI & ML -->
+      <div>
+        <p class="tech-row-label">AI &amp; ML</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="svc-tech-pill">Python</span>
+          <span class="svc-tech-pill">TensorFlow</span>
+          <span class="svc-tech-pill">PyTorch</span>
+          <span class="svc-tech-pill">Scikit-learn</span>
+          <span class="svc-tech-pill">Hugging Face</span>
+          <span class="svc-tech-pill">LangChain</span>
+          <span class="svc-tech-pill">OpenAI</span>
+          <span class="svc-tech-pill">Anthropic</span>
+        </div>
+      </div>
+
+      <!-- Row 2: Infrastructure -->
+      <div>
+        <p class="tech-row-label">Infrastructure</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="svc-tech-pill">AWS SageMaker</span>
+          <span class="svc-tech-pill">Google Vertex AI</span>
+          <span class="svc-tech-pill">Azure ML</span>
+          <span class="svc-tech-pill">Docker</span>
+          <span class="svc-tech-pill">Kubernetes</span>
+          <span class="svc-tech-pill">MLflow</span>
+        </div>
+      </div>
+
+      <!-- Row 3: Data -->
+      <div>
+        <p class="tech-row-label">Data</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="svc-tech-pill">PostgreSQL</span>
+          <span class="svc-tech-pill">MongoDB</span>
+          <span class="svc-tech-pill">Pinecone</span>
+          <span class="svc-tech-pill">Redis</span>
+          <span class="svc-tech-pill">Apache Spark</span>
+          <span class="svc-tech-pill">Kafka</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6 — CASE STUDY PREVIEW
+============================================================= -->
+<section id="case-study" style="background:#ffffff;padding:80px 0;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="reveal" style="border:1px solid #E2E8F0;border-radius:20px;padding:48px;background:white;">
+      <div class="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 items-center">
+
+        <!-- Left -->
+        <div>
+          <span class="inline-block font-inter font-bold text-[11px] px-4 py-1.5 rounded-full mb-5"
+                style="background:#EFF6FF;color:#2563EB;letter-spacing:1.5px;">
+            CASE STUDY
+          </span>
+          <h3 class="font-jakarta font-bold mb-4 leading-snug"
+              style="font-size:28px;color:#0f172a;">
+            AI Fraud Detection for FinTech Startup
+          </h3>
+          <p class="font-inter mb-6 leading-[1.8]"
+             style="font-size:16px;color:#64748B;">
+            A Mumbai-based FinTech company was losing $2M annually to fraud. We built a real-time ML inference pipeline processing 50,000 transactions per second with 99.2% accuracy — reducing fraud by 67% in 90 days.
+          </p>
+
+          <!-- Results row -->
+          <div class="flex flex-wrap gap-4 mb-6">
+            <div class="text-center rounded-xl px-5 py-4" style="background:#F8FAFC;border-radius:12px;min-width:90px;">
+              <p class="font-jakarta font-extrabold text-[28px] leading-none" style="color:#06B6D4;">67%</p>
+              <p class="font-inter text-[12px] mt-1" style="color:#64748B;">Fraud Reduction</p>
+            </div>
+            <div class="text-center rounded-xl px-5 py-4" style="background:#F8FAFC;border-radius:12px;min-width:90px;">
+              <p class="font-jakarta font-extrabold text-[28px] leading-none" style="color:#2563EB;">90</p>
+              <p class="font-inter text-[12px] mt-1" style="color:#64748B;">Days to Deploy</p>
+            </div>
+            <div class="text-center rounded-xl px-5 py-4" style="background:#F8FAFC;border-radius:12px;min-width:90px;">
+              <p class="font-jakarta font-extrabold text-[28px] leading-none" style="color:#16a34a;">$2M+</p>
+              <p class="font-inter text-[12px] mt-1" style="color:#64748B;">Annual Savings</p>
+            </div>
+          </div>
+
+          <a href="#" class="font-inter font-semibold" style="color:#06B6D4;text-decoration:none;font-size:15px;"
+             onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+            Read Full Case Study →
+          </a>
+        </div>
+
+        <!-- Right: area chart SVG -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg"
+               class="w-full max-w-[320px]" aria-hidden="true">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#2563EB" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.05"/>
+              </linearGradient>
+              <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#2563EB"/>
+                <stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid lines -->
+            <line x1="30" y1="20"  x2="300" y2="20"  stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="30" y1="60"  x2="300" y2="60"  stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="30" y1="100" x2="300" y2="100" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="30" y1="140" x2="300" y2="140" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="30" y1="180" x2="300" y2="180" stroke="#E2E8F0" stroke-width="1"/>
+            <!-- Area fill -->
+            <path d="M30 170 C60 160 90 130 120 100 C150 70 180 50 210 35 C240 22 270 18 300 15 L300 180 L30 180 Z"
+                  fill="url(#chartGrad)"/>
+            <!-- Line -->
+            <path d="M30 170 C60 160 90 130 120 100 C150 70 180 50 210 35 C240 22 270 18 300 15"
+                  stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Data points -->
+            <circle cx="30"  cy="170" r="5" fill="#2563EB" stroke="white" stroke-width="2"/>
+            <circle cx="120" cy="100" r="5" fill="#2563EB" stroke="white" stroke-width="2"/>
+            <circle cx="210" cy="35"  r="5" fill="#06B6D4" stroke="white" stroke-width="2"/>
+            <circle cx="300" cy="15"  r="5" fill="#06B6D4" stroke="white" stroke-width="2"/>
+            <!-- Axes -->
+            <line x1="30" y1="15" x2="30" y2="185" stroke="#CBD5E1" stroke-width="1.5"/>
+            <line x1="25" y1="180" x2="305" y2="180" stroke="#CBD5E1" stroke-width="1.5"/>
+            <!-- Labels -->
+            <text x="30"  y="200" text-anchor="middle" fill="#94A3B8" font-size="10" font-family="Inter,sans-serif">Month 1</text>
+            <text x="120" y="200" text-anchor="middle" fill="#94A3B8" font-size="10" font-family="Inter,sans-serif">Month 3</text>
+            <text x="210" y="200" text-anchor="middle" fill="#94A3B8" font-size="10" font-family="Inter,sans-serif">Month 6</text>
+            <text x="300" y="200" text-anchor="middle" fill="#06B6D4" font-size="10" font-family="Inter,sans-serif" font-weight="600">Month 9</text>
+            <!-- Badge -->
+            <rect x="218" y="4" width="82" height="22" rx="5" fill="#06B6D4" fill-opacity=".12"/>
+            <rect x="218" y="4" width="82" height="22" rx="5" stroke="#06B6D4" stroke-width="1"/>
+            <text x="259" y="19" text-anchor="middle" fill="#06B6D4" font-size="10" font-family="Inter,sans-serif" font-weight="700">↑ 99.2% Accuracy</text>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7 — FAQ
+============================================================= -->
+<section style="background:#F8FAFC;padding:80px 0;">
+  <div class="max-w-[860px] mx-auto px-5 sm:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <h2 class="font-jakarta font-extrabold" style="font-size:44px;color:#0f172a;">
+        Frequently Asked Questions
+      </h2>
+    </div>
+
+    <div class="reveal">
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text">How long does an AI project typically take?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          Most focused AI projects take 6–12 weeks from discovery to production deployment. Larger enterprise implementations may take 3–6 months. We always start with a 2-week discovery sprint to give you a precise timeline before committing to a full engagement.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text">Do we need large amounts of data to get started?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          Not always. We assess your data during discovery and recommend the right approach — whether that is fine-tuning with your data, using foundation models with RAG, or collecting new data. Many powerful AI solutions can be built with surprisingly small datasets.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text">How do you ensure AI model accuracy and reliability?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          We implement rigorous testing, validation, and monitoring pipelines. Every model goes through offline evaluation, A/B testing, and gradual rollout before full production deployment. We also set up continuous monitoring to detect drift and retrain as needed.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text">Can you integrate AI with our existing systems?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          Yes — integration is core to what we do. We design AI solutions to work with your existing infrastructure via APIs, webhooks, and native integrations. We have integrated with Salesforce, SAP, custom databases, and virtually every major enterprise system.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text">What ongoing support do you provide post-launch?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          We offer flexible support packages including model monitoring, retraining, performance optimization, and feature additions. Most clients stay with us on a retainer after initial delivery.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 8 — CTA BANNER
+============================================================= -->
+<section class="hero-bg" style="padding:80px 0;">
+  <div class="max-w-[900px] mx-auto px-5 sm:px-8 text-center reveal">
+
+    <h2 class="font-jakarta font-extrabold text-white mb-5"
+        style="font-size:clamp(32px,4vw,44px);">
+      Ready to Build Your AI Solution?
+    </h2>
+    <p class="font-inter mb-10 mx-auto" style="font-size:18px;color:#93c5fd;max-width:600px;line-height:1.7;">
+      Book a free 30-minute consultation with our AI team. No commitment, no sales pitch — just honest advice about what AI can do for your business.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="index.html#contact"
+         class="px-8 py-4 rounded-xl bg-white font-jakarta font-bold text-[16px]
+                hover:bg-white/90 transition-colors shadow-lg"
+         style="color:#1e3a8a;">
+        Book Free Consultation →
+      </a>
+      <a href="index.html#services"
+         class="px-8 py-4 rounded-xl border border-white text-white font-inter text-[16px]
+                hover:bg-white/10 transition-colors">
+        View All Services
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================= -->
+<footer id="footer" style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="footer-grid">
+
+      <!-- Col 1: Brand -->
+      <div style="max-width:260px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <svg width="36" height="36" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="ng-ft" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2563EB"/>
+                <stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <rect width="44" height="44" rx="10" fill="url(#ng-ft)"/>
+            <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="13" cy="13" r="2.5" fill="white"/>
+            <circle cx="31" cy="13" r="2.5" fill="white"/>
+            <circle cx="13" cy="31" r="2.5" fill="white"/>
+            <circle cx="31" cy="31" r="2.5" fill="white"/>
+            <circle cx="22" cy="22" r="2.5" fill="white"/>
+          </svg>
+          <div>
+            <p class="font-jakarta font-bold text-white" style="font-size:18px;margin:0;">Nexara</p>
+            <p class="font-inter" style="font-size:12px;color:#64748B;margin:0;">Cloud Labs Pvt. Ltd.</p>
+          </div>
+        </div>
+        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">
+          India's AI-first IT services and consultancy. Building intelligent technology for forward-thinking businesses worldwide.
+        </p>
+        <div style="display:flex;gap:8px;">
+          <a href="#" class="footer-social-btn" aria-label="LinkedIn">L</a>
+          <a href="#" class="footer-social-btn" aria-label="Twitter">T</a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub">G</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Services -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Services</p>
+        <a href="index.html#services" class="footer-link">AI Solutions</a>
+        <a href="index.html#services" class="footer-link">Data Engineering</a>
+        <a href="index.html#services" class="footer-link">Full Stack Engineering</a>
+        <a href="index.html#services" class="footer-link">Quality Engineering</a>
+        <a href="index.html#services" class="footer-link">Digital Transformation</a>
+        <a href="index.html#services" class="footer-link">FinOps</a>
+      </div>
+
+      <!-- Col 3: Company -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Company</p>
+        <a href="index.html#about"        class="footer-link">About Us</a>
+        <a href="index.html#case-studies" class="footer-link">Case Studies</a>
+        <a href="index.html#blog"         class="footer-link">Blog</a>
+        <a href="career.html"             class="footer-link">Careers</a>
+        <a href="index.html#contact"      class="footer-link">Contact Us</a>
+      </div>
+
+      <!-- Col 4: Resources -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Resources</p>
+        <a href="#" class="footer-link">Documentation</a>
+        <a href="#" class="footer-link">API Docs</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">Cookie Policy</a>
+      </div>
+
+      <!-- Col 5: Contact -->
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
+        <a href="mailto:hello@nexaracloudlabs.com" class="font-inter"
+           style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;"
+           onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+          hello@nexaracloudlabs.com
+        </a>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
+        <a href="index.html#contact" class="font-inter font-bold"
+           style="display:inline-block;margin-top:16px;font-size:13px;color:#06B6D4;text-decoration:none;">
+          Get a Free Quote →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;"
+           onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;"
+           onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;"
+           onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Cookie Policy</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================= -->
+<script>
+/* ---- Particle Canvas ---- */
+(function () {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx    = canvas.getContext('2d');
+  const COUNT  = 50;
+  const RADIUS = 1.5;
+  const LINK   = 120;
+  let pts = [];
+
+  function resize() {
+    const hero    = canvas.parentElement;
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  function init() {
+    pts = Array.from({ length: COUNT }, () => ({
+      x:  Math.random() * canvas.width,
+      y:  Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.7,
+      vy: (Math.random() - 0.5) * 0.7,
+    }));
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of pts) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx = -p.vx;
+      if (p.y < 0 || p.y > canvas.height) p.vy = -p.vy;
+    }
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        if (dx * dx + dy * dy < LINK * LINK) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+          ctx.lineWidth   = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    for (const p of pts) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  init();
+  tick();
+  window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
+})();
+
+
+/* ---- Mega Dropdown ---- */
+const ddTrigger = document.getElementById('services-trigger');
+const ddPanel   = document.getElementById('mega-dropdown');
+const ddChevron = document.getElementById('dd-chevron');
+
+function ddIsOpen() { return ddPanel.classList.contains('dd-open'); }
+function ddOpen() {
+  ddPanel.classList.remove('dd-closed');
+  ddPanel.classList.add('dd-open');
+  ddChevron.style.transform = 'rotate(180deg)';
+  ddTrigger.setAttribute('aria-expanded', 'true');
+}
+function ddClose() {
+  ddPanel.classList.remove('dd-open');
+  ddPanel.classList.add('dd-closed');
+  ddChevron.style.transform = '';
+  ddTrigger.setAttribute('aria-expanded', 'false');
+}
+ddTrigger.addEventListener('click', (e) => { e.stopPropagation(); ddIsOpen() ? ddClose() : ddOpen(); });
+document.addEventListener('click', (e) => { if (ddIsOpen() && !ddPanel.contains(e.target) && e.target !== ddTrigger) ddClose(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { ddClose(); drawerClose(); } });
+
+
+/* ---- Mobile Drawer ---- */
+const hamburger    = document.getElementById('hamburger');
+const mobileDrawer = document.getElementById('mobile-drawer');
+const closeDrawerBtn = document.getElementById('close-drawer');
+const drawerBg     = document.getElementById('drawer-bg');
+
+function drawerOpen() {
+  mobileDrawer.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  hamburger.setAttribute('aria-expanded', 'true');
+}
+function drawerClose() {
+  mobileDrawer.style.display = 'none';
+  document.body.style.overflow = '';
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+
+hamburger.addEventListener('click', drawerOpen);
+closeDrawerBtn.addEventListener('click', drawerClose);
+drawerBg.addEventListener('click', drawerClose);
+mobileDrawer.querySelectorAll('nav a').forEach(a => a.addEventListener('click', drawerClose));
+
+
+/* ---- FAQ Accordion ---- */
+function toggleFaq(questionEl) {
+  const answer = questionEl.nextElementSibling;
+  const toggle = questionEl.querySelector('.faq-toggle');
+  const isOpen = answer.classList.contains('open');
+
+  // Close all
+  document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-toggle').forEach(t => { t.textContent = '+'; t.style.transform = ''; });
+
+  if (!isOpen) {
+    answer.classList.add('open');
+    toggle.textContent = '−';
+    toggle.style.transform = 'rotate(45deg)';
+  }
+}
+
+
+/* ---- Scroll Reveal ---- */
+(function () {
+  const revEls = document.querySelectorAll('.reveal');
+  if (!revEls.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revEls.forEach(el => obs.observe(el));
+})();
+
+
+/* ---- Active nav link for Services ---- */
+document.querySelectorAll('nav a').forEach(a => {
+  if (a.getAttribute('href') === '#' || a.textContent.trim() === 'Services') {
+    a.style.color = '#06B6D4';
+  }
+});
+</script>
+
+</body>
+</html>
