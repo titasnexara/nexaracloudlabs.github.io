@@ -3,169 +3,1194 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Careers at Nexara Cloud Labs — Join a team building AI-first solutions for businesses worldwide.">
   <title>Careers | Nexara Cloud Labs</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ncl-bg':    '#0A0F1E',
+            'ncl-blue':  '#2563EB',
+            'ncl-teal':  '#06B6D4',
+            'ncl-text':  '#F0F4FF',
+            'ncl-muted': '#64748B',
+            'ncl-panel': '#0F1629',
+          },
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Dropdown transition */
+    #mega-dropdown {
+      transform-origin: top center;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    #mega-dropdown.dd-closed {
+      opacity: 0;
+      transform: scaleY(0.96);
+      pointer-events: none;
+    }
+    #mega-dropdown.dd-open {
+      opacity: 1;
+      transform: scaleY(1);
+      pointer-events: auto;
+    }
+
+    .drawer-hidden { display: none; }
+
+    .svc-tile {
+      background: linear-gradient(135deg, rgba(37,99,235,.13), rgba(6,182,212,.13));
+      border: 1px solid rgba(37, 99, 235, 0.28);
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Hero */
+    .careers-hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 50%, #0e7490 100%);
+      padding: 140px 40px 80px;
+      text-align: center;
+    }
+
+    .stat-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 9999px;
+      padding: 8px 20px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Why Join cards */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 540px) { .why-grid { grid-template-columns: 1fr; } }
+
+    .why-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.10);
+    }
+    .why-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    /* Job cards */
+    .job-listing-card {
+      background: #0A0F1E;
+      border: 1px solid #1E2D4A;
+      border-radius: 14px;
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .job-listing-card:hover {
+      border-color: rgba(37,99,235,0.45);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    @media (max-width: 600px) {
+      .job-listing-card { flex-direction: column; align-items: flex-start; }
+    }
+
+    .badge-dept {
+      background: rgba(6,182,212,0.12);
+      border: 1px solid rgba(6,182,212,0.3);
+      color: #06B6D4;
+      border-radius: 9999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+    .badge-loc {
+      background: rgba(100,116,139,0.12);
+      border: 1px solid rgba(100,116,139,0.3);
+      color: #94A3B8;
+      border-radius: 9999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+    .badge-type {
+      background: rgba(37,99,235,0.12);
+      border: 1px solid rgba(37,99,235,0.3);
+      color: #93c5fd;
+      border-radius: 9999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .jobs-search {
+      width: 100%;
+      max-width: 500px;
+      background: #fff;
+      border: 1px solid #1E2D4A;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 15px;
+      color: #0f172a;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      display: block;
+      margin: 0 auto 40px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .jobs-search:focus {
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    /* Process */
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 44px 1fr 44px 1fr 44px 1fr;
+      align-items: start;
+      gap: 0;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .process-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .process-connector { display: none !important; }
+    }
+
+    .process-step-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563EB, #06B6D4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      margin: 0 auto 16px;
+    }
+    .process-step-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .process-step-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+    .process-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 26px;
+    }
+    .process-connector-line {
+      height: 2px;
+      width: 44px;
+      background: linear-gradient(90deg,#2563EB,#06B6D4);
+      opacity: 0.35;
+    }
+
+    /* Life cards */
+    .life-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 768px) { .life-grid { grid-template-columns: 1fr; } }
+
+    .life-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid #1E2D4A;
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .life-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(37,99,235,0.4);
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal */
+    #apply-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #apply-modal.open {
+      display: flex;
+    }
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+    }
+    .modal-box {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+    }
+    .modal-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: #0f172a;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+      background: #fff;
+    }
+    .modal-input:focus {
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .modal-label {
+      display: block;
+      font-size: 12px;
+      color: #64748B;
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Footer */
+    .footer-link {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #64748B;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .footer-link:hover { color: #06B6D4; }
+    .footer-social-btn {
+      width: 32px; height: 32px;
+      border: 1px solid #1E2D4A; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #64748B; font-size: 12px; font-weight: 700;
+      text-decoration: none; font-family: 'Inter', sans-serif;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .footer-social-btn:hover { background: #fff; color: #0f172a; border-color: #fff; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #1E2D4A;
+    }
+    @media (max-width: 1100px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+    @media (max-width: 900px)  { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (max-width: 640px)  { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px)  { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<body>
-  <header class="navbar">
-    <a class="brand" href="index.html#home">
-      <img src="images/logo.png" alt="Nexara Cloud Labs logo" class="logo">
-      <div>
-        <span class="eyebrow">Nexara Cloud Labs</span>
-        <p class="brand-name">Cloud · AI · Security</p>
+
+<body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
+
+<!-- ============================================================
+     NAVBAR
+============================================================= -->
+<header id="navbar" class="sticky top-0 z-50 w-full bg-ncl-bg border-b border-white/[.06] relative">
+
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
+
+    <!-- Brand -->
+    <a href="index.html" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#2563EB"/>
+            <stop offset="100%" stop-color="#06B6D4"/>
+          </linearGradient>
+        </defs>
+        <rect width="44" height="44" rx="10" fill="url(#ng1)"/>
+        <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2"
+              stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="13" cy="13" r="2.5" fill="white"/>
+        <circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="13" cy="31" r="2.5" fill="white"/>
+        <circle cx="31" cy="31" r="2.5" fill="white"/>
+        <circle cx="22" cy="22" r="2.5" fill="white"/>
+      </svg>
+      <div class="flex flex-col leading-none gap-[3px]">
+        <span class="font-jakarta font-bold text-white text-[20px]">Nexara</span>
+        <span class="font-jakarta text-ncl-teal text-[11px] tracking-wide">Cloud Labs</span>
       </div>
     </a>
 
-    <nav class="nav-menu" aria-label="Primary navigation">
-      <a href="index.html#home">Home</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#process">Process</a>
-      <a href="index.html#about">About</a>
-      <a href="career.html">Career</a>
+    <!-- Center nav (desktop) -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+      <a href="index.html" class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Home</a>
+
+      <button id="services-trigger"
+              aria-haspopup="true" aria-expanded="false"
+              class="flex items-center gap-1 text-white text-[14px] hover:text-ncl-teal transition-colors duration-150 bg-transparent border-none cursor-pointer p-0">
+        Services
+        <svg id="dd-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none"
+             class="transition-transform duration-200 mt-[1px]">
+          <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <a href="index.html#about"        class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">About</a>
+      <a href="index.html#case-studies" class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Case Studies</a>
+      <a href="index.html#blog"         class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Blog</a>
+      <a href="career.html"             class="text-ncl-teal text-[14px] font-semibold">Careers</a>
     </nav>
 
-    <div class="nav-actions">
-      <a id="authButton" href="login.html" class="button button-secondary">Admin Login</a>
+    <!-- Right actions (desktop) -->
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
+      <a href="index.html#contact"
+         class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium
+                hover:bg-white/10 transition-colors duration-150">
+        Contact
+      </a>
+      <a href="index.html#contact"
+         class="px-4 py-[9px] rounded-lg bg-ncl-blue text-white text-[14px] font-semibold
+                hover:bg-blue-700 transition-colors duration-150">
+        Get Free Quote
+      </a>
     </div>
-  </header>
 
-  <main>
-    <section class="section hero reveal">
-      <div class="hero-copy">
-        <span class="eyebrow">Join our team</span>
-        <h1>Find your next role at Nexara Cloud Labs</h1>
-        <p class="hero-text">View open positions, learn what makes our team different, and apply directly from this page.</p>
-      </div>
-    </section>
+    <!-- Hamburger (mobile) -->
+    <button id="hamburger"
+            aria-label="Open menu" aria-expanded="false"
+            class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9
+                   rounded-lg hover:bg-white/10 transition-colors">
+      <span class="block w-5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+      <span class="block w-5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+      <span class="block w-3.5 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+    </button>
+  </div>
 
-    <section class="section">
-      <div class="section-header">
-        <span class="eyebrow">Open roles</span>
-        <h2>Current job opportunities</h2>
-      </div>
+  <!-- Mega Dropdown -->
+  <div id="mega-dropdown"
+       class="dd-closed absolute left-0 right-0 top-full bg-ncl-panel border-b border-white/[.08] shadow-2xl">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 py-7">
+      <div class="grid grid-cols-2 gap-2">
 
-      <div id="jobGrid" class="job-grid"></div>
-      <p id="noJobs" class="form-message" style="display:none;">No job postings are live right now. Please check back soon.</p>
-    </section>
-
-    <section class="section reveal">
-      <div class="section-header">
-        <span class="eyebrow">Apply now</span>
-        <h2>Submit your application</h2>
-        <p>Complete the form below and we’ll prepare a direct application email to support@nexaracloudlabs.com.</p>
-      </div>
-
-      <form id="applyForm" class="contact-form">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <input type="text" name="position" placeholder="Position you are applying for" required>
-        <textarea name="message" placeholder="Tell us why you're a great fit" rows="6" required></textarea>
-        <button type="submit" class="button button-primary">Prepare Application</button>
-        <p id="applyMessage" class="form-message" aria-live="polite"></p>
-      </form>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>© 2026 Nexara Cloud Labs. Designed for cloud-first growth.</p>
-  </footer>
-
-  <script>
-    const jobGrid = document.getElementById('jobGrid');
-    const noJobs = document.getElementById('noJobs');
-    const jobs = JSON.parse(localStorage.getItem('jobAds') || '[]');
-
-    function renderJobs() {
-      jobGrid.innerHTML = '';
-      if (!jobs.length) {
-        noJobs.style.display = 'block';
-        return;
-      }
-      noJobs.style.display = 'none';
-      jobs.forEach((job) => {
-        const card = document.createElement('article');
-        card.className = 'job-card';
-        card.innerHTML = `
+        <a href="service.html?s=ai" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">🤖</div>
           <div>
-            <span class="job-tag">${job.type}</span>
-            <h3>${job.title}</h3>
-            <p>${job.location}</p>
-            <p>${job.description}</p>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">AI Solutions &amp; Automation</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">LLMs, ML pipelines, automation</p>
           </div>
-          <button class="button button-secondary" type="button" data-title="${job.title}">Apply</button>
-        `;
-        card.querySelector('button').addEventListener('click', () => {
-          const recipient = 'support@nexaracloudlabs.com';
-          const subject = encodeURIComponent(`Job application: ${job.title}`);
-          const body = encodeURIComponent(`Position: ${job.title}\nLocation: ${job.location}\n\nPlease include your application details here.`);
-          window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-        });
-        jobGrid.appendChild(card);
-      });
+        </a>
+
+        <a href="service.html?s=data" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">🗄️</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Data Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Pipelines, warehouses, analytics</p>
+          </div>
+        </a>
+
+        <a href="service.html?s=fullstack" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">💻</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Full Stack Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Web, mobile, cloud-native</p>
+          </div>
+        </a>
+
+        <a href="service.html?s=quality" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">✅</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Quality Engineering</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Test automation, CI/CD quality</p>
+          </div>
+        </a>
+
+        <a href="service.html?s=digital" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">⚡</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">Digital Transformation</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Legacy modernisation, roadmaps</p>
+          </div>
+        </a>
+
+        <a href="service.html?s=finops" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group">
+          <div class="svc-tile">💰</div>
+          <div>
+            <p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal transition-colors">FinOps Consulting</p>
+            <p class="text-ncl-muted text-[12px] mt-0.5">Cloud cost optimisation</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile full-screen drawer -->
+<div id="mobile-drawer" class="drawer-hidden fixed inset-0 z-[200]">
+  <div id="drawer-bg" class="absolute inset-0 bg-ncl-bg/95 backdrop-blur-md"></div>
+  <div class="relative z-10 flex flex-col h-full px-6 pt-6 pb-10 overflow-y-auto">
+
+    <div class="flex items-center justify-between mb-10">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Nexara Cloud Labs">
+        <svg width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ng2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <rect width="44" height="44" rx="10" fill="url(#ng2)"/>
+          <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="13" cy="13" r="2.5" fill="white"/>
+          <circle cx="31" cy="13" r="2.5" fill="white"/>
+          <circle cx="13" cy="31" r="2.5" fill="white"/>
+          <circle cx="31" cy="31" r="2.5" fill="white"/>
+          <circle cx="22" cy="22" r="2.5" fill="white"/>
+        </svg>
+        <div class="flex flex-col leading-none gap-[3px]">
+          <span class="font-jakarta font-bold text-white text-xl">Nexara</span>
+          <span class="font-jakarta text-ncl-teal text-xs tracking-wide">Cloud Labs</span>
+        </div>
+      </a>
+      <button id="close-drawer" aria-label="Close menu"
+              class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="flex flex-col divide-y divide-white/[.08]">
+      <a href="index.html"              class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Home</a>
+      <a href="index.html#services"     class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Services</a>
+      <a href="index.html#about"        class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">About</a>
+      <a href="index.html#case-studies" class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Case Studies</a>
+      <a href="index.html#blog"         class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Blog</a>
+      <a href="career.html"             class="py-4 font-jakarta font-semibold text-ncl-teal text-lg">Careers</a>
+    </nav>
+
+    <div class="flex flex-col gap-3 mt-8">
+      <a href="index.html#contact"
+         class="py-3 px-6 rounded-xl border border-white text-white text-base font-jakarta font-semibold
+                text-center hover:bg-white/10 transition-colors">
+        Contact
+      </a>
+      <a href="index.html#contact"
+         class="py-3 px-6 rounded-xl bg-ncl-blue text-white text-base font-jakarta font-semibold
+                text-center hover:bg-blue-700 transition-colors">
+        Get Free Quote
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 2 — HERO
+============================================================= -->
+<section class="careers-hero">
+  <div style="max-width:760px;margin:0 auto;">
+
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.4);border-radius:9999px;padding:6px 18px;margin-bottom:28px;">
+      <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#06B6D4;">We're Hiring 🚀</span>
+    </div>
+
+    <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(36px,6vw,52px);color:#fff;line-height:1.1;margin:0 0 20px;">
+      Build the Future With Us
+    </h1>
+
+    <p style="font-family:'Inter',sans-serif;font-size:18px;color:#93c5fd;max-width:560px;margin:0 auto 36px;line-height:1.7;">
+      Join a team of passionate engineers, data scientists, and consultants building AI-first solutions for businesses worldwide.
+    </p>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+      <span class="stat-pill">🌍 Remote-First</span>
+      <span class="stat-pill">⚡ 5+ Open Roles</span>
+      <span class="stat-pill">🤝 Startup Culture</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3 — WHY JOIN US
+============================================================= -->
+<section style="background:#fff;padding:80px 40px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#0f172a;text-align:center;margin:0 0 48px;">
+      Why Engineers Love Working Here
+    </h2>
+
+    <div class="why-grid reveal">
+
+      <div class="why-card">
+        <div class="why-icon" style="background:linear-gradient(135deg,#1e3a8a,#2563EB);">🚀</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 10px;">Cutting-Edge Tech Stack</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Work with the latest AI tools, LLMs, cloud platforms, and modern engineering practices every day.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon" style="background:linear-gradient(135deg,#0e7490,#06B6D4);">🌍</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 10px;">Remote-First Culture</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Work from anywhere in India. Flexible hours, async communication, and regular team meetups.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon" style="background:linear-gradient(135deg,#7c3aed,#2563EB);">📈</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 10px;">Rapid Career Growth</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Fast-growing startup means real ownership, real impact, and promotions based on merit not tenure.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon" style="background:linear-gradient(135deg,#059669,#06B6D4);">💰</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 10px;">Competitive Compensation</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Market-rate salaries, ESOPs, health insurance, and generous learning and development budgets.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4 — OPEN ROLES
+============================================================= -->
+<section id="open-roles" style="background:#0F1629;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#fff;text-align:center;margin:0 0 36px;">
+      Open Positions
+    </h2>
+
+    <input
+      type="text"
+      id="job-search"
+      class="jobs-search"
+      placeholder="Search roles..."
+      autocomplete="off"
+    >
+
+    <div id="jobs-container" style="display:flex;flex-direction:column;gap:16px;max-width:900px;margin:0 auto;">
+
+      <div class="job-listing-card reveal" data-search="senior ai ml engineer ai data remote full-time">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">Senior AI/ML Engineer</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge-dept">AI &amp; Data</span>
+            <span class="badge-loc">Remote</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+        </div>
+        <button class="apply-btn"
+                data-role="Senior AI/ML Engineer"
+                style="background:#2563EB;color:#fff;border:none;border-radius:10px;padding:11px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background 0.2s;"
+                onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Apply Now →
+        </button>
+      </div>
+
+      <div class="job-listing-card reveal" data-search="data engineer data platform bangalore remote full-time">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">Data Engineer</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge-dept">Data Platform</span>
+            <span class="badge-loc">Bangalore / Remote</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+        </div>
+        <button class="apply-btn"
+                data-role="Data Engineer"
+                style="background:#2563EB;color:#fff;border:none;border-radius:10px;padding:11px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background 0.2s;"
+                onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Apply Now →
+        </button>
+      </div>
+
+      <div class="job-listing-card reveal" data-search="senior react developer engineering remote full-time">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">Senior React Developer</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge-dept">Engineering</span>
+            <span class="badge-loc">Remote</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+        </div>
+        <button class="apply-btn"
+                data-role="Senior React Developer"
+                style="background:#2563EB;color:#fff;border:none;border-radius:10px;padding:11px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background 0.2s;"
+                onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Apply Now →
+        </button>
+      </div>
+
+      <div class="job-listing-card reveal" data-search="qa automation lead quality engineering hybrid full-time">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">QA Automation Lead</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge-dept">Quality Engineering</span>
+            <span class="badge-loc">Hybrid</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+        </div>
+        <button class="apply-btn"
+                data-role="QA Automation Lead"
+                style="background:#2563EB;color:#fff;border:none;border-radius:10px;padding:11px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background 0.2s;"
+                onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Apply Now →
+        </button>
+      </div>
+
+      <div class="job-listing-card reveal" data-search="finops consultant consulting remote contract">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">FinOps Consultant</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge-dept">Consulting</span>
+            <span class="badge-loc">Remote</span>
+            <span class="badge-type">Contract</span>
+          </div>
+        </div>
+        <button class="apply-btn"
+                data-role="FinOps Consultant"
+                style="background:#2563EB;color:#fff;border:none;border-radius:10px;padding:11px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background 0.2s;"
+                onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Apply Now →
+        </button>
+      </div>
+
+      <p id="no-results" style="display:none;text-align:center;color:#64748B;font-family:'Inter',sans-serif;font-size:15px;padding:32px 0;">
+        No roles match your search. Try a different keyword.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5 — HIRING PROCESS
+============================================================= -->
+<section style="background:#fff;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <div class="reveal" style="text-align:center;margin-bottom:12px;">
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#0f172a;margin:0 0 12px;">Our Hiring Process</h2>
+      <p style="font-family:'Inter',sans-serif;font-size:16px;color:#64748B;max-width:560px;margin:0 auto;">We respect your time. Our process is fast, transparent, and focused on real skills.</p>
+    </div>
+
+    <div class="process-grid reveal">
+
+      <div class="process-step-box">
+        <div class="process-step-circle">1</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 8px;">Apply Online</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Submit your application. We review every application within 48 hours.</p>
+      </div>
+
+      <div class="process-connector">
+        <div class="process-connector-line"></div>
+      </div>
+
+      <div class="process-step-box">
+        <div class="process-step-circle">2</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 8px;">Intro Call</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">30-minute video call with our hiring manager. We want to know you as a person.</p>
+      </div>
+
+      <div class="process-connector">
+        <div class="process-connector-line"></div>
+      </div>
+
+      <div class="process-step-box">
+        <div class="process-step-circle">3</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 8px;">Technical Round</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">A focused take-home task or live coding session. No trick questions, ever.</p>
+      </div>
+
+      <div class="process-connector">
+        <div class="process-connector-line"></div>
+      </div>
+
+      <div class="process-step-box">
+        <div class="process-step-circle">4</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#0f172a;margin:0 0 8px;">Final Interview</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Meet the founders and team. Ask us anything. We are an open book.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6 — LIFE AT NEXARA
+============================================================= -->
+<section style="background:#0F1629;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#fff;text-align:center;margin:0 0 48px;">
+      Life at Nexara
+    </h2>
+
+    <div class="life-grid reveal">
+
+      <div class="life-card">
+        <div style="font-size:36px;margin-bottom:16px;">🎯</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Real Ownership</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Every engineer owns their domain end to end. No ticket monkeys here — you design, build, and ship.</p>
+      </div>
+
+      <div class="life-card">
+        <div style="font-size:36px;margin-bottom:16px;">🧠</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Always Learning</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Weekly tech talks, learning budget of ₹50,000/year, and access to every major AI/cloud certification.</p>
+      </div>
+
+      <div class="life-card">
+        <div style="font-size:36px;margin-bottom:16px;">🤝</div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Team First</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">We win together. Collaborative, not competitive. Ego-free environment where the best idea wins.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     APPLICATION MODAL
+============================================================= -->
+<div id="apply-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-box">
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
+      <h3 id="modal-title" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:22px;color:#0f172a;margin:0;line-height:1.2;">
+        Apply for <span id="modal-role-name">this Role</span>
+      </h3>
+      <button id="modal-close-btn"
+              aria-label="Close modal"
+              style="background:none;border:1px solid #E2E8F0;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:12px;line-height:1;transition:background 0.2s;"
+              onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='none'">
+        &times;
+      </button>
+    </div>
+
+    <form id="apply-form" style="display:flex;flex-direction:column;gap:16px;">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div>
+          <label class="modal-label" for="app-name">Full Name *</label>
+          <input class="modal-input" type="text" id="app-name" placeholder="Jane Smith">
+        </div>
+        <div>
+          <label class="modal-label" for="app-email">Email *</label>
+          <input class="modal-input" type="email" id="app-email" placeholder="jane@gmail.com">
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div>
+          <label class="modal-label" for="app-phone">Phone</label>
+          <input class="modal-input" type="tel" id="app-phone" placeholder="+91 9876543210">
+        </div>
+        <div>
+          <label class="modal-label" for="app-experience">Years of Experience</label>
+          <select class="modal-input" id="app-experience" style="appearance:none;-webkit-appearance:none;cursor:pointer;color:#0f172a;">
+            <option value="">Select range</option>
+            <option value="0-2">0–2 years</option>
+            <option value="2-5">2–5 years</option>
+            <option value="5-10">5–10 years</option>
+            <option value="10+">10+ years</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="modal-label" for="app-linkedin">LinkedIn Profile URL</label>
+        <input class="modal-input" type="url" id="app-linkedin" placeholder="https://linkedin.com/in/yourprofile">
+      </div>
+
+      <div>
+        <label class="modal-label" for="app-portfolio">Portfolio / GitHub URL</label>
+        <input class="modal-input" type="url" id="app-portfolio" placeholder="https://github.com/yourhandle">
+      </div>
+
+      <div>
+        <label class="modal-label" for="app-message">Why do you want to join Nexara? *</label>
+        <textarea class="modal-input" id="app-message" rows="4" placeholder="Tell us what excites you about this role and Nexara..." style="resize:vertical;"></textarea>
+      </div>
+
+      <div>
+        <label class="modal-label" for="app-resume">Resume (PDF, DOC, DOCX)</label>
+        <input class="modal-input" type="file" id="app-resume" accept=".pdf,.doc,.docx" style="padding:8px 14px;cursor:pointer;">
+      </div>
+
+      <button type="submit"
+              style="width:100%;padding:14px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:background 0.2s;margin-top:4px;"
+              onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+        Submit Application →
+      </button>
+
+    </form>
+
+    <div id="apply-success" style="display:none;text-align:center;padding:32px 0;">
+      <div style="font-size:56px;margin-bottom:20px;">🎉</div>
+      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:24px;color:#0f172a;margin:0 0 12px;">Application Submitted!</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:16px;color:#64748B;line-height:1.7;margin:0;">We will review it and get back to you within 48 hours.</p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================= -->
+<footer id="footer" style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <div class="footer-grid">
+
+      <div style="max-width:260px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <svg width="36" height="36" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="ng-ft" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2563EB"/>
+                <stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <rect width="44" height="44" rx="10" fill="url(#ng-ft)"/>
+            <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="13" cy="13" r="2.5" fill="white"/>
+            <circle cx="31" cy="13" r="2.5" fill="white"/>
+            <circle cx="13" cy="31" r="2.5" fill="white"/>
+            <circle cx="31" cy="31" r="2.5" fill="white"/>
+            <circle cx="22" cy="22" r="2.5" fill="white"/>
+          </svg>
+          <div>
+            <p class="font-jakarta font-bold text-white" style="font-size:18px;margin:0;">Nexara</p>
+            <p class="font-inter" style="font-size:12px;color:#64748B;margin:0;">Cloud Labs Pvt. Ltd.</p>
+          </div>
+        </div>
+        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">India's AI-first IT services and consultancy. Building intelligent technology for forward-thinking businesses worldwide.</p>
+        <div style="display:flex;gap:8px;">
+          <a href="#" class="footer-social-btn" aria-label="LinkedIn">L</a>
+          <a href="#" class="footer-social-btn" aria-label="Twitter">T</a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub">G</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Services</p>
+        <a href="index.html#services" class="footer-link">AI Solutions</a>
+        <a href="index.html#services" class="footer-link">Data Engineering</a>
+        <a href="index.html#services" class="footer-link">Full Stack Engineering</a>
+        <a href="index.html#services" class="footer-link">Quality Engineering</a>
+        <a href="index.html#services" class="footer-link">Digital Transformation</a>
+        <a href="index.html#services" class="footer-link">FinOps</a>
+      </div>
+
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Company</p>
+        <a href="index.html#about" class="footer-link">About Us</a>
+        <a href="index.html#case-studies" class="footer-link">Case Studies</a>
+        <a href="index.html#blog" class="footer-link">Blog</a>
+        <a href="career.html" class="footer-link" style="color:#06B6D4;">Careers</a>
+        <a href="index.html#contact" class="footer-link">Contact Us</a>
+      </div>
+
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Resources</p>
+        <a href="#" class="footer-link">Documentation</a>
+        <a href="#" class="footer-link">API Docs</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">Cookie Policy</a>
+      </div>
+
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
+        <a href="mailto:hello@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">hello@nexaracloudlabs.com</a>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
+        <a href="index.html#contact" class="font-inter font-bold" style="display:inline-block;margin-top:16px;font-size:13px;color:#06B6D4;text-decoration:none;">Get a Free Quote →</a>
+      </div>
+
+    </div>
+
+    <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Cookie Policy</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================= -->
+<script>
+/* ---- Navbar scroll shadow ---- */
+(function () {
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 40) {
+      navbar.style.borderBottomColor = 'rgba(30,45,74,0.9)';
+      navbar.style.background = 'rgba(10,15,30,0.97)';
+    } else {
+      navbar.style.borderBottomColor = '';
+      navbar.style.background = '';
     }
+  }, { passive: true });
+})();
 
-    renderJobs();
 
-    const applyForm = document.getElementById('applyForm');
-    const applyMessage = document.getElementById('applyMessage');
+/* ---- Mega Dropdown ---- */
+(function () {
+  var ddTrigger = document.getElementById('services-trigger');
+  var ddPanel   = document.getElementById('mega-dropdown');
+  var ddChevron = document.getElementById('dd-chevron');
 
-    applyForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const name = applyForm.name.value.trim();
-      const email = applyForm.email.value.trim();
-      const position = applyForm.position.value.trim();
-      const message = applyForm.message.value.trim();
-      const recipient = 'support@nexaracloudlabs.com';
-      const subject = encodeURIComponent(`Job application: ${position}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPosition: ${position}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-      applyMessage.textContent = 'Your application draft is ready in your mail app.';
-      applyMessage.classList.add('form-message--success');
-      applyForm.reset();
-    });
+  function ddIsOpen() { return ddPanel.classList.contains('dd-open'); }
+  function ddOpen() {
+    ddPanel.classList.remove('dd-closed');
+    ddPanel.classList.add('dd-open');
+    ddChevron.style.transform = 'rotate(180deg)';
+    ddTrigger.setAttribute('aria-expanded', 'true');
+  }
+  function ddClose() {
+    ddPanel.classList.remove('dd-open');
+    ddPanel.classList.add('dd-closed');
+    ddChevron.style.transform = '';
+    ddTrigger.setAttribute('aria-expanded', 'false');
+  }
 
-    function isAuthenticated() {
-      return sessionStorage.getItem('adminAuth') === 'true';
-    }
+  ddTrigger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    ddIsOpen() ? ddClose() : ddOpen();
+  });
+  document.addEventListener('click', function (e) {
+    if (ddIsOpen() && !ddPanel.contains(e.target) && e.target !== ddTrigger) ddClose();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ddClose(); });
+})();
 
-    function setupHeaderAuth() {
-      const authButton = document.getElementById('authButton');
-      if (!authButton) return;
-      if (isAuthenticated()) {
-        authButton.textContent = 'Logout';
-        authButton.href = '#';
-        authButton.classList.remove('button-secondary');
-        authButton.classList.add('button-primary');
-        authButton.addEventListener('click', (event) => {
-          event.preventDefault();
-          sessionStorage.removeItem('adminAuth');
-          window.location.href = 'login.html';
-        });
+
+/* ---- Mobile Drawer ---- */
+(function () {
+  var hamburger    = document.getElementById('hamburger');
+  var mobileDrawer = document.getElementById('mobile-drawer');
+  var closeDrawer  = document.getElementById('close-drawer');
+  var drawerBg     = document.getElementById('drawer-bg');
+
+  function drawerOpen() {
+    mobileDrawer.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+  function drawerClose() {
+    mobileDrawer.style.display = 'none';
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', drawerOpen);
+  closeDrawer.addEventListener('click', drawerClose);
+  drawerBg.addEventListener('click', drawerClose);
+  mobileDrawer.querySelectorAll('nav a').forEach(function (a) {
+    a.addEventListener('click', drawerClose);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') drawerClose(); });
+})();
+
+
+/* ---- Job Search Filter ---- */
+(function () {
+  var searchInput = document.getElementById('job-search');
+  var jobCards    = document.querySelectorAll('#jobs-container .job-listing-card');
+  var noResults   = document.getElementById('no-results');
+
+  searchInput.addEventListener('keyup', function () {
+    var query   = searchInput.value.toLowerCase().trim();
+    var visible = 0;
+
+    jobCards.forEach(function (card) {
+      var haystack = (card.dataset.search || '') + ' ' + card.innerText.toLowerCase();
+      if (!query || haystack.indexOf(query) !== -1) {
+        card.style.display = 'flex';
+        visible++;
+      } else {
+        card.style.display = 'none';
       }
+    });
+
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+  });
+})();
+
+
+/* ---- Application Modal ---- */
+(function () {
+  var modal    = document.getElementById('apply-modal');
+  var closeBtn = document.getElementById('modal-close-btn');
+  var backdrop = document.getElementById('modal-backdrop');
+  var roleName = document.getElementById('modal-role-name');
+  var form     = document.getElementById('apply-form');
+  var success  = document.getElementById('apply-success');
+
+  function openModal(role) {
+    roleName.textContent = role;
+    form.style.display   = 'flex';
+    success.style.display = 'none';
+    form.reset();
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.apply-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openModal(btn.dataset.role || 'this Role');
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var name    = document.getElementById('app-name').value.trim();
+    var email   = document.getElementById('app-email').value.trim();
+    var message = document.getElementById('app-message').value.trim();
+
+    if (!name) {
+      document.getElementById('app-name').focus();
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('app-email').focus();
+      return;
+    }
+    if (!message) {
+      document.getElementById('app-message').focus();
+      return;
     }
 
-    setupHeaderAuth();
+    form.style.display    = 'none';
+    success.style.display = 'block';
+  });
+})();
 
-    const revealElements = document.querySelectorAll('.reveal, .fade-in-up, .stagger-children');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
-    revealElements.forEach((element, index) => {
-      element.style.transitionDelay = `${index * 80}ms`;
-      revealObserver.observe(element);
-    });
 
-    window.addEventListener('scroll', () => {
-      document.querySelector('.navbar')
-        ?.classList.toggle('navbar--scrolled', window.scrollY > 40);
-    }, { passive: true });
-  </script>
+/* ---- Scroll Reveal ---- */
+(function () {
+  var revEls = document.querySelectorAll('.reveal');
+  if (!revEls.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.10 });
+  revEls.forEach(function (el) { obs.observe(el); });
+})();
+</script>
+
 </body>
 </html>
