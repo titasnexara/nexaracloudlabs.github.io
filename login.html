@@ -1262,9 +1262,13 @@ function handleSignIn() {
 
     /* Scenario SUCCESS — admin credentials */
     if (email.includes('admin') && pw === 'demo123') {
-      setSuccess();
-      return;
-    }
+  sessionStorage.setItem('adminAuth', 'true');
+  setSuccess();
+  setTimeout(function() {
+    window.location.href = 'admin.html';
+  }, 1500);
+  return;
+}
 
     /* Scenario 7 — account not found (unrecognized email) */
     if (!email.includes('admin') && !email.includes('nexara')) {
@@ -1272,7 +1276,7 @@ function handleSignIn() {
       showErr(
         $id('lpEmail'),
         $id('lpEmailErr'),
-        'No account found with this email. Check your email or contact hello@nexaracloudlabs.com'
+        'No account found with this email. Check your email or contact support@nexaracloudlabs.com'
       );
       return;
     }

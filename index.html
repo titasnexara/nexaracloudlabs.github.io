@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nexara Cloud Labs — India's AI-First IT Consultancy delivering AI solutions, data engineering, and full-stack expertise.">
-  <title>Nexara Cloud Labs | India's AI-First IT Consultancy</title>
+  <meta name="description" content="Nexara Cloud Labs — AI Solutions, Data Engineering, and Full-Stack expertise delivered by rigorously vetted engineers.">
+  
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
+    tailwind.config = {           
       theme: {
         extend: {
           colors: {
@@ -135,6 +135,25 @@
   <script type="text/javascript">
     (function(){ emailjs.init("OelXm9bTu-IjRWqla"); })();
   </script>
+  <style>
+#contactForm input,
+#contactForm select,
+#contactForm textarea {
+  pointer-events: auto !important;
+  user-select: auto !important;
+  opacity: 1 !important;
+  cursor: text !important;
+  color: #0f172a !important;
+  background: #ffffff !important;
+  -webkit-user-select: auto !important;
+}
+#contactForm select {
+  cursor: pointer !important;
+}
+#contactForm {
+  pointer-events: auto !important;
+}
+</style>
 </head>
 
 <body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
@@ -147,28 +166,11 @@
   <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
 
     <!-- Brand -->
-    <a href="#" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#2563EB"/>
-            <stop offset="100%" stop-color="#06B6D4"/>
-          </linearGradient>
-        </defs>
-        <rect width="44" height="44" rx="10" fill="url(#ng1)"/>
-        <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2"
-              stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="13" cy="13" r="2.5" fill="white"/>
-        <circle cx="31" cy="13" r="2.5" fill="white"/>
-        <circle cx="13" cy="31" r="2.5" fill="white"/>
-        <circle cx="31" cy="31" r="2.5" fill="white"/>
-        <circle cx="22" cy="22" r="2.5" fill="white"/>
-      </svg>
-      <div class="flex flex-col leading-none gap-[3px]">
-        <span class="font-jakarta font-bold text-white text-[20px]">Nexara</span>
-        <span class="font-jakarta text-ncl-teal text-[11px] tracking-wide">Cloud Labs</span>
-      </div>
-    </a>
+    <a href="#" class="flex items-center shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+  <img src="nexara_logo_dark.png"
+       alt="Nexara Cloud Labs"
+       style="height:44px;width:auto;object-fit:contain;">
+</a>
 
     <!-- Center nav (desktop) -->
     <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
@@ -202,11 +204,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
                 hover:bg-white/10 transition-colors duration-150">
         Contact
       </a>
-      <a href="#contact"
-         class="px-4 py-[9px] rounded-lg bg-ncl-blue text-white text-[14px] font-semibold
-                hover:bg-blue-700 transition-colors duration-150">
-        Get Free Quote
-      </a>
+      
     </div>
 
     <!-- Hamburger (mobile) -->
@@ -286,28 +284,11 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
 
     <!-- Drawer header -->
     <div class="flex items-center justify-between mb-10">
-      <a href="#" class="flex items-center gap-3" aria-label="Nexara Cloud Labs">
-        <svg width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ng2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#2563EB"/>
-              <stop offset="100%" stop-color="#06B6D4"/>
-            </linearGradient>
-          </defs>
-          <rect width="44" height="44" rx="10" fill="url(#ng2)"/>
-          <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2"
-                stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="13" cy="13" r="2.5" fill="white"/>
-          <circle cx="31" cy="13" r="2.5" fill="white"/>
-          <circle cx="13" cy="31" r="2.5" fill="white"/>
-          <circle cx="31" cy="31" r="2.5" fill="white"/>
-          <circle cx="22" cy="22" r="2.5" fill="white"/>
-        </svg>
-        <div class="flex flex-col leading-none gap-[3px]">
-          <span class="font-jakarta font-bold text-white text-xl">Nexara</span>
-          <span class="font-jakarta text-ncl-teal text-xs tracking-wide">Cloud Labs</span>
-        </div>
-      </a>
+      <a href="#" class="flex items-center shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+  <img src="nexara_logo_dark.png"
+       alt="Nexara Cloud Labs"
+       style="height:52px;width:auto;object-fit:contain;">
+</a>
       <button id="close-drawer" aria-label="Close menu"
               class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors text-white">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -333,11 +314,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
                 text-center hover:bg-white/10 transition-colors">
         Contact
       </a>
-      <a href="#contact"
-         class="py-3 px-6 rounded-xl bg-ncl-blue text-white text-base font-jakarta font-semibold
-                text-center hover:bg-blue-700 transition-colors">
-        Get Free Quote
-      </a>
+      
     </div>
   </div>
 </div>
@@ -357,10 +334,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
       <div class="w-full lg:w-[55%] lg:pr-16 text-center lg:text-left">
 
         <!-- Eyebrow pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6
-                    border border-ncl-teal/50 text-ncl-teal text-sm font-medium font-inter">
-          🚀 India's AI-First IT Consultancy
-        </div>
+        
 
         <!-- H1 -->
         <h1 class="font-jakarta font-extrabold text-white mb-5 leading-[1.1]
@@ -378,25 +352,22 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
 
         <!-- CTAs -->
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6">
-          <a href="#contact"
-             class="px-6 py-3 rounded-xl bg-white text-[#1e3a8a] font-jakarta font-bold text-[15px]
-                    hover:bg-white/90 transition-colors shadow-lg">
-            Start Your Project →
-          </a>
-          <a href="#services"
-             class="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/60 text-white
-                    font-inter text-[15px] hover:bg-white/10 transition-colors">
-            <span class="text-ncl-teal text-xs">▶</span> See Our Work
-          </a>
+          
+          <button onclick="openContactForm()"
+   class="px-6 py-3 rounded-xl bg-white text-[#1e3a8a] font-jakarta font-bold text-[15px]
+          hover:bg-white/90 transition-colors shadow-lg cursor-pointer border-none">
+  Start Your Project →
+</button>
+          
         </div>
 
         <!-- Trust badges -->
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-5">
           <span class="flex items-center gap-1.5 text-white/75 text-sm font-inter">
-            <span class="text-green-400 font-bold text-base leading-none">✓</span> 50+ Projects
+           <span class="text-green-400 font-bold text-base leading-none">✓</span> Proven Delivery
           </span>
           <span class="flex items-center gap-1.5 text-white/75 text-sm font-inter">
-            <span class="text-green-400 font-bold text-base leading-none">✓</span> Enterprise Grade
+            <span class="text-green-400 font-bold text-base leading-none">✓</span> Expert-Vetted Talent
           </span>
           <span class="flex items-center gap-1.5 text-white/75 text-sm font-inter">
             <span class="text-green-400 font-bold text-base leading-none">✓</span> India Based
@@ -414,7 +385,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
           <div class="flex items-center gap-2.5 mb-5">
             <span class="w-2.5 h-2.5 rounded-full bg-green-400 dot-pulse shrink-0"></span>
             <span class="font-inter text-white/75 text-[11px] font-medium tracking-widest uppercase">
-              Live Platform Metrics
+              Why Clients Trust Us
             </span>
           </div>
 
@@ -422,24 +393,21 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
           <div class="grid grid-cols-2 gap-3">
 
             <div class="metric-cell">
-              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">24</p>
-              <p class="font-inter text-ncl-muted text-xs">AI Models</p>
-            </div>
-
-            <div class="metric-cell">
-              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">99.9%</p>
-              <p class="font-inter text-ncl-muted text-xs">Uptime SLA</p>
-            </div>
-
-            <div class="metric-cell">
-              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">50+</p>
-              <p class="font-inter text-ncl-muted text-xs">Projects</p>
-            </div>
-
-            <div class="metric-cell">
-              <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">4.9★</p>
-              <p class="font-inter text-ncl-muted text-xs">Client Rating</p>
-            </div>
+  <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">100%</p>
+  <p class="font-inter text-ncl-muted text-xs">Expert-Vetted Engineers</p>
+</div>
+<div class="metric-cell">
+  <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">99.9%</p>
+  <p class="font-inter text-ncl-muted text-xs">Uptime SLA</p>
+</div>
+<div class="metric-cell">
+  <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">24h</p>
+  <p class="font-inter text-ncl-muted text-xs">Response Guarantee</p>
+</div>
+<div class="metric-cell">
+  <p class="font-jakarta font-bold text-ncl-teal text-[30px] leading-none mb-1">5★</p>
+  <p class="font-inter text-ncl-muted text-xs">Client Satisfaction</p>
+</div>
 
           </div>
 
@@ -511,30 +479,30 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
 
       <div class="flex flex-col items-center py-8 px-6 text-center">
         <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
-          <span class="stat-num" data-target="50">0</span>+
-        </p>
-        <p class="font-inter text-[16px] text-ncl-muted mt-3">Clients Served</p>
+          100%
+</p>
+<p class="font-inter text-[16px] text-ncl-muted mt-3">Expert-Vetted Resources</p>
       </div>
 
       <div class="flex flex-col items-center py-8 px-6 text-center">
         <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
-          <span class="stat-num" data-target="100">0</span>+
-        </p>
-        <p class="font-inter text-[16px] text-ncl-muted mt-3">Projects Delivered</p>
+          24h
+</p>
+<p class="font-inter text-[16px] text-ncl-muted mt-3">Response Guarantee</p>
       </div>
 
       <div class="flex flex-col items-center py-8 px-6 text-center">
         <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
-          <span class="stat-num" data-target="5">0</span>+
-        </p>
-        <p class="font-inter text-[16px] text-ncl-muted mt-3">Years Experience</p>
+          6+
+</p>
+<p class="font-inter text-[16px] text-ncl-muted mt-3">Core Service Areas</p>
       </div>
 
       <div class="flex flex-col items-center py-8 px-6 text-center">
         <p class="font-jakarta font-extrabold text-[56px] leading-none text-gradient">
-          <span class="stat-num" data-target="98">0</span>%
-        </p>
-        <p class="font-inter text-[16px] text-ncl-muted mt-3">Client Satisfaction</p>
+          5★
+</p>
+<p class="font-inter text-[16px] text-ncl-muted mt-3">Client Satisfaction</p>
       </div>
 
     </div>
@@ -587,7 +555,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Real-time ML inference</li>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>AI strategy &amp; roadmapping</li>
           </ul>
-          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+          <button onclick="openSvcDrawer('ai')" class="font-inter font-semibold text-ncl-teal hover:underline text-sm bg-transparent border-none cursor-pointer p-0">Learn More →</button>
         </div>
         <!-- Neural network SVG -->
         <div class="flex items-center justify-center">
@@ -651,7 +619,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Real-time streaming (Kafka, Flink)</li>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>dbt transformations &amp; data quality</li>
           </ul>
-          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+          <button onclick="openSvcDrawer('data')" class="font-inter font-semibold text-ncl-teal hover:underline text-sm bg-transparent border-none cursor-pointer p-0">Learn More →</button>
         </div>
         <!-- Pipeline flow SVG -->
         <div class="flex items-center justify-center">
@@ -713,7 +681,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Cloud-native microservices</li>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>API design &amp; integration</li>
           </ul>
-          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+          <button onclick="openSvcDrawer('fullstack')" class="font-inter font-semibold text-ncl-teal hover:underline text-sm bg-transparent border-none cursor-pointer p-0">Learn More →</button>
         </div>
         <!-- Stack layers SVG -->
         <div class="flex items-center justify-center">
@@ -761,7 +729,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>CI/CD quality gates</li>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Test strategy &amp; framework design</li>
           </ul>
-          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+          <button onclick="openSvcDrawer('quality')" class="font-inter font-semibold text-ncl-teal hover:underline text-sm bg-transparent border-none cursor-pointer p-0">Learn More →</button>
         </div>
         <!-- Checklist SVG -->
         <div class="flex items-center justify-center">
@@ -814,7 +782,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Digital operating model</li>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Change management &amp; training</li>
           </ul>
-          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+          <button onclick="openSvcDrawer('digital')" class="font-inter font-semibold text-ncl-teal hover:underline text-sm bg-transparent border-none cursor-pointer p-0">Learn More →</button>
         </div>
         <!-- Before/After SVG -->
         <div class="flex items-center justify-center">
@@ -871,7 +839,7 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Multi-cloud governance</li>
             <li class="flex items-start gap-2 font-inter text-ncl-muted text-sm"><span class="text-ncl-teal font-bold shrink-0">✓</span>Engineering cost culture</li>
           </ul>
-          <a href="#contact" class="font-inter font-semibold text-ncl-teal hover:underline text-sm">Learn More →</a>
+          <button onclick="openSvcDrawer('finops')" class="font-inter font-semibold text-ncl-teal hover:underline text-sm bg-transparent border-none cursor-pointer p-0">Learn More →</button>
         </div>
         <!-- Bar chart SVG -->
         <div class="flex items-center justify-center">
@@ -1006,50 +974,55 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-      <article class="insight-card fade-in-up">
-        <div style="height:160px;background:linear-gradient(135deg,#1e3a8a,#0e7490);display:flex;align-items:center;justify-content:center;font-size:48px;">🧠</div>
-        <div class="p-6">
-          <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#EFF6FF;color:#1d4ed8;letter-spacing:1px;">AI TRENDS</span>
-          <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug">How LLMs Are Reshaping Enterprise Data in 2025</h3>
-          <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]" style="display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
-            Large language models are fundamentally changing how enterprises process and act on data at scale.
-          </p>
-          <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #F1F5F9;">
-            <span class="font-inter text-[13px] text-[#64748B]">5 min read</span>
-            <a href="#" class="font-inter text-[13px] text-[#2563EB] hover:underline">Read More →</a>
-          </div>
-        </div>
-      </article>
+  <article class="insight-card fade-in-up">
+    <div style="height:160px;background:linear-gradient(135deg,#1e3a8a,#0e7490);display:flex;align-items:center;justify-content:center;font-size:48px;">🧠</div>
+    <div class="p-6">
+      <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#EFF6FF;color:#1d4ed8;letter-spacing:1px;">AI TRENDS</span>
+      <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug"
+          onclick="openArticle('llm')"
+          style="color:#ffffff;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">
+        How LLMs Are Reshaping Enterprise Data in 2025
+      </h3>
+      <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]">Large language models are fundamentally changing how enterprises process and act on data at scale.</p>
+      <div class="mt-4 pt-3" style="border-top:1px solid #1E2D4A;">
+        <span class="font-inter text-[13px] text-[#64748B]">8 min read</span>
+      </div>
+    </div>
+  </article>
 
-      <article class="insight-card fade-in-up">
-        <div style="height:160px;background:linear-gradient(135deg,#0e7490,#059669);display:flex;align-items:center;justify-content:center;font-size:48px;">☁️</div>
-        <div class="p-6">
-          <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#F0FDFA;color:#0f766e;letter-spacing:1px;">FINOPS</span>
-          <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug">Cut Cloud Costs by 40% with FinOps Automation</h3>
-          <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]" style="display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
-            Most teams are leaving significant cloud savings on the table. Here is a proven 90-day framework.
-          </p>
-          <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #F1F5F9;">
-            <span class="font-inter text-[13px] text-[#64748B]">5 min read</span>
-            <a href="#" class="font-inter text-[13px] text-[#2563EB] hover:underline">Read More →</a>
-          </div>
-        </div>
-      </article>
+  <article class="insight-card fade-in-up">
+    <div style="height:160px;background:linear-gradient(135deg,#0e7490,#059669);display:flex;align-items:center;justify-content:center;font-size:48px;">☁️</div>
+    <div class="p-6">
+      <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#F0FDFA;color:#0f766e;letter-spacing:1px;">FINOPS</span>
+      <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug"
+          onclick="openArticle('finops')"
+          style="color:#ffffff;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">
+        Cut Cloud Costs by 40% with FinOps Automation
+      </h3>
+      <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]">Most teams are leaving significant cloud savings on the table. Here is a proven 90-day framework.</p>
+      <div class="mt-4 pt-3" style="border-top:1px solid #1E2D4A;">
+        <span class="font-inter text-[13px] text-[#64748B]">6 min read</span>
+      </div>
+    </div>
+  </article>
 
-      <article class="insight-card fade-in-up">
-        <div style="height:160px;background:linear-gradient(135deg,#7c3aed,#1e3a8a);display:flex;align-items:center;justify-content:center;font-size:48px;">⚡</div>
-        <div class="p-6">
-          <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#F5F3FF;color:#6d28d9;letter-spacing:1px;">ENGINEERING</span>
-          <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug">Why Test Automation Is Non-Negotiable for Scale</h3>
-          <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]" style="display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
-            Manual QA is a hidden tax on engineering velocity. Here is how leading teams eliminated it entirely.
-          </p>
-          <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #F1F5F9;">
-            <span class="font-inter text-[13px] text-[#64748B]">5 min read</span>
-            <a href="#" class="font-inter text-[13px] text-[#2563EB] hover:underline">Read More →</a>
-          </div>
-        </div>
-      </article>
+  <article class="insight-card fade-in-up">
+    <div style="height:160px;background:linear-gradient(135deg,#7c3aed,#1e3a8a);display:flex;align-items:center;justify-content:center;font-size:48px;">⚡</div>
+    <div class="p-6">
+      <span class="font-inter font-bold text-[11px] px-3 py-1 rounded-full inline-block" style="background:#F5F3FF;color:#6d28d9;letter-spacing:1px;">ENGINEERING</span>
+      <h3 class="font-jakarta font-bold text-[18px] mt-2 mb-2 leading-snug"
+          onclick="openArticle('qa')"
+          style="color:#ffffff;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">
+        Why Test Automation Is Non-Negotiable for Scale
+      </h3>
+      <p class="font-inter text-[14px] text-[#64748B] leading-[1.6]">Manual QA is a hidden tax on engineering velocity. Here is how leading teams eliminated it entirely.</p>
+      <div class="mt-4 pt-3" style="border-top:1px solid #1E2D4A;">
+        <span class="font-inter text-[13px] text-[#64748B]">7 min read</span>
+      </div>
+    </div>
+  </article>
+
+</div>
 
     </div>
   </div>
@@ -1057,59 +1030,182 @@ onmouseout="this.style.color='#94A3B8'">Client Login</a>
 
 
 <!-- ============================================================
-     WHY NEXARA
+     ABOUT SECTION
 ============================================================= -->
-<section id="why-nexara" class="bg-[#0A0F1E] py-20">
+<section id="about" class="bg-[#0A0F1E] py-20">
   <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
-    <div class="flex flex-col lg:flex-row items-center gap-20">
 
-      <div class="w-full lg:w-[40%] fade-in-up">
-        <p class="font-inter text-[11px] text-[#2563EB] font-semibold tracking-[3px] uppercase mb-3">WHY CHOOSE US</p>
-        <h2 class="font-jakarta font-bold text-[36px] text-[#0f172a] leading-tight mb-4">Why 50+ Companies Trust Nexara</h2>
-        <p class="font-inter text-[16px] text-[#64748B] leading-relaxed mb-8">
-          We combine startup agility with enterprise-grade quality — delivering production-ready solutions that create measurable business impact.
+    <div class="text-center mb-16">
+      <p class="font-inter text-[11px] text-ncl-blue font-semibold tracking-[3px] uppercase mb-3">WHO WE ARE</p>
+      <h2 class="font-jakarta font-extrabold text-white text-[32px] sm:text-[44px] leading-tight mb-4">
+        Built by Engineers,<br class="hidden sm:block"> For Businesses That Demand More
+      </h2>
+      <p class="font-inter text-ncl-muted text-base max-w-[600px] mx-auto leading-relaxed">
+        We exist to give growing companies access to the same quality of engineering
+        talent that only large enterprises could previously afford.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start mb-16">
+
+      <!-- Photo column -->
+<div class="flex flex-col items-center lg:items-start gap-6">
+  <div style="position:relative;width:100%;max-width:280px;">
+
+    <!-- Decorative background blob -->
+    <div style="position:absolute;inset:-8px;background:linear-gradient(135deg,#2563EB,#06B6D4);
+    border-radius:24px;opacity:0.15;z-index:0;"></div>
+
+    <!-- Photo -->
+    <img src="titas.png"
+         alt="Titas — Founder & CEO, Nexara Cloud Labs"
+         style="position:relative;z-index:1;width:100%;border-radius:20px;
+         display:block;object-fit:cover;aspect-ratio:3/4;
+         border:2px solid rgba(37,99,235,0.3);">
+
+    <!-- Name badge overlaid at bottom -->
+    <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+    z-index:2;background:rgba(10,15,30,0.92);backdrop-filter:blur(8px);
+    border:1px solid rgba(6,182,212,0.3);border-radius:12px;
+    padding:10px 20px;white-space:nowrap;text-align:center;">
+      <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;
+      font-size:14px;color:#ffffff;margin:0;">Titas</p>
+      <p style="font-family:'Inter',sans-serif;font-size:11px;
+      color:#06B6D4;margin:0;">Founder & CEO</p>
+    </div>
+  </div>
+
+  <!-- Tags below photo -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;max-width:280px;">
+    <span style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.25);
+    color:#93c5fd;border-radius:9999px;padding:4px 12px;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;">
+      13+ Years IT Experience
+    </span>
+    <span style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);
+    color:#06B6D4;border-radius:9999px;padding:4px 12px;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;">
+      AI & Data Engineering
+    </span>
+    <span style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);
+    color:#a78bfa;border-radius:9999px;padding:4px 12px;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;">
+      European Client Delivery
+    </span>
+    <span style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);
+    color:#34d399;border-radius:9999px;padding:4px 12px;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;">
+      Remote-First Leadership
+    </span>
+  </div>
+</div>
+
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2563EB,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👩‍💻</div>
+          <div>
+            <p class="font-jakarta font-bold text-white text-[18px] mb-0">The Founding Story</p>
+            <p class="font-inter text-ncl-muted text-[13px]">Why Nexara Cloud Labs exists</p>
+          </div>
+        </div>
+        <p class="font-inter text-[#94A3B8] text-[15px] leading-[1.85] mb-5">
+          Nexara Cloud Labs was founded by <strong style="color:#ffffff;">Titas</strong>, a technology
+          leader with <strong style="color:#06B6D4;">13 years of hands-on IT experience</strong> spanning
+          AI, data engineering, full-stack development, and quality engineering.
         </p>
-        <a href="#contact" class="inline-block font-inter font-semibold text-white bg-[#2563EB] hover:bg-blue-700 rounded-lg px-6 py-3 text-[15px] transition-colors">
-          Schedule a Free Call →
-        </a>
+        <p class="font-inter text-[#94A3B8] text-[15px] leading-[1.85] mb-5">
+          Over more than a decade, Titas built deep expertise working with clients across Europe and beyond —
+          earning a reputation for technical rigour, transparent communication, and delivery that actually
+          sticks. When she launched Nexara Cloud Labs, the mission was clear: bring that same standard of
+          engineering excellence to a wider range of businesses, without the overhead of a large consultancy.
+        </p>
+        <p class="font-inter text-[#94A3B8] text-[15px] leading-[1.85]">
+          We are early-stage by choice — lean, focused, and deeply invested in every project we take on.
+          We would rather do fewer things exceptionally well than scale prematurely and dilute quality.
+        </p>
       </div>
 
-      <div class="w-full lg:w-[60%] fade-in-up">
-
-        <div class="flex items-start gap-5 py-6">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#2563EB,#1d4ed8);">⚡</div>
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#0e7490,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🎯</div>
           <div>
-            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">AI-First by Design</p>
-            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">We embed AI into every engagement from day one — not as an afterthought but as the strategic foundation.</p>
+            <p class="font-jakarta font-bold text-white text-[18px] mb-0">Our Hiring Philosophy</p>
+            <p class="font-inter text-ncl-muted text-[13px]">The standard every engineer must meet</p>
           </div>
         </div>
+        <p class="font-inter text-[#94A3B8] text-[15px] leading-[1.85] mb-5">
+          The technology industry has a body-shopping problem. CVs get forwarded, generalists get placed
+          as specialists, and clients pay enterprise rates for junior output. We built Nexara specifically
+          to fix that.
+        </p>
+        <p class="font-inter text-[#94A3B8] text-[15px] leading-[1.85] mb-6">
+          Every engineer we place goes through a <strong style="color:#ffffff;">technical interview
+          conducted by a domain practitioner</strong> — an AI engineer interviews AI engineers, a QA
+          lead interviews QA leads, a data engineer interviews data engineers. No shortcuts, no rubber
+          stamps, no exceptions.
+        </p>
 
-        <div class="flex items-start gap-5 py-6" style="border-top:1px solid #1E2D4A;">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#0e7490,#059669);">🚀</div>
-          <div>
-            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">Startup Speed, Enterprise Quality</p>
-            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">Agile sprints, daily updates, transparent delivery. Production-ready code shipped in weeks not months.</p>
+        <div class="flex flex-col gap-3">
+          <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:12px;padding:14px 18px;display:flex;gap:12px;align-items:center;">
+            <span style="color:#06B6D4;font-weight:700;font-size:18px;flex-shrink:0;">01</span>
+            <div>
+              <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;color:#ffffff;margin:0 0 2px;">Domain Expert Screening</p>
+              <p style="font-family:'Inter',sans-serif;font-size:12px;color:#64748B;margin:0;">Technical assessment by a practitioner who has done the exact same job</p>
+            </div>
+          </div>
+          <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:12px;padding:14px 18px;display:flex;gap:12px;align-items:center;">
+            <span style="color:#06B6D4;font-weight:700;font-size:18px;flex-shrink:0;">02</span>
+            <div>
+              <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;color:#ffffff;margin:0 0 2px;">Communication & Collaboration Check</p>
+              <p style="font-family:'Inter',sans-serif;font-size:12px;color:#64748B;margin:0;">We verify English fluency, async communication skills, and client-facing professionalism</p>
+            </div>
+          </div>
+          <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:12px;padding:14px 18px;display:flex;gap:12px;align-items:center;">
+            <span style="color:#06B6D4;font-weight:700;font-size:18px;flex-shrink:0;">03</span>
+            <div>
+              <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;color:#ffffff;margin:0 0 2px;">Founder Sign-Off</p>
+              <p style="font-family:'Inter',sans-serif;font-size:12px;color:#64748B;margin:0;">Titas personally reviews every placement before a client ever meets them</p>
+            </div>
           </div>
         </div>
-
-        <div class="flex items-start gap-5 py-6" style="border-top:1px solid #1E2D4A;">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#7c3aed,#2563EB);">🌍</div>
-          <div>
-            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">India-Based, Global Standards</p>
-            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">World-class engineering talent at competitive rates with zero compromise on quality or communication.</p>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-5 py-6" style="border-top:1px solid #1E2D4A;">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#0e7490,#06B6D4);">🤝</div>
-          <div>
-            <p class="font-jakarta font-bold text-[16px] text-[#0f172a] mb-1">True Partnership Model</p>
-            <p class="font-inter text-[14px] text-[#64748B] leading-relaxed">We work as an embedded extension of your team. Your success metrics are our success metrics.</p>
-          </div>
-        </div>
-
       </div>
     </div>
+
+    <div style="border-top:1px solid #1E2D4A;padding-top:56px;">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <p class="font-jakarta font-extrabold text-[42px] leading-none text-gradient mb-2">13+</p>
+          <p class="font-inter text-[14px] text-ncl-muted">Years of IT Experience</p>
+        </div>
+        <div class="text-center">
+          <p class="font-jakarta font-extrabold text-[42px] leading-none text-gradient mb-2">🌍</p>
+          <p class="font-inter text-[14px] text-ncl-muted">European Client Delivered</p>
+        </div>
+        <div class="text-center">
+          <p class="font-jakarta font-extrabold text-[42px] leading-none text-gradient mb-2">100%</p>
+          <p class="font-inter text-[14px] text-ncl-muted">Expert-Vetted Engineers</p>
+        </div>
+        <div class="text-center">
+          <p class="font-jakarta font-extrabold text-[42px] leading-none text-gradient mb-2">24h</p>
+          <p class="font-inter text-[14px] text-ncl-muted">Response Guarantee</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-14">
+      <p class="font-inter text-ncl-muted text-[15px] mb-5">
+        Want to know if we are the right fit for your project?
+      </p>
+      <button onclick="openContactForm()"
+              style="display:inline-block;padding:13px 32px;background:#2563EB;color:#fff;
+              border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;
+              font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;"
+              onmouseover="this.style.background='#1d4ed8'"
+              onmouseout="this.style.background='#2563EB'">
+        Let's Have a Conversation →
+      </button>
+    </div>
+
   </div>
 </section>
 
@@ -1537,7 +1633,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
 
     <div class="flex items-center justify-between" style="margin-bottom:40px;">
       <h2 class="font-jakarta font-bold text-[#0f172a]" style="font-size:44px;margin:0;">Results We Have Delivered</h2>
-      <a href="#" class="font-inter" style="font-size:14px;color:#06B6D4;text-decoration:none;white-space:nowrap;flex-shrink:0;margin-left:24px;">View all →</a>
+      
     </div>
 
     <div class="cs-grid">
@@ -1558,7 +1654,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
             <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">AWS</span>
             <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Kafka</span>
           </div>
-          <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a>
+          <!-- <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a> -->
         </div>
       </div>
 
@@ -1577,7 +1673,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
             <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">dbt</span>
             <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">Airflow</span>
           </div>
-          <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a>
+          <!-- <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a> -->
         </div>
       </div>
 
@@ -1596,7 +1692,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
             <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">TypeScript</span>
             <span class="font-inter" style="font-size:11px;background:#F1F5F9;color:#64748B;padding:4px 10px;border-radius:999px;">CI/CD</span>
           </div>
-          <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a>
+          <!-- <a href="#" class="font-inter font-semibold" style="display:inline-block;margin-top:16px;font-size:14px;color:#06B6D4;text-decoration:none;">Read Case Study →</a> -->
         </div>
       </div>
 
@@ -1621,8 +1717,18 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
 
       <div style="flex:1;min-width:0;">
 
+ 
+<!-- Slide 0 — Andreas Schyman, CtrlPrint -->
+<div class="testi-slide active" data-index="0">
+  <div style="background:#fff;border-radius:20px;padding:20px;border:1px solid #E2E8F0;">
+    <img src="testimonial_andreas_final.png"
+         alt="Testimonial from Andreas Schyman, CPO/CTO at CtrlPrint"
+         style="width:100%;border-radius:12px;display:block;">
+  </div>
+</div>
+
         <!-- Slide 1 -->
-        <div class="testi-slide active" data-index="0">
+        <div class="testi-slide" data-index="1">
           <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
             <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
             <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
@@ -1638,7 +1744,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
         </div>
 
         <!-- Slide 2 -->
-        <div class="testi-slide" data-index="1">
+        <div class="testi-slide" data-index="2">
           <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
             <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
             <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
@@ -1654,7 +1760,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
         </div>
 
         <!-- Slide 3 -->
-        <div class="testi-slide" data-index="2">
+        <div class="testi-slide" data-index="3">
           <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
             <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
             <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
@@ -1678,8 +1784,9 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
     <!-- Dot navigation -->
     <div style="display:flex;justify-content:center;gap:8px;margin-top:32px;" id="testi-dots">
       <button class="testi-dot active" data-dot="0" aria-label="Go to slide 1"></button>
-      <button class="testi-dot" data-dot="1" aria-label="Go to slide 2"></button>
-      <button class="testi-dot" data-dot="2" aria-label="Go to slide 3"></button>
+<button class="testi-dot" data-dot="1" aria-label="Go to slide 2"></button>
+<button class="testi-dot" data-dot="2" aria-label="Go to slide 3"></button>
+<button class="testi-dot" data-dot="3" aria-label="Go to slide 4"></button>
     </div>
 
   </div>
@@ -1824,7 +1931,260 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
   .footer-grid { grid-template-columns: 1fr; }
 }
 </style>
+<style>
+/* ===== SERVICE DRAWER ===== */
+#svc-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 16, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 8888;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#svc-drawer-overlay.open { display: block; }
+#svc-drawer-overlay.visible { opacity: 1; }
 
+#svc-drawer {
+  position: fixed;
+  top: 0;
+  right: -520px;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  background: #0F1629;
+  border-left: 1px solid #1E2D4A;
+  z-index: 9000;
+  overflow-y: auto;
+  transition: right 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+}
+#svc-drawer.open { right: 0; }
+
+.svc-drawer-header {
+  padding: 28px 32px 24px;
+  border-bottom: 1px solid #1E2D4A;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  background: #0F1629;
+  z-index: 1;
+}
+.svc-drawer-body { padding: 32px; flex: 1; }
+
+.svc-drawer-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(6,182,212,0.2));
+  border: 1px solid rgba(37,99,235,0.3);
+  display: flex; align-items: center;
+  justify-content: center; font-size: 24px;
+  flex-shrink: 0;
+}
+.svc-drawer-close {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid #1E2D4A;
+  background: transparent;
+  color: #64748B;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.svc-drawer-close:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+.svc-drawer-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #06B6D4; margin-bottom: 6px;
+}
+.svc-drawer-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: #ffffff; line-height: 1.2;
+  margin: 0;
+}
+.svc-drawer-body p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; color: #94A3B8;
+  line-height: 1.8; margin: 0 0 20px;
+}
+.svc-drawer-section-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #ffffff; margin: 24px 0 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.svc-use-case {
+  background: rgba(37,99,235,0.07);
+  border: 1px solid rgba(37,99,235,0.18);
+  border-radius: 12px; padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.svc-use-case-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #ffffff; margin-bottom: 4px;
+}
+.svc-use-case p {
+  font-size: 13px; color: #64748B;
+  line-height: 1.6; margin: 0;
+}
+.svc-capability-row {
+  display: flex; gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.svc-capability-row span.check {
+  color: #06B6D4; font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+.svc-capability-row p {
+  font-size: 13px; color: #94A3B8;
+  line-height: 1.6; margin: 0;
+}
+.svc-capability-row strong { color: #ffffff; }
+.svc-tech-row {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;
+}
+.svc-tech-pill {
+  background: rgba(6,182,212,0.08);
+  border: 1px solid rgba(6,182,212,0.2);
+  color: #06B6D4; border-radius: 9999px;
+  padding: 4px 12px; font-size: 12px;
+  font-weight: 600; font-family: 'Inter', sans-serif;
+}
+.svc-drawer-cta {
+  margin: 28px 32px 32px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(6,182,212,0.1));
+  border: 1px solid rgba(37,99,235,0.3);
+  border-radius: 14px;
+}
+.svc-drawer-cta p {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; color: #94A3B8;
+  margin: 0 0 12px;
+}
+.svc-drawer-cta button {
+  width: 100%; padding: 12px;
+  background: #2563EB; color: #fff;
+  border: none; border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s;
+}
+.svc-drawer-cta button:hover { background: #1d4ed8; }
+
+<style>
+/* ===== ARTICLE MODAL ===== */
+#article-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 40px 20px;
+  background: rgba(5,8,16,0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+#article-modal.open { display: block; }
+
+.article-modal-box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 52px;
+  max-width: 740px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+.article-modal-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid #E2E8F0;
+  background: transparent;
+  color: #64748B;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.article-modal-close:hover { background: #f1f5f9; }
+
+.article-label {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+}
+.article-modal-box h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800; font-size: 28px;
+  color: #0f172a; line-height: 1.2;
+  margin: 0 0 8px;
+}
+.article-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; color: #94A3B8;
+  margin-bottom: 28px;
+}
+.article-divider {
+  border: none;
+  border-top: 2px solid #E2E8F0;
+  margin: 24px 0;
+}
+.article-modal-box h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700; font-size: 18px;
+  color: #0f172a; margin: 28px 0 10px;
+}
+.article-modal-box p {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px; color: #475569;
+  line-height: 1.85; margin: 0 0 16px;
+}
+.article-modal-box ul {
+  padding-left: 20px; margin: 0 0 20px;
+}
+.article-modal-box ul li {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; color: #475569;
+  line-height: 1.75; margin-bottom: 8px;
+}
+.article-callout {
+  background: #EFF6FF;
+  border-left: 4px solid #2563EB;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.article-callout p {
+  margin: 0; color: #1e3a8a;
+  font-weight: 500; font-size: 14px;
+}
+@media (max-width: 600px) {
+  .article-modal-box { padding: 32px 24px; }
+  .article-modal-box h2 { font-size: 22px; }
+}
+</style>
+</style>
 
 <!-- ============================================================
      CONTACT
@@ -1857,7 +2217,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
         <div>
           <div style="font-size:12px;color:#64748B;">Email</div>
           <div style="font-size:14px;color:#0f172a;
-          font-weight:600;">hello@nexaracloudlabs.com</div>
+          font-weight:600;">support@nexaracloudlabs.com</div>
         </div>
       </div>
 
@@ -2018,11 +2378,11 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
         <p style="color:#64748B; margin-bottom:24px;">
         Thank you! We will get back to you
         within 24 hours.</p>
-        <button onclick="resetContactForm()"
-        style="padding:10px 24px; border:1px solid #E2E8F0;
-        background:white; border-radius:8px;
-        cursor:pointer; color:#64748B;">
-        Send Another Message</button>
+        <button onclick="openContactForm()"
+style="padding:10px 24px; border:1px solid #E2E8F0;
+background:white; border-radius:8px;
+cursor:pointer; color:#64748B; font-family:'Inter',sans-serif;">
+Send Another Message</button>
       </div>
     </div>
   </div>
@@ -2061,7 +2421,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
             <p class="font-inter" style="font-size:12px;color:#64748B;margin:0;">Cloud Labs Pvt. Ltd.</p>
           </div>
         </div>
-        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">India's AI-first IT services and consultancy. Building intelligent technology for forward-thinking businesses worldwide.</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">An early-stage AI-first technology partner. Every engineer rigorously vetted by domain experts — delivering intelligent solutions for forward-thinking businesses worldwide.</p>
         <div style="display:flex;gap:8px;">
           <a href="#" class="footer-social-btn" aria-label="LinkedIn">L</a>
           <a href="#" class="footer-social-btn" aria-label="Twitter">T</a>
@@ -2103,10 +2463,10 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
       <!-- Col 5: Contact -->
       <div>
         <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
-        <a href="mailto:hello@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;transition:text-decoration .2s;word-break:break-word;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">hello@nexaracloudlabs.com</a>
+        <a href="mailto:support@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;transition:text-decoration .2s;word-break:break-word;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">support@nexaracloudlabs.com</a>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
-        <a href="#contact" class="font-inter font-bold" style="display:inline-block;margin-top:16px;font-size:13px;color:#06B6D4;text-decoration:none;">Get a Free Quote →</a>
+        
       </div>
 
     </div>
@@ -2180,6 +2540,24 @@ function submitContactForm(e) {
       }
       alert('Something went wrong. Please email us directly at support@nexaracloudlabs.com');
     });
+
+    /* =========================================================
+   FIX: openContactForm() — always resets to clean form
+   Called by: Start Your Project, See Our Work,
+              Schedule a Free Call, Send Another Message
+   ========================================================= */
+function openContactForm() {
+  var form    = document.getElementById('contactForm');
+  var success = document.getElementById('contactSuccess');
+  var btn     = form ? form.querySelector('button[type="submit"], button[onclick]') : null;
+
+  if (form)    { form.reset(); form.style.display = 'flex'; }
+  if (success) { success.style.display = 'none'; }
+  if (btn)     { btn.textContent = 'Send Message →'; btn.disabled = false; btn.style.opacity = '1'; }
+
+  var section = document.getElementById('contact');
+  if (section) section.scrollIntoView({ behavior: 'smooth' });
+}
 }
 
 function resetContactForm() {
@@ -2363,7 +2741,7 @@ function getReply(msg) {
   } else if (msg.includes('price') || msg.includes('cost') || msg.includes('pricing') || msg.includes('budget')) {
     return 'Our engagements typically start from $5,000 for focused projects. We offer fixed-price and time-and-materials models. Would you like a free consultation to discuss your specific needs?';
   } else if (msg.includes('call') || msg.includes('meet') || msg.includes('book') || msg.includes('contact')) {
-    return 'You can book a free 30-min consultation or reach us at hello@nexaracloudlabs.com. We respond within 24 hours. Want me to scroll you to the contact form?';
+    return 'You can book a free 30-min consultation or reach us at support@nexaracloudlabs.com. We respond within 24 hours. Want me to scroll you to the contact form?';
   } else if (msg.includes('ai') || msg.includes('llm') || msg.includes('machine learning')) {
     return 'Our AI team specialises in custom LLM deployment, RAG systems, ML pipelines, and intelligent automation. We have delivered AI solutions for FinTech, E-commerce, and SaaS companies. Want to see a case study?';
   } else if (msg.includes('data') || msg.includes('pipeline') || msg.includes('warehouse')) {
@@ -2371,10 +2749,456 @@ function getReply(msg) {
   } else if (msg.includes('finops') || msg.includes('cloud cost') || msg.includes('aws cost')) {
     return 'Our FinOps practice typically saves clients 30-40% on cloud infrastructure within 90 days. We work with AWS, Azure, and GCP. Would you like a free cloud cost assessment?';
   } else {
-    return 'Great question! For the most accurate answer I recommend speaking with our team directly at hello@nexaracloudlabs.com or using the contact form on this page. Can I help with anything else?';
+    return 'Great question! For the most accurate answer I recommend speaking with our team directly at support@nexaracloudlabs.com or using the contact form on this page. Can I help with anything else?';
   }
 }
 </script>
+ <script>
+function openContactForm() {
+  var form    = document.getElementById('contactForm');
+  var success = document.getElementById('contactSuccess');
+  var btn     = form ? form.querySelector('button[type="submit"], button[onclick]') : null;
 
+  if (form)    { form.reset(); form.style.display = 'flex'; }
+  if (success) { success.style.display = 'none'; }
+  if (btn)     { btn.textContent = 'Send Message →'; btn.disabled = false; btn.style.opacity = '1'; }
+
+  var section = document.getElementById('contact');
+   if (section) section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+<!-- ===== SERVICE DETAIL DRAWER ===== -->
+<div id="svc-drawer-overlay"></div>
+<div id="svc-drawer" role="dialog" aria-modal="true" aria-labelledby="svc-drawer-title">
+
+  <div class="svc-drawer-header">
+    <div style="display:flex; gap:14px; align-items:flex-start;">
+      <div class="svc-drawer-icon" id="svc-drawer-icon">🤖</div>
+      <div>
+        <div class="svc-drawer-eyebrow" id="svc-drawer-eyebrow">SERVICE</div>
+        <h2 class="svc-drawer-title" id="svc-drawer-title">Service Name</h2>
+      </div>
+    </div>
+    <button class="svc-drawer-close" onclick="closeSvcDrawer()" aria-label="Close">×</button>
+  </div>
+
+  <div class="svc-drawer-body" id="svc-drawer-body"></div>
+
+  <div class="svc-drawer-cta">
+    <p>Ready to explore this for your business?</p>
+    <button onclick="closeSvcDrawer(); openContactForm();">
+      Start a Conversation →
+    </button>
+  </div>
+
+</div>
+<script>
+/* ===== SERVICE DRAWER DATA + LOGIC ===== */
+var svcDrawerData = {
+
+  ai: {
+    icon: '🤖',
+    eyebrow: 'AI SOLUTIONS & AUTOMATION',
+    title: 'Intelligent Systems Built for Your Workflow',
+    intro: 'We don\'t bolt AI onto your existing process. We study how your team actually works, identify the highest-value automation opportunities, and build systems that operate reliably in production — not just in demos.',
+    useCases: [
+      { title: '📄 Document Intelligence', desc: 'Automatically extract, classify, and route data from invoices, contracts, and forms — replacing manual data entry entirely.' },
+      { title: '💬 Internal Knowledge Assistant', desc: 'An LLM trained on your internal docs, SOPs, and wikis that answers employee questions instantly without ticket queues.' },
+      { title: '🔍 Customer Support Automation', desc: 'AI agents that resolve 60–70% of tier-1 support tickets without human involvement, escalating only what needs a human.' },
+    ],
+    capabilities: [
+      { title: 'Custom LLM fine-tuning & RAG', desc: 'We fine-tune foundation models on your proprietary data so answers come from your knowledge base, not the internet.' },
+      { title: 'Real-time ML inference', desc: 'Low-latency model serving with A/B testing and shadow deployment baked in from day one.' },
+      { title: 'Intelligent process automation', desc: 'Document processing, classification, and decisioning workflows that run 24/7 with full audit trails.' },
+      { title: 'AI strategy & roadmapping', desc: 'A 12-month execution plan identifying your highest-ROI AI use cases before writing a single line of code.' },
+    ],
+    tech: ['Python', 'LangChain', 'OpenAI', 'HuggingFace', 'Pinecone', 'FastAPI', 'AWS SageMaker']
+  },
+
+  data: {
+    icon: '🗄️',
+    eyebrow: 'DATA ENGINEERING',
+    title: 'Pipelines That Work at 3am Without You',
+    intro: 'Your data infrastructure should be invisible — reliable, fast, and self-healing. We build pipelines that don\'t break silently, warehouses that answer business questions in seconds, and streaming systems that keep up with your real-time demands.',
+    useCases: [
+      { title: '🏗️ Warehouse Migration', desc: 'Move from legacy Oracle or Redshift to Snowflake or BigQuery with zero downtime using dual-write migration strategies.' },
+      { title: '⚡ Real-Time Analytics', desc: 'Stream millions of events per second through Kafka into dashboards that update in under a second — not batch jobs that run overnight.' },
+      { title: '📊 Self-Serve Analytics Platform', desc: 'A dbt-modelled warehouse with a data catalogue your analysts can actually use — reducing ad-hoc SQL requests to the data team by 80%.' },
+    ],
+    capabilities: [
+      { title: 'ETL/ELT pipeline design', desc: 'Fault-tolerant, idempotent pipelines in Airflow or Prefect with full lineage tracking and on-call alerting.' },
+      { title: 'Cloud data warehouse', desc: 'Snowflake and BigQuery specialists — schema design, cost optimisation, clustering, and materialisation strategy.' },
+      { title: 'Real-time streaming', desc: 'Kafka and Flink architectures for event-driven analytics, fraud detection, and operational intelligence.' },
+      { title: 'dbt & data quality', desc: 'Modelled transformations with enforced contracts, Great Expectations checks, and a data catalogue your team will actually adopt.' },
+    ],
+    tech: ['Snowflake', 'BigQuery', 'Apache Kafka', 'dbt', 'Airflow', 'Apache Spark', 'Flink', 'Terraform']
+  },
+
+  fullstack: {
+    icon: '💻',
+    eyebrow: 'FULL STACK ENGINEERING',
+    title: 'Complete Products, Not Just Features',
+    intro: 'We build entire products end-to-end — pixel-perfect frontends, hardened APIs, and cloud-native infrastructure. Our engineers own the full stack so nothing gets lost in handoffs between teams.',
+    useCases: [
+      { title: '🚀 MVP to Production', desc: 'Take your idea from validated concept to live product in 8 weeks. Full stack, fully tested, ready to onboard your first 1,000 users.' },
+      { title: '🔗 Third-Party Integrations', desc: 'Stripe, Salesforce, HubSpot, and custom API integrations built with proper webhook handling, retry logic, and idempotency keys.' },
+      { title: '📱 Customer-Facing Portals', desc: 'Dashboards, client portals, and internal tools that score 95+ on Core Web Vitals and work flawlessly on every device.' },
+    ],
+    capabilities: [
+      { title: 'React / Next.js / TypeScript', desc: 'Server components, edge rendering, and accessible component systems built with performance budgets enforced from day one.' },
+      { title: 'Node.js & Python backends', desc: 'REST and GraphQL APIs with OpenAPI specs, rate limiting, auth middleware, and structured logging out of the box.' },
+      { title: 'Cloud-native microservices', desc: 'Kubernetes-orchestrated services on AWS, GCP, or Azure with Terraform IaC and full observability (traces, metrics, logs).' },
+      { title: 'API design & integration', desc: 'Versioned, well-documented APIs that external developers can actually use without calling your support team.' },
+    ],
+    tech: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL', 'Redis', 'Kubernetes', 'Terraform']
+  },
+
+  quality: {
+    icon: '✅',
+    eyebrow: 'QUALITY ENGINEERING',
+    title: 'Ship on Friday Without the Sick Feeling',
+    intro: 'Manual QA is a bottleneck pretending to be a safety net. We replace it with deterministic, fast, maintainable automation that gives your team the confidence to deploy any time — including Friday afternoons.',
+    useCases: [
+      { title: '🧪 Automation from Scratch', desc: 'We build your entire test suite from zero — E2E, API, and unit coverage — and integrate it into your CI/CD pipeline in 4 weeks.' },
+      { title: '⚠️ QA Cycle Reduction', desc: 'Compress a 2-week manual regression cycle down to 45 minutes of automated execution running in parallel on every pull request.' },
+      { title: '🔒 Security & Performance Gates', desc: 'OWASP security scans, Lighthouse performance budgets, and load tests that block deploys automatically when thresholds are breached.' },
+    ],
+    capabilities: [
+      { title: 'Playwright & Cypress E2E', desc: 'Cross-browser test suites with Page Object Model, visual regression, and parallel execution completing in under 10 minutes.' },
+      { title: 'API & contract testing', desc: 'Pact-based consumer-driven contracts so breaking API changes are caught before deployment, not after an incident.' },
+      { title: 'CI/CD quality gates', desc: 'GitHub Actions or Jenkins pipelines with enforced coverage thresholds and security scans blocking bad code automatically.' },
+      { title: 'Performance & load testing', desc: 'k6 and JMeter scripts validating your system under realistic traffic with p95/p99 SLA reporting your CTO can read.' },
+    ],
+    tech: ['Playwright', 'Cypress', 'k6', 'JMeter', 'PyTest', 'GitHub Actions', 'Jenkins', 'Pact', 'OWASP ZAP']
+  },
+
+  digital: {
+    icon: '⚡',
+    eyebrow: 'DIGITAL TRANSFORMATION',
+    title: 'Modernise Without Burning Down the House',
+    intro: 'Digital transformation fails when it becomes a rewrite-everything project with a 3-year timeline. We take an incremental, risk-managed approach — strangling the monolith progressively and delivering business value at every step.',
+    useCases: [
+      { title: '🏛️ Legacy Modernisation', desc: 'Decompose a monolith into services incrementally using the strangler fig pattern — no big-bang rewrite, no downtime, no panic.' },
+      { title: '☁️ Cloud Migration', desc: 'A phased migration to AWS, Azure, or GCP that balances cost, risk, and speed — not a lift-and-shift that recreates your problems in the cloud.' },
+      { title: '🛠️ Internal Developer Platform', desc: 'Golden paths, self-service infrastructure, and Backstage portals that make your engineering teams 2–3× more productive.' },
+    ],
+    capabilities: [
+      { title: 'Legacy system assessment', desc: 'A structured architecture audit identifying tech debt, security risks, and the highest-ROI modernisation opportunities.' },
+      { title: 'Cloud adoption strategy', desc: 'Phased migration plans with clear business cases — not technology-first decisions that ignore operational reality.' },
+      { title: 'Digital operating model', desc: 'Platform engineering and internal developer platforms that reduce toil and let your engineers focus on product.' },
+      { title: 'Change management & training', desc: 'We embed with your team, run workshops, and document runbooks until they own it confidently — then we step back.' },
+    ],
+    tech: ['AWS', 'Azure', 'GCP', 'Kubernetes', 'Terraform', 'Backstage', 'ArgoCD', 'Helm', 'Prometheus']
+  },
+
+  finops: {
+    icon: '💰',
+    eyebrow: 'FINOPS CONSULTING',
+    title: 'Cut Cloud Costs by 30–40% in 90 Days',
+    intro: 'Cloud bills grow silently. By the time finance notices, you\'re paying 2–3× what you should. We combine tooling, process, and culture change to give you permanent visibility and control — not a one-time cost cut that creeps back.',
+    useCases: [
+      { title: '🔍 Cloud Cost Audit', desc: 'A 30-day assessment across your AWS, Azure, or GCP environment identifying idle resources, overprovisioned instances, and untagged spend.' },
+      { title: '📉 Commitment Strategy', desc: 'Reserved Instances and Savings Plans matched to your actual workload patterns — not blanket purchases that lock you into the wrong things.' },
+      { title: '📊 Engineering Cost Culture', desc: 'Unit economics dashboards for every service, cost-per-feature visibility, and budget alerts that go to the team responsible — not just finance.' },
+    ],
+    capabilities: [
+      { title: 'Cloud cost analysis & rightsizing', desc: 'Idle resource identification, instance rightsizing, and data transfer optimisation that typically saves 10–20% immediately.' },
+      { title: 'FinOps framework implementation', desc: 'Inform → Optimise → Operate. Dashboards in Grafana or CloudHealth that every engineer can read and act on.' },
+      { title: 'Multi-cloud governance', desc: 'Tagging policies, budget guardrails, and anomaly detection so cost spikes are caught in hours, not at month-end.' },
+      { title: 'Engineering cost culture', desc: 'Cost reviews in every sprint retrospective, architecture review checklists, and on-call runbooks that include cost impact.' },
+    ],
+    tech: ['AWS Cost Explorer', 'Azure Cost Mgmt', 'GCP Billing', 'Infracost', 'CloudHealth', 'Terraform', 'Grafana']
+  }
+
+};
+
+function openSvcDrawer(key) {
+  var data = svcDrawerData[key];
+  if (!data) return;
+
+  // Set header
+  document.getElementById('svc-drawer-icon').textContent  = data.icon;
+  document.getElementById('svc-drawer-eyebrow').textContent = data.eyebrow;
+  document.getElementById('svc-drawer-title').textContent  = data.title;
+
+  // Build body HTML
+  var html = '';
+
+  // Intro
+  html += '<p>' + data.intro + '</p>';
+
+  // Real-world use cases
+  html += '<div class="svc-drawer-section-title">Real-World Use Cases</div>';
+  data.useCases.forEach(function(uc) {
+    html += '<div class="svc-use-case">';
+    html += '<div class="svc-use-case-title">' + uc.title + '</div>';
+    html += '<p>' + uc.desc + '</p>';
+    html += '</div>';
+  });
+
+  // What we deliver
+  html += '<div class="svc-drawer-section-title">What We Deliver</div>';
+  data.capabilities.forEach(function(cap) {
+    html += '<div class="svc-capability-row">';
+    html += '<span class="check">✓</span>';
+    html += '<p><strong>' + cap.title + '</strong> — ' + cap.desc + '</p>';
+    html += '</div>';
+  });
+
+  // Tech stack
+  html += '<div class="svc-drawer-section-title">Technology Stack</div>';
+  html += '<div class="svc-tech-row">';
+  data.tech.forEach(function(t) {
+    html += '<span class="svc-tech-pill">' + t + '</span>';
+  });
+  html += '</div>';
+
+  document.getElementById('svc-drawer-body').innerHTML = html;
+
+  // Open drawer
+  var overlay = document.getElementById('svc-drawer-overlay');
+  var drawer  = document.getElementById('svc-drawer');
+  overlay.classList.add('open');
+  drawer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Fade in overlay
+  setTimeout(function() { overlay.classList.add('visible'); }, 10);
+  // Scroll drawer to top
+  drawer.scrollTop = 0;
+}
+
+function closeSvcDrawer() {
+  var overlay = document.getElementById('svc-drawer-overlay');
+  var drawer  = document.getElementById('svc-drawer');
+  overlay.classList.remove('visible');
+  drawer.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(function() { overlay.classList.remove('open'); }, 300);
+}
+
+// Close on overlay click
+document.getElementById('svc-drawer-overlay').addEventListener('click', closeSvcDrawer);
+// Close on Escape key
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeSvcDrawer(); });
+</script>
+<!-- ===== ARTICLE MODAL ===== -->
+<!-- <div id="article-modal" role="dialog" aria-modal="true">
+  <div class="article-modal-box">
+    <button class="article-modal-close" onclick="closeArticle()" aria-label="Close">×</button>
+    <div id="article-modal-content"></div>
+  </div>
+</div> -->
+<script>
+// var articles = {
+
+//   llm: {
+//     label: 'AI TRENDS',
+//     labelStyle: 'background:#EFF6FF;color:#1d4ed8;',
+//     title: 'How LLMs Are Reshaping Enterprise Data in 2025',
+//     meta: 'By Nexara Cloud Labs · 8 min read · June 2025',
+//     content: `
+//       <p>Large language models have moved from research curiosity to production infrastructure in under three years. In 2025, the question is no longer "should we use LLMs?" but "how do we use them without creating a fragile, expensive mess?" This article covers what is actually working in enterprise deployments right now.</p>
+
+//       <h3>The shift from prompting to fine-tuning</h3>
+//       <p>In 2023, most enterprise LLM projects were prompt-engineering exercises — carefully crafted instructions fed to a general-purpose model. In 2025, the teams getting real ROI have moved beyond this. They are fine-tuning foundation models on their own data, building retrieval-augmented generation (RAG) pipelines, and deploying smaller, faster, domain-specific models that outperform GPT-4 on their specific tasks at one-tenth the cost.</p>
+
+//       <div class="article-callout"><p>💡 A fine-tuned 7B parameter model trained on your support tickets will outperform GPT-4 on your support tasks — and cost 95% less per token to run.</p></div>
+
+//       <h3>RAG is the default architecture</h3>
+//       <p>Retrieval-Augmented Generation has become the standard pattern for knowledge-heavy enterprise applications. Instead of baking knowledge into model weights — expensive and slow to update — RAG pipelines retrieve relevant documents from a vector database at inference time and inject them into the prompt as context. The model reasons over fresh, accurate information rather than stale training data.</p>
+//       <p>The components of a production RAG system:</p>
+//       <ul>
+//         <li>A document ingestion pipeline (chunking, embedding, upsert into Pinecone/pgvector)</li>
+//         <li>A retrieval layer with hybrid search — dense vectors plus BM25 keyword matching</li>
+//         <li>A re-ranking step to filter the top-k results by relevance</li>
+//         <li>A generation step with a fine-tuned or prompted LLM</li>
+//         <li>Evaluation pipelines using RAGAS or custom domain metrics</li>
+//       </ul>
+
+//       <h3>The hidden cost nobody talks about: data quality</h3>
+//       <p>The most common reason enterprise LLM projects fail is not the model — it is the data going into the RAG pipeline. Scanned PDFs with poor OCR, inconsistent naming conventions, and tribal knowledge that exists only in people's heads. Before writing a single line of LLM code, invest 30 days in data cleaning and a proper document taxonomy. It is not exciting. It is the difference between a demo and a product.</p>
+
+//       <h3>What to actually measure</h3>
+//       <p>Vanity metrics like response time and token count are easy to track but miss the point entirely. The metrics that matter for enterprise LLM deployments are hallucination rate, answer faithfulness to retrieved context, human-judged correctness on your domain, and ultimately business outcomes — support ticket deflection rate, time-to-resolution, analyst hours saved per week.</p>
+
+//       <h3>The practical 90-day roadmap</h3>
+//       <ul>
+//         <li><strong>Days 1–30:</strong> Data audit, baseline evaluation framework, proof of concept on one high-value workflow</li>
+//         <li><strong>Days 31–60:</strong> Build production RAG pipeline, fine-tune if domain-specific accuracy requires it, integrate with existing systems via API</li>
+//         <li><strong>Days 61–90:</strong> Staged rollout with monitoring, human-in-the-loop review for edge cases, measure and report business impact to stakeholders</li>
+//       </ul>
+//       <p>The teams that succeed with LLMs in 2025 are not the ones with the biggest models or the highest GPU budgets. They are the ones who defined success metrics before writing code, started with one workflow instead of everything, and treated data quality as a first-class engineering concern.</p>
+//     `
+//   },
+
+//   finops: {
+//     label: 'FINOPS',
+//     labelStyle: 'background:#F0FDFA;color:#0f766e;',
+//     title: 'Cut Cloud Costs by 40% with FinOps Automation',
+//     meta: 'By Nexara Cloud Labs · 6 min read · May 2025',
+//     content: `
+//       <p>The average company overspends on cloud infrastructure by 32%. In high-growth startups we have audited, that number is often closer to 50%. The good news: most of this is recoverable without any performance impact or re-architecture. Here is a practical 90-day framework that works.</p>
+
+//       <h3>Why cloud bills grow out of control</h3>
+//       <p>Cloud cost problems share a common root cause: the people making technical decisions — engineers — are not the people who see the bill — finance. Engineers optimise for speed, resilience, and simplicity, not cost. Without feedback loops connecting technical choices to dollar impact, spend grows silently until it becomes a board-level conversation.</p>
+
+//       <div class="article-callout"><p>💡 The core FinOps principle: engineers who can see the unit cost of their decisions make better decisions. Visibility always precedes optimisation.</p></div>
+
+//       <h3>Days 1–30: Achieve full visibility</h3>
+//       <p>You cannot optimise what you cannot see. The entire first month is instrumentation:</p>
+//       <ul>
+//         <li>Enable cost allocation tags across all resources — team, environment, service, feature</li>
+//         <li>Set up AWS Cost Explorer, Azure Cost Management, or GCP Billing dashboards visible to engineering, not just finance</li>
+//         <li>Identify your top 10 cost drivers — usually compute, data transfer, and storage in that order</li>
+//         <li>Establish unit economics: cost per API request, cost per active user, cost per GB processed</li>
+//         <li>Configure anomaly detection alerts so cost spikes surface within hours, not at month-end</li>
+//       </ul>
+
+//       <h3>Days 31–60: Eliminate waste systematically</h3>
+//       <p>With visibility in place the quick wins become obvious. In our experience auditing cloud accounts, these categories consistently deliver the fastest savings:</p>
+//       <ul>
+//         <li><strong>Idle resources:</strong> Instances running below 5% CPU for 90+ days. Terminating these alone typically saves 10–15%.</li>
+//         <li><strong>Overprovisioned instances:</strong> Rightsizing EC2, RDS, or compute instances to match actual utilisation. AWS Compute Optimizer automates the analysis.</li>
+//         <li><strong>Data transfer costs:</strong> Unexpected egress fees are a common surprise. Moving processing to the same region as storage eliminates most of this.</li>
+//         <li><strong>Zombie resources:</strong> Unattached EBS volumes, unused Elastic IPs, orphaned snapshots accumulate quietly and cost real money every month.</li>
+//       </ul>
+
+//       <h3>Days 61–90: Commit strategically</h3>
+//       <p>Once you have a clear picture of your steady-state workload, commitment-based discounts — Reserved Instances, Savings Plans, Committed Use Discounts — can save 30–60% on compute. The key is matching commitment type and term length to your actual workload stability. Buying one-year RIs for workloads that change monthly is a common and expensive mistake.</p>
+
+//       <h3>Making savings permanent: the culture piece</h3>
+//       <p>The most sophisticated FinOps tooling fails without organisational change. Teams that maintain low cloud costs long-term have cost reviews as part of every sprint retrospective, architecture review processes that include a FinOps checkpoint, and on-call runbooks that include cost impact alongside reliability impact. The goal is not a one-time cost cut — it is making cost efficiency a first-class engineering concern permanently.</p>
+//     `
+//   },
+
+//   qa: {
+//     label: 'ENGINEERING',
+//     labelStyle: 'background:#F5F3FF;color:#6d28d9;',
+//     title: 'Why Test Automation Is Non-Negotiable for Scale',
+//     meta: 'By Nexara Cloud Labs · 7 min read · April 2025',
+//     content: `
+//       <p>Every engineering team that has ever missed a release deadline has said some version of "QA is the bottleneck." The standard response is to hire more manual testers. This article explains why that is exactly the wrong answer, and what building a real automated quality culture actually looks like in practice.</p>
+
+//       <h3>The real cost of manual QA</h3>
+//       <p>Manual QA has three hidden costs that never appear on a budget spreadsheet. First, cycle time: a 2-week QA cycle means engineers are context-switching between what they are testing and what they are building, and bugs found after two weeks cost 10× more to fix than bugs caught immediately. Second, reliability: humans are inconsistent — a test case executed differently on Friday than Monday is not a test, it is a hope. Third, knowledge concentration: when your QA lead leaves, they take your institutional testing knowledge with them.</p>
+
+//       <div class="article-callout"><p>💡 Teams with 80%+ automated test coverage release 200× more frequently with 24× faster recovery from incidents — DORA State of DevOps Report 2023.</p></div>
+
+//       <h3>The testing pyramid for modern architectures</h3>
+//       <p>The classic testing pyramid remains directionally correct but needs updating for microservices and API-first architectures:</p>
+//       <ul>
+//         <li><strong>Unit tests (70%):</strong> Fast, isolated, run in milliseconds. Vitest or Jest for JavaScript, PyTest for Python. Target 80%+ coverage on business logic, not boilerplate.</li>
+//         <li><strong>Contract tests (10%):</strong> Consumer-driven contracts with Pact.io ensure microservices do not break each other's expectations. Critical for teams with multiple services and independent deployment cycles.</li>
+//         <li><strong>Integration tests (15%):</strong> Test real database interactions and third-party API integrations using Testcontainers for reproducible, isolated environments.</li>
+//         <li><strong>E2E tests (5%):</strong> Happy path and critical user journeys only. Playwright is the current gold standard — reliable, fast, multi-browser, excellent TypeScript support.</li>
+//       </ul>
+
+//       <h3>What a real CI/CD quality gate looks like</h3>
+//       <p>Tests only create value if they block bad code from reaching production. A quality gate is a mandatory CI step that must pass before a pull request merges or a deployment proceeds. A practical gate enforces: all unit and integration tests passing, code coverage not decreasing from baseline, no new high or critical security vulnerabilities from dependency scanning, and performance budgets not regressing on key user journeys.</p>
+
+//       <h3>Shift left means thinking about quality earlier, not differently</h3>
+//       <p>Shift left does not mean moving testers to write code alongside developers. It means integrating quality thinking from the moment a feature is designed. Acceptance criteria written as testable Given/When/Then scenarios. Developers writing tests as part of their definition of done, not as an afterthought. QA engineers focused on test strategy, tooling, and exploratory testing on the edge cases automation cannot cover.</p>
+
+//       <h3>How to start if you have zero automation today</h3>
+//       <ul>
+//         <li><strong>Week 1–2:</strong> Set up the CI pipeline and testing framework. Make it possible for any developer to run the full suite locally in under 60 seconds.</li>
+//         <li><strong>Week 3–4:</strong> Write E2E tests for your 5 most critical user journeys. These deliver the highest ROI immediately and build team confidence in automation.</li>
+//         <li><strong>Month 2:</strong> Add the quality gate. This is the cultural change — now tests must pass before code ships. Expect some resistance. Hold the line.</li>
+//         <li><strong>Month 3+:</strong> Gradually increase unit test coverage, add contract tests between services, track flakiness rate and defect escape rate as your north star metrics.</li>
+//       </ul>
+//       <p>The goal is not 100% coverage. It is high-value coverage that gives your team the confidence to deploy on a Friday afternoon without a knot in their stomach.</p>
+//     `
+//   }
+
+// };
+
+function openArticle(key) {
+  var article = articles[key];
+  if (!article) return;
+
+  document.getElementById('article-modal-content').innerHTML =
+    '<span class="article-label" style="' + article.labelStyle + '">' + article.label + '</span>' +
+    '<h2>' + article.title + '</h2>' +
+    '<p class="article-meta">' + article.meta + '</p>' +
+    '<hr class="article-divider">' +
+    article.content;
+
+  var modal = document.getElementById('article-modal');
+  modal.classList.add('open');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  document.getElementById('article-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('article-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeArticle();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeArticle();
+});
+</script>
+
+<div id="article-modal" style="display:none;position:fixed;inset:0;z-index:9999;overflow-y:auto;padding:40px 20px;background:rgba(5,8,16,0.9);">
+  <div style="background:#ffffff;border-radius:20px;padding:40px;max-width:740px;margin:0 auto;position:relative;">
+    <button onclick="closeArticle()" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid #E2E8F0;background:#fff;font-size:20px;cursor:pointer;line-height:1;">×</button>
+    <div id="article-modal-content"></div>
+  </div>
+</div>
+
+<script>
+var articles = {
+  llm: {
+    label: 'AI TRENDS',
+    labelStyle: 'background:#EFF6FF;color:#1d4ed8;',
+    title: 'How LLMs Are Reshaping Enterprise Data in 2025',
+    meta: 'By Nexara Cloud Labs · 8 min read · June 2025',
+    content: '<p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">Large language models have moved from research curiosity to production infrastructure in under three years. In 2025, the question is no longer "should we use LLMs?" but "how do we use them without creating a fragile, expensive mess?"</p><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">The shift from prompting to fine-tuning</h3><p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">In 2023, most enterprise LLM projects were prompt-engineering exercises. In 2025, the teams getting real ROI are fine-tuning foundation models on their own data and deploying smaller, domain-specific models that outperform GPT-4 on specific tasks at one-tenth the cost.</p><div style="background:#EFF6FF;border-left:4px solid #2563EB;border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;"><p style="margin:0;color:#1e3a8a;font-weight:500;font-family:Inter,sans-serif;font-size:14px;">💡 A fine-tuned 7B parameter model trained on your support tickets will outperform GPT-4 on your support tasks — and cost 95% less per token to run.</p></div><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">RAG is the default architecture</h3><p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">Retrieval-Augmented Generation has become the standard pattern for knowledge-heavy enterprise applications. Instead of baking knowledge into model weights, RAG pipelines retrieve relevant documents from a vector database at inference time. The model reasons over fresh, accurate information rather than stale training data.</p><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">The hidden cost: data quality</h3><p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">The most common reason enterprise LLM projects fail is not the model — it is the data. Scanned PDFs with poor OCR, inconsistent naming, tribal knowledge that exists only in peoples heads. Before writing a single line of LLM code, invest 30 days in data cleaning. It is the difference between a demo and a product.</p><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">The 90-day roadmap</h3><ul style="padding-left:20px;font-family:Inter,sans-serif;font-size:14px;color:#475569;line-height:1.75;"><li style="margin-bottom:8px;"><strong>Days 1–30:</strong> Data audit, baseline evaluation, proof of concept on one high-value workflow</li><li style="margin-bottom:8px;"><strong>Days 31–60:</strong> Build production RAG pipeline, fine-tune if needed, integrate with existing systems</li><li style="margin-bottom:8px;"><strong>Days 61–90:</strong> Staged rollout with monitoring, human-in-the-loop for edge cases, measure business impact</li></ul>'
+  },
+  finops: {
+    label: 'FINOPS',
+    labelStyle: 'background:#F0FDFA;color:#0f766e;',
+    title: 'Cut Cloud Costs by 40% with FinOps Automation',
+    meta: 'By Nexara Cloud Labs · 6 min read · May 2025',
+    content: '<p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">The average company overspends on cloud infrastructure by 32%. In high-growth startups we have audited, that number is often closer to 50%. Most of this is recoverable without any performance impact or re-architecture.</p><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">Why cloud bills grow out of control</h3><p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">Cloud cost problems share a common root cause: engineers making technical decisions are not the people who see the bill. Without feedback loops connecting technical choices to dollar impact, spend grows silently until it becomes a crisis.</p><div style="background:#EFF6FF;border-left:4px solid #2563EB;border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;"><p style="margin:0;color:#1e3a8a;font-weight:500;font-family:Inter,sans-serif;font-size:14px;">💡 Engineers who can see the unit cost of their decisions make better decisions. Visibility always precedes optimisation.</p></div><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">Days 1–30: Achieve full visibility</h3><ul style="padding-left:20px;font-family:Inter,sans-serif;font-size:14px;color:#475569;line-height:1.75;"><li style="margin-bottom:8px;">Enable cost allocation tags across all resources — team, environment, service, feature</li><li style="margin-bottom:8px;">Set up cost dashboards visible to engineering teams, not just finance</li><li style="margin-bottom:8px;">Identify your top 10 cost drivers — usually compute, data transfer, and storage</li><li style="margin-bottom:8px;">Configure anomaly detection so cost spikes surface within hours not month-end</li></ul><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">Days 31–60: Eliminate waste</h3><ul style="padding-left:20px;font-family:Inter,sans-serif;font-size:14px;color:#475569;line-height:1.75;"><li style="margin-bottom:8px;"><strong>Idle resources:</strong> Instances below 5% CPU for 90+ days — terminating these saves 10–15% immediately</li><li style="margin-bottom:8px;"><strong>Overprovisioned instances:</strong> Rightsize EC2 and RDS to match actual utilisation</li><li style="margin-bottom:8px;"><strong>Zombie resources:</strong> Unattached EBS volumes, unused Elastic IPs, orphaned snapshots</li></ul><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">Days 61–90: Commit strategically</h3><p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">Reserved Instances and Savings Plans can save 30–60% on compute. Match commitment type and term length to your actual workload stability — buying one-year RIs for workloads that change monthly is a common and expensive mistake.</p>'
+  },
+  qa: {
+    label: 'ENGINEERING',
+    labelStyle: 'background:#F5F3FF;color:#6d28d9;',
+    title: 'Why Test Automation Is Non-Negotiable for Scale',
+    meta: 'By Nexara Cloud Labs · 7 min read · April 2025',
+    content: '<p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">Every engineering team that has missed a release deadline has said "QA is the bottleneck." The standard response is to hire more manual testers. This is exactly the wrong answer.</p><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">The real cost of manual QA</h3><p style="font-family:Inter,sans-serif;font-size:15px;color:#475569;line-height:1.85;">Manual QA has three hidden costs. First, cycle time: a 2-week QA cycle means bugs found after two weeks cost 10x more to fix. Second, reliability: humans execute tests inconsistently. Third, knowledge concentration: when your QA lead leaves, your testing knowledge walks out with them.</p><div style="background:#EFF6FF;border-left:4px solid #2563EB;border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;"><p style="margin:0;color:#1e3a8a;font-weight:500;font-family:Inter,sans-serif;font-size:14px;">💡 Teams with 80%+ automated test coverage release 200x more frequently with 24x faster incident recovery — DORA 2023.</p></div><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">The testing pyramid in 2025</h3><ul style="padding-left:20px;font-family:Inter,sans-serif;font-size:14px;color:#475569;line-height:1.75;"><li style="margin-bottom:8px;"><strong>Unit tests (70%):</strong> Fast, isolated, milliseconds to run. Jest for JS, PyTest for Python. Target 80%+ on business logic.</li><li style="margin-bottom:8px;"><strong>Contract tests (10%):</strong> Pact.io consumer-driven contracts so microservices never break each others expectations.</li><li style="margin-bottom:8px;"><strong>Integration tests (15%):</strong> Real database interactions using Testcontainers for reproducible environments.</li><li style="margin-bottom:8px;"><strong>E2E tests (5%):</strong> Critical user journeys only. Playwright is the gold standard — fast, reliable, multi-browser.</li></ul><h3 style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;color:#0f172a;margin:24px 0 10px;">How to start with zero automation</h3><ul style="padding-left:20px;font-family:Inter,sans-serif;font-size:14px;color:#475569;line-height:1.75;"><li style="margin-bottom:8px;"><strong>Week 1–2:</strong> Set up CI pipeline and framework. Full suite runs locally in under 60 seconds.</li><li style="margin-bottom:8px;"><strong>Week 3–4:</strong> Write E2E tests for your 5 most critical user journeys.</li><li style="margin-bottom:8px;"><strong>Month 2:</strong> Add the quality gate — tests must pass before code ships.</li><li style="margin-bottom:8px;"><strong>Month 3+:</strong> Increase unit coverage, add contract tests, track flakiness rate.</li></ul>'
+  }
+};
+
+function openArticle(key) {
+  var article = articles[key];
+  if (!article) return;
+  var modal = document.getElementById('article-modal');
+  document.getElementById('article-modal-content').innerHTML =
+    '<span style="display:inline-block;font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;border-radius:9999px;padding:4px 12px;margin-bottom:16px;' + article.labelStyle + '">' + article.label + '</span>' +
+    '<h2 style="font-family:Plus Jakarta Sans,sans-serif;font-weight:800;font-size:26px;color:#0f172a;margin:0 0 8px;line-height:1.2;">' + article.title + '</h2>' +
+    '<p style="font-family:Inter,sans-serif;font-size:13px;color:#94A3B8;margin-bottom:24px;">' + article.meta + '</p>' +
+    '<hr style="border:none;border-top:2px solid #E2E8F0;margin:0 0 24px;">' +
+    article.content;
+  modal.style.display = 'block';
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  document.getElementById('article-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('article-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeArticle();
+});
+</script>
+</div>
 </body>
 </html>
