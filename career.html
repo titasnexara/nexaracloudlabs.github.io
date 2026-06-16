@@ -354,26 +354,6 @@
           <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Portfolio / GitHub URL</label>
           <input id="app-portfolio" type="url" placeholder="https://github.com/yourhandle" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
-    <div>
-  <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">
-    Resume Link *
-  </label>
-  <input id="app-resume" type="url" placeholder="https://drive.google.com/file/your-resume"
-    style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;"
-    onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-  <div style="background:#EFF6FF;border-radius:8px;padding:10px 14px;margin-top:8px;display:flex;gap:10px;align-items:flex-start;">
-    <span style="font-size:16px;flex-shrink:0;">📎</span>
-    <div>
-      <p style="font-family:'Inter',sans-serif;font-size:12px;color:#1d4ed8;margin:0;font-weight:600;">How to share your resume:</p>
-      <p style="font-family:'Inter',sans-serif;font-size:12px;color:#475569;margin:4px 0 0;line-height:1.7;">
-        1. Upload your resume to Google Drive<br>
-        2. Right-click the file → <strong>Share</strong><br>
-        3. Change access to <strong>"Anyone with the link"</strong><br>
-        4. Click <strong>Copy link</strong> and paste it above
-      </p>
-    </div>
-  </div>
-</div>
         <div>
           <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Why do you want to join Nexara? *</label>
           <textarea id="app-message" rows="4" placeholder="Tell us what excites you about this role and Nexara Cloud Labs..." style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;resize:vertical;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'"></textarea>
@@ -453,6 +433,7 @@
     </div>
     <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
       <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved. <a href="/admin/" style="color:#1E2D4A;text-decoration:none;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#1E2D4A'">·</a></p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Cookie Policy</a>
@@ -625,54 +606,36 @@ function submitApplication() {
   var linkedin  = document.getElementById('app-linkedin').value.trim();
   var portfolio = document.getElementById('app-portfolio').value.trim();
   var message   = document.getElementById('app-message').value.trim();
-  var resume    = document.getElementById('app-resume').value.trim();
   var errorEl   = document.getElementById('apply-error');
 
-  if (!name)    { errorEl.textContent='Please enter your full name.'; errorEl.style.display='block'; return; }
-  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent='Please enter a valid email address.'; errorEl.style.display='block'; return; }
-  if (!message) { errorEl.textContent='Please tell us why you want to join Nexara.'; errorEl.style.display='block'; return; }
-  if (!resume)  { errorEl.textContent='Please paste your resume link.'; errorEl.style.display='block'; return; }
+  if(!name){ errorEl.textContent='Please enter your full name.'; errorEl.style.display='block'; return; }
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errorEl.textContent='Please enter a valid email address.'; errorEl.style.display='block'; return; }
+  if(!message){ errorEl.textContent='Please tell us why you want to join Nexara.'; errorEl.style.display='block'; return; }
 
   errorEl.style.display = 'none';
   var btn = document.getElementById('apply-submit-btn');
   btn.textContent='Submitting...'; btn.disabled=true; btn.style.opacity='0.7';
 
-  var formData = new FormData();
-  formData.append('Role',       currentRole);
-  formData.append('Name',       name);
-  formData.append('Email',      email);
-  formData.append('Phone',      phone      || 'Not provided');
-  formData.append('Experience', exp        || 'Not specified');
-  formData.append('LinkedIn',   linkedin   || 'Not provided');
-  formData.append('Portfolio',  portfolio  || 'Not provided');
-  formData.append('Resume',     resume);
-  formData.append('Message',    message);
+  var templateParams = {
+    role: currentRole, name: name, email: email,
+    phone: phone||'Not provided', experience: exp||'Not specified',
+    linkedin: linkedin||'Not provided', portfolio: portfolio||'Not provided',
+    message: message
+  };
 
-  fetch('https://formspree.io/f/xrevjyro', {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(function(r) {
-    if (r.ok) { return r.json(); }
-    throw new Error('Network error');
-  })
-  .then(function(data) {
-    if (data.ok || data.next) {
+  emailjs.send('service_75046rp', 'template_job_app', templateParams)
+    .then(function(){
       document.getElementById('success-role-name').textContent = currentRole;
       document.getElementById('apply-form-wrap').style.display = 'none';
       document.getElementById('apply-success').style.display   = 'block';
-    } else {
-      throw new Error('Submission failed');
-    }
-    btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-  })
-  .catch(function(err) {
-    console.error('Formspree error:', err);
-    errorEl.textContent='Something went wrong. Please email us at support@nexaracloudlabs.com';
-    errorEl.style.display='block';
-    btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-  });
+      btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
+    })
+    .catch(function(err){
+      console.error('EmailJS error:',err);
+      errorEl.textContent='Something went wrong. Please email us at support@nexaracloudlabs.com';
+      errorEl.style.display='block';
+      btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
+    });
 }
 
 /* ---- Jobs from Google Sheets ---- */
