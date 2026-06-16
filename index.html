@@ -2735,20 +2735,67 @@ function sendMessage() {
 }
 
 function getReply(msg) {
-  if (msg.includes('service') || msg.includes('offer') || msg.includes('do you')) {
-    return 'We offer 6 core services: AI Solutions & Automation, Data Engineering, Full Stack Engineering, Quality Engineering, Digital Transformation, and FinOps Consulting. Which would you like to know more about?';
-  } else if (msg.includes('price') || msg.includes('cost') || msg.includes('pricing') || msg.includes('budget')) {
-    return 'Our engagements typically start from $5,000 for focused projects. We offer fixed-price and time-and-materials models. Would you like a free consultation to discuss your specific needs?';
-  } else if (msg.includes('call') || msg.includes('meet') || msg.includes('book') || msg.includes('contact')) {
-    return 'You can book a free 30-min consultation or reach us at support@nexaracloudlabs.com. We respond within 24 hours. Want me to scroll you to the contact form?';
-  } else if (msg.includes('ai') || msg.includes('llm') || msg.includes('machine learning')) {
-    return 'Our AI team specialises in custom LLM deployment, RAG systems, ML pipelines, and intelligent automation. We have delivered AI solutions for FinTech, E-commerce, and SaaS companies. Want to see a case study?';
-  } else if (msg.includes('data') || msg.includes('pipeline') || msg.includes('warehouse')) {
-    return 'Our data engineering team builds robust ETL pipelines, cloud data warehouses (Snowflake, BigQuery), and real-time streaming systems using Kafka and Spark. What is your data challenge?';
-  } else if (msg.includes('finops') || msg.includes('cloud cost') || msg.includes('aws cost')) {
-    return 'Our FinOps practice typically saves clients 30-40% on cloud infrastructure within 90 days. We work with AWS, Azure, and GCP. Would you like a free cloud cost assessment?';
+  msg = msg.toLowerCase();
+
+  // Founder / team
+  if (msg.includes('founder') || msg.includes('titas') || msg.includes('ceo') || msg.includes('who started') || msg.includes('who built') || msg.includes('about you') || msg.includes('team')) {
+    return 'Nexara Cloud Labs was founded by Titas, a technology leader with 13+ years of hands-on IT experience across AI, data engineering, full-stack development, and quality engineering. She built deep expertise working with clients across Europe before launching Nexara to bring enterprise-grade engineering to a wider range of businesses.';
+
+  // Services
+  } else if (msg.includes('service') || msg.includes('offer') || msg.includes('what do you do') || msg.includes('help me with')) {
+    return 'We offer 6 core services: AI Solutions & Automation, Data Engineering, Full Stack Engineering, Quality Engineering, Digital Transformation, and FinOps Consulting. Which area would you like to know more about?';
+
+  // AI
+  } else if (msg.includes('ai') || msg.includes('llm') || msg.includes('machine learning') || msg.includes('automation')) {
+    return 'Our AI practice covers custom LLM deployment, RAG systems, ML pipelines, and intelligent automation. We have delivered AI solutions for FinTech, E-commerce, and SaaS companies across Europe and India.';
+
+  // Data
+  } else if (msg.includes('data') || msg.includes('pipeline') || msg.includes('warehouse') || msg.includes('etl')) {
+    return 'Our data engineering team builds robust ETL pipelines, cloud data warehouses (Snowflake, BigQuery), and real-time streaming systems. What is your data challenge?';
+
+  // FinOps
+  } else if (msg.includes('finops') || msg.includes('cloud cost') || msg.includes('aws') || msg.includes('gcp') || msg.includes('azure')) {
+    return 'Our FinOps practice typically saves clients 30–40% on cloud infrastructure within 90 days. We work with AWS, Azure, and GCP. Would you like a free cloud cost assessment?';
+
+  // Quality / Testing
+  } else if (msg.includes('quality') || msg.includes('testing') || msg.includes('qa') || msg.includes('automation test')) {
+    return 'Our Quality Engineering team builds test automation frameworks, CI/CD quality gates, and performance testing pipelines. We eliminate manual QA bottlenecks so your team ships faster with confidence.';
+
+  // Pricing
+  } else if (msg.includes('price') || msg.includes('cost') || msg.includes('pricing') || msg.includes('budget') || msg.includes('rate') || msg.includes('charge')) {
+    return 'Our engagements are scoped based on your specific needs. We offer both fixed-price project models and flexible time-and-materials. Book a free 30-minute call and we will give you a clear estimate — no obligation.';
+
+  // Hiring / jobs / careers
+  } else if (msg.includes('job') || msg.includes('career') || msg.includes('hiring') || msg.includes('work with you') || msg.includes('join') || msg.includes('apply')) {
+    return 'We are hiring! Visit our Careers page at nexaracloudlabs.com/career.html to see open roles. Every engineer goes through a rigorous interview by a domain expert in their field — we hire for quality, not just availability.';
+
+  // Experience / clients
+  } else if (msg.includes('experience') || msg.includes('client') || msg.includes('project') || msg.includes('case study') || msg.includes('portfolio') || msg.includes('work')) {
+    return 'We have successfully delivered projects for European clients including CtrlPrint in Stockholm. Our founder Titas brings 13+ years of IT experience. We are an early-stage consultancy that competes on quality — not headcount.';
+
+  // Location
+  } else if (msg.includes('location') || msg.includes('where') || msg.includes('based') || msg.includes('india') || msg.includes('bangalore') || msg.includes('remote')) {
+    return 'We are based in Bangalore, India and operate remote-first. We have successfully collaborated with European clients, aligning with their working hours for seamless communication.';
+
+  // Contact / book call
+  } else if (msg.includes('call') || msg.includes('meet') || msg.includes('book') || msg.includes('contact') || msg.includes('email') || msg.includes('speak')) {
+    return 'You can reach us at support@nexaracloudlabs.com or use the Contact form on this page. We respond within 24 hours and offer a free 30-minute consultation to understand your needs.';
+
+  // Blog / insights
+  } else if (msg.includes('blog') || msg.includes('article') || msg.includes('insight') || msg.includes('read')) {
+    return 'We publish technical insights on AI, FinOps, and engineering on our Blog page. Check it out at nexaracloudlabs.com/blog.html — written by practitioners, for practitioners.';
+
+  // Hiring process
+  } else if (msg.includes('interview') || msg.includes('how do you hire') || msg.includes('vetting') || msg.includes('engineers')) {
+    return 'Every engineer we place goes through a 3-step process: domain expert technical screening (an AI engineer interviews AI engineers), communication and collaboration assessment, and a personal review by our founder Titas. No shortcuts, no exceptions.';
+
+  // Greeting
+  } else if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('good morning') || msg.includes('good evening')) {
+    return 'Hi there! 👋 I am Nexara\'s AI assistant. I can answer questions about our services, team, and how we can help your business. What would you like to know?';
+
+  // Default
   } else {
-    return 'Great question! For the most accurate answer I recommend speaking with our team directly at support@nexaracloudlabs.com or using the contact form on this page. Can I help with anything else?';
+    return 'That\'s a great question! For the most accurate answer, reach us at support@nexaracloudlabs.com or use the Contact form. We respond within 24 hours. Is there anything specific about our services I can help with?';
   }
 }
 </script>
