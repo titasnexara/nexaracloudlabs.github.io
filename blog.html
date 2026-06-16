@@ -132,7 +132,7 @@
     <div class="hidden lg:flex items-center gap-3 shrink-0">
       <a href="login.html" style="color:#94A3B8;font-size:14px;text-decoration:none;margin-right:4px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94A3B8'">Client Login</a>
       <a href="index.html#contact" class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium hover:bg-white/10 transition-colors duration-150">Contact</a>
-      
+      <a href="index.html#contact" class="px-4 py-[9px] rounded-lg bg-ncl-blue text-white text-[14px] font-semibold hover:bg-blue-700 transition-colors duration-150">Get Free Quote</a>
     </div>
     <button id="hamburger" aria-label="Open menu" aria-expanded="false" class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 rounded-lg hover:bg-white/10 transition-colors">
       <span class="block w-5 h-0.5 bg-white rounded-full"></span>
@@ -177,7 +177,7 @@
     </nav>
     <div class="flex flex-col gap-3 mt-8">
       <a href="index.html#contact" class="py-3 px-6 rounded-xl border border-white text-white text-base font-jakarta font-semibold text-center hover:bg-white/10 transition-colors">Contact</a>
-      
+      <a href="index.html#contact" class="py-3 px-6 rounded-xl bg-ncl-blue text-white text-base font-jakarta font-semibold text-center hover:bg-blue-700 transition-colors">Get Free Quote</a>
     </div>
   </div>
 </div>
@@ -285,7 +285,7 @@
         <a href="mailto:support@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;">support@nexaracloudlabs.com</a>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
-        
+        <a href="index.html#contact" class="font-inter font-bold" style="display:inline-block;margin-top:16px;font-size:13px;color:#06B6D4;text-decoration:none;">Get a Free Quote →</a>
       </div>
     </div>
     <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
@@ -489,19 +489,116 @@ var BUILT_IN_POSTS = [
   }
 ];
 
-/* Load custom posts from localStorage */
-function getCustomPosts() {
-  try { return JSON.parse(localStorage.getItem('ncl_blog_posts') || '[]'); }
-  catch(e) { return []; }
-}
+/* ---- GitHub repo details ---- */
+var GITHUB_USER = 'titasnexara';
+var GITHUB_REPO = 'nexaracloudlabs.github.io';
+var GITHUB_BRANCH = 'main';
 
-/* Combine all posts — custom first, then built-in */
-function getAllPosts() {
-  return getCustomPosts().concat(BUILT_IN_POSTS);
-}
-
-/* Current filter state */
+/* ---- All posts (built-in + GitHub) ---- */
+var githubPosts = [];
 var currentCategory = 'all';
+
+/* ---- Parse markdown frontmatter ---- */
+function parseFrontmatter(text) {
+  var result = { content: text, data: {} };
+  if (!text.startsWith('---')) return result;
+  var end = text.indexOf('---', 3);
+  if (end === -1) return result;
+  var front = text.slice(3, end).trim();
+  var body  = text.slice(end + 3).trim();
+  front.split('\n').forEach(function(line){
+    var colon = line.indexOf(':');
+    if (colon === -1) return;
+    var key = line.slice(0, colon).trim();
+    var val = line.slice(colon + 1).trim().replace(/^["']|["']$/g, '');
+    result.data[key] = val;
+  });
+  result.content = body;
+  return result;
+}
+
+/* ---- Convert markdown to HTML (simple) ---- */
+function mdToHtml(md) {
+  return md
+    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^[\*\-] (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs, function(m){ return '<ul>' + m + '</ul>'; })
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hul])/gm, '')
+    .split('\n').map(function(line){
+      if (line.startsWith('<h') || line.startsWith('<ul') || line.startsWith('<li')) return line;
+      if (line.trim() === '') return '';
+      return '<p>' + line + '</p>';
+    }).join('');
+}
+
+/* ---- Category label styles ---- */
+var LABEL_STYLES = {
+  'AI TRENDS':   'background:#EFF6FF;color:#1d4ed8;',
+  'ENGINEERING': 'background:#F5F3FF;color:#6d28d9;',
+  'FINOPS':      'background:#F0FDFA;color:#0f766e;',
+  'DATA':        'background:#FFF7ED;color:#c2410c;',
+  'CLOUD':       'background:#F0F9FF;color:#0369a1;'
+};
+
+var GRADIENTS = [
+  'linear-gradient(135deg,#1e3a8a,#0e7490)',
+  'linear-gradient(135deg,#0e7490,#059669)',
+  'linear-gradient(135deg,#7c3aed,#1e3a8a)',
+  'linear-gradient(135deg,#1e3a8a,#2563EB)',
+  'linear-gradient(135deg,#0e7490,#06B6D4)'
+];
+
+/* ---- Fetch posts from GitHub ---- */
+function fetchGithubPosts() {
+  var apiUrl = 'https://api.github.com/repos/' + GITHUB_USER + '/' + GITHUB_REPO + '/contents/_posts?ref=' + GITHUB_BRANCH;
+  fetch(apiUrl)
+    .then(function(r){ return r.json(); })
+    .then(function(files){
+      if (!Array.isArray(files)) { renderPosts(); return; }
+      var promises = files.map(function(file){
+        return fetch(file.download_url)
+          .then(function(r){ return r.text(); })
+          .then(function(text){
+            var parsed = parseFrontmatter(text);
+            var d = parsed.data;
+            var dateStr = d.date ? new Date(d.date).toLocaleDateString('en-GB', {month:'long', year:'numeric'}) : 'June 2026';
+            var cat = (d.category || 'AI TRENDS').toUpperCase();
+            var gradIdx = Math.abs(file.name.length) % GRADIENTS.length;
+            return {
+              id: file.name.replace('.md',''),
+              title: d.title || 'Untitled',
+              category: cat,
+              labelStyle: LABEL_STYLES[cat] || 'background:#EFF6FF;color:#1d4ed8;',
+              emoji: d.emoji || '📝',
+              gradient: d.gradient || GRADIENTS[gradIdx],
+              summary: d.summary || '',
+              date: dateStr,
+              readTime: d.readTime || '5 min read',
+              author: d.author || 'Nexara Cloud Labs',
+              content: mdToHtml(parsed.content),
+              isGithub: true
+            };
+          });
+      });
+      return Promise.all(promises);
+    })
+    .then(function(posts){
+      if (posts) githubPosts = posts.reverse();
+      renderPosts();
+    })
+    .catch(function(){
+      renderPosts();
+    });
+}
+
+/* ---- Get all posts ---- */
+function getAllPosts() {
+  return githubPosts.concat(BUILT_IN_POSTS);
+}
 
 function setCategory(cat) {
   currentCategory = cat;
@@ -520,13 +617,13 @@ function renderPosts() {
     var catMatch = currentCategory === 'all' || post.category === currentCategory;
     var qMatch   = !query ||
       post.title.toLowerCase().includes(query) ||
-      post.summary.toLowerCase().includes(query) ||
+      (post.summary||'').toLowerCase().includes(query) ||
       post.category.toLowerCase().includes(query);
     return catMatch && qMatch;
   });
 
-  var grid     = document.getElementById('blog-grid');
-  var noPostsEl= document.getElementById('no-posts');
+  var grid      = document.getElementById('blog-grid');
+  var noPostsEl = document.getElementById('no-posts');
 
   if (!filtered.length) {
     grid.innerHTML = '';
@@ -536,7 +633,8 @@ function renderPosts() {
   noPostsEl.style.display = 'none';
 
   grid.innerHTML = filtered.map(function(post, idx){
-    return '<div class="blog-card reveal" onclick="openArticle(\'' + post.id + '\')" style="animation-delay:' + (idx * 80) + 'ms">' +
+    var safeId = post.id.replace(/'/g, "\\'");
+    return '<div class="blog-card reveal" onclick="openArticle(\'' + safeId + '\')" style="animation-delay:' + (idx * 80) + 'ms">' +
       '<div class="blog-card-img" style="background:' + (post.gradient || 'linear-gradient(135deg,#1e3a8a,#0e7490)') + ';">' + (post.emoji || '📝') + '</div>' +
       '<div class="blog-card-body">' +
         '<span class="blog-label" style="' + (post.labelStyle || 'background:#EFF6FF;color:#1d4ed8;') + '">' + post.category + '</span>' +
@@ -550,14 +648,13 @@ function renderPosts() {
     '</div>';
   }).join('');
 
-  /* Re-run reveal observer on new cards */
   var obs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, {threshold:0.08});
   grid.querySelectorAll('.blog-card').forEach(function(el){ obs.observe(el); });
 }
 
-/* Open article modal */
+/* ---- Open article modal ---- */
 function openArticle(id) {
   var post = getAllPosts().find(function(p){ return p.id === id; });
   if (!post) return;
@@ -587,7 +684,7 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') closeArticle();
 });
 
-/* Responsive grid */
+/* ---- Responsive grid ---- */
 function updateGrid() {
   var grid = document.getElementById('blog-grid');
   if (window.innerWidth < 640) {
@@ -601,8 +698,8 @@ function updateGrid() {
 window.addEventListener('resize', updateGrid, {passive:true});
 updateGrid();
 
-/* Init */
-renderPosts();
+/* ---- Init — fetch GitHub posts first, then render ---- */
+fetchGithubPosts();
 </script>
 
 </body>
