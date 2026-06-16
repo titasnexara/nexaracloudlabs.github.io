@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nexara Cloud Labs Blog — AI, Data Engineering, FinOps and Technology Insights from our team.">
+  <title>Blog | Nexara Cloud Labs</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ncl-bg':    '#0A0F1E',
+            'ncl-blue':  '#2563EB',
+            'ncl-teal':  '#06B6D4',
+            'ncl-text':  '#F0F4FF',
+            'ncl-muted': '#64748B',
+            'ncl-panel': '#0F1629',
+          },
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Dropdown */
+    #mega-dropdown { transform-origin:top center; transition:opacity 0.18s ease,transform 0.18s ease; }
+    #mega-dropdown.dd-closed { opacity:0; transform:scaleY(0.96); pointer-events:none; }
+    #mega-dropdown.dd-open   { opacity:1; transform:scaleY(1); pointer-events:auto; }
+    .drawer-hidden { display:none; }
+    .svc-tile { background:linear-gradient(135deg,rgba(37,99,235,.13),rgba(6,182,212,.13)); border:1px solid rgba(37,99,235,0.28); width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+
+    /* Hero */
+    .blog-hero { position:relative; background:linear-gradient(135deg,#1e1b4b 0%,#1e3a8a 50%,#0e7490 100%); padding:120px 40px 80px; text-align:center; overflow:hidden; }
+    #hero-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+
+    /* Category filter */
+    .cat-btn { padding:8px 18px; border-radius:9999px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; cursor:pointer; border:1px solid #1E2D4A; background:transparent; color:#64748B; transition:all 0.2s; white-space:nowrap; }
+    .cat-btn:hover { border-color:#2563EB; color:#93c5fd; }
+    .cat-btn.active { background:#2563EB; border-color:#2563EB; color:#ffffff; }
+
+    /* Blog cards */
+    .blog-card { background:#0F1629; border:1px solid #1E2D4A; border-radius:16px; overflow:hidden; transition:transform 0.3s ease,box-shadow 0.3s ease,border-color 0.3s ease; cursor:pointer; display:flex; flex-direction:column; }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 20px 48px rgba(0,0,0,0.3); border-color:rgba(37,99,235,0.4); }
+    .blog-card-img { height:180px; display:flex; align-items:center; justify-content:center; font-size:52px; flex-shrink:0; }
+    .blog-card-body { padding:24px; flex:1; display:flex; flex-direction:column; }
+    .blog-label { display:inline-block; font-family:'Inter',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; border-radius:9999px; padding:4px 12px; margin-bottom:12px; }
+    .blog-card-title { font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:17px; color:#ffffff; line-height:1.35; margin:0 0 10px; }
+    .blog-card-summary { font-family:'Inter',sans-serif; font-size:13px; color:#64748B; line-height:1.7; margin:0; flex:1; display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .blog-card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:16px; padding-top:14px; border-top:1px solid #1E2D4A; }
+    .blog-card-meta { font-family:'Inter',sans-serif; font-size:12px; color:#475569; }
+    .blog-read-link { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; color:#2563EB; }
+
+    /* Article Modal */
+    #article-modal { display:none; position:fixed; inset:0; z-index:9999; overflow-y:auto; padding:40px 20px; background:rgba(5,8,16,0.92); backdrop-filter:blur(8px); }
+    #article-modal.open { display:block; }
+    .article-box { background:#ffffff; border-radius:20px; padding:52px; max-width:760px; margin:0 auto; position:relative; box-shadow:0 40px 100px rgba(0,0,0,0.5); }
+    .article-close { position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%; border:1px solid #E2E8F0; background:transparent; color:#64748B; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; line-height:1; }
+    .article-close:hover { background:#f1f5f9; }
+    .article-box h2 { font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:28px; color:#0f172a; margin:0 0 8px; line-height:1.2; }
+    .article-box h3 { font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:18px; color:#0f172a; margin:28px 0 10px; }
+    .article-box p  { font-family:'Inter',sans-serif; font-size:15px; color:#475569; line-height:1.85; margin:0 0 16px; }
+    .article-box ul { padding-left:20px; margin:0 0 16px; }
+    .article-box ul li { font-family:'Inter',sans-serif; font-size:14px; color:#475569; line-height:1.75; margin-bottom:8px; }
+    .article-meta { font-family:'Inter',sans-serif; font-size:13px; color:#94A3B8; margin-bottom:28px; }
+    .article-divider { border:none; border-top:2px solid #E2E8F0; margin:24px 0; }
+    .article-callout { background:#EFF6FF; border-left:4px solid #2563EB; border-radius:0 10px 10px 0; padding:16px 20px; margin:20px 0; }
+    .article-callout p { margin:0; color:#1e3a8a; font-weight:500; font-size:14px; }
+    @media(max-width:600px){ .article-box{padding:32px 24px} .article-box h2{font-size:22px} }
+
+    /* Search */
+    .blog-search { width:100%; max-width:480px; background:#0F1629; border:1px solid #1E2D4A; border-radius:10px; padding:12px 20px; font-size:15px; color:#fff; font-family:'Inter',sans-serif; outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
+    .blog-search::placeholder { color:#475569; }
+    .blog-search:focus { border-color:#2563EB; box-shadow:0 0 0 3px rgba(37,99,235,0.12); }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* Footer */
+    .footer-link { display:block; font-family:'Inter',sans-serif; font-size:13px; color:#64748B; text-decoration:none; margin-bottom:10px; transition:color .2s; }
+    .footer-link:hover { color:#06B6D4; }
+    .footer-social-btn { width:32px; height:32px; border:1px solid #1E2D4A; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; color:#64748B; font-size:12px; font-weight:700; text-decoration:none; font-family:'Inter',sans-serif; transition:background .2s,color .2s,border-color .2s; }
+    .footer-social-btn:hover { background:#fff; color:#0f172a; border-color:#fff; }
+    .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid #1E2D4A; }
+    @media(max-width:1100px){ .footer-grid{grid-template-columns:1.4fr 1fr 1fr 1fr} }
+    @media(max-width:900px) { .footer-grid{grid-template-columns:1fr 1fr 1fr} }
+    @media(max-width:640px) { .footer-grid{grid-template-columns:1fr 1fr} }
+    @media(max-width:480px) { .footer-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+
+<body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
+
+<!-- ============================================================ NAVBAR ============================================================ -->
+<header id="navbar" class="sticky top-0 z-50 w-full bg-ncl-bg border-b border-white/[.06] relative">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
+    <a href="index.html" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs>
+        <rect width="44" height="44" rx="10" fill="url(#ng1)"/>
+        <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/>
+      </svg>
+      <div class="flex flex-col leading-none gap-[3px]">
+        <span class="font-jakarta font-bold text-white text-[20px]">Nexara</span>
+        <span class="font-jakarta text-ncl-teal text-[11px] tracking-wide">Cloud Labs</span>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+      <a href="index.html"              class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Home</a>
+      <button id="services-trigger" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-1 text-white text-[14px] hover:text-ncl-teal transition-colors duration-150 bg-transparent border-none cursor-pointer p-0">
+        Services
+        <svg id="dd-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" class="transition-transform duration-200 mt-[1px]"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="index.html#about"        class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">About</a>
+      <a href="index.html#case-studies" class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Case Studies</a>
+      <a href="blog.html"               class="text-ncl-teal text-[14px] font-semibold">Blog</a>
+      <a href="career.html"             class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Careers</a>
+    </nav>
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
+      <a href="login.html" style="color:#94A3B8;font-size:14px;text-decoration:none;margin-right:4px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94A3B8'">Client Login</a>
+      <a href="index.html#contact" class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium hover:bg-white/10 transition-colors duration-150">Contact</a>
+      <a href="index.html#contact" class="px-4 py-[9px] rounded-lg bg-ncl-blue text-white text-[14px] font-semibold hover:bg-blue-700 transition-colors duration-150">Get Free Quote</a>
+    </div>
+    <button id="hamburger" aria-label="Open menu" aria-expanded="false" class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 rounded-lg hover:bg-white/10 transition-colors">
+      <span class="block w-5 h-0.5 bg-white rounded-full"></span>
+      <span class="block w-5 h-0.5 bg-white rounded-full"></span>
+      <span class="block w-3.5 h-0.5 bg-white rounded-full"></span>
+    </button>
+  </div>
+  <div id="mega-dropdown" class="dd-closed absolute left-0 right-0 top-full bg-ncl-panel border-b border-white/[.08] shadow-2xl">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 py-7">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="service.html?s=ai"        class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">🤖</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">AI Solutions &amp; Automation</p><p class="text-ncl-muted text-[12px] mt-0.5">LLMs, ML pipelines, automation</p></div></a>
+        <a href="service.html?s=data"      class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">🗄️</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Data Engineering</p><p class="text-ncl-muted text-[12px] mt-0.5">Pipelines, warehouses, analytics</p></div></a>
+        <a href="service.html?s=fullstack" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">💻</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Full Stack Engineering</p><p class="text-ncl-muted text-[12px] mt-0.5">Web, mobile, cloud-native</p></div></a>
+        <a href="service.html?s=quality"   class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">✅</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Quality Engineering</p><p class="text-ncl-muted text-[12px] mt-0.5">Test automation, CI/CD quality</p></div></a>
+        <a href="service.html?s=digital"   class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">⚡</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Digital Transformation</p><p class="text-ncl-muted text-[12px] mt-0.5">Legacy modernisation, roadmaps</p></div></a>
+        <a href="service.html?s=finops"    class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">💰</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">FinOps Consulting</p><p class="text-ncl-muted text-[12px] mt-0.5">Cloud cost optimisation</p></div></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="drawer-hidden fixed inset-0 z-[200]">
+  <div id="drawer-bg" class="absolute inset-0 bg-ncl-bg/95 backdrop-blur-md"></div>
+  <div class="relative z-10 flex flex-col h-full px-6 pt-6 pb-10 overflow-y-auto">
+    <div class="flex items-center justify-between mb-10">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="ng2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs><rect width="44" height="44" rx="10" fill="url(#ng2)"/><path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/><circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+        <div class="flex flex-col leading-none gap-[3px]"><span class="font-jakarta font-bold text-white text-xl">Nexara</span><span class="font-jakarta text-ncl-teal text-xs tracking-wide">Cloud Labs</span></div>
+      </a>
+      <button id="close-drawer" aria-label="Close menu" class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col divide-y divide-white/[.08]">
+      <a href="index.html"              class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Home</a>
+      <a href="index.html#services"     class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Services</a>
+      <a href="index.html#about"        class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">About</a>
+      <a href="index.html#case-studies" class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Case Studies</a>
+      <a href="blog.html"               class="py-4 font-jakarta font-semibold text-ncl-teal text-lg">Blog</a>
+      <a href="career.html"             class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Careers</a>
+    </nav>
+    <div class="flex flex-col gap-3 mt-8">
+      <a href="index.html#contact" class="py-3 px-6 rounded-xl border border-white text-white text-base font-jakarta font-semibold text-center hover:bg-white/10 transition-colors">Contact</a>
+      <a href="index.html#contact" class="py-3 px-6 rounded-xl bg-ncl-blue text-white text-base font-jakarta font-semibold text-center hover:bg-blue-700 transition-colors">Get Free Quote</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ HERO ============================================================ -->
+<section class="blog-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div style="position:relative;z-index:1;max-width:700px;margin:0 auto;">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.4);border-radius:9999px;padding:6px 18px;margin-bottom:24px;">
+      <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#06B6D4;">Thought Leadership</span>
+    </div>
+    <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);color:#fff;line-height:1.1;margin:0 0 18px;">
+      AI &amp; Technology Insights
+    </h1>
+    <p style="font-family:'Inter',sans-serif;font-size:17px;color:#93c5fd;max-width:520px;margin:0 auto;line-height:1.7;">
+      Practical guides and real-world perspectives from the Nexara Cloud Labs team — written by practitioners, for practitioners.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================ BLOG CONTENT ============================================================ -->
+<section style="background:#0A0F1E;padding:60px 0 100px;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+    <!-- Search + Filter row -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:40px;">
+      <input type="text" id="blog-search" class="blog-search" placeholder="Search articles..." oninput="filterPosts()">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;" id="cat-filters">
+        <button class="cat-btn active" data-cat="all"         onclick="setCategory('all')">All</button>
+        <button class="cat-btn"        data-cat="AI TRENDS"   onclick="setCategory('AI TRENDS')">AI Trends</button>
+        <button class="cat-btn"        data-cat="FINOPS"      onclick="setCategory('FINOPS')">FinOps</button>
+        <button class="cat-btn"        data-cat="ENGINEERING" onclick="setCategory('ENGINEERING')">Engineering</button>
+        <button class="cat-btn"        data-cat="DATA"        onclick="setCategory('DATA')">Data</button>
+        <button class="cat-btn"        data-cat="CLOUD"       onclick="setCategory('CLOUD')">Cloud</button>
+      </div>
+    </div>
+
+    <!-- Blog grid -->
+    <div id="blog-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+    </div>
+
+    <!-- No results -->
+    <p id="no-posts" style="display:none;text-align:center;color:#64748B;font-family:'Inter',sans-serif;font-size:15px;padding:60px 0;">
+      No articles found. Try a different search or category.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================ ARTICLE MODAL ============================================================ -->
+<div id="article-modal">
+  <div class="article-box">
+    <button class="article-close" onclick="closeArticle()" aria-label="Close">&times;</button>
+    <div id="article-content"></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer id="footer" style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+    <div class="footer-grid">
+      <div style="max-width:260px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <svg width="36" height="36" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="ng-ft" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs><rect width="44" height="44" rx="10" fill="url(#ng-ft)"/><path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/><circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+          <div><p class="font-jakarta font-bold text-white" style="font-size:18px;margin:0;">Nexara</p><p class="font-inter" style="font-size:12px;color:#64748B;margin:0;">Cloud Labs Pvt. Ltd.</p></div>
+        </div>
+        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">An early-stage AI-first technology partner. Every engineer rigorously vetted by domain experts.</p>
+        <div style="display:flex;gap:8px;">
+          <a href="#" class="footer-social-btn" aria-label="LinkedIn">L</a>
+          <a href="#" class="footer-social-btn" aria-label="Twitter">T</a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub">G</a>
+        </div>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Services</p>
+        <a href="index.html#services" class="footer-link">AI Solutions</a>
+        <a href="index.html#services" class="footer-link">Data Engineering</a>
+        <a href="index.html#services" class="footer-link">Full Stack Engineering</a>
+        <a href="index.html#services" class="footer-link">Quality Engineering</a>
+        <a href="index.html#services" class="footer-link">Digital Transformation</a>
+        <a href="index.html#services" class="footer-link">FinOps</a>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Company</p>
+        <a href="index.html#about"        class="footer-link">About Us</a>
+        <a href="index.html#case-studies" class="footer-link">Case Studies</a>
+        <a href="blog.html"               class="footer-link" style="color:#06B6D4;">Blog</a>
+        <a href="career.html"             class="footer-link">Careers</a>
+        <a href="index.html#contact"      class="footer-link">Contact Us</a>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Resources</p>
+        <a href="#" class="footer-link">Documentation</a>
+        <a href="#" class="footer-link">API Docs</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">Cookie Policy</a>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
+        <a href="mailto:support@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;">support@nexaracloudlabs.com</a>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
+        <a href="index.html#contact" class="font-inter font-bold" style="display:inline-block;margin-top:16px;font-size:13px;color:#06B6D4;text-decoration:none;">Get a Free Quote →</a>
+      </div>
+    </div>
+    <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================ JAVASCRIPT ============================================================ -->
+<script>
+/* ---- Hero particle canvas ---- */
+(function(){
+  var canvas=document.getElementById('hero-canvas');
+  var ctx=canvas.getContext('2d');
+  var pts=[],COUNT=55,LINK=110;
+  function resize(){ canvas.width=canvas.parentElement.offsetWidth; canvas.height=canvas.parentElement.offsetHeight; }
+  function init(){ pts=Array.from({length:COUNT},function(){return{x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6};}); }
+  function tick(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<pts.length;i++){
+      pts[i].x+=pts[i].vx; pts[i].y+=pts[i].vy;
+      if(pts[i].x<0||pts[i].x>canvas.width)pts[i].vx=-pts[i].vx;
+      if(pts[i].y<0||pts[i].y>canvas.height)pts[i].vy=-pts[i].vy;
+      for(var j=i+1;j<pts.length;j++){
+        var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+        if(dx*dx+dy*dy<LINK*LINK){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=0.6;ctx.stroke();}
+      }
+      ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.4,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.22)';ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  resize();init();tick();
+  window.addEventListener('resize',function(){resize();init();},{passive:true});
+})();
+
+/* ---- Navbar ---- */
+(function(){
+  var navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){navbar.style.borderBottomColor=window.scrollY>40?'rgba(30,45,74,0.9)':'';navbar.style.background=window.scrollY>40?'rgba(10,15,30,0.97)':'';},{passive:true});
+})();
+
+/* ---- Mega Dropdown ---- */
+(function(){
+  var ddTrigger=document.getElementById('services-trigger');
+  var ddPanel=document.getElementById('mega-dropdown');
+  var ddChevron=document.getElementById('dd-chevron');
+  function ddIsOpen(){return ddPanel.classList.contains('dd-open')}
+  function ddOpen(){ddPanel.classList.remove('dd-closed');ddPanel.classList.add('dd-open');ddChevron.style.transform='rotate(180deg)';ddTrigger.setAttribute('aria-expanded','true')}
+  function ddClose(){ddPanel.classList.remove('dd-open');ddPanel.classList.add('dd-closed');ddChevron.style.transform='';ddTrigger.setAttribute('aria-expanded','false')}
+  ddTrigger.addEventListener('click',function(e){e.stopPropagation();ddIsOpen()?ddClose():ddOpen()});
+  document.addEventListener('click',function(e){if(ddIsOpen()&&!ddPanel.contains(e.target)&&e.target!==ddTrigger)ddClose()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose()});
+})();
+
+/* ---- Mobile Drawer ---- */
+(function(){
+  var hamburger=document.getElementById('hamburger');
+  var mobileDrawer=document.getElementById('mobile-drawer');
+  var closeDrawer=document.getElementById('close-drawer');
+  var drawerBg=document.getElementById('drawer-bg');
+  function drawerOpen(){mobileDrawer.style.display='block';document.body.style.overflow='hidden';hamburger.setAttribute('aria-expanded','true')}
+  function drawerClose(){mobileDrawer.style.display='none';document.body.style.overflow='';hamburger.setAttribute('aria-expanded','false')}
+  hamburger.addEventListener('click',drawerOpen);
+  closeDrawer.addEventListener('click',drawerClose);
+  drawerBg.addEventListener('click',drawerClose);
+  mobileDrawer.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',drawerClose)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')drawerClose()});
+})();
+
+/* ---- Scroll Reveal ---- */
+(function(){
+  var revEls=document.querySelectorAll('.reveal');
+  if(!revEls.length)return;
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target)}})},{threshold:0.10});
+  revEls.forEach(function(el){obs.observe(el)});
+})();
+
+
+/* ============================================================
+   BLOG DATA
+   — Built-in articles (the 3 CTO articles from homepage)
+   — Custom posts saved in localStorage by admin
+============================================================ */
+var BUILT_IN_POSTS = [
+  {
+    id: 'llm-2025',
+    title: 'How LLMs Are Reshaping Enterprise Data in 2025',
+    category: 'AI TRENDS',
+    labelStyle: 'background:#EFF6FF;color:#1d4ed8;',
+    emoji: '🧠',
+    gradient: 'linear-gradient(135deg,#1e3a8a,#0e7490)',
+    summary: 'Large language models have moved from research curiosity to production infrastructure. In 2025, the question is no longer "should we use LLMs?" but "how do we use them without creating a fragile, expensive mess?"',
+    date: 'June 2025',
+    readTime: '8 min read',
+    author: 'Nexara Cloud Labs',
+    content: `
+      <p>Large language models have moved from research curiosity to production infrastructure in under three years. In 2025, the question is no longer "should we use LLMs?" but "how do we use them without creating a fragile, expensive mess?" This article covers what is actually working in enterprise deployments right now.</p>
+      <h3>The shift from prompting to fine-tuning</h3>
+      <p>In 2023, most enterprise LLM projects were prompt-engineering exercises — carefully crafted instructions fed to a general-purpose model. In 2025, the teams getting real ROI have moved beyond this. They are fine-tuning foundation models on their own data, building retrieval-augmented generation (RAG) pipelines, and deploying smaller, faster, domain-specific models that outperform GPT-4 on their specific tasks at one-tenth the cost.</p>
+      <div class="article-callout"><p>💡 A fine-tuned 7B parameter model trained on your support tickets will outperform GPT-4 on your support tasks — and cost 95% less per token to run.</p></div>
+      <h3>RAG is the default architecture</h3>
+      <p>Retrieval-Augmented Generation has become the standard pattern for knowledge-heavy enterprise applications. Instead of baking knowledge into model weights — expensive and slow to update — RAG pipelines retrieve relevant documents from a vector database at inference time and inject them into the prompt as context. The model reasons over fresh, accurate information rather than stale training data.</p>
+      <p>The components of a production RAG system:</p>
+      <ul>
+        <li>A document ingestion pipeline (chunking, embedding, upsert into Pinecone/pgvector)</li>
+        <li>A retrieval layer with hybrid search — dense vectors plus BM25 keyword matching</li>
+        <li>A re-ranking step to filter the top-k results by relevance</li>
+        <li>A generation step with a fine-tuned or prompted LLM</li>
+        <li>Evaluation pipelines using RAGAS or custom domain metrics</li>
+      </ul>
+      <h3>The hidden cost nobody talks about: data quality</h3>
+      <p>The most common reason enterprise LLM projects fail is not the model — it is the data going into the RAG pipeline. Scanned PDFs with poor OCR, inconsistent naming conventions, and tribal knowledge that exists only in people's heads. Before writing a single line of LLM code, invest 30 days in data cleaning and a proper document taxonomy. It is not exciting. It is the difference between a demo and a product.</p>
+      <h3>What to actually measure</h3>
+      <p>Vanity metrics like response time and token count are easy to track but miss the point entirely. The metrics that matter for enterprise LLM deployments are hallucination rate, answer faithfulness to retrieved context, human-judged correctness on your domain, and ultimately business outcomes — support ticket deflection rate, time-to-resolution, analyst hours saved per week.</p>
+      <h3>The practical 90-day roadmap</h3>
+      <ul>
+        <li><strong>Days 1–30:</strong> Data audit, baseline evaluation framework, proof of concept on one high-value workflow</li>
+        <li><strong>Days 31–60:</strong> Build production RAG pipeline, fine-tune if domain-specific accuracy requires it, integrate with existing systems via API</li>
+        <li><strong>Days 61–90:</strong> Staged rollout with monitoring, human-in-the-loop review for edge cases, measure and report business impact</li>
+      </ul>
+      <p>The teams that succeed with LLMs in 2025 are not the ones with the biggest models or the highest GPU budgets. They are the ones who defined success metrics before writing code, started with one workflow instead of everything, and treated data quality as a first-class engineering concern.</p>
+    `
+  },
+  {
+    id: 'finops-40',
+    title: 'Cut Cloud Costs by 40% with FinOps Automation',
+    category: 'FINOPS',
+    labelStyle: 'background:#F0FDFA;color:#0f766e;',
+    emoji: '☁️',
+    gradient: 'linear-gradient(135deg,#0e7490,#059669)',
+    summary: 'The average company overspends on cloud infrastructure by 32%. In high-growth startups, that number is often closer to 50%. Most of this is recoverable without any performance impact or re-architecture.',
+    date: 'May 2025',
+    readTime: '6 min read',
+    author: 'Nexara Cloud Labs',
+    content: `
+      <p>The average company overspends on cloud infrastructure by 32%. In high-growth startups we have audited, that number is often closer to 50%. The good news: most of this is recoverable without any performance impact or re-architecture. Here is a practical 90-day framework that works.</p>
+      <h3>Why cloud bills grow out of control</h3>
+      <p>Cloud cost problems share a common root cause: the people making technical decisions — engineers — are not the people who see the bill — finance. Engineers optimise for speed, resilience, and simplicity, not cost. Without feedback loops connecting technical choices to dollar impact, spend grows silently until it becomes a board-level conversation.</p>
+      <div class="article-callout"><p>💡 The core FinOps principle: engineers who can see the unit cost of their decisions make better decisions. Visibility always precedes optimisation.</p></div>
+      <h3>Days 1–30: Achieve full visibility</h3>
+      <p>You cannot optimise what you cannot see. The entire first month is instrumentation:</p>
+      <ul>
+        <li>Enable cost allocation tags across all resources — team, environment, service, feature</li>
+        <li>Set up AWS Cost Explorer, Azure Cost Management, or GCP Billing dashboards visible to engineering, not just finance</li>
+        <li>Identify your top 10 cost drivers — usually compute, data transfer, and storage in that order</li>
+        <li>Establish unit economics: cost per API request, cost per active user, cost per GB processed</li>
+        <li>Configure anomaly detection alerts so cost spikes surface within hours, not at month-end</li>
+      </ul>
+      <h3>Days 31–60: Eliminate waste systematically</h3>
+      <ul>
+        <li><strong>Idle resources:</strong> Instances running below 5% CPU for 90+ days. Terminating these alone typically saves 10–15%.</li>
+        <li><strong>Overprovisioned instances:</strong> Rightsizing EC2, RDS, or compute instances to match actual utilisation.</li>
+        <li><strong>Data transfer costs:</strong> Unexpected egress fees are a common surprise. Moving processing to the same region as storage eliminates most of this.</li>
+        <li><strong>Zombie resources:</strong> Unattached EBS volumes, unused Elastic IPs, orphaned snapshots accumulate quietly and cost real money every month.</li>
+      </ul>
+      <h3>Days 61–90: Commit strategically</h3>
+      <p>Once you have a clear picture of your steady-state workload, commitment-based discounts — Reserved Instances, Savings Plans, Committed Use Discounts — can save 30–60% on compute. The key is matching commitment type and term length to your actual workload stability. Buying one-year RIs for workloads that change monthly is a common and expensive mistake.</p>
+      <h3>Making savings permanent: the culture piece</h3>
+      <p>The most sophisticated FinOps tooling fails without organisational change. Teams that maintain low cloud costs long-term have cost reviews as part of every sprint retrospective, architecture review processes that include a FinOps checkpoint, and on-call runbooks that include cost impact alongside reliability impact. The goal is not a one-time cost cut — it is making cost efficiency a first-class engineering concern permanently.</p>
+    `
+  },
+  {
+    id: 'test-automation',
+    title: 'Why Test Automation Is Non-Negotiable for Scale',
+    category: 'ENGINEERING',
+    labelStyle: 'background:#F5F3FF;color:#6d28d9;',
+    emoji: '⚡',
+    gradient: 'linear-gradient(135deg,#7c3aed,#1e3a8a)',
+    summary: 'Every engineering team that has ever missed a release deadline has said "QA is the bottleneck." The standard response is to hire more manual testers. This article explains why that is exactly the wrong answer.',
+    date: 'April 2025',
+    readTime: '7 min read',
+    author: 'Nexara Cloud Labs',
+    content: `
+      <p>Every engineering team that has ever missed a release deadline has said some version of "QA is the bottleneck." The standard response is to hire more manual testers. This article explains why that is exactly the wrong answer, and what building a real automated quality culture actually looks like in practice.</p>
+      <h3>The real cost of manual QA</h3>
+      <p>Manual QA has three hidden costs that never appear on a budget spreadsheet. First, cycle time: a 2-week QA cycle means engineers are context-switching between what they are testing and what they are building, and bugs found after two weeks cost 10× more to fix than bugs caught immediately. Second, reliability: humans are inconsistent — a test case executed differently on Friday than Monday is not a test, it is a hope. Third, knowledge concentration: when your QA lead leaves, they take your institutional testing knowledge with them.</p>
+      <div class="article-callout"><p>💡 Teams with 80%+ automated test coverage release 200× more frequently with 24× faster recovery from incidents — DORA State of DevOps Report 2023.</p></div>
+      <h3>The testing pyramid for modern architectures</h3>
+      <ul>
+        <li><strong>Unit tests (70%):</strong> Fast, isolated, run in milliseconds. Vitest or Jest for JavaScript, PyTest for Python. Target 80%+ coverage on business logic, not boilerplate.</li>
+        <li><strong>Contract tests (10%):</strong> Consumer-driven contracts with Pact.io ensure microservices do not break each other's expectations.</li>
+        <li><strong>Integration tests (15%):</strong> Test real database interactions and third-party API integrations using Testcontainers for reproducible, isolated environments.</li>
+        <li><strong>E2E tests (5%):</strong> Happy path and critical user journeys only. Playwright is the current gold standard — reliable, fast, multi-browser, excellent TypeScript support.</li>
+      </ul>
+      <h3>What a real CI/CD quality gate looks like</h3>
+      <p>Tests only create value if they block bad code from reaching production. A quality gate is a mandatory CI step that must pass before a pull request merges or a deployment proceeds. A practical gate enforces: all unit and integration tests passing, code coverage not decreasing from baseline, no new high or critical security vulnerabilities from dependency scanning, and performance budgets not regressing on key user journeys.</p>
+      <h3>How to start if you have zero automation today</h3>
+      <ul>
+        <li><strong>Week 1–2:</strong> Set up the CI pipeline and testing framework. Make it possible for any developer to run the full suite locally in under 60 seconds.</li>
+        <li><strong>Week 3–4:</strong> Write E2E tests for your 5 most critical user journeys. These deliver the highest ROI immediately.</li>
+        <li><strong>Month 2:</strong> Add the quality gate. This is the cultural change — now tests must pass before code ships. Expect some resistance. Hold the line.</li>
+        <li><strong>Month 3+:</strong> Gradually increase unit test coverage, add contract tests between services, track flakiness rate and defect escape rate as your north star metrics.</li>
+      </ul>
+      <p>The goal is not 100% coverage. It is high-value coverage that gives your team the confidence to deploy on a Friday afternoon without a knot in their stomach.</p>
+    `
+  }
+];
+
+/* Load custom posts from localStorage */
+function getCustomPosts() {
+  try { return JSON.parse(localStorage.getItem('ncl_blog_posts') || '[]'); }
+  catch(e) { return []; }
+}
+
+/* Combine all posts — custom first, then built-in */
+function getAllPosts() {
+  return getCustomPosts().concat(BUILT_IN_POSTS);
+}
+
+/* Current filter state */
+var currentCategory = 'all';
+
+function setCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn.dataset.cat === cat);
+  });
+  renderPosts();
+}
+
+function filterPosts() { renderPosts(); }
+
+function renderPosts() {
+  var query    = (document.getElementById('blog-search').value || '').toLowerCase().trim();
+  var allPosts = getAllPosts();
+  var filtered = allPosts.filter(function(post){
+    var catMatch = currentCategory === 'all' || post.category === currentCategory;
+    var qMatch   = !query ||
+      post.title.toLowerCase().includes(query) ||
+      post.summary.toLowerCase().includes(query) ||
+      post.category.toLowerCase().includes(query);
+    return catMatch && qMatch;
+  });
+
+  var grid     = document.getElementById('blog-grid');
+  var noPostsEl= document.getElementById('no-posts');
+
+  if (!filtered.length) {
+    grid.innerHTML = '';
+    noPostsEl.style.display = 'block';
+    return;
+  }
+  noPostsEl.style.display = 'none';
+
+  grid.innerHTML = filtered.map(function(post, idx){
+    return '<div class="blog-card reveal" onclick="openArticle(\'' + post.id + '\')" style="animation-delay:' + (idx * 80) + 'ms">' +
+      '<div class="blog-card-img" style="background:' + (post.gradient || 'linear-gradient(135deg,#1e3a8a,#0e7490)') + ';">' + (post.emoji || '📝') + '</div>' +
+      '<div class="blog-card-body">' +
+        '<span class="blog-label" style="' + (post.labelStyle || 'background:#EFF6FF;color:#1d4ed8;') + '">' + post.category + '</span>' +
+        '<h3 class="blog-card-title">' + post.title + '</h3>' +
+        '<p class="blog-card-summary">' + post.summary + '</p>' +
+        '<div class="blog-card-footer">' +
+          '<span class="blog-card-meta">' + post.date + ' · ' + post.readTime + '</span>' +
+          '<span class="blog-read-link">Read Article →</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  /* Re-run reveal observer on new cards */
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, {threshold:0.08});
+  grid.querySelectorAll('.blog-card').forEach(function(el){ obs.observe(el); });
+}
+
+/* Open article modal */
+function openArticle(id) {
+  var post = getAllPosts().find(function(p){ return p.id === id; });
+  if (!post) return;
+
+  document.getElementById('article-content').innerHTML =
+    '<span class="blog-label" style="' + (post.labelStyle||'background:#EFF6FF;color:#1d4ed8;') + '">' + post.category + '</span>' +
+    '<h2>' + post.title + '</h2>' +
+    '<p class="article-meta">By ' + (post.author||'Nexara Cloud Labs') + ' · ' + post.readTime + ' · ' + post.date + '</p>' +
+    '<hr class="article-divider">' +
+    post.content;
+
+  var modal = document.getElementById('article-modal');
+  modal.classList.add('open');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  document.getElementById('article-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('article-modal').addEventListener('click', function(e){
+  if (e.target === this) closeArticle();
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeArticle();
+});
+
+/* Responsive grid */
+function updateGrid() {
+  var grid = document.getElementById('blog-grid');
+  if (window.innerWidth < 640) {
+    grid.style.gridTemplateColumns = '1fr';
+  } else if (window.innerWidth < 1024) {
+    grid.style.gridTemplateColumns = 'repeat(2,1fr)';
+  } else {
+    grid.style.gridTemplateColumns = 'repeat(3,1fr)';
+  }
+}
+window.addEventListener('resize', updateGrid, {passive:true});
+updateGrid();
+
+/* Init */
+renderPosts();
+</script>
+
+</body>
+</html>
