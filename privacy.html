@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy Policy — Nexara Cloud Labs. How we collect, use and protect your personal data.">
+  <title>Privacy Policy | Nexara Cloud Labs</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ncl-bg':    '#0A0F1E',
+            'ncl-blue':  '#2563EB',
+            'ncl-teal':  '#06B6D4',
+            'ncl-text':  '#F0F4FF',
+            'ncl-muted': '#64748B',
+            'ncl-panel': '#0F1629',
+          },
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    #mega-dropdown { transform-origin:top center; transition:opacity 0.18s ease,transform 0.18s ease; }
+    #mega-dropdown.dd-closed { opacity:0; transform:scaleY(0.96); pointer-events:none; }
+    #mega-dropdown.dd-open   { opacity:1; transform:scaleY(1); pointer-events:auto; }
+    .drawer-hidden { display:none; }
+    .svc-tile { background:linear-gradient(135deg,rgba(37,99,235,.13),rgba(6,182,212,.13)); border:1px solid rgba(37,99,235,0.28); width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+
+    /* Policy content styles */
+    .policy-section { margin-bottom: 48px; }
+    .policy-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #ffffff;
+      margin: 0 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1E2D4A;
+    }
+    .policy-section h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #ffffff;
+      margin: 24px 0 10px;
+    }
+    .policy-section p {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: #94A3B8;
+      line-height: 1.85;
+      margin: 0 0 14px;
+    }
+    .policy-section ul {
+      padding-left: 20px;
+      margin: 0 0 14px;
+    }
+    .policy-section ul li {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: #94A3B8;
+      line-height: 1.85;
+      margin-bottom: 8px;
+    }
+    .policy-section ul li strong {
+      color: #ffffff;
+    }
+    .policy-highlight {
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .policy-highlight p {
+      margin: 0;
+      color: #93c5fd;
+    }
+
+    /* Footer */
+    .footer-link { display:block; font-family:'Inter',sans-serif; font-size:13px; color:#64748B; text-decoration:none; margin-bottom:10px; transition:color .2s; }
+    .footer-link:hover { color:#06B6D4; }
+    .footer-social-btn { width:32px; height:32px; border:1px solid #1E2D4A; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; color:#64748B; font-size:12px; font-weight:700; text-decoration:none; font-family:'Inter',sans-serif; transition:background .2s,color .2s,border-color .2s; }
+    .footer-social-btn:hover { background:#fff; color:#0f172a; border-color:#fff; }
+    .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid #1E2D4A; }
+    @media(max-width:1100px){ .footer-grid{grid-template-columns:1.4fr 1fr 1fr 1fr} }
+    @media(max-width:900px) { .footer-grid{grid-template-columns:1fr 1fr 1fr} }
+    @media(max-width:640px) { .footer-grid{grid-template-columns:1fr 1fr} }
+    @media(max-width:480px) { .footer-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+
+<body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
+
+<!-- ============================================================ NAVBAR ============================================================ -->
+<header id="navbar" class="sticky top-0 z-50 w-full bg-ncl-bg border-b border-white/[.06] relative">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
+    <a href="index.html" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs>
+        <rect width="44" height="44" rx="10" fill="url(#ng1)"/>
+        <path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/>
+      </svg>
+      <div class="flex flex-col leading-none gap-[3px]">
+        <span class="font-jakarta font-bold text-white text-[20px]">Nexara</span>
+        <span class="font-jakarta text-ncl-teal text-[11px] tracking-wide">Cloud Labs</span>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8">
+      <a href="index.html"              class="text-white text-[14px] hover:text-ncl-teal transition-colors">Home</a>
+      <button id="services-trigger" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-1 text-white text-[14px] hover:text-ncl-teal transition-colors bg-transparent border-none cursor-pointer p-0">
+        Services
+        <svg id="dd-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" class="transition-transform duration-200 mt-[1px]"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="index.html#about"        class="text-white text-[14px] hover:text-ncl-teal transition-colors">About</a>
+      <a href="blog.html"               class="text-white text-[14px] hover:text-ncl-teal transition-colors">Blog</a>
+      <a href="career.html"             class="text-white text-[14px] hover:text-ncl-teal transition-colors">Careers</a>
+    </nav>
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
+      <a href="index.html#contact" class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium hover:bg-white/10 transition-colors">Contact</a>
+    </div>
+    <button id="hamburger" aria-label="Open menu" aria-expanded="false" class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 rounded-lg hover:bg-white/10 transition-colors">
+      <span class="block w-5 h-0.5 bg-white rounded-full"></span>
+      <span class="block w-5 h-0.5 bg-white rounded-full"></span>
+      <span class="block w-3.5 h-0.5 bg-white rounded-full"></span>
+    </button>
+  </div>
+  <div id="mega-dropdown" class="dd-closed absolute left-0 right-0 top-full bg-ncl-panel border-b border-white/[.08] shadow-2xl">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 py-7">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="service.html?s=ai"        class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">🤖</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">AI Solutions &amp; Automation</p><p class="text-ncl-muted text-[12px] mt-0.5">LLMs, ML pipelines, automation</p></div></a>
+        <a href="service.html?s=data"      class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">🗄️</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Data Engineering</p><p class="text-ncl-muted text-[12px] mt-0.5">Pipelines, warehouses, analytics</p></div></a>
+        <a href="service.html?s=fullstack" class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">💻</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Full Stack Engineering</p><p class="text-ncl-muted text-[12px] mt-0.5">Web, mobile, cloud-native</p></div></a>
+        <a href="service.html?s=quality"   class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">✅</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Quality Engineering</p><p class="text-ncl-muted text-[12px] mt-0.5">Test automation, CI/CD quality</p></div></a>
+        <a href="service.html?s=digital"   class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">⚡</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Digital Transformation</p><p class="text-ncl-muted text-[12px] mt-0.5">Legacy modernisation, roadmaps</p></div></a>
+        <a href="service.html?s=finops"    class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">💰</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">FinOps Consulting</p><p class="text-ncl-muted text-[12px] mt-0.5">Cloud cost optimisation</p></div></a>
+        <a href="#ai-academy"              class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[.06] transition-colors group"><div class="svc-tile">🎓</div><div><p class="font-jakarta font-semibold text-white text-[13px] group-hover:text-ncl-teal">Nexara AI Academy</p><p class="text-ncl-muted text-[12px] mt-0.5">Corporate AI training &amp; agent workshops</p></div></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="drawer-hidden fixed inset-0 z-[200]">
+  <div id="drawer-bg" class="absolute inset-0 bg-ncl-bg/95 backdrop-blur-md"></div>
+  <div class="relative z-10 flex flex-col h-full px-6 pt-6 pb-10 overflow-y-auto">
+    <div class="flex items-center justify-between mb-10">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="ng2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs><rect width="44" height="44" rx="10" fill="url(#ng2)"/><path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/><circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+        <div class="flex flex-col leading-none gap-[3px]"><span class="font-jakarta font-bold text-white text-xl">Nexara</span><span class="font-jakarta text-ncl-teal text-xs tracking-wide">Cloud Labs</span></div>
+      </a>
+      <button id="close-drawer" aria-label="Close menu" class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col divide-y divide-white/[.08]">
+      <a href="index.html"          class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Home</a>
+      <a href="index.html#services" class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Services</a>
+      <a href="index.html#about"    class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">About</a>
+      <a href="blog.html"           class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Blog</a>
+      <a href="career.html"         class="py-4 font-jakarta font-semibold text-white text-lg hover:text-ncl-teal transition-colors">Careers</a>
+    </nav>
+    <div class="flex flex-col gap-3 mt-8">
+      <a href="index.html#contact" class="py-3 px-6 rounded-xl border border-white text-white text-base font-jakarta font-semibold text-center hover:bg-white/10 transition-colors">Contact</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ HERO ============================================================ -->
+<section style="background:linear-gradient(135deg,#1e1b4b 0%,#1e3a8a 50%,#0e7490 100%);padding:100px 40px 60px;text-align:center;">
+  <div style="max-width:700px;margin:0 auto;">
+    <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:#06B6D4;text-transform:uppercase;margin:0 0 16px;">Legal</p>
+    <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(32px,5vw,48px);color:#fff;line-height:1.1;margin:0 0 16px;">Privacy Policy</h1>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:#93c5fd;margin:0;">
+      Last updated: June 2026
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================ CONTENT ============================================================ -->
+<section style="background:#0A0F1E;padding:80px 0;">
+  <div style="max-width:860px;margin:0 auto;padding:0 40px;">
+
+    <div class="policy-highlight">
+      <p>This Privacy Policy explains how Nexara Cloud Labs Private Limited ("Nexara", "we", "us", or "our") collects, uses, and protects your personal information when you visit <strong style="color:#ffffff;">nexaracloudlabs.com</strong> or interact with our services. We are committed to protecting your privacy and complying with applicable data protection laws including the GDPR.</p>
+    </div>
+
+    <!-- 1. Who We Are -->
+    <div class="policy-section">
+      <h2>1. Who We Are</h2>
+      <p><strong style="color:#fff;">Nexara Cloud Labs Private Limited</strong><br>
+      Bangalore, Karnataka, India<br>
+      Email: <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;text-decoration:none;">support@nexaracloudlabs.com</a></p>
+      <p>We are an AI-first technology consultancy providing engineering services, corporate AI training, and technology solutions to businesses globally.</p>
+    </div>
+
+    <!-- 2. What Data We Collect -->
+    <div class="policy-section">
+      <h2>2. What Data We Collect</h2>
+      <p>We only collect data that you voluntarily provide to us. We do not use tracking cookies or analytics tools that collect personal data without your knowledge.</p>
+
+      <h3>Contact Form</h3>
+      <ul>
+        <li><strong>Name</strong> — to address you correctly</li>
+        <li><strong>Email address</strong> — to respond to your enquiry</li>
+        <li><strong>Message</strong> — the content of your enquiry</li>
+      </ul>
+
+      <h3>Job Applications</h3>
+      <ul>
+        <li><strong>Full name</strong></li>
+        <li><strong>Email address</strong></li>
+        <li><strong>Phone number</strong> (optional)</li>
+        <li><strong>Years of experience</strong></li>
+        <li><strong>LinkedIn profile URL</strong> (optional)</li>
+        <li><strong>Portfolio / GitHub URL</strong> (optional)</li>
+        <li><strong>Resume link</strong> (Google Drive or similar)</li>
+        <li><strong>Cover message</strong> — why you want to join Nexara</li>
+      </ul>
+
+      <h3>Website Usage</h3>
+      <p>We do not currently use cookies, Google Analytics, or any third-party tracking tools on our website. Your visit to our website is not tracked or profiled.</p>
+    </div>
+
+    <!-- 3. How We Use Your Data -->
+    <div class="policy-section">
+      <h2>3. How We Use Your Data</h2>
+      <ul>
+        <li><strong>To respond to enquiries</strong> — we use your contact form data solely to reply to your message</li>
+        <li><strong>To process job applications</strong> — we use application data to evaluate your suitability for open roles</li>
+        <li><strong>To communicate about services</strong> — only if you have expressed interest in our services</li>
+      </ul>
+      <p>We do not use your data for marketing without your explicit consent. We do not sell, rent, or trade your personal data to any third party.</p>
+    </div>
+
+    <!-- 4. Legal Basis -->
+    <div class="policy-section">
+      <h2>4. Legal Basis for Processing (GDPR)</h2>
+      <p>For users in the European Economic Area (EEA), we process your personal data under the following legal bases:</p>
+      <ul>
+        <li><strong>Legitimate interest</strong> — responding to your enquiries and processing job applications</li>
+        <li><strong>Consent</strong> — where you have voluntarily submitted information to us</li>
+        <li><strong>Contractual necessity</strong> — where processing is necessary to fulfil a service agreement</li>
+      </ul>
+    </div>
+
+    <!-- 5. Third Party Services -->
+    <div class="policy-section">
+      <h2>5. Third-Party Services We Use</h2>
+      <p>To operate our website and process your data, we use the following third-party services:</p>
+      <ul>
+        <li><strong>Netlify</strong> — website hosting (USA). <a href="https://www.netlify.com/privacy/" target="_blank" style="color:#06B6D4;">Privacy Policy</a></li>
+        <li><strong>Formspree</strong> — job application form processing (USA). <a href="https://formspree.io/legal/privacy-policy/" target="_blank" style="color:#06B6D4;">Privacy Policy</a></li>
+        <li><strong>EmailJS</strong> — contact form email delivery (USA). <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" style="color:#06B6D4;">Privacy Policy</a></li>
+        <li><strong>Google Sheets</strong> — job listings management (USA). <a href="https://policies.google.com/privacy" target="_blank" style="color:#06B6D4;">Privacy Policy</a></li>
+        <li><strong>GitHub</strong> — source code and deployment (USA). <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" style="color:#06B6D4;">Privacy Policy</a></li>
+      </ul>
+      <p>All third-party providers are bound by their own privacy policies and data processing agreements. We have selected providers that comply with GDPR where applicable.</p>
+    </div>
+
+    <!-- 6. Data Retention -->
+    <div class="policy-section">
+      <h2>6. How Long We Keep Your Data</h2>
+      <ul>
+        <li><strong>Contact form submissions</strong> — retained for up to 12 months, then deleted</li>
+        <li><strong>Job applications</strong> — retained for up to 6 months after the role is filled, then deleted</li>
+        <li><strong>Client communications</strong> — retained for the duration of the business relationship plus 2 years</li>
+      </ul>
+      <p>You can request deletion of your data at any time by emailing us at <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;">support@nexaracloudlabs.com</a>.</p>
+    </div>
+
+    <!-- 7. Your Rights -->
+    <div class="policy-section">
+      <h2>7. Your Rights</h2>
+      <p>Under GDPR and applicable data protection laws, you have the following rights:</p>
+      <ul>
+        <li><strong>Right to access</strong> — request a copy of the personal data we hold about you</li>
+        <li><strong>Right to rectification</strong> — request correction of inaccurate data</li>
+        <li><strong>Right to erasure</strong> — request deletion of your personal data</li>
+        <li><strong>Right to restrict processing</strong> — request that we limit how we use your data</li>
+        <li><strong>Right to data portability</strong> — request your data in a portable format</li>
+        <li><strong>Right to object</strong> — object to processing based on legitimate interests</li>
+        <li><strong>Right to withdraw consent</strong> — withdraw consent at any time where processing is based on consent</li>
+      </ul>
+      <p>To exercise any of these rights, email us at <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;">support@nexaracloudlabs.com</a>. We will respond within 30 days.</p>
+    </div>
+
+    <!-- 8. Data Security -->
+    <div class="policy-section">
+      <h2>8. Data Security</h2>
+      <p>We take reasonable technical and organisational measures to protect your personal data against unauthorised access, loss, or disclosure. Our website is served over HTTPS and all form submissions are encrypted in transit.</p>
+      <p>However, no method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</p>
+    </div>
+
+    <!-- 9. International Transfers -->
+    <div class="policy-section">
+      <h2>9. International Data Transfers</h2>
+      <p>Nexara Cloud Labs is based in India. Some of the third-party services we use (listed in Section 5) are based in the United States. When your data is transferred internationally, we ensure appropriate safeguards are in place, including Standard Contractual Clauses where required by GDPR.</p>
+    </div>
+
+    <!-- 10. Children -->
+    <div class="policy-section">
+      <h2>10. Children's Privacy</h2>
+      <p>Our website and services are not directed at children under the age of 16. We do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately.</p>
+    </div>
+
+    <!-- 11. Changes -->
+    <div class="policy-section">
+      <h2>11. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review this policy periodically.</p>
+    </div>
+
+    <!-- 12. Contact -->
+    <div class="policy-section">
+      <h2>12. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy or how we handle your data, please contact us:</p>
+      <div class="policy-highlight">
+        <p><strong style="color:#ffffff;">Nexara Cloud Labs Private Limited</strong><br>
+        Bangalore, Karnataka, India<br>
+        Email: <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;">support@nexaracloudlabs.com</a><br>
+        Website: <a href="https://nexaracloudlabs.com" style="color:#06B6D4;">nexaracloudlabs.com</a></p>
+      </div>
+      <p>If you are based in the EU and are not satisfied with our response, you have the right to lodge a complaint with your local data protection authority.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
+    <div class="footer-grid">
+      <div style="max-width:260px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <svg width="36" height="36" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="ng-ft" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs><rect width="44" height="44" rx="10" fill="url(#ng-ft)"/><path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/><circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+          <div><p class="font-jakarta font-bold text-white" style="font-size:18px;margin:0;">Nexara</p><p class="font-inter" style="font-size:12px;color:#64748B;margin:0;">Cloud Labs Pvt. Ltd.</p></div>
+        </div>
+        <p class="font-inter" style="font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 20px;">An early-stage AI-first technology partner. Every engineer rigorously vetted by domain experts.</p>
+        <div style="display:flex;gap:8px;">
+          <a href="#" class="footer-social-btn" aria-label="LinkedIn">L</a>
+          <a href="#" class="footer-social-btn" aria-label="Twitter">T</a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub">G</a>
+        </div>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Services</p>
+        <a href="index.html#services" class="footer-link">AI Solutions</a>
+        <a href="index.html#services" class="footer-link">Data Engineering</a>
+        <a href="index.html#services" class="footer-link">Full Stack Engineering</a>
+        <a href="index.html#services" class="footer-link">Quality Engineering</a>
+        <a href="index.html#services" class="footer-link">Digital Transformation</a>
+        <a href="index.html#services" class="footer-link">FinOps</a>
+        <a href="index.html#ai-academy" class="footer-link">AI Academy</a>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Company</p>
+        <a href="index.html#about"        class="footer-link">About Us</a>
+        <a href="blog.html"               class="footer-link">Blog</a>
+        <a href="career.html"             class="footer-link">Careers</a>
+        <a href="index.html#contact"      class="footer-link">Contact Us</a>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Legal</p>
+        <a href="privacy.html"       class="footer-link" style="color:#06B6D4;">Privacy Policy</a>
+        <a href="terms.html"         class="footer-link">Terms of Service</a>
+        <a href="privacy.html#cookies" class="footer-link">Cookie Policy</a>
+      </div>
+      <div>
+        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
+        <a href="mailto:support@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;">support@nexaracloudlabs.com</a>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
+      </div>
+    </div>
+    <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2026 Nexara Cloud Labs Private Limited. All rights reserved. <a href="/admin/" style="color:#1E2D4A;text-decoration:none;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#1E2D4A'">·</a></p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="privacy.html" style="font-size:13px;color:#06B6D4;text-decoration:none;">Privacy Policy</a>
+        <a href="terms.html"   style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================ JAVASCRIPT ============================================================ -->
+<script>
+/* Navbar scroll */
+(function(){
+  var navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){
+    navbar.style.borderBottomColor=window.scrollY>40?'rgba(30,45,74,0.9)':'';
+    navbar.style.background=window.scrollY>40?'rgba(10,15,30,0.97)':'';
+  },{passive:true});
+})();
+
+/* Mega Dropdown */
+(function(){
+  var ddTrigger=document.getElementById('services-trigger');
+  var ddPanel=document.getElementById('mega-dropdown');
+  var ddChevron=document.getElementById('dd-chevron');
+  function ddIsOpen(){return ddPanel.classList.contains('dd-open')}
+  function ddOpen(){ddPanel.classList.remove('dd-closed');ddPanel.classList.add('dd-open');ddChevron.style.transform='rotate(180deg)';ddTrigger.setAttribute('aria-expanded','true')}
+  function ddClose(){ddPanel.classList.remove('dd-open');ddPanel.classList.add('dd-closed');ddChevron.style.transform='';ddTrigger.setAttribute('aria-expanded','false')}
+  ddTrigger.addEventListener('click',function(e){e.stopPropagation();ddIsOpen()?ddClose():ddOpen()});
+  document.addEventListener('click',function(e){if(ddIsOpen()&&!ddPanel.contains(e.target)&&e.target!==ddTrigger)ddClose()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose()});
+})();
+
+/* Mobile Drawer */
+(function(){
+  var hamburger=document.getElementById('hamburger');
+  var mobileDrawer=document.getElementById('mobile-drawer');
+  var closeDrawer=document.getElementById('close-drawer');
+  var drawerBg=document.getElementById('drawer-bg');
+  function drawerOpen(){mobileDrawer.style.display='block';document.body.style.overflow='hidden';}
+  function drawerClose(){mobileDrawer.style.display='none';document.body.style.overflow='';}
+  hamburger.addEventListener('click',drawerOpen);
+  closeDrawer.addEventListener('click',drawerClose);
+  drawerBg.addEventListener('click',drawerClose);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')drawerClose()});
+})();
+</script>
+
+</body>
+</html>
