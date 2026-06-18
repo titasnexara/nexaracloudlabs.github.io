@@ -139,8 +139,8 @@
       <a href="index.html#blog"         class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Blog</a>
       <a href="career.html"             class="text-ncl-teal text-[14px] font-semibold">Careers</a>
     </nav>
-    <div class="hidden lg:flex items-center gap-3 shrink-0">
-      <a href="index.html#contact" class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium hover:bg-white/10 transition-colors duration-150">Contact</a>
+    <div class="hidden lg:flex items-center gap-3 shrink-0" id="nav-auth-area">
+      <a href="index.html#contact" class="px-4 py-[9px] rounded-lg border border-white/30 text-white text-[14px] font-medium hover:bg-white/10 transition-colors duration-150">Contact</a>
     </div>
     <button id="hamburger" aria-label="Open menu" aria-expanded="false" class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 rounded-lg hover:bg-white/10 transition-colors">
       <span class="block w-5 h-0.5 bg-white rounded-full"></span>
@@ -377,9 +377,17 @@
       <div style="width:70px;height:70px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;">🎉</div>
       <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;color:#0f172a;margin:0 0 12px;">Application Submitted!</h3>
       <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 8px;">Thank you for applying for <strong id="success-role-name" style="color:#0f172a;"></strong>.</p>
-      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 24px;">Our team will review your application and get back to you within <strong style="color:#0f172a;">48 hours</strong>.</p>
-      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:16px;margin-bottom:24px;">
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">Questions? Email us at <a href="mailto:support@nexaracloudlabs.com" style="color:#2563EB;text-decoration:none;">support@nexaracloudlabs.com</a></p>
+      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 20px;">Our team will review your application and get back to you within <strong style="color:#0f172a;">48 hours</strong>.</p>
+      <div id="track-status-prompt" style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:18px 20px;margin-bottom:16px;text-align:left;">
+        <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1e3a8a;margin:0 0 6px;">Want to track your application status?</p>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#1d4ed8;line-height:1.6;margin:0 0 14px;">Create a free account to check your application status anytime - see when it moves to Under Review, Shortlisted, or Interview stage.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button onclick="closeApplyModal();showRegister();document.getElementById('auth-modal').style.display='flex';document.body.style.overflow='hidden';" style="padding:9px 18px;background:#2563EB;color:#fff;border:none;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;">Create Account</button>
+          <button onclick="closeApplyModal();showLogin();document.getElementById('auth-modal').style.display='flex';document.body.style.overflow='hidden';" style="padding:9px 18px;background:transparent;color:#2563EB;border:1px solid #2563EB;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;">Sign In</button>
+        </div>
+      </div>
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:14px;margin-bottom:16px;">
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">Questions? <a href="mailto:support@nexaracloudlabs.com" style="color:#2563EB;text-decoration:none;">support@nexaracloudlabs.com</a></p>
       </div>
       <button onclick="closeApplyModal()" style="padding:11px 28px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Done</button>
     </div>
@@ -844,45 +852,98 @@ const _supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 /* -- State -- */
 var currentUser  = null;
 var currentJob   = null;
-var pendingJobId = null;  // job to apply after login
+var pendingJobId = null;
+var appliedJobs  = [];  // track which jobs user already applied to
+
+/* -- Toast helper -- */
+function showToast(msg, color, duration) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:'+(color||'#2563EB')+';color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);white-space:nowrap;';
+  document.body.appendChild(t);
+  setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, duration||3000);
+}
 
 /* -- Auth state listener -- */
 _supa.auth.onAuthStateChange(function(event, session) {
   currentUser = session ? session.user : null;
   updateNavbar();
+  if (currentUser) loadAppliedJobs();
 });
 
 /* -- Check session on load -- */
 _supa.auth.getSession().then(function(res) {
   currentUser = res.data.session ? res.data.session.user : null;
   updateNavbar();
+  if (currentUser) {
+    loadAppliedJobs();
+    showToast('👋 Welcome back, ' + (currentUser.user_metadata && currentUser.user_metadata.full_name ? currentUser.user_metadata.full_name : currentUser.email), '#0F1629', 3000);
+  }
 });
 
-/* -- Update navbar with login/logout button -- */
-function updateNavbar() {
-  var existing = document.getElementById('portal-nav-btn');
-  if (existing) existing.remove();
-
-  var nav = document.querySelector('.hidden.lg\\:flex.items-center.gap-3.shrink-0');
-  if (!nav) return;
-
-  var btn = document.createElement('button');
-  btn.id = 'portal-nav-btn';
-  btn.style.cssText = 'padding:8px 16px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #1E2D4A;background:transparent;color:#94A3B8;transition:all 0.2s;';
-  btn.onmouseover = function(){ this.style.borderColor='#06B6D4'; this.style.color='#06B6D4'; };
-  btn.onmouseout  = function(){ this.style.borderColor='#1E2D4A'; this.style.color='#94A3B8'; };
-
-  if (currentUser) {
-    btn.textContent = 'My Applications';
-    btn.onclick = openMyApps;
-  } else {
-    btn.textContent = 'Sign In';
-    btn.onclick = function(){ openAuthModal(); };
-  }
-  nav.insertBefore(btn, nav.firstChild);
+/* -- Load jobs user already applied to -- */
+function loadAppliedJobs() {
+  if (!currentUser) return;
+  _supa.from('applications')
+    .select('job_id, job_title')
+    .eq('user_id', currentUser.id)
+    .then(function(res) {
+      if (res.data) {
+        appliedJobs = res.data.map(function(a){ return a.job_title; });
+      }
+    });
 }
 
-/* -- Override renderJobs to show title only + View Details button -- */
+/* -- Update navbar -- */
+function updateNavbar() {
+  ['portal-signin-btn','portal-register-btn','portal-myapps-btn','portal-signout-btn','portal-nav-btn'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.remove();
+  });
+
+  var nav = document.getElementById('nav-auth-area');
+  if (!nav) return;
+
+  if (currentUser) {
+    var signOutBtn = document.createElement('button');
+    signOutBtn.id = 'portal-signout-btn';
+    signOutBtn.textContent = 'Sign Out';
+    signOutBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(239,68,68,0.35);background:transparent;color:#EF4444;transition:all 0.2s;';
+    signOutBtn.onmouseover = function(){ this.style.background='rgba(239,68,68,0.1)'; };
+    signOutBtn.onmouseout  = function(){ this.style.background='transparent'; };
+    signOutBtn.onclick = doLogout;
+    nav.insertBefore(signOutBtn, nav.firstChild);
+
+    var myAppsBtn = document.createElement('button');
+    myAppsBtn.id = 'portal-myapps-btn';
+    myAppsBtn.textContent = 'My Applications';
+    myAppsBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #1E2D4A;background:transparent;color:#94A3B8;transition:all 0.2s;';
+    myAppsBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
+    myAppsBtn.onmouseout  = function(){ this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'; };
+    myAppsBtn.onclick = openMyApps;
+    nav.insertBefore(myAppsBtn, nav.firstChild);
+  } else {
+    var registerBtn = document.createElement('button');
+    registerBtn.id = 'portal-register-btn';
+    registerBtn.textContent = 'Register';
+    registerBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
+    registerBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
+    registerBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
+    registerBtn.onclick = function(){ showRegister(); openAuthModal(); };
+    nav.insertBefore(registerBtn, nav.firstChild);
+
+    var signInBtn = document.createElement('button');
+    signInBtn.id = 'portal-signin-btn';
+    signInBtn.textContent = 'Sign In';
+    signInBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:transparent;color:#fff;transition:all 0.2s;';
+    signInBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
+    signInBtn.onmouseout  = function(){ this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='#fff'; };
+    signInBtn.onclick = function(){ showLogin(); openAuthModal(); };
+    nav.insertBefore(signInBtn, nav.firstChild);
+  }
+}
+
+
+/* -- Override renderJobs -- */
 var _origRenderJobs = renderJobs;
 renderJobs = function(jobs) {
   var container = document.getElementById('jobs-container');
@@ -892,7 +953,6 @@ renderJobs = function(jobs) {
     noResults.style.display = 'none'; return;
   }
   noResults.style.display = 'none';
-  // Store jobs globally for lookup by index
   window._jobsStore = jobs;
   container.innerHTML = jobs.map(function(job, idx) {
     return '<div class="job-listing-card">' +
@@ -908,7 +968,7 @@ renderJobs = function(jobs) {
         'style="background:transparent;color:#06B6D4;border:1px solid rgba(6,182,212,0.4);border-radius:10px;padding:10px 20px;' +
         'font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;" ' +
         'onmouseover="this.style.background=\'rgba(6,182,212,0.1)\'" onmouseout="this.style.background=\'transparent\'">' +
-        'View Details →</button>' +
+        'View Details</button>' +
     '</div>';
   }).join('');
 };
@@ -918,7 +978,10 @@ function openJobDetail(idx) {
   var job = window._jobsStore ? window._jobsStore[idx] : null;
   if (!job) return;
   currentJob = job;
+
+  var alreadyApplied = appliedJobs.indexOf(job.title) !== -1;
   var desc = job.description || 'Please apply to find out more about this exciting opportunity.';
+
   document.getElementById('job-detail-content').innerHTML =
     '<p style="font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#06B6D4;text-transform:uppercase;margin:0 0 10px;">OPEN POSITION</p>' +
     '<h2 style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:800;font-size:26px;color:#fff;margin:0 0 12px;line-height:1.2;">' + job.title + '</h2>' +
@@ -928,7 +991,25 @@ function openJobDetail(idx) {
       '<span class="badge-type">'+job.type+'</span>' +
     '</div>' +
     '<hr style="border:none;border-top:1px solid #1E2D4A;margin:0 0 20px;">' +
-    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.8;">' + desc.replace(/\n/g,'<br>') + '</div>';
+    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.9;white-space:pre-line;">' + desc + '</div>';
+
+  // Update apply button based on status
+  var applyBtn = document.getElementById('jd-apply-btn');
+  if (alreadyApplied) {
+    applyBtn.textContent = '✅ Already Applied';
+    applyBtn.disabled = true;
+    applyBtn.style.background = '#0F1629';
+    applyBtn.style.color = '#06B6D4';
+    applyBtn.style.border = '1px solid rgba(6,182,212,0.3)';
+    applyBtn.onclick = null;
+  } else {
+    applyBtn.textContent = 'Apply Now →';
+    applyBtn.disabled = false;
+    applyBtn.style.background = '#2563EB';
+    applyBtn.style.color = '#fff';
+    applyBtn.style.border = 'none';
+    applyBtn.onclick = handleApplyClick;
+  }
 
   var modal = document.getElementById('job-detail-modal');
   modal.style.display = 'flex';
@@ -947,53 +1028,45 @@ function shareJob() {
   if (!currentJob) return;
   var url = 'https://nexaracloudlabs.com/career.html#open-roles';
   var text = currentJob.title + ' - Open Position at Nexara Cloud Labs\n' + url;
-
   if (navigator.share) {
-    navigator.share({
-      title: currentJob.title + ' - Nexara Cloud Labs',
-      text: 'Check out this job opening at Nexara Cloud Labs!',
-      url: url
-    }).catch(function(){});
+    navigator.share({ title: currentJob.title + ' - Nexara Cloud Labs', text: 'Check out this job opening at Nexara Cloud Labs!', url: url }).catch(function(){});
   } else {
-    // Fallback - copy to clipboard
     var temp = document.createElement('textarea');
     temp.value = text;
     document.body.appendChild(temp);
     temp.select();
     document.execCommand('copy');
     document.body.removeChild(temp);
-
-    // Show a toast notification
-    var toast = document.createElement('div');
-    toast.textContent = '✅ Link copied to clipboard!';
-    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#2563EB;color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);';
-    document.body.appendChild(toast);
-    setTimeout(function(){ document.body.removeChild(toast); }, 3000);
+    showToast('✅ Link copied to clipboard!', '#2563EB');
   }
 }
 
-/* -- Handle Apply click -- */
+/* -- Handle Apply click -- no login required to apply -- */
 function handleApplyClick() {
   if (!currentJob) return;
-  if (currentUser) {
-    closeJobDetail();
-    openApplyForm();
-  } else {
-    pendingJobId = currentJob;
-    closeJobDetail();
-    openAuthModal();
+  // Only check duplicate if user is logged in
+  if (currentUser && appliedJobs.indexOf(currentJob.title) !== -1) {
+    showToast('⚠️ You have already applied for this role.', '#F59E0B');
+    return;
   }
+  // No login required — open form directly
+  closeJobDetail();
+  openApplyForm();
 }
 
-/* -- Open existing apply form with Supabase submit -- */
+/* -- Open apply form -- */
 function openApplyForm() {
   if (!currentJob) return;
+  // Only block duplicate if logged in
+  if (currentUser && appliedJobs.indexOf(currentJob.title) !== -1) {
+    showToast('⚠️ You have already applied for this role.', '#F59E0B');
+    return;
+  }
   document.getElementById('modal-role-name').textContent = currentJob.title;
   document.getElementById('apply-form-wrap').style.display = 'block';
   document.getElementById('apply-success').style.display   = 'none';
   document.getElementById('apply-form').reset();
   document.getElementById('apply-error').style.display     = 'none';
-  // Pre-fill email if logged in
   if (currentUser && currentUser.email) {
     document.getElementById('app-email').value = currentUser.email;
   }
@@ -1002,7 +1075,7 @@ function openApplyForm() {
   document.body.style.overflow = 'hidden';
 }
 
-/* -- Override submitApplication to use Supabase -- */
+/* -- Submit application -- */
 submitApplication = function() {
   var name     = document.getElementById('app-name').value.trim();
   var email    = document.getElementById('app-email').value.trim();
@@ -1015,15 +1088,20 @@ submitApplication = function() {
   var errorEl  = document.getElementById('apply-error');
 
   if (!name)   { errorEl.textContent='Please enter your full name.'; errorEl.style.display='block'; return; }
-  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent='Please enter a valid email.'; errorEl.style.display='block'; return; }
+  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent='Please enter a valid email address.'; errorEl.style.display='block'; return; }
+  if (!resume) { errorEl.textContent='Please paste your Google Drive resume link.'; errorEl.style.display='block'; return; }
   if (!message){ errorEl.textContent='Please tell us why you want to join Nexara.'; errorEl.style.display='block'; return; }
-  if (!resume) { errorEl.textContent='Please paste your resume link.'; errorEl.style.display='block'; return; }
+
+  // Final duplicate check
+  var jobTitle = currentJob ? currentJob.title : document.getElementById('modal-role-name').textContent;
+  if (appliedJobs.indexOf(jobTitle) !== -1) {
+    errorEl.textContent = 'You have already applied for this role.';
+    errorEl.style.display = 'block'; return;
+  }
 
   errorEl.style.display = 'none';
   var btn = document.getElementById('apply-submit-btn');
   btn.textContent='Submitting...'; btn.disabled=true; btn.style.opacity='0.7';
-
-  var jobTitle = currentJob ? currentJob.title : document.getElementById('modal-role-name').textContent;
 
   // Save to Supabase
   _supa.from('applications').insert({
@@ -1040,18 +1118,17 @@ submitApplication = function() {
     message:    message,
     status:     'Applied'
   }).then(function(res) {
-    if (res.error) {
-      console.error(res.error);
-      // Fall back to Formspree if Supabase fails
-      submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
-      return;
-    }
-    // Also notify via Formspree email
-    submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
+    if (res.error) { console.error(res.error); }
+    // Add to local applied list to prevent duplicate in same session
+    appliedJobs.push(jobTitle);
+    sendEmailNotification(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
+  }).catch(function(err) {
+    console.error(err);
+    sendEmailNotification(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
   });
 };
 
-function submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl) {
+function sendEmailNotification(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl) {
   var templateParams = {
     role:       jobTitle,
     name:       name,
@@ -1070,20 +1147,18 @@ function submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume
   };
 
   emailjs.send('service_75046rp', 'template_bskusn7', templateParams)
-    .then(function() {
-      document.getElementById('success-role-name').textContent = jobTitle;
-      document.getElementById('apply-form-wrap').style.display = 'none';
-      document.getElementById('apply-success').style.display   = 'block';
-      btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-    })
-    .catch(function(err) {
-      console.error('EmailJS error:', err);
-      // Still show success if Supabase saved it
-      document.getElementById('success-role-name').textContent = jobTitle;
-      document.getElementById('apply-form-wrap').style.display = 'none';
-      document.getElementById('apply-success').style.display   = 'block';
-      btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-    });
+    .then(function() { showSuccess(jobTitle, btn); })
+    .catch(function(err) { console.error('EmailJS error:', err); showSuccess(jobTitle, btn); });
+}
+
+function showSuccess(jobTitle, btn) {
+  document.getElementById('success-role-name').textContent = jobTitle;
+  document.getElementById('apply-form-wrap').style.display = 'none';
+  document.getElementById('apply-success').style.display   = 'block';
+  // Hide track prompt if already logged in
+  var prompt = document.getElementById('track-status-prompt');
+  if (prompt) prompt.style.display = currentUser ? 'none' : 'block';
+  btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
 }
 
 /* -- Auth Modal -- */
@@ -1095,29 +1170,31 @@ function openAuthModal() {
 function closeAuthModal() {
   document.getElementById('auth-modal').style.display = 'none';
   document.body.style.overflow = '';
+  pendingJobId = null; // clear pending if user dismisses
 }
 function showLogin() {
   document.getElementById('auth-login-tab').style.display    = 'block';
   document.getElementById('auth-register-tab').style.display = 'none';
   document.getElementById('auth-confirm-tab').style.display  = 'none';
+  document.getElementById('login-error').style.display = 'none';
 }
 function showRegister() {
   document.getElementById('auth-login-tab').style.display    = 'none';
   document.getElementById('auth-register-tab').style.display = 'block';
   document.getElementById('auth-confirm-tab').style.display  = 'none';
+  document.getElementById('reg-error').style.display = 'none';
 }
 document.getElementById('auth-modal').addEventListener('click', function(e){ if(e.target===this) closeAuthModal(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeAuthModal(); closeJobDetail(); closeMyApps(); } });
 
 function doLogin() {
   var email = document.getElementById('login-email').value.trim();
   var pass  = document.getElementById('login-password').value;
   var errEl = document.getElementById('login-error');
   var btn   = document.getElementById('login-btn');
-
   if (!email||!pass) { errEl.textContent='Please enter email and password.'; errEl.style.display='block'; return; }
   errEl.style.display='none';
   btn.textContent='Signing in...'; btn.disabled=true;
-
   _supa.auth.signInWithPassword({ email: email, password: pass })
     .then(function(res) {
       btn.textContent='Sign In'; btn.disabled=false;
@@ -1125,10 +1202,12 @@ function doLogin() {
       currentUser = res.data.user;
       closeAuthModal();
       updateNavbar();
+      loadAppliedJobs();
+      showToast('✅ Signed in successfully!', '#059669');
       if (pendingJobId) {
         currentJob = pendingJobId;
         pendingJobId = null;
-        setTimeout(openApplyForm, 200);
+        setTimeout(openApplyForm, 300);
       }
     });
 }
@@ -1139,17 +1218,14 @@ function doRegister() {
   var pass  = document.getElementById('reg-password').value;
   var errEl = document.getElementById('reg-error');
   var btn   = document.getElementById('reg-btn');
-
   if (!name||!email||!pass) { errEl.textContent='Please fill in all fields.'; errEl.style.display='block'; return; }
   if (pass.length < 6) { errEl.textContent='Password must be at least 6 characters.'; errEl.style.display='block'; return; }
   errEl.style.display='none';
   btn.textContent='Creating account...'; btn.disabled=true;
-
   _supa.auth.signUp({ email: email, password: pass, options: { data: { full_name: name } } })
     .then(function(res) {
       btn.textContent='Create Account'; btn.disabled=false;
       if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
-      // Show confirmation notice
       document.getElementById('auth-login-tab').style.display    = 'none';
       document.getElementById('auth-register-tab').style.display = 'none';
       document.getElementById('auth-confirm-tab').style.display  = 'block';
@@ -1172,7 +1248,6 @@ document.getElementById('my-apps-modal').addEventListener('click', function(e){ 
 function loadMyApplications() {
   var listEl = document.getElementById('my-apps-list');
   listEl.innerHTML = '<p style="font-family:Inter,sans-serif;color:#64748B;font-size:14px;text-align:center;padding:20px 0;">Loading your applications...</p>';
-
   _supa.from('applications')
     .select('*')
     .eq('user_id', currentUser.id)
@@ -1182,30 +1257,28 @@ function loadMyApplications() {
         listEl.innerHTML = '<div style="text-align:center;padding:32px 0;"><div style="font-size:40px;margin-bottom:12px;">📋</div><p style="font-family:Inter,sans-serif;color:#64748B;font-size:14px;">No applications yet. Browse open roles and apply!</p></div>';
         return;
       }
-
       var statusColors = {
-        'Applied':     { bg:'rgba(37,99,235,0.1)',  color:'#93c5fd',  border:'rgba(37,99,235,0.3)' },
-        'Under Review':{ bg:'rgba(245,158,11,0.1)', color:'#fcd34d',  border:'rgba(245,158,11,0.3)' },
-        'Shortlisted': { bg:'rgba(16,185,129,0.1)', color:'#6ee7b7',  border:'rgba(16,185,129,0.3)' },
-        'Interviewing':{ bg:'rgba(139,92,246,0.1)', color:'#c4b5fd',  border:'rgba(139,92,246,0.3)' },
-        'Offer Made':  { bg:'rgba(6,182,212,0.1)',  color:'#67e8f9',  border:'rgba(6,182,212,0.3)' },
-        'Rejected':    { bg:'rgba(239,68,68,0.1)',  color:'#fca5a5',  border:'rgba(239,68,68,0.3)' }
+        'Applied':      { bg:'rgba(37,99,235,0.1)',   color:'#93c5fd', border:'rgba(37,99,235,0.3)' },
+        'Under Review': { bg:'rgba(245,158,11,0.1)',  color:'#fcd34d', border:'rgba(245,158,11,0.3)' },
+        'Shortlisted':  { bg:'rgba(16,185,129,0.1)',  color:'#6ee7b7', border:'rgba(16,185,129,0.3)' },
+        'Interviewing': { bg:'rgba(139,92,246,0.1)',  color:'#c4b5fd', border:'rgba(139,92,246,0.3)' },
+        'Offer Made':   { bg:'rgba(6,182,212,0.1)',   color:'#67e8f9', border:'rgba(6,182,212,0.3)' },
+        'Rejected':     { bg:'rgba(239,68,68,0.1)',   color:'#fca5a5', border:'rgba(239,68,68,0.3)' }
       };
-
       listEl.innerHTML = res.data.map(function(app) {
         var sc = statusColors[app.status] || statusColors['Applied'];
         var date = new Date(app.applied_at).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
         return '<div style="background:#0A0F1E;border:1px solid #1E2D4A;border-radius:12px;padding:20px 22px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">' +
           '<div>' +
-            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:16px;color:#fff;margin:0 0 6px;">'+app.job_title+'</p>' +
+            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:16px;color:#fff;margin:0 0 4px;">'+app.job_title+'</p>' +
             '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Applied on '+date+'</p>' +
           '</div>' +
           '<span style="background:'+sc.bg+';border:1px solid '+sc.border+';color:'+sc.color+';border-radius:9999px;padding:5px 14px;font-family:Inter,sans-serif;font-size:12px;font-weight:700;white-space:nowrap;">'+app.status+'</span>' +
         '</div>';
       }).join('') +
-      '<div style="margin-top:20px;padding-top:20px;border-top:1px solid #1E2D4A;display:flex;justify-content:space-between;align-items:center;">' +
-        '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Questions? Email <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;text-decoration:none;">support@nexaracloudlabs.com</a></p>' +
-        '<button onclick="doLogout()" style="padding:8px 16px;background:transparent;color:#EF4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;font-family:Inter,sans-serif;font-size:12px;cursor:pointer;">Sign Out</button>' +
+      '<div style="margin-top:20px;padding-top:20px;border-top:1px solid #1E2D4A;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">' +
+        '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Questions? <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;text-decoration:none;">support@nexaracloudlabs.com</a></p>' +
+        '<button onclick="doLogout()" style="padding:8px 16px;background:transparent;color:#EF4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;font-family:Inter,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">Sign Out</button>' +
       '</div>';
     });
 }
@@ -1213,8 +1286,10 @@ function loadMyApplications() {
 function doLogout() {
   _supa.auth.signOut().then(function() {
     currentUser = null;
+    appliedJobs = [];
     closeMyApps();
     updateNavbar();
+    showToast('👋 Signed out successfully', '#0F1629');
   });
 }
 </script>
