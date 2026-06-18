@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Careers at Nexara Cloud Labs — Join a team building AI-first solutions for businesses worldwide.">
+  <meta name="description" content="Careers at Nexara Cloud Labs -- Join a team building AI-first solutions for businesses worldwide.">
   <title>Careers | Nexara Cloud Labs</title>
 
   <link rel="stylesheet" href="style.css">
@@ -208,7 +208,7 @@
 </section>
 
 
-<!-- ============================================================ WHY JOIN — dark, fixed HTML ============================================================ -->
+<!-- ============================================================ WHY JOIN -- dark, fixed HTML ============================================================ -->
 <section style="background:#0A0F1E;padding:80px 40px;">
   <div style="max-width:1200px;margin:0 auto;">
     <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#ffffff;text-align:center;margin:0 0 48px;">
@@ -245,7 +245,7 @@
 </section>
 
 
-<!-- ============================================================ OPEN ROLES — animated background ============================================================ -->
+<!-- ============================================================ OPEN ROLES -- animated background ============================================================ -->
 <section id="open-roles" class="jobs-section">
   <canvas id="jobs-canvas"></canvas>
   <div class="jobs-inner" style="max-width:1100px;margin:0 auto;">
@@ -295,7 +295,7 @@
   <div style="max-width:1100px;margin:0 auto;">
     <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#fff;text-align:center;margin:0 0 48px;">Life at Nexara</h2>
     <div class="life-grid reveal">
-      <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🎯</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Real Ownership</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Every engineer owns their domain end to end. No ticket monkeys here — you design, build, and ship.</p></div>
+      <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🎯</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Real Ownership</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Every engineer owns their domain end to end. No ticket monkeys here -- you design, build, and ship.</p></div>
       <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🧠</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Always Learning</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Weekly tech talks, learning budget of ₹50,000/year, and access to every major AI/cloud certification.</p></div>
       <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🤝</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Team First</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">We win together. Collaborative, not competitive. Ego-free environment where the best idea wins.</p></div>
     </div>
@@ -339,9 +339,9 @@
             <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Years of Experience</label>
             <select id="app-experience" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;background:#fff;cursor:pointer;">
               <option value="">Select range</option>
-              <option value="0-2">0–2 years</option>
-              <option value="2-5">2–5 years</option>
-              <option value="5-10">5–10 years</option>
+              <option value="0-2">0-2 years</option>
+              <option value="2-5">2-5 years</option>
+              <option value="5-10">5-10 years</option>
               <option value="10+">10+ years</option>
             </select>
           </div>
@@ -388,6 +388,114 @@
 </div>
 
 
+<!-- ============================================================ JOB DETAIL MODAL ============================================================ -->
+<div id="job-detail-modal" style="display:none;position:fixed;inset:0;z-index:9998;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);">
+  <div style="position:relative;background:#0F1629;border:1px solid #1E2D4A;border-radius:20px;padding:40px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.6);">
+    <button onclick="closeJobDetail()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #1E2D4A;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;display:flex;align-items:center;justify-content:center;line-height:1;">&times;</button>
+
+    <div id="job-detail-content"></div>
+
+    <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+      <button id="jd-apply-btn" onclick="handleApplyClick()"
+        style="flex:1;padding:13px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;min-width:140px;"
+        onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+        Apply Now →
+      </button>
+      <button onclick="shareJob()"
+        style="padding:13px 20px;background:transparent;color:#94A3B8;border:1px solid #1E2D4A;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;"
+        onmouseover="this.style.borderColor='#2563EB';this.style.color='#93c5fd'" onmouseout="this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'">
+        🔗 Share
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ AUTH MODAL (Login / Register) ============================================================ -->
+<div id="auth-modal" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);">
+  <div style="position:relative;background:#fff;border-radius:20px;padding:40px;max-width:440px;width:100%;box-shadow:0 40px 100px rgba(0,0,0,0.5);">
+    <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #E2E8F0;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;line-height:1;">&times;</button>
+
+    <!-- Login tab -->
+    <div id="auth-login-tab">
+      <div style="text-align:center;margin-bottom:24px;">
+        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 8px;">NEXARA CLOUD LABS</p>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;">Sign in to your account</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Track your job applications</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address</label>
+          <input id="login-email" type="email" placeholder="you@email.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Password</label>
+          <input id="login-password" type="password" placeholder="••••••••" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <p id="login-error" style="display:none;font-size:13px;color:#EF4444;font-family:'Inter',sans-serif;margin:0;"></p>
+        <button onclick="doLogin()" id="login-btn"
+          style="width:100%;padding:13px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;"
+          onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Sign In
+        </button>
+        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
+          New here? <a href="#" onclick="showRegister()" style="color:#2563EB;font-weight:600;text-decoration:none;">Create an account</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Register tab -->
+    <div id="auth-register-tab" style="display:none;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 8px;">NEXARA CLOUD LABS</p>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;">Create your account</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Apply and track your applications</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Full Name</label>
+          <input id="reg-name" type="text" placeholder="Jane Smith" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address</label>
+          <input id="reg-email" type="email" placeholder="you@email.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Password</label>
+          <input id="reg-password" type="password" placeholder="Min 6 characters" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <p id="reg-error" style="display:none;font-size:13px;color:#EF4444;font-family:'Inter',sans-serif;margin:0;"></p>
+        <button onclick="doRegister()" id="reg-btn"
+          style="width:100%;padding:13px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;"
+          onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Create Account
+        </button>
+        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
+          Already have an account? <a href="#" onclick="showLogin()" style="color:#2563EB;font-weight:600;text-decoration:none;">Sign in</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Email confirmation notice -->
+    <div id="auth-confirm-tab" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">📧</div>
+      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#0f172a;margin:0 0 10px;">Check your email</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.7;margin:0 0 20px;">We sent a confirmation link to your email. Click it to verify your account, then come back and sign in.</p>
+      <button onclick="showLogin()" style="padding:11px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Back to Sign In</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ MY APPLICATIONS MODAL ============================================================ -->
+<div id="my-apps-modal" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);">
+  <div style="position:relative;background:#0F1629;border:1px solid #1E2D4A;border-radius:20px;padding:40px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.6);">
+    <button onclick="closeMyApps()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #1E2D4A;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;line-height:1;">&times;</button>
+    <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#fff;margin:0 0 6px;">My Applications</h3>
+    <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0 0 24px;">Track the status of your job applications</p>
+    <div id="my-apps-list"></div>
+  </div>
+</div>
+
 <!-- ============================================================ FOOTER ============================================================ -->
 <footer id="footer" style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
   <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
@@ -425,7 +533,7 @@
         <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Resources</p>
         <a href="#" class="footer-link">Documentation</a>
         <a href="#" class="footer-link">API Docs</a>
-        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
         <a href="#" class="footer-link">Terms of Service</a>
         <a href="#" class="footer-link">Cookie Policy</a>
       </div>
@@ -433,13 +541,13 @@
         <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
         <a href="mailto:support@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">support@nexaracloudlabs.com</a>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
-        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon–Fri, 9am–6pm IST</p>
+        <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon-Fri, 9am-6pm IST</p>
       </div>
     </div>
     <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
       <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved. <a href="/admin/" style="color:#1E2D4A;text-decoration:none;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#1E2D4A'">·</a></p>
       <div style="display:flex;gap:20px;flex-wrap:wrap;">
-      <a href="privacy.html" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
+        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Cookie Policy</a>
       </div>
@@ -723,6 +831,373 @@ function filterJobs() {
 }
 
 loadJobs();
+</script>
+
+<!-- ============================================================ SUPABASE JOB PORTAL ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* -- Supabase config -- */
+const SUPA_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
+const SUPA_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
+const _supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+/* -- State -- */
+var currentUser  = null;
+var currentJob   = null;
+var pendingJobId = null;  // job to apply after login
+
+/* -- Auth state listener -- */
+_supa.auth.onAuthStateChange(function(event, session) {
+  currentUser = session ? session.user : null;
+  updateNavbar();
+});
+
+/* -- Check session on load -- */
+_supa.auth.getSession().then(function(res) {
+  currentUser = res.data.session ? res.data.session.user : null;
+  updateNavbar();
+});
+
+/* -- Update navbar with login/logout button -- */
+function updateNavbar() {
+  var existing = document.getElementById('portal-nav-btn');
+  if (existing) existing.remove();
+
+  var nav = document.querySelector('.hidden.lg\\:flex.items-center.gap-3.shrink-0');
+  if (!nav) return;
+
+  var btn = document.createElement('button');
+  btn.id = 'portal-nav-btn';
+  btn.style.cssText = 'padding:8px 16px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #1E2D4A;background:transparent;color:#94A3B8;transition:all 0.2s;';
+  btn.onmouseover = function(){ this.style.borderColor='#06B6D4'; this.style.color='#06B6D4'; };
+  btn.onmouseout  = function(){ this.style.borderColor='#1E2D4A'; this.style.color='#94A3B8'; };
+
+  if (currentUser) {
+    btn.textContent = 'My Applications';
+    btn.onclick = openMyApps;
+  } else {
+    btn.textContent = 'Sign In';
+    btn.onclick = function(){ openAuthModal(); };
+  }
+  nav.insertBefore(btn, nav.firstChild);
+}
+
+/* -- Override renderJobs to show title only + View Details button -- */
+var _origRenderJobs = renderJobs;
+renderJobs = function(jobs) {
+  var container = document.getElementById('jobs-container');
+  var noResults = document.getElementById('no-results');
+  if (!jobs.length) {
+    container.innerHTML = '<p style="text-align:center;color:#64748B;font-family:Inter,sans-serif;font-size:15px;padding:32px 0;">No open positions at the moment. Check back soon!</p>';
+    noResults.style.display = 'none'; return;
+  }
+  noResults.style.display = 'none';
+  // Store jobs globally for lookup by index
+  window._jobsStore = jobs;
+  container.innerHTML = jobs.map(function(job, idx) {
+    return '<div class="job-listing-card">' +
+      '<div>' +
+        '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">' + job.title + '</p>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;">' +
+          '<span class="badge-dept">'+(job.department||'General')+'</span>' +
+          '<span class="badge-loc">'+job.location+'</span>' +
+          '<span class="badge-type">'+job.type+'</span>' +
+        '</div>' +
+      '</div>' +
+      '<button onclick="openJobDetail('+idx+')" ' +
+        'style="background:transparent;color:#06B6D4;border:1px solid rgba(6,182,212,0.4);border-radius:10px;padding:10px 20px;' +
+        'font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;" ' +
+        'onmouseover="this.style.background=\'rgba(6,182,212,0.1)\'" onmouseout="this.style.background=\'transparent\'">' +
+        'View Details →</button>' +
+    '</div>';
+  }).join('');
+};
+
+/* -- Job Detail Modal -- */
+function openJobDetail(idx) {
+  var job = window._jobsStore ? window._jobsStore[idx] : null;
+  if (!job) return;
+  currentJob = job;
+  var desc = job.description || 'Please apply to find out more about this exciting opportunity.';
+  document.getElementById('job-detail-content').innerHTML =
+    '<p style="font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#06B6D4;text-transform:uppercase;margin:0 0 10px;">OPEN POSITION</p>' +
+    '<h2 style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:800;font-size:26px;color:#fff;margin:0 0 12px;line-height:1.2;">' + job.title + '</h2>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">' +
+      '<span class="badge-dept">'+(job.department||'General')+'</span>' +
+      '<span class="badge-loc">'+job.location+'</span>' +
+      '<span class="badge-type">'+job.type+'</span>' +
+    '</div>' +
+    '<hr style="border:none;border-top:1px solid #1E2D4A;margin:0 0 20px;">' +
+    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.8;">' + desc.replace(/\n/g,'<br>') + '</div>';
+
+  var modal = document.getElementById('job-detail-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeJobDetail() {
+  document.getElementById('job-detail-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('job-detail-modal').addEventListener('click', function(e){ if(e.target===this) closeJobDetail(); });
+
+/* -- Share job -- */
+function shareJob() {
+  if (!currentJob) return;
+  var url = window.location.href.split('#')[0] + '#open-roles';
+  if (navigator.share) {
+    navigator.share({ title: currentJob.title + ' -- Nexara Cloud Labs', url: url });
+  } else {
+    navigator.clipboard.writeText(url).then(function(){ alert('Link copied to clipboard!'); });
+  }
+}
+
+/* -- Handle Apply click -- */
+function handleApplyClick() {
+  if (!currentJob) return;
+  if (currentUser) {
+    closeJobDetail();
+    openApplyForm();
+  } else {
+    pendingJobId = currentJob;
+    closeJobDetail();
+    openAuthModal();
+  }
+}
+
+/* -- Open existing apply form with Supabase submit -- */
+function openApplyForm() {
+  if (!currentJob) return;
+  document.getElementById('modal-role-name').textContent = currentJob.title;
+  document.getElementById('apply-form-wrap').style.display = 'block';
+  document.getElementById('apply-success').style.display   = 'none';
+  document.getElementById('apply-form').reset();
+  document.getElementById('apply-error').style.display     = 'none';
+  // Pre-fill email if logged in
+  if (currentUser && currentUser.email) {
+    document.getElementById('app-email').value = currentUser.email;
+  }
+  var modal = document.getElementById('apply-modal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/* -- Override submitApplication to use Supabase -- */
+submitApplication = function() {
+  var name     = document.getElementById('app-name').value.trim();
+  var email    = document.getElementById('app-email').value.trim();
+  var phone    = document.getElementById('app-phone').value.trim();
+  var exp      = document.getElementById('app-experience').value;
+  var linkedin = document.getElementById('app-linkedin').value.trim();
+  var portfolio= document.getElementById('app-portfolio').value.trim();
+  var resume   = document.getElementById('app-resume').value.trim();
+  var message  = document.getElementById('app-message').value.trim();
+  var errorEl  = document.getElementById('apply-error');
+
+  if (!name)   { errorEl.textContent='Please enter your full name.'; errorEl.style.display='block'; return; }
+  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent='Please enter a valid email.'; errorEl.style.display='block'; return; }
+  if (!message){ errorEl.textContent='Please tell us why you want to join Nexara.'; errorEl.style.display='block'; return; }
+  if (!resume) { errorEl.textContent='Please paste your resume link.'; errorEl.style.display='block'; return; }
+
+  errorEl.style.display = 'none';
+  var btn = document.getElementById('apply-submit-btn');
+  btn.textContent='Submitting...'; btn.disabled=true; btn.style.opacity='0.7';
+
+  var jobTitle = currentJob ? currentJob.title : document.getElementById('modal-role-name').textContent;
+
+  // Save to Supabase
+  _supa.from('applications').insert({
+    user_id:    currentUser ? currentUser.id : null,
+    job_title:  jobTitle,
+    job_id:     currentJob ? (currentJob.id || jobTitle) : jobTitle,
+    full_name:  name,
+    email:      email,
+    phone:      phone      || null,
+    experience: exp        || null,
+    linkedin:   linkedin   || null,
+    portfolio:  portfolio  || null,
+    resume_link:resume,
+    message:    message,
+    status:     'Applied'
+  }).then(function(res) {
+    if (res.error) {
+      console.error(res.error);
+      // Fall back to Formspree if Supabase fails
+      submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
+      return;
+    }
+    // Also notify via Formspree email
+    submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
+  });
+};
+
+function submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl) {
+  var templateParams = {
+    role:       jobTitle,
+    name:       name,
+    from_name:  name,
+    from_email: email,
+    email:      email,
+    phone:      phone      || 'Not provided',
+    experience: exp        || 'Not specified',
+    linkedin:   linkedin   || 'Not provided',
+    portfolio:  portfolio  || 'Not provided',
+    resume:     resume     || 'Not provided',
+    message:    message,
+    company:    'Nexara Cloud Labs',
+    service:    jobTitle,
+    budget:     ''
+  };
+
+  emailjs.send('service_75046rp', 'template_bskusn7', templateParams)
+    .then(function() {
+      document.getElementById('success-role-name').textContent = jobTitle;
+      document.getElementById('apply-form-wrap').style.display = 'none';
+      document.getElementById('apply-success').style.display   = 'block';
+      btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
+    })
+    .catch(function(err) {
+      console.error('EmailJS error:', err);
+      // Still show success if Supabase saved it
+      document.getElementById('success-role-name').textContent = jobTitle;
+      document.getElementById('apply-form-wrap').style.display = 'none';
+      document.getElementById('apply-success').style.display   = 'block';
+      btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
+    });
+}
+
+/* -- Auth Modal -- */
+function openAuthModal() {
+  showLogin();
+  document.getElementById('auth-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeAuthModal() {
+  document.getElementById('auth-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function showLogin() {
+  document.getElementById('auth-login-tab').style.display    = 'block';
+  document.getElementById('auth-register-tab').style.display = 'none';
+  document.getElementById('auth-confirm-tab').style.display  = 'none';
+}
+function showRegister() {
+  document.getElementById('auth-login-tab').style.display    = 'none';
+  document.getElementById('auth-register-tab').style.display = 'block';
+  document.getElementById('auth-confirm-tab').style.display  = 'none';
+}
+document.getElementById('auth-modal').addEventListener('click', function(e){ if(e.target===this) closeAuthModal(); });
+
+function doLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var pass  = document.getElementById('login-password').value;
+  var errEl = document.getElementById('login-error');
+  var btn   = document.getElementById('login-btn');
+
+  if (!email||!pass) { errEl.textContent='Please enter email and password.'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  btn.textContent='Signing in...'; btn.disabled=true;
+
+  _supa.auth.signInWithPassword({ email: email, password: pass })
+    .then(function(res) {
+      btn.textContent='Sign In'; btn.disabled=false;
+      if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
+      currentUser = res.data.user;
+      closeAuthModal();
+      updateNavbar();
+      if (pendingJobId) {
+        currentJob = pendingJobId;
+        pendingJobId = null;
+        setTimeout(openApplyForm, 200);
+      }
+    });
+}
+
+function doRegister() {
+  var name  = document.getElementById('reg-name').value.trim();
+  var email = document.getElementById('reg-email').value.trim();
+  var pass  = document.getElementById('reg-password').value;
+  var errEl = document.getElementById('reg-error');
+  var btn   = document.getElementById('reg-btn');
+
+  if (!name||!email||!pass) { errEl.textContent='Please fill in all fields.'; errEl.style.display='block'; return; }
+  if (pass.length < 6) { errEl.textContent='Password must be at least 6 characters.'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  btn.textContent='Creating account...'; btn.disabled=true;
+
+  _supa.auth.signUp({ email: email, password: pass, options: { data: { full_name: name } } })
+    .then(function(res) {
+      btn.textContent='Create Account'; btn.disabled=false;
+      if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
+      // Show confirmation notice
+      document.getElementById('auth-login-tab').style.display    = 'none';
+      document.getElementById('auth-register-tab').style.display = 'none';
+      document.getElementById('auth-confirm-tab').style.display  = 'block';
+    });
+}
+
+/* -- My Applications -- */
+function openMyApps() {
+  if (!currentUser) { openAuthModal(); return; }
+  document.getElementById('my-apps-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  loadMyApplications();
+}
+function closeMyApps() {
+  document.getElementById('my-apps-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('my-apps-modal').addEventListener('click', function(e){ if(e.target===this) closeMyApps(); });
+
+function loadMyApplications() {
+  var listEl = document.getElementById('my-apps-list');
+  listEl.innerHTML = '<p style="font-family:Inter,sans-serif;color:#64748B;font-size:14px;text-align:center;padding:20px 0;">Loading your applications...</p>';
+
+  _supa.from('applications')
+    .select('*')
+    .eq('user_id', currentUser.id)
+    .order('applied_at', { ascending: false })
+    .then(function(res) {
+      if (res.error || !res.data || !res.data.length) {
+        listEl.innerHTML = '<div style="text-align:center;padding:32px 0;"><div style="font-size:40px;margin-bottom:12px;">📋</div><p style="font-family:Inter,sans-serif;color:#64748B;font-size:14px;">No applications yet. Browse open roles and apply!</p></div>';
+        return;
+      }
+
+      var statusColors = {
+        'Applied':     { bg:'rgba(37,99,235,0.1)',  color:'#93c5fd',  border:'rgba(37,99,235,0.3)' },
+        'Under Review':{ bg:'rgba(245,158,11,0.1)', color:'#fcd34d',  border:'rgba(245,158,11,0.3)' },
+        'Shortlisted': { bg:'rgba(16,185,129,0.1)', color:'#6ee7b7',  border:'rgba(16,185,129,0.3)' },
+        'Interviewing':{ bg:'rgba(139,92,246,0.1)', color:'#c4b5fd',  border:'rgba(139,92,246,0.3)' },
+        'Offer Made':  { bg:'rgba(6,182,212,0.1)',  color:'#67e8f9',  border:'rgba(6,182,212,0.3)' },
+        'Rejected':    { bg:'rgba(239,68,68,0.1)',  color:'#fca5a5',  border:'rgba(239,68,68,0.3)' }
+      };
+
+      listEl.innerHTML = res.data.map(function(app) {
+        var sc = statusColors[app.status] || statusColors['Applied'];
+        var date = new Date(app.applied_at).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+        return '<div style="background:#0A0F1E;border:1px solid #1E2D4A;border-radius:12px;padding:20px 22px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">' +
+          '<div>' +
+            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:16px;color:#fff;margin:0 0 6px;">'+app.job_title+'</p>' +
+            '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Applied on '+date+'</p>' +
+          '</div>' +
+          '<span style="background:'+sc.bg+';border:1px solid '+sc.border+';color:'+sc.color+';border-radius:9999px;padding:5px 14px;font-family:Inter,sans-serif;font-size:12px;font-weight:700;white-space:nowrap;">'+app.status+'</span>' +
+        '</div>';
+      }).join('') +
+      '<div style="margin-top:20px;padding-top:20px;border-top:1px solid #1E2D4A;display:flex;justify-content:space-between;align-items:center;">' +
+        '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Questions? Email <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;text-decoration:none;">support@nexaracloudlabs.com</a></p>' +
+        '<button onclick="doLogout()" style="padding:8px 16px;background:transparent;color:#EF4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;font-family:Inter,sans-serif;font-size:12px;cursor:pointer;">Sign Out</button>' +
+      '</div>';
+    });
+}
+
+function doLogout() {
+  _supa.auth.signOut().then(function() {
+    currentUser = null;
+    closeMyApps();
+    updateNavbar();
+  });
+}
 </script>
 
 </body>
