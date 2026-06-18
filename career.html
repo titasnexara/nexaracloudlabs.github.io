@@ -945,11 +945,30 @@ document.getElementById('job-detail-modal').addEventListener('click', function(e
 /* -- Share job -- */
 function shareJob() {
   if (!currentJob) return;
-  var url = window.location.href.split('#')[0] + '#open-roles';
+  var url = 'https://nexaracloudlabs.com/career.html#open-roles';
+  var text = currentJob.title + ' - Open Position at Nexara Cloud Labs\n' + url;
+
   if (navigator.share) {
-    navigator.share({ title: currentJob.title + ' -- Nexara Cloud Labs', url: url });
+    navigator.share({
+      title: currentJob.title + ' - Nexara Cloud Labs',
+      text: 'Check out this job opening at Nexara Cloud Labs!',
+      url: url
+    }).catch(function(){});
   } else {
-    navigator.clipboard.writeText(url).then(function(){ alert('Link copied to clipboard!'); });
+    // Fallback - copy to clipboard
+    var temp = document.createElement('textarea');
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand('copy');
+    document.body.removeChild(temp);
+
+    // Show a toast notification
+    var toast = document.createElement('div');
+    toast.textContent = '✅ Link copied to clipboard!';
+    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#2563EB;color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);';
+    document.body.appendChild(toast);
+    setTimeout(function(){ document.body.removeChild(toast); }, 3000);
   }
 }
 
@@ -1040,7 +1059,7 @@ function submitViaFormspree(name, email, phone, exp, linkedin, portfolio, resume
     from_email: email,
     email:      email,
     phone:      phone      || 'Not provided',
-    experience: exp        || 'Not specified',
+    experience: exp ? exp + ' years' : 'Not specified',
     linkedin:   linkedin   || 'Not provided',
     portfolio:  portfolio  || 'Not provided',
     resume:     resume     || 'Not provided',
