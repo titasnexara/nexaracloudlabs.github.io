@@ -195,7 +195,7 @@
     </nav>
 
     <!-- Right actions (desktop) -->
-    <div class="hidden lg:flex items-center gap-3 shrink-0">
+    <div class="hidden lg:flex items-center gap-3 shrink-0" id="home-nav-actions">
       
       <a href="#contact"
          class="px-4 py-[9px] rounded-lg border border-white text-white text-[14px] font-medium
@@ -3584,7 +3584,7 @@ document.addEventListener('DOMContentLoaded', function(){
       var el = document.getElementById(id); if(el) el.remove();
     });
 
-    var nav = document.querySelector('.hidden.lg\\:flex.items-center.gap-3.shrink-0');
+    var nav = document.getElementById('home-nav-actions');
     if (!nav) return;
 
     if (user) {
@@ -3614,25 +3614,15 @@ document.addEventListener('DOMContentLoaded', function(){
       appsBtn.onmouseout  = function(){ this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'; };
       nav.insertBefore(appsBtn, nav.firstChild);
     } else {
-      // Register (solid blue)
-      var regBtn = document.createElement('button');
-      regBtn.id = 'home-register-btn';
-      regBtn.textContent = 'Register';
-      regBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
-      regBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
-      regBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
-      regBtn.onclick = function(){ homeShowRegister(); homeOpenAuth(); };
-      nav.insertBefore(regBtn, nav.firstChild);
-
-      // Sign In (outline)
-      var sinBtn = document.createElement('button');
-      sinBtn.id = 'home-signin-btn';
-      sinBtn.textContent = 'Sign In';
-      sinBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:transparent;color:#fff;transition:all 0.2s;';
-      sinBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
-      sinBtn.onmouseout  = function(){ this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='#fff'; };
-      sinBtn.onclick = function(){ homeShowLogin(); homeOpenAuth(); };
-      nav.insertBefore(sinBtn, nav.firstChild);
+     // Single Sign In / Register button
+      var authBtn = document.createElement('button');
+      authBtn.id = 'home-signin-btn';
+      authBtn.textContent = 'Sign In / Register';
+      authBtn.style.cssText = 'padding:8px 20px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
+      authBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
+      authBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
+      authBtn.onclick = function(){ homeShowLogin(); homeOpenAuth(); };
+      nav.insertBefore(authBtn, nav.firstChild);
     }
   }
 
@@ -3695,7 +3685,7 @@ document.addEventListener('DOMContentLoaded', function(){
   };
 
   // Close on backdrop click / Escape
-  var modal = document.getElementById('home-auth-modal');
+ var modal = document.getElementById('home-auth-modal');
   if (modal) {
     modal.addEventListener('click', function(e){ if(e.target===this) homeCloseAuth(); });
   }

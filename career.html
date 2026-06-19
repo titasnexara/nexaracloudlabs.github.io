@@ -922,23 +922,14 @@ function updateNavbar() {
     myAppsBtn.onclick = openMyApps;
     nav.insertBefore(myAppsBtn, nav.firstChild);
   } else {
-    var registerBtn = document.createElement('button');
-    registerBtn.id = 'portal-register-btn';
-    registerBtn.textContent = 'Register';
-    registerBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
-    registerBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
-    registerBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
-    registerBtn.onclick = function(){ showRegister(); openAuthModal(); };
-    nav.insertBefore(registerBtn, nav.firstChild);
-
-    var signInBtn = document.createElement('button');
-    signInBtn.id = 'portal-signin-btn';
-    signInBtn.textContent = 'Sign In';
-    signInBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:transparent;color:#fff;transition:all 0.2s;';
-    signInBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
-    signInBtn.onmouseout  = function(){ this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='#fff'; };
-    signInBtn.onclick = function(){ showLogin(); openAuthModal(); };
-    nav.insertBefore(signInBtn, nav.firstChild);
+    var authBtn = document.createElement('button');
+    authBtn.id = 'portal-signin-btn';
+    authBtn.textContent = 'Sign In / Register';
+    authBtn.style.cssText = 'padding:8px 20px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
+    authBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
+    authBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
+    authBtn.onclick = function(){ showLogin(); openAuthModal(); };
+    nav.insertBefore(authBtn, nav.firstChild);
   }
 }
 
