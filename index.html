@@ -3564,7 +3564,7 @@ document.getElementById('article-modal').addEventListener('click', function(e) {
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 <script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   var SUPA_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
   var SUPA_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
   var _supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
@@ -3710,7 +3710,7 @@ document.getElementById('article-modal').addEventListener('click', function(e) {
   _supa.auth.onAuthStateChange(function(event, session){
     updateNav(session ? session.user : null);
   });
-})();
+});
 </script>
 
 </body>
