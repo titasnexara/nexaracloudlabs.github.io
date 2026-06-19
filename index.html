@@ -3695,7 +3695,12 @@ document.getElementById('article-modal').addEventListener('click', function(e) {
   };
 
   // Close on backdrop click / Escape
-  document.getElementById('home-auth-modal').addEventListener('click', function(e){ if(e.target===this) homeCloseAuth(); });
+  window.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('home-auth-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e){ if(e.target===this) homeCloseAuth(); });
+    }
+  });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') homeCloseAuth(); });
 
   // Init
