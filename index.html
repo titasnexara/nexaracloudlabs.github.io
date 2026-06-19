@@ -3487,5 +3487,226 @@ document.getElementById('article-modal').addEventListener('click', function(e) {
     });
   }
 </script>
+<!-- ============================================================
+  AUTH MODAL FOR INDEX.HTML
+  Paste this entire block just before </body> in index.html
+============================================================ -->
+
+<!-- Auth Modal -->
+<div id="home-auth-modal" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);">
+  <div style="position:relative;background:#fff;border-radius:20px;padding:40px;max-width:440px;width:100%;box-shadow:0 40px 100px rgba(0,0,0,0.5);">
+    <button onclick="homeCloseAuth()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #E2E8F0;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;line-height:1;">&times;</button>
+
+    <!-- Login tab -->
+    <div id="home-login-tab">
+      <div style="text-align:center;margin-bottom:24px;">
+        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 8px;">NEXARA CLOUD LABS</p>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;">Sign in to your account</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Track your job applications</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address</label>
+          <input id="home-login-email" type="email" placeholder="you@email.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Password</label>
+          <input id="home-login-password" type="password" placeholder="••••••••" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <p id="home-login-error" style="display:none;font-size:13px;color:#EF4444;font-family:'Inter',sans-serif;margin:0;"></p>
+        <button onclick="homeDoLogin()" id="home-login-btn" style="width:100%;padding:13px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">Sign In</button>
+        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
+          New here? <a href="#" onclick="homeShowRegister()" style="color:#2563EB;font-weight:600;text-decoration:none;">Create an account</a>
+        </p>
+        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
+          Looking for jobs? <a href="career.html" style="color:#2563EB;font-weight:600;text-decoration:none;">View open roles →</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Register tab -->
+    <div id="home-register-tab" style="display:none;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 8px;">NEXARA CLOUD LABS</p>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;">Create your account</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Apply and track your job applications</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Full Name</label>
+          <input id="home-reg-name" type="text" placeholder="Jane Smith" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address</label>
+          <input id="home-reg-email" type="email" placeholder="you@email.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Password</label>
+          <input id="home-reg-password" type="password" placeholder="Min 6 characters" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <p id="home-reg-error" style="display:none;font-size:13px;color:#EF4444;font-family:'Inter',sans-serif;margin:0;"></p>
+        <button onclick="homeDoRegister()" id="home-reg-btn" style="width:100%;padding:13px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">Create Account</button>
+        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
+          Already have an account? <a href="#" onclick="homeShowLogin()" style="color:#2563EB;font-weight:600;text-decoration:none;">Sign in</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Confirm tab -->
+    <div id="home-confirm-tab" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">📧</div>
+      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#0f172a;margin:0 0 10px;">Check your email</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.7;margin:0 0 20px;">We sent a confirmation link. Click it to verify your account, then come back and sign in.</p>
+      <button onclick="homeShowLogin()" style="padding:11px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Back to Sign In</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+<script>
+(function(){
+  var SUPA_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
+  var SUPA_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
+  var _supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  var _user = null;
+
+  function showToast(msg, color) {
+    var t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:'+(color||'#2563EB')+';color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);white-space:nowrap;';
+    document.body.appendChild(t);
+    setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 3000);
+  }
+
+  function updateNav(user) {
+    _user = user;
+    ['home-signin-btn','home-register-btn','home-myapps-btn','home-signout-btn'].forEach(function(id){
+      var el = document.getElementById(id); if(el) el.remove();
+    });
+
+    var nav = document.querySelector('.hidden.lg\\:flex.items-center.gap-3.shrink-0');
+    if (!nav) return;
+
+    if (user) {
+      // Sign Out
+      var outBtn = document.createElement('button');
+      outBtn.id = 'home-signout-btn';
+      outBtn.textContent = 'Sign Out';
+      outBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(239,68,68,0.35);background:transparent;color:#EF4444;transition:all 0.2s;';
+      outBtn.onmouseover = function(){ this.style.background='rgba(239,68,68,0.1)'; };
+      outBtn.onmouseout  = function(){ this.style.background='transparent'; };
+      outBtn.onclick = function(){
+        _supa.auth.signOut().then(function(){
+          _user = null;
+          updateNav(null);
+          showToast('👋 Signed out successfully', '#0F1629');
+        });
+      };
+      nav.insertBefore(outBtn, nav.firstChild);
+
+      // My Applications (links to career.html)
+      var appsBtn = document.createElement('a');
+      appsBtn.id = 'home-myapps-btn';
+      appsBtn.href = 'career.html';
+      appsBtn.textContent = 'My Applications';
+      appsBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #1E2D4A;background:transparent;color:#94A3B8;transition:all 0.2s;text-decoration:none;';
+      appsBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
+      appsBtn.onmouseout  = function(){ this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'; };
+      nav.insertBefore(appsBtn, nav.firstChild);
+    } else {
+      // Register (solid blue)
+      var regBtn = document.createElement('button');
+      regBtn.id = 'home-register-btn';
+      regBtn.textContent = 'Register';
+      regBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
+      regBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
+      regBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
+      regBtn.onclick = function(){ homeShowRegister(); homeOpenAuth(); };
+      nav.insertBefore(regBtn, nav.firstChild);
+
+      // Sign In (outline)
+      var sinBtn = document.createElement('button');
+      sinBtn.id = 'home-signin-btn';
+      sinBtn.textContent = 'Sign In';
+      sinBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:transparent;color:#fff;transition:all 0.2s;';
+      sinBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
+      sinBtn.onmouseout  = function(){ this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='#fff'; };
+      sinBtn.onclick = function(){ homeShowLogin(); homeOpenAuth(); };
+      nav.insertBefore(sinBtn, nav.firstChild);
+    }
+  }
+
+  // Auth modal helpers
+  window.homeOpenAuth = function() {
+    document.getElementById('home-auth-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+  window.homeCloseAuth = function() {
+    document.getElementById('home-auth-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  window.homeShowLogin = function() {
+    document.getElementById('home-login-tab').style.display    = 'block';
+    document.getElementById('home-register-tab').style.display = 'none';
+    document.getElementById('home-confirm-tab').style.display  = 'none';
+    document.getElementById('home-login-error').style.display  = 'none';
+  };
+  window.homeShowRegister = function() {
+    document.getElementById('home-login-tab').style.display    = 'none';
+    document.getElementById('home-register-tab').style.display = 'block';
+    document.getElementById('home-confirm-tab').style.display  = 'none';
+    document.getElementById('home-reg-error').style.display    = 'none';
+  };
+
+  window.homeDoLogin = function() {
+    var email = document.getElementById('home-login-email').value.trim();
+    var pass  = document.getElementById('home-login-password').value;
+    var errEl = document.getElementById('home-login-error');
+    var btn   = document.getElementById('home-login-btn');
+    if (!email||!pass) { errEl.textContent='Please enter email and password.'; errEl.style.display='block'; return; }
+    errEl.style.display='none';
+    btn.textContent='Signing in...'; btn.disabled=true;
+    _supa.auth.signInWithPassword({ email: email, password: pass }).then(function(res) {
+      btn.textContent='Sign In'; btn.disabled=false;
+      if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
+      updateNav(res.data.user);
+      homeCloseAuth();
+      showToast('✅ Signed in successfully!', '#059669');
+    });
+  };
+
+  window.homeDoRegister = function() {
+    var name  = document.getElementById('home-reg-name').value.trim();
+    var email = document.getElementById('home-reg-email').value.trim();
+    var pass  = document.getElementById('home-reg-password').value;
+    var errEl = document.getElementById('home-reg-error');
+    var btn   = document.getElementById('home-reg-btn');
+    if (!name||!email||!pass) { errEl.textContent='Please fill in all fields.'; errEl.style.display='block'; return; }
+    if (pass.length<6) { errEl.textContent='Password must be at least 6 characters.'; errEl.style.display='block'; return; }
+    errEl.style.display='none';
+    btn.textContent='Creating account...'; btn.disabled=true;
+    _supa.auth.signUp({ email: email, password: pass, options: { data: { full_name: name } } }).then(function(res) {
+      btn.textContent='Create Account'; btn.disabled=false;
+      if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
+      document.getElementById('home-login-tab').style.display    = 'none';
+      document.getElementById('home-register-tab').style.display = 'none';
+      document.getElementById('home-confirm-tab').style.display  = 'block';
+    });
+  };
+
+  // Close on backdrop click / Escape
+  document.getElementById('home-auth-modal').addEventListener('click', function(e){ if(e.target===this) homeCloseAuth(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') homeCloseAuth(); });
+
+  // Init
+  _supa.auth.getSession().then(function(res){
+    updateNav(res.data.session ? res.data.session.user : null);
+  });
+  _supa.auth.onAuthStateChange(function(event, session){
+    updateNav(session ? session.user : null);
+  });
+})();
+</script>
+
 </body>
 </html>
