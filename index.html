@@ -1939,127 +1939,16 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawerClos
       <h2 class="font-jakarta font-bold text-[#0f172a]" style="font-size:44px;margin:0;">What Our Clients Say</h2>
     </div>
 
-    <div style="position:relative;display:flex;align-items:center;gap:16px;max-width:920px;margin:0 auto;">
-
-      <button class="testi-arrow" id="testi-prev" aria-label="Previous testimonial">&#8592;</button>
-
-      <div style="flex:1;min-width:0;">
-
- 
-<!-- Slide 0 — Andreas Schyman, CtrlPrint -->
-<div class="testi-slide active" data-index="0">
-  <div style="background:#fff;border-radius:20px;padding:20px;border:1px solid #E2E8F0;">
-    <img src="testimonial_andreas_final.png"
-         alt="Testimonial from Andreas Schyman, CPO/CTO at CtrlPrint"
-         style="width:100%;border-radius:12px;display:block;">
-  </div>
-</div>
-
-        <!-- Slide 1 -->
-        <div class="testi-slide" data-index="1">
-          <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
-            <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
-            <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
-            <p class="font-inter" style="font-size:18px;color:#0f172a;font-style:italic;line-height:1.8;margin:0;">"Nexara transformed our data infrastructure in just 8 weeks. Real-time insights that used to take days now happen instantly. The ROI was visible within the first month."</p>
-            <div style="margin-top:28px;display:flex;align-items:center;gap:16px;">
-              <div style="width:48px;height:48px;border-radius:50%;background:#2563EB;font-weight:700;font-size:16px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;">RS</div>
-              <div>
-                <p class="font-jakarta font-bold" style="font-size:16px;color:#0f172a;margin:0 0 2px;">Rahul Sharma</p>
-                <p class="font-inter" style="font-size:14px;color:#64748B;margin:0;">CTO, FinTech Startup · Mumbai</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="testi-slide" data-index="2">
-          <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
-            <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
-            <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
-            <p class="font-inter" style="font-size:18px;color:#0f172a;font-style:italic;line-height:1.8;margin:0;">"Their AI automation reduced our manual processing by 80%. We went from 3 FTEs doing data entry to full automation. Professional, fast, and genuinely invested."</p>
-            <div style="margin-top:28px;display:flex;align-items:center;gap:16px;">
-              <div style="width:48px;height:48px;border-radius:50%;background:#0e7490;font-weight:700;font-size:16px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;">PM</div>
-              <div>
-                <p class="font-jakarta font-bold" style="font-size:16px;color:#0f172a;margin:0 0 2px;">Priya Mehta</p>
-                <p class="font-inter" style="font-size:14px;color:#64748B;margin:0;">VP Operations, E-commerce · Bangalore</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="testi-slide" data-index="3">
-          <div style="background:#fff;border-radius:20px;padding:48px;border:1px solid #E2E8F0;position:relative;">
-            <span style="position:absolute;top:24px;left:32px;font-size:96px;line-height:1;color:#06B6D4;opacity:0.15;font-family:serif;pointer-events:none;">"</span>
-            <div style="color:#F59E0B;font-size:20px;margin-bottom:20px;">★★★★★</div>
-            <p class="font-inter" style="font-size:18px;color:#0f172a;font-style:italic;line-height:1.8;margin:0;">"Best technology partner we have worked with in 10 years. Our QA cycle dropped from 2 weeks to 6 hours. Would recommend without hesitation."</p>
-            <div style="margin-top:28px;display:flex;align-items:center;gap:16px;">
-              <div style="width:48px;height:48px;border-radius:50%;background:#7c3aed;font-weight:700;font-size:16px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;">JK</div>
-              <div>
-                <p class="font-jakarta font-bold" style="font-size:16px;color:#0f172a;margin:0 0 2px;">James Kowalski</p>
-                <p class="font-inter" style="font-size:14px;color:#64748B;margin:0;">CEO, SaaS Platform · London</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+    <div style="max-width:920px;margin:0 auto;">
+      <div style="background:#fff;border-radius:20px;padding:20px;border:1px solid #E2E8F0;">
+        <img src="testimonial_andreas_final.png"
+             alt="Testimonial from Andreas Schyman, CPO/CTO at CtrlPrint"
+             style="width:100%;border-radius:12px;display:block;">
       </div>
-
-      <button class="testi-arrow" id="testi-next" aria-label="Next testimonial">&#8594;</button>
-
-    </div>
-
-    <!-- Dot navigation -->
-    <div style="display:flex;justify-content:center;gap:8px;margin-top:32px;" id="testi-dots">
-      <button class="testi-dot active" data-dot="0" aria-label="Go to slide 1"></button>
-<button class="testi-dot" data-dot="1" aria-label="Go to slide 2"></button>
-<button class="testi-dot" data-dot="2" aria-label="Go to slide 3"></button>
-<button class="testi-dot" data-dot="3" aria-label="Go to slide 4"></button>
     </div>
 
   </div>
 </section>
-
-
-<script>
-/* ---- Testimonials Carousel ---- */
-(function () {
-  const slides  = document.querySelectorAll('.testi-slide');
-  const dots    = document.querySelectorAll('#testi-dots .testi-dot');
-  const btnPrev = document.getElementById('testi-prev');
-  const btnNext = document.getElementById('testi-next');
-  const TOTAL   = slides.length;
-  let current   = 0;
-  let timer     = null;
-
-  function goTo(idx) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (idx + TOTAL) % TOTAL;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  function startTimer() { timer = setInterval(function () { goTo(current + 1); }, 4000); }
-  function stopTimer()  { clearInterval(timer); }
-
-  btnPrev.addEventListener('click', function () { stopTimer(); goTo(current - 1); startTimer(); });
-  btnNext.addEventListener('click', function () { stopTimer(); goTo(current + 1); startTimer(); });
-
-  dots.forEach(function (dot) {
-    dot.addEventListener('click', function () {
-      stopTimer();
-      goTo(parseInt(dot.dataset.dot, 10));
-      startTimer();
-    });
-  });
-
-  document.getElementById('testimonials').addEventListener('mouseenter', stopTimer);
-  document.getElementById('testimonials').addEventListener('mouseleave', startTimer);
-
-  startTimer();
-})();
-</script>
 
 
 <style>
