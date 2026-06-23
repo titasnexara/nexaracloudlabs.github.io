@@ -28,8 +28,6 @@
       },
     }
   </script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script type="text/javascript">(function(){ emailjs.init("OelXm9bTu-IjRWqla"); })();</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,13 +40,11 @@
     .drawer-hidden { display:none; }
     .svc-tile { background:linear-gradient(135deg,rgba(37,99,235,.13),rgba(6,182,212,.13)); border:1px solid rgba(37,99,235,0.28); width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
 
-    /* Hero */
     .careers-hero { position:relative; background:linear-gradient(135deg,#1e1b4b 0%,#1e3a8a 50%,#0e7490 100%); padding:140px 40px 80px; text-align:center; overflow:hidden; }
     #hero-canvas  { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 
     .stat-pill { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:9999px; padding:8px 20px; color:#fff; font-family:'Inter',sans-serif; font-size:14px; font-weight:500; white-space:nowrap; }
 
-    /* Why Join */
     .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
     @media(max-width:900px){ .why-grid{grid-template-columns:repeat(2,1fr)} }
     @media(max-width:540px){ .why-grid{grid-template-columns:1fr} }
@@ -56,12 +52,10 @@
     .why-card:hover { transform:translateY(-6px); box-shadow:0 20px 48px rgba(0,0,0,0.3); }
     .why-icon { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:16px; }
 
-    /* Jobs section animated background */
     .jobs-section { position:relative; background:#0F1629; padding:80px 40px; overflow:hidden; }
     #jobs-canvas  { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0.4; }
     .jobs-inner   { position:relative; z-index:1; }
 
-    /* Job cards */
     .job-listing-card { background:#0A0F1E; border:1px solid #1E2D4A; border-radius:14px; padding:24px 28px; display:flex; justify-content:space-between; align-items:center; gap:20px; transition:border-color 0.25s,box-shadow 0.25s; }
     .job-listing-card:hover { border-color:rgba(37,99,235,0.45); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
     @media(max-width:600px){ .job-listing-card{flex-direction:column;align-items:flex-start} }
@@ -74,7 +68,6 @@
     .jobs-search::placeholder { color:#64748B; }
     .jobs-search:focus { border-color:#2563EB; box-shadow:0 0 0 3px rgba(37,99,235,0.12); }
 
-    /* Process */
     .process-grid { display:grid; grid-template-columns:1fr 44px 1fr 44px 1fr 44px 1fr; align-items:start; gap:0; margin-top:48px; }
     @media(max-width:768px){ .process-grid{grid-template-columns:1fr;gap:20px} .process-connector{display:none!important} }
     .process-step-circle { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#06B6D4); display:flex; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:18px; color:#fff; margin:0 auto 16px; }
@@ -83,21 +76,17 @@
     .process-connector { display:flex; align-items:center; justify-content:center; padding-top:26px; }
     .process-connector-line { height:2px; width:44px; background:linear-gradient(90deg,#2563EB,#06B6D4); opacity:0.35; }
 
-    /* Life cards */
     .life-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
     @media(max-width:768px){ .life-grid{grid-template-columns:1fr} }
     .life-card { background:rgba(255,255,255,0.04); border:1px solid #1E2D4A; border-radius:16px; padding:32px 28px; transition:transform 0.25s,border-color 0.25s; }
     .life-card:hover { transform:translateY(-6px); border-color:rgba(37,99,235,0.4); }
 
-    /* Reveal */
     .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
 
-    /* Apply Modal */
-    #apply-modal { display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); }
-    #apply-modal.open { display:flex; }
+    /* Job Detail Modal */
+    #job-detail-modal { display:none; position:fixed; inset:0; z-index:9998; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.8); backdrop-filter:blur(6px); }
 
-    /* Footer */
     .footer-link { display:block; font-family:'Inter',sans-serif; font-size:13px; color:#64748B; text-decoration:none; margin-bottom:10px; transition:color .2s; }
     .footer-link:hover { color:#06B6D4; }
     .footer-social-btn { width:32px; height:32px; border:1px solid #1E2D4A; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; color:#64748B; font-size:12px; font-weight:700; text-decoration:none; font-family:'Inter',sans-serif; transition:background .2s,color .2s,border-color .2s; }
@@ -112,7 +101,7 @@
 
 <body class="bg-ncl-bg font-inter text-ncl-text antialiased overflow-x-hidden">
 
-<!-- ============================================================ NAVBAR ============================================================ -->
+<!-- NAVBAR -->
 <header id="navbar" class="sticky top-0 z-50 w-full bg-ncl-bg border-b border-white/[.06] relative">
   <div class="max-w-[1400px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-6">
     <a href="index.html" class="flex items-center gap-3 shrink-0 select-none" aria-label="Nexara Cloud Labs home">
@@ -139,7 +128,7 @@
       <a href="index.html#blog"         class="text-white text-[14px] hover:text-ncl-teal transition-colors duration-150">Blog</a>
       <a href="career.html"             class="text-ncl-teal text-[14px] font-semibold">Careers</a>
     </nav>
-    <div class="hidden lg:flex items-center gap-3 shrink-0" id="nav-auth-area">
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
       <a href="index.html#contact" class="px-4 py-[9px] rounded-lg border border-white/30 text-white text-[14px] font-medium hover:bg-white/10 transition-colors duration-150">Contact</a>
     </div>
     <button id="hamburger" aria-label="Open menu" aria-expanded="false" class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 rounded-lg hover:bg-white/10 transition-colors">
@@ -189,8 +178,7 @@
   </div>
 </div>
 
-
-<!-- ============================================================ HERO ============================================================ -->
+<!-- HERO -->
 <section class="careers-hero">
   <canvas id="hero-canvas"></canvas>
   <div style="position:relative;z-index:1;max-width:760px;margin:0 auto;">
@@ -207,70 +195,50 @@
   </div>
 </section>
 
-
-<!-- ============================================================ WHY JOIN -- dark, fixed HTML ============================================================ -->
+<!-- WHY JOIN -->
 <section style="background:#0A0F1E;padding:80px 40px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#ffffff;text-align:center;margin:0 0 48px;">
-      Why Engineers Love Working Here
-    </h2>
+    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#ffffff;text-align:center;margin:0 0 48px;">Why Engineers Love Working Here</h2>
     <div class="why-grid reveal">
-
       <div class="why-card">
         <div class="why-icon" style="background:linear-gradient(135deg,#1e3a8a,#2563EB);">🚀</div>
         <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#ffffff;margin:0 0 10px;">Cutting-Edge Tech Stack</h3>
         <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Work with the latest AI tools, LLMs, cloud platforms, and modern engineering practices every day.</p>
       </div>
-
       <div class="why-card">
         <div class="why-icon" style="background:linear-gradient(135deg,#0e7490,#06B6D4);">🌍</div>
         <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#ffffff;margin:0 0 10px;">Remote-First Culture</h3>
         <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Work from anywhere in India. Flexible hours, async communication, and regular team meetups.</p>
       </div>
-
       <div class="why-card">
         <div class="why-icon" style="background:linear-gradient(135deg,#7c3aed,#2563EB);">📈</div>
         <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#ffffff;margin:0 0 10px;">Rapid Career Growth</h3>
         <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Fast-growing startup means real ownership, real impact, and promotions based on merit not tenure.</p>
       </div>
-
       <div class="why-card">
         <div class="why-icon" style="background:linear-gradient(135deg,#059669,#06B6D4);">💰</div>
         <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#ffffff;margin:0 0 10px;">Competitive Compensation</h3>
         <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Market-rate salaries, ESOPs, health insurance, and generous learning and development budgets.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- ============================================================ OPEN ROLES -- animated background ============================================================ -->
+<!-- OPEN ROLES -->
 <section id="open-roles" class="jobs-section">
   <canvas id="jobs-canvas"></canvas>
   <div class="jobs-inner" style="max-width:1100px;margin:0 auto;">
-
-    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#fff;text-align:center;margin:0 0 36px;">
-      Open Positions
-    </h2>
-
+    <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#fff;text-align:center;margin:0 0 36px;">Open Positions</h2>
     <input type="text" id="job-search" class="jobs-search" placeholder="Search roles..." autocomplete="off" oninput="filterJobs()">
-
     <div id="jobs-loading" style="text-align:center;padding:40px 0;">
       <p style="font-family:'Inter',sans-serif;color:#64748B;font-size:15px;">Loading open positions...</p>
     </div>
-
     <div id="jobs-container" style="display:none;flex-direction:column;gap:16px;max-width:900px;margin:0 auto;"></div>
-
-    <p id="no-results" style="display:none;text-align:center;color:#64748B;font-family:'Inter',sans-serif;font-size:15px;padding:32px 0;">
-      No roles match your search. Try a different keyword.
-    </p>
-
+    <p id="no-results" style="display:none;text-align:center;color:#64748B;font-family:'Inter',sans-serif;font-size:15px;padding:32px 0;">No roles match your search. Try a different keyword.</p>
   </div>
 </section>
 
-
-<!-- ============================================================ HIRING PROCESS ============================================================ -->
+<!-- HIRING PROCESS -->
 <section style="background:#fff;padding:80px 40px;">
   <div style="max-width:1100px;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:12px;">
@@ -289,126 +257,29 @@
   </div>
 </section>
 
-
-<!-- ============================================================ LIFE AT NEXARA ============================================================ -->
+<!-- LIFE AT NEXARA -->
 <section style="background:#0F1629;padding:80px 40px;">
   <div style="max-width:1100px;margin:0 auto;">
     <h2 class="reveal" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:#fff;text-align:center;margin:0 0 48px;">Life at Nexara</h2>
     <div class="life-grid reveal">
-      <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🎯</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Real Ownership</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Every engineer owns their domain end to end. No ticket monkeys here -- you design, build, and ship.</p></div>
+      <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🎯</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Real Ownership</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Every engineer owns their domain end to end. No ticket monkeys here — you design, build, and ship.</p></div>
       <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🧠</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Always Learning</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">Weekly tech talks, learning budget of ₹50,000/year, and access to every major AI/cloud certification.</p></div>
       <div class="life-card"><div style="font-size:36px;margin-bottom:16px;">🤝</div><h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 12px;">Team First</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#94A3B8;line-height:1.7;margin:0;">We win together. Collaborative, not competitive. Ego-free environment where the best idea wins.</p></div>
     </div>
   </div>
 </section>
 
-
-<!-- ============================================================ APPLICATION MODAL ============================================================ -->
-<div id="apply-modal" role="dialog" aria-modal="true">
-  <div style="position:relative;background:#fff;border-radius:20px;padding:40px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.4);">
-
-    <button id="modal-close-btn" aria-label="Close"
-            style="position:absolute;top:16px;right:16px;background:none;border:1px solid #E2E8F0;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;display:flex;align-items:center;justify-content:center;line-height:1;">
-      &times;
-    </button>
-
-    <div id="apply-form-wrap">
-      <div style="margin-bottom:24px;">
-        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 6px;">APPLYING FOR</p>
-        <h3 id="modal-role-name" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;line-height:1.2;"></h3>
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Nexara Cloud Labs · Bangalore, India (Remote-First)</p>
-      </div>
-      <hr style="border:none;border-top:1px solid #E2E8F0;margin:0 0 24px;">
-      <form id="apply-form" style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <div>
-            <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Full Name *</label>
-            <input id="app-name" type="text" placeholder="Jane Smith" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-          </div>
-          <div>
-            <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address *</label>
-            <input id="app-email" type="email" placeholder="jane@gmail.com" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <div>
-            <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Phone Number</label>
-            <input id="app-phone" type="tel" placeholder="+91 9876543210" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-          </div>
-          <div>
-            <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Years of Experience</label>
-            <select id="app-experience" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;background:#fff;cursor:pointer;">
-              <option value="">Select range</option>
-              <option value="0-2">0-2 years</option>
-              <option value="2-5">2-5 years</option>
-              <option value="5-10">5-10 years</option>
-              <option value="10+">10+ years</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">LinkedIn Profile URL</label>
-          <input id="app-linkedin" type="url" placeholder="https://linkedin.com/in/yourprofile" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Portfolio / GitHub URL</label>
-          <input id="app-portfolio" type="url" placeholder="https://github.com/yourhandle" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Resume Link *</label>
-          <input id="app-resume" type="url" placeholder="https://drive.google.com/file/your-resume" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-          <div style="background:#EFF6FF;border-radius:8px;padding:10px 14px;margin-top:8px;display:flex;gap:10px;align-items:flex-start;"><span style="font-size:16px;flex-shrink:0;">📎</span><div><p style="font-family:'Inter',sans-serif;font-size:12px;color:#1d4ed8;margin:0;font-weight:600;">How to share your resume:</p><p style="font-family:'Inter',sans-serif;font-size:12px;color:#475569;margin:4px 0 0;line-height:1.7;">Upload to Google Drive → Right-click → Share → Anyone with the link → Copy link → Paste above</p></div></div>
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Why do you want to join Nexara? *</label>
-          <textarea id="app-message" rows="4" placeholder="Tell us what excites you about this role and Nexara Cloud Labs..." style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;resize:vertical;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'"></textarea>
-        </div>
-        <p id="apply-error" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#EF4444;margin:0;"></p>
-        <button type="button" id="apply-submit-btn" onclick="submitApplication()"
-          style="width:100%;padding:14px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;"
-          onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
-          Submit Application →
-        </button>
-        <p style="font-family:'Inter',sans-serif;font-size:11px;color:#94A3B8;text-align:center;margin:0;">🔒 Your details are safe. We respond to every application within 48 hours.</p>
-      </form>
-    </div>
-
-    <div id="apply-success" style="display:none;text-align:center;padding:20px 0;">
-      <div style="width:70px;height:70px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;">🎉</div>
-      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;color:#0f172a;margin:0 0 12px;">Application Submitted!</h3>
-      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 8px;">Thank you for applying for <strong id="success-role-name" style="color:#0f172a;"></strong>.</p>
-      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 20px;">Our team will review your application and get back to you within <strong style="color:#0f172a;">48 hours</strong>.</p>
-      <div id="track-status-prompt" style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:18px 20px;margin-bottom:16px;text-align:left;">
-        <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1e3a8a;margin:0 0 6px;">Want to track your application status?</p>
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#1d4ed8;line-height:1.6;margin:0 0 14px;">Create a free account to check your application status anytime - see when it moves to Under Review, Shortlisted, or Interview stage.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button onclick="closeApplyModal();showRegister();document.getElementById('auth-modal').style.display='flex';document.body.style.overflow='hidden';" style="padding:9px 18px;background:#2563EB;color:#fff;border:none;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;">Create Account</button>
-          <button onclick="closeApplyModal();showLogin();document.getElementById('auth-modal').style.display='flex';document.body.style.overflow='hidden';" style="padding:9px 18px;background:transparent;color:#2563EB;border:1px solid #2563EB;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;">Sign In</button>
-        </div>
-      </div>
-      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:14px;margin-bottom:16px;">
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">Questions? <a href="mailto:support@nexaracloudlabs.com" style="color:#2563EB;text-decoration:none;">support@nexaracloudlabs.com</a></p>
-      </div>
-      <button onclick="closeApplyModal()" style="padding:11px 28px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Done</button>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- ============================================================ JOB DETAIL MODAL ============================================================ -->
+<!-- JOB DETAIL MODAL -->
 <div id="job-detail-modal" style="display:none;position:fixed;inset:0;z-index:9998;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);">
   <div style="position:relative;background:#0F1629;border:1px solid #1E2D4A;border-radius:20px;padding:40px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.6);">
     <button onclick="closeJobDetail()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #1E2D4A;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;display:flex;align-items:center;justify-content:center;line-height:1;">&times;</button>
-
     <div id="job-detail-content"></div>
-
     <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
-      <button id="jd-apply-btn" onclick="handleApplyClick()"
-        style="flex:1;padding:13px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;min-width:140px;"
+      <a id="jd-apply-btn" href="https://forms.gle/d28nqpuh4GMMT9QU7" target="_blank"
+        style="flex:1;padding:13px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;min-width:140px;text-align:center;text-decoration:none;display:inline-block;"
         onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
         Apply Now →
-      </button>
+      </a>
       <button onclick="shareJob()"
         style="padding:13px 20px;background:transparent;color:#94A3B8;border:1px solid #1E2D4A;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;"
         onmouseover="this.style.borderColor='#2563EB';this.style.color='#93c5fd'" onmouseout="this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'">
@@ -418,93 +289,7 @@
   </div>
 </div>
 
-<!-- ============================================================ AUTH MODAL (Login / Register) ============================================================ -->
-<div id="auth-modal" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);">
-  <div style="position:relative;background:#fff;border-radius:20px;padding:40px;max-width:440px;width:100%;box-shadow:0 40px 100px rgba(0,0,0,0.5);">
-    <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #E2E8F0;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;line-height:1;">&times;</button>
-
-    <!-- Login tab -->
-    <div id="auth-login-tab">
-      <div style="text-align:center;margin-bottom:24px;">
-        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 8px;">NEXARA CLOUD LABS</p>
-        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;">Sign in to your account</h3>
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Track your job applications</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address</label>
-          <input id="login-email" type="email" placeholder="you@email.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Password</label>
-          <input id="login-password" type="password" placeholder="••••••••" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <p id="login-error" style="display:none;font-size:13px;color:#EF4444;font-family:'Inter',sans-serif;margin:0;"></p>
-        <button onclick="doLogin()" id="login-btn"
-          style="width:100%;padding:13px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;"
-          onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
-          Sign In
-        </button>
-        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
-          New here? <a href="#" onclick="showRegister()" style="color:#2563EB;font-weight:600;text-decoration:none;">Create an account</a>
-        </p>
-      </div>
-    </div>
-
-    <!-- Register tab -->
-    <div id="auth-register-tab" style="display:none;">
-      <div style="text-align:center;margin-bottom:24px;">
-        <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 8px;">NEXARA CLOUD LABS</p>
-        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0;">Create your account</h3>
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:6px 0 0;">Apply and track your applications</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Full Name</label>
-          <input id="reg-name" type="text" placeholder="Jane Smith" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address</label>
-          <input id="reg-email" type="email" placeholder="you@email.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <div>
-          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Password</label>
-          <input id="reg-password" type="password" placeholder="Min 6 characters" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
-        </div>
-        <p id="reg-error" style="display:none;font-size:13px;color:#EF4444;font-family:'Inter',sans-serif;margin:0;"></p>
-        <button onclick="doRegister()" id="reg-btn"
-          style="width:100%;padding:13px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;"
-          onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
-          Create Account
-        </button>
-        <p style="text-align:center;font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0;">
-          Already have an account? <a href="#" onclick="showLogin()" style="color:#2563EB;font-weight:600;text-decoration:none;">Sign in</a>
-        </p>
-      </div>
-    </div>
-
-    <!-- Email confirmation notice -->
-    <div id="auth-confirm-tab" style="display:none;text-align:center;padding:20px 0;">
-      <div style="font-size:48px;margin-bottom:16px;">📧</div>
-      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#0f172a;margin:0 0 10px;">Check your email</h3>
-      <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.7;margin:0 0 20px;">We sent a confirmation link to your email. Click it to verify your account, then come back and sign in.</p>
-      <button onclick="showLogin()" style="padding:11px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Back to Sign In</button>
-    </div>
-
-  </div>
-</div>
-
-<!-- ============================================================ MY APPLICATIONS MODAL ============================================================ -->
-<div id="my-apps-modal" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);">
-  <div style="position:relative;background:#0F1629;border:1px solid #1E2D4A;border-radius:20px;padding:40px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.6);">
-    <button onclick="closeMyApps()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #1E2D4A;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;line-height:1;">&times;</button>
-    <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#fff;margin:0 0 6px;">My Applications</h3>
-    <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0 0 24px;">Track the status of your job applications</p>
-    <div id="my-apps-list"></div>
-  </div>
-</div>
-
-<!-- ============================================================ FOOTER ============================================================ -->
+<!-- FOOTER -->
 <footer id="footer" style="background:#050810;padding:60px 0 32px;border-top:2px solid #06B6D4;">
   <div class="max-w-[1400px] mx-auto px-5 sm:px-8">
     <div class="footer-grid">
@@ -547,119 +332,54 @@
       </div>
       <div>
         <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
-        <a href="mailto:support@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">support@nexaracloudlabs.com</a>
+        <a href="mailto:titas@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;">titas@nexaracloudlabs.com</a>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon-Fri, 9am-6pm IST</p>
       </div>
     </div>
     <div style="padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
-      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved. <a href="/admin/" style="color:#1E2D4A;text-decoration:none;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#1E2D4A'">·</a></p>
+      <p class="font-inter" style="font-size:13px;color:#64748B;margin:0;">© 2025 Nexara Cloud Labs Private Limited. All rights reserved.</p>
       <div style="display:flex;gap:20px;flex-wrap:wrap;">
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Privacy Policy</a>
         <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Terms of Service</a>
-        <a href="#" class="font-inter" style="font-size:13px;color:#64748B;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748B'">Cookie Policy</a>
       </div>
     </div>
   </div>
 </footer>
 
-
-<!-- ============================================================ ALL JAVASCRIPT ============================================================ -->
 <script>
-/* ---- Hero particle canvas ---- */
+/* Hero particle canvas */
 (function(){
-  var canvas = document.getElementById('hero-canvas');
-  var ctx = canvas.getContext('2d');
-  var pts = [];
-  var COUNT = 55, LINK = 110;
-
-  function resize(){
-    canvas.width  = canvas.parentElement.offsetWidth;
-    canvas.height = canvas.parentElement.offsetHeight;
-  }
-  function init(){
-    pts = Array.from({length:COUNT},function(){
-      return { x:Math.random()*canvas.width, y:Math.random()*canvas.height,
-               vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6 };
-    });
-  }
-  function tick(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    for(var i=0;i<pts.length;i++){
-      pts[i].x+=pts[i].vx; pts[i].y+=pts[i].vy;
-      if(pts[i].x<0||pts[i].x>canvas.width)  pts[i].vx=-pts[i].vx;
-      if(pts[i].y<0||pts[i].y>canvas.height) pts[i].vy=-pts[i].vy;
-      for(var j=i+1;j<pts.length;j++){
-        var dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
-        if(dx*dx+dy*dy<LINK*LINK){
-          ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle='rgba(255,255,255,0.07)'; ctx.lineWidth=0.6; ctx.stroke();
-        }
-      }
-      ctx.beginPath(); ctx.arc(pts[i].x,pts[i].y,1.4,0,Math.PI*2);
-      ctx.fillStyle='rgba(255,255,255,0.22)'; ctx.fill();
-    }
-    requestAnimationFrame(tick);
-  }
-  resize(); init(); tick();
+  var canvas=document.getElementById('hero-canvas');
+  var ctx=canvas.getContext('2d');
+  var pts=[];
+  var COUNT=55,LINK=110;
+  function resize(){canvas.width=canvas.parentElement.offsetWidth;canvas.height=canvas.parentElement.offsetHeight;}
+  function init(){pts=Array.from({length:COUNT},function(){return{x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6};});}
+  function tick(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<pts.length;i++){pts[i].x+=pts[i].vx;pts[i].y+=pts[i].vy;if(pts[i].x<0||pts[i].x>canvas.width)pts[i].vx=-pts[i].vx;if(pts[i].y<0||pts[i].y>canvas.height)pts[i].vy=-pts[i].vy;for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;if(dx*dx+dy*dy<LINK*LINK){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=0.6;ctx.stroke();}}ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.4,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.22)';ctx.fill();}requestAnimationFrame(tick);}
+  resize();init();tick();
   window.addEventListener('resize',function(){resize();init();},{passive:true});
 })();
 
-/* ---- Jobs section floating orbs animation ---- */
+/* Jobs section orbs */
 (function(){
-  var canvas = document.getElementById('jobs-canvas');
-  var ctx = canvas.getContext('2d');
-  var orbs = [];
-
-  function resize(){
-    canvas.width  = canvas.parentElement.offsetWidth;
-    canvas.height = canvas.parentElement.offsetHeight;
-  }
-
-  function init(){
-    orbs = [];
-    var colors = ['rgba(37,99,235,', 'rgba(6,182,212,', 'rgba(124,58,237,'];
-    for(var i=0;i<6;i++){
-      orbs.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: 80 + Math.random()*120,
-        vx:(Math.random()-.5)*.4,
-        vy:(Math.random()-.5)*.4,
-        color: colors[Math.floor(Math.random()*colors.length)],
-        op: 0.04 + Math.random()*0.06
-      });
-    }
-  }
-
-  function tick(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    orbs.forEach(function(o){
-      o.x+=o.vx; o.y+=o.vy;
-      if(o.x-o.r<0||o.x+o.r>canvas.width)  o.vx=-o.vx;
-      if(o.y-o.r<0||o.y+o.r>canvas.height) o.vy=-o.vy;
-      var g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);
-      g.addColorStop(0, o.color+o.op+')');
-      g.addColorStop(1, o.color+'0)');
-      ctx.beginPath(); ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
-      ctx.fillStyle=g; ctx.fill();
-    });
-    requestAnimationFrame(tick);
-  }
-  resize(); init(); tick();
+  var canvas=document.getElementById('jobs-canvas');
+  var ctx=canvas.getContext('2d');
+  var orbs=[];
+  function resize(){canvas.width=canvas.parentElement.offsetWidth;canvas.height=canvas.parentElement.offsetHeight;}
+  function init(){orbs=[];var colors=['rgba(37,99,235,','rgba(6,182,212,','rgba(124,58,237,'];for(var i=0;i<6;i++){orbs.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:80+Math.random()*120,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,color:colors[Math.floor(Math.random()*colors.length)],op:0.04+Math.random()*0.06});}}
+  function tick(){ctx.clearRect(0,0,canvas.width,canvas.height);orbs.forEach(function(o){o.x+=o.vx;o.y+=o.vy;if(o.x-o.r<0||o.x+o.r>canvas.width)o.vx=-o.vx;if(o.y-o.r<0||o.y+o.r>canvas.height)o.vy=-o.vy;var g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);g.addColorStop(0,o.color+o.op+')');g.addColorStop(1,o.color+'0)');ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();});requestAnimationFrame(tick);}
+  resize();init();tick();
   window.addEventListener('resize',function(){resize();init();},{passive:true});
 })();
 
-/* ---- Navbar scroll ---- */
+/* Navbar scroll */
 (function(){
   var navbar=document.getElementById('navbar');
-  window.addEventListener('scroll',function(){
-    navbar.style.borderBottomColor=window.scrollY>40?'rgba(30,45,74,0.9)':'';
-    navbar.style.background=window.scrollY>40?'rgba(10,15,30,0.97)':'';
-  },{passive:true});
+  window.addEventListener('scroll',function(){navbar.style.borderBottomColor=window.scrollY>40?'rgba(30,45,74,0.9)':'';navbar.style.background=window.scrollY>40?'rgba(10,15,30,0.97)':'';},{passive:true});
 })();
 
-/* ---- Mega Dropdown ---- */
+/* Mega Dropdown */
 (function(){
   var ddTrigger=document.getElementById('services-trigger');
   var ddPanel=document.getElementById('mega-dropdown');
@@ -672,7 +392,7 @@
   document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose()});
 })();
 
-/* ---- Mobile Drawer ---- */
+/* Mobile Drawer */
 (function(){
   var hamburger=document.getElementById('hamburger');
   var mobileDrawer=document.getElementById('mobile-drawer');
@@ -687,603 +407,118 @@
   document.addEventListener('keydown',function(e){if(e.key==='Escape')drawerClose()});
 })();
 
-/* ---- Scroll Reveal ---- */
+/* Scroll Reveal */
 (function(){
   var revEls=document.querySelectorAll('.reveal');
   if(!revEls.length)return;
-  var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target)}})},{threshold:0.10});
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target)}});},{threshold:0.10});
   revEls.forEach(function(el){obs.observe(el)});
 })();
 
-/* ---- Apply Modal ---- */
-var currentRole = '';
-
-function openModal(role) {
-  currentRole = role;
-  document.getElementById('modal-role-name').textContent   = role;
-  document.getElementById('apply-form-wrap').style.display = 'block';
-  document.getElementById('apply-success').style.display   = 'none';
-  document.getElementById('apply-form').reset();
-  document.getElementById('apply-error').style.display     = 'none';
-  var modal = document.getElementById('apply-modal');
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeApplyModal() {
-  document.getElementById('apply-modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('modal-close-btn').addEventListener('click', closeApplyModal);
-document.getElementById('apply-modal').addEventListener('click', function(e){ if(e.target===this) closeApplyModal(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeApplyModal(); });
-
-function submitApplication() {
-  var name      = document.getElementById('app-name').value.trim();
-  var email     = document.getElementById('app-email').value.trim();
-  var phone     = document.getElementById('app-phone').value.trim();
-  var exp       = document.getElementById('app-experience').value;
-  var linkedin  = document.getElementById('app-linkedin').value.trim();
-  var portfolio = document.getElementById('app-portfolio').value.trim();
-  var resume    = document.getElementById('app-resume').value.trim();
-  var message   = document.getElementById('app-message').value.trim();
-  var errorEl   = document.getElementById('apply-error');
-
-  if(!name)    { errorEl.textContent='Please enter your full name.'; errorEl.style.display='block'; return; }
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errorEl.textContent='Please enter a valid email address.'; errorEl.style.display='block'; return; }
-  if(!message) { errorEl.textContent='Please tell us why you want to join Nexara.'; errorEl.style.display='block'; return; }
-  if(!resume)  { errorEl.textContent='Please paste your Google Drive resume link.'; errorEl.style.display='block'; return; }
-
-  errorEl.style.display = 'none';
-  var btn = document.getElementById('apply-submit-btn');
-  btn.textContent='Submitting...'; btn.disabled=true; btn.style.opacity='0.7';
-
-  var formData = new FormData();
-  formData.append('Role',       currentRole);
-  formData.append('Name',       name);
-  formData.append('Email',      email);
-  formData.append('Phone',      phone      || 'Not provided');
-  formData.append('Experience', exp        || 'Not specified');
-  formData.append('LinkedIn',   linkedin   || 'Not provided');
-  formData.append('Portfolio',  portfolio  || 'Not provided');
-  formData.append('Resume',     resume);
-  formData.append('Message',    message);
-
-  fetch('https://formspree.io/f/xrevjyro', {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(function(r) {
-    if (r.ok) { return r.json(); }
-    throw new Error('Network error');
-  })
-  .then(function(data) {
-    if (data.ok || data.next) {
-      document.getElementById('success-role-name').textContent = currentRole;
-      document.getElementById('apply-form-wrap').style.display = 'none';
-      document.getElementById('apply-success').style.display   = 'block';
-    } else {
-      throw new Error('Submission failed');
-    }
-    btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-  })
-  .catch(function(err) {
-    console.error('Formspree error:', err);
-    errorEl.textContent='Something went wrong. Please email us at support@nexaracloudlabs.com';
-    errorEl.style.display='block';
-    btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-  });
-}
-
-/* ---- Jobs from Google Sheets ---- */
+/* Jobs */
 var JOBS_API = 'https://script.google.com/macros/s/AKfycbxcYnyXJ7AUA4ceF6aw_NHxsmCWeSSUgGDdXdhaTsvsRj0uFREZjqtx0qkISQZeFlSRXA/exec';
-var allJobs  = [];
+var allJobs = [];
+var currentJob = null;
+var APPLY_FORM_URL = 'https://forms.gle/d28nqpuh4GMMT9QU7';
 
-function loadJobs() {
+function loadJobs(){
   fetch(JOBS_API)
-    .then(function(r){ return r.json(); })
+    .then(function(r){return r.json();})
     .then(function(data){
-      allJobs = data.jobs || [];
-      document.getElementById('jobs-loading').style.display = 'none';
-      document.getElementById('jobs-container').style.display = 'flex';
+      allJobs=data.jobs||[];
+      document.getElementById('jobs-loading').style.display='none';
+      document.getElementById('jobs-container').style.display='flex';
       renderJobs(allJobs);
     })
     .catch(function(){
-      document.getElementById('jobs-loading').innerHTML =
-        '<p style="font-family:Inter,sans-serif;color:#EF4444;font-size:14px;">Could not load jobs. Please refresh or contact support@nexaracloudlabs.com</p>';
+      document.getElementById('jobs-loading').innerHTML='<p style="font-family:Inter,sans-serif;color:#EF4444;font-size:14px;">Could not load jobs. Please refresh or contact titas@nexaracloudlabs.com</p>';
     });
 }
 
-function renderJobs(jobs) {
-  var container = document.getElementById('jobs-container');
-  var noResults = document.getElementById('no-results');
+function renderJobs(jobs){
+  var container=document.getElementById('jobs-container');
+  var noResults=document.getElementById('no-results');
   if(!jobs.length){
     container.innerHTML='<p style="text-align:center;color:#64748B;font-family:Inter,sans-serif;font-size:15px;padding:32px 0;">No open positions at the moment. Check back soon!</p>';
-    noResults.style.display='none'; return;
+    noResults.style.display='none';return;
   }
   noResults.style.display='none';
-  container.innerHTML = jobs.map(function(job){
+  window._jobsStore=jobs;
+  container.innerHTML=jobs.map(function(job,idx){
     return '<div class="job-listing-card">'+
       '<div>'+
-      '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">'+job.title+'</p>'+
-      '<div style="display:flex;flex-wrap:wrap;gap:8px;">'+
+        '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">'+job.title+'</p>'+
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;">'+
+          '<span class="badge-dept">'+(job.department||'General')+'</span>'+
+          '<span class="badge-loc">'+job.location+'</span>'+
+          '<span class="badge-type">'+job.type+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<button onclick="openJobDetail('+idx+')" '+
+        'style="background:transparent;color:#06B6D4;border:1px solid rgba(6,182,212,0.4);border-radius:10px;padding:10px 20px;'+
+        'font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;" '+
+        'onmouseover="this.style.background=\'rgba(6,182,212,0.1)\'" onmouseout="this.style.background=\'transparent\'">'+
+        'View Details</button>'+
+    '</div>';
+  }).join('');
+}
+
+function filterJobs(){
+  var query=document.getElementById('job-search').value.toLowerCase().trim();
+  if(!query){renderJobs(allJobs);return;}
+  var filtered=allJobs.filter(function(job){
+    return(job.title+' '+(job.department||'')+' '+job.location+' '+job.type).toLowerCase().includes(query);
+  });
+  renderJobs(filtered);
+  document.getElementById('no-results').style.display=filtered.length?'none':'block';
+}
+
+function openJobDetail(idx){
+  var job=window._jobsStore?window._jobsStore[idx]:null;
+  if(!job)return;
+  currentJob=job;
+  var desc=job.description||'Please apply to find out more about this exciting opportunity.';
+  document.getElementById('job-detail-content').innerHTML=
+    '<p style="font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#06B6D4;text-transform:uppercase;margin:0 0 10px;">OPEN POSITION</p>'+
+    '<h2 style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:800;font-size:26px;color:#fff;margin:0 0 12px;line-height:1.2;">'+job.title+'</h2>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">'+
       '<span class="badge-dept">'+(job.department||'General')+'</span>'+
       '<span class="badge-loc">'+job.location+'</span>'+
       '<span class="badge-type">'+job.type+'</span>'+
-      '</div>'+
-      (job.description?'<p style="font-family:Inter,sans-serif;font-size:13px;color:#64748B;margin:10px 0 0;line-height:1.6;">'+job.description+'</p>':'')+
-      '</div>'+
-      '<button class="apply-btn" data-role="'+job.title+'" '+
-      'style="background:#2563EB;color:#fff;border:none;border-radius:10px;padding:11px 22px;'+
-      'font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:600;font-size:14px;cursor:pointer;'+
-      'white-space:nowrap;flex-shrink:0;transition:background 0.2s;" '+
-      'onmouseover="this.style.background=\'#1d4ed8\'" onmouseout="this.style.background=\'#2563EB\'">'+
-      'Apply Now →</button>'+
-      '</div>';
-  }).join('');
-  container.querySelectorAll('.apply-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){ openModal(btn.dataset.role); });
-  });
+    '</div>'+
+    '<hr style="border:none;border-top:1px solid #1E2D4A;margin:0 0 20px;">'+
+    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.9;white-space:pre-line;">'+desc+'</div>';
+
+  var modal=document.getElementById('job-detail-modal');
+  modal.style.display='flex';
+  document.body.style.overflow='hidden';
 }
 
-function filterJobs() {
-  var query = document.getElementById('job-search').value.toLowerCase().trim();
-  if(!query){ renderJobs(allJobs); return; }
-  var filtered = allJobs.filter(function(job){
-    return (job.title+' '+(job.department||'')+' '+job.location+' '+job.type).toLowerCase().includes(query);
-  });
-  renderJobs(filtered);
-  document.getElementById('no-results').style.display = filtered.length?'none':'block';
+function closeJobDetail(){
+  document.getElementById('job-detail-modal').style.display='none';
+  document.body.style.overflow='';
+}
+
+document.getElementById('job-detail-modal').addEventListener('click',function(e){if(e.target===this)closeJobDetail();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeJobDetail();});
+
+function shareJob(){
+  if(!currentJob)return;
+  var url='https://nexaracloudlabs.com/career#open-roles';
+  var text=currentJob.title+' - Open Position at Nexara Cloud Labs\n'+url;
+  if(navigator.share){
+    navigator.share({title:currentJob.title+' - Nexara Cloud Labs',text:'Check out this job opening at Nexara Cloud Labs!',url:url}).catch(function(){});
+  } else {
+    var temp=document.createElement('textarea');
+    temp.value=text;document.body.appendChild(temp);temp.select();document.execCommand('copy');document.body.removeChild(temp);
+    var t=document.createElement('div');
+    t.textContent='✅ Link copied to clipboard!';
+    t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#2563EB;color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);';
+    document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},3000);
+  }
 }
 
 loadJobs();
 </script>
-
-<!-- ============================================================ SUPABASE JOB PORTAL ============================================================ -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-/* -- Supabase config -- */
-const SUPA_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
-const SUPA_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
-const _supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
-
-/* -- State -- */
-var currentUser  = null;
-var currentJob   = null;
-var pendingJobId = null;
-var appliedJobs  = [];  // track which jobs user already applied to
-
-/* -- Toast helper -- */
-function showToast(msg, color, duration) {
-  var t = document.createElement('div');
-  t.textContent = msg;
-  t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:'+(color||'#2563EB')+';color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);white-space:nowrap;';
-  document.body.appendChild(t);
-  setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, duration||3000);
-}
-
-/* -- Auth state listener -- */
-_supa.auth.onAuthStateChange(function(event, session) {
-  currentUser = session ? session.user : null;
-  updateNavbar();
-  if (currentUser) loadAppliedJobs();
-});
-
-/* -- Check session on load -- */
-_supa.auth.getSession().then(function(res) {
-  currentUser = res.data.session ? res.data.session.user : null;
-  updateNavbar();
-  if (currentUser) {
-    loadAppliedJobs();
-    showToast('👋 Welcome back, ' + (currentUser.user_metadata && currentUser.user_metadata.full_name ? currentUser.user_metadata.full_name : currentUser.email), '#0F1629', 3000);
-  }
-});
-
-/* -- Load jobs user already applied to -- */
-function loadAppliedJobs() {
-  if (!currentUser) return;
-  _supa.from('applications')
-    .select('job_id, job_title')
-    .eq('user_id', currentUser.id)
-    .then(function(res) {
-      if (res.data) {
-        appliedJobs = res.data.map(function(a){ return a.job_title; });
-      }
-    });
-}
-
-/* -- Update navbar -- */
-function updateNavbar() {
-  ['portal-signin-btn','portal-register-btn','portal-myapps-btn','portal-signout-btn','portal-nav-btn'].forEach(function(id){
-    var el = document.getElementById(id); if(el) el.remove();
-  });
-
-  var nav = document.getElementById('nav-auth-area');
-  if (!nav) return;
-
-  if (currentUser) {
-    var signOutBtn = document.createElement('button');
-    signOutBtn.id = 'portal-signout-btn';
-    signOutBtn.textContent = 'Sign Out';
-    signOutBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(239,68,68,0.35);background:transparent;color:#EF4444;transition:all 0.2s;';
-    signOutBtn.onmouseover = function(){ this.style.background='rgba(239,68,68,0.1)'; };
-    signOutBtn.onmouseout  = function(){ this.style.background='transparent'; };
-    signOutBtn.onclick = doLogout;
-    nav.insertBefore(signOutBtn, nav.firstChild);
-
-    var myAppsBtn = document.createElement('button');
-    myAppsBtn.id = 'portal-myapps-btn';
-    myAppsBtn.textContent = 'My Applications';
-    myAppsBtn.style.cssText = 'padding:8px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #1E2D4A;background:transparent;color:#94A3B8;transition:all 0.2s;';
-    myAppsBtn.onmouseover = function(){ this.style.borderColor='#06B6D4';this.style.color='#06B6D4'; };
-    myAppsBtn.onmouseout  = function(){ this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'; };
-    myAppsBtn.onclick = openMyApps;
-    nav.insertBefore(myAppsBtn, nav.firstChild);
-  } else {
-    var authBtn = document.createElement('button');
-    authBtn.id = 'portal-signin-btn';
-    authBtn.textContent = 'Sign In / Register';
-    authBtn.style.cssText = 'padding:8px 20px;border-radius:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#2563EB;color:#fff;transition:all 0.2s;';
-    authBtn.onmouseover = function(){ this.style.background='#1d4ed8'; };
-    authBtn.onmouseout  = function(){ this.style.background='#2563EB'; };
-    authBtn.onclick = function(){ showLogin(); openAuthModal(); };
-    nav.insertBefore(authBtn, nav.firstChild);
-  }
-}
-
-
-/* -- Override renderJobs -- */
-var _origRenderJobs = renderJobs;
-renderJobs = function(jobs) {
-  var container = document.getElementById('jobs-container');
-  var noResults = document.getElementById('no-results');
-  if (!jobs.length) {
-    container.innerHTML = '<p style="text-align:center;color:#64748B;font-family:Inter,sans-serif;font-size:15px;padding:32px 0;">No open positions at the moment. Check back soon!</p>';
-    noResults.style.display = 'none'; return;
-  }
-  noResults.style.display = 'none';
-  window._jobsStore = jobs;
-  container.innerHTML = jobs.map(function(job, idx) {
-    return '<div class="job-listing-card">' +
-      '<div>' +
-        '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 10px;">' + job.title + '</p>' +
-        '<div style="display:flex;flex-wrap:wrap;gap:8px;">' +
-          '<span class="badge-dept">'+(job.department||'General')+'</span>' +
-          '<span class="badge-loc">'+job.location+'</span>' +
-          '<span class="badge-type">'+job.type+'</span>' +
-        '</div>' +
-      '</div>' +
-      '<button onclick="openJobDetail('+idx+')" ' +
-        'style="background:transparent;color:#06B6D4;border:1px solid rgba(6,182,212,0.4);border-radius:10px;padding:10px 20px;' +
-        'font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;" ' +
-        'onmouseover="this.style.background=\'rgba(6,182,212,0.1)\'" onmouseout="this.style.background=\'transparent\'">' +
-        'View Details</button>' +
-    '</div>';
-  }).join('');
-};
-
-/* -- Job Detail Modal -- */
-function openJobDetail(idx) {
-  var job = window._jobsStore ? window._jobsStore[idx] : null;
-  if (!job) return;
-  currentJob = job;
-
-  var alreadyApplied = appliedJobs.indexOf(job.title) !== -1;
-  var desc = job.description || 'Please apply to find out more about this exciting opportunity.';
-
-  document.getElementById('job-detail-content').innerHTML =
-    '<p style="font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#06B6D4;text-transform:uppercase;margin:0 0 10px;">OPEN POSITION</p>' +
-    '<h2 style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:800;font-size:26px;color:#fff;margin:0 0 12px;line-height:1.2;">' + job.title + '</h2>' +
-    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">' +
-      '<span class="badge-dept">'+(job.department||'General')+'</span>' +
-      '<span class="badge-loc">'+job.location+'</span>' +
-      '<span class="badge-type">'+job.type+'</span>' +
-    '</div>' +
-    '<hr style="border:none;border-top:1px solid #1E2D4A;margin:0 0 20px;">' +
-    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.9;white-space:pre-line;">' + desc + '</div>';
-
-  // Update apply button based on status
-  var applyBtn = document.getElementById('jd-apply-btn');
-  if (alreadyApplied) {
-    applyBtn.textContent = '✅ Already Applied';
-    applyBtn.disabled = true;
-    applyBtn.style.background = '#0F1629';
-    applyBtn.style.color = '#06B6D4';
-    applyBtn.style.border = '1px solid rgba(6,182,212,0.3)';
-    applyBtn.onclick = null;
-  } else {
-    applyBtn.textContent = 'Apply Now →';
-    applyBtn.disabled = false;
-    applyBtn.style.background = '#2563EB';
-    applyBtn.style.color = '#fff';
-    applyBtn.style.border = 'none';
-    applyBtn.onclick = handleApplyClick;
-  }
-
-  var modal = document.getElementById('job-detail-modal');
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeJobDetail() {
-  document.getElementById('job-detail-modal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-document.getElementById('job-detail-modal').addEventListener('click', function(e){ if(e.target===this) closeJobDetail(); });
-
-/* -- Share job -- */
-function shareJob() {
-  if (!currentJob) return;
-  var url = 'https://nexaracloudlabs.com/career.html#open-roles';
-  var text = currentJob.title + ' - Open Position at Nexara Cloud Labs\n' + url;
-  if (navigator.share) {
-    navigator.share({ title: currentJob.title + ' - Nexara Cloud Labs', text: 'Check out this job opening at Nexara Cloud Labs!', url: url }).catch(function(){});
-  } else {
-    var temp = document.createElement('textarea');
-    temp.value = text;
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand('copy');
-    document.body.removeChild(temp);
-    showToast('✅ Link copied to clipboard!', '#2563EB');
-  }
-}
-
-/* -- Handle Apply click -- no login required to apply -- */
-function handleApplyClick() {
-  if (!currentJob) return;
-  // Only check duplicate if user is logged in
-  if (currentUser && appliedJobs.indexOf(currentJob.title) !== -1) {
-    showToast('⚠️ You have already applied for this role.', '#F59E0B');
-    return;
-  }
-  // No login required — open form directly
-  closeJobDetail();
-  openApplyForm();
-}
-
-/* -- Open apply form -- */
-function openApplyForm() {
-  if (!currentJob) return;
-  // Only block duplicate if logged in
-  if (currentUser && appliedJobs.indexOf(currentJob.title) !== -1) {
-    showToast('⚠️ You have already applied for this role.', '#F59E0B');
-    return;
-  }
-  document.getElementById('modal-role-name').textContent = currentJob.title;
-  document.getElementById('apply-form-wrap').style.display = 'block';
-  document.getElementById('apply-success').style.display   = 'none';
-  document.getElementById('apply-form').reset();
-  document.getElementById('apply-error').style.display     = 'none';
-  if (currentUser && currentUser.email) {
-    document.getElementById('app-email').value = currentUser.email;
-  }
-  var modal = document.getElementById('apply-modal');
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-/* -- Submit application -- */
-submitApplication = function() {
-  var name     = document.getElementById('app-name').value.trim();
-  var email    = document.getElementById('app-email').value.trim();
-  var phone    = document.getElementById('app-phone').value.trim();
-  var exp      = document.getElementById('app-experience').value;
-  var linkedin = document.getElementById('app-linkedin').value.trim();
-  var portfolio= document.getElementById('app-portfolio').value.trim();
-  var resume   = document.getElementById('app-resume').value.trim();
-  var message  = document.getElementById('app-message').value.trim();
-  var errorEl  = document.getElementById('apply-error');
-
-  if (!name)   { errorEl.textContent='Please enter your full name.'; errorEl.style.display='block'; return; }
-  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent='Please enter a valid email address.'; errorEl.style.display='block'; return; }
-  if (!resume) { errorEl.textContent='Please paste your Google Drive resume link.'; errorEl.style.display='block'; return; }
-  if (!message){ errorEl.textContent='Please tell us why you want to join Nexara.'; errorEl.style.display='block'; return; }
-
-  // Final duplicate check
-  var jobTitle = currentJob ? currentJob.title : document.getElementById('modal-role-name').textContent;
-  if (appliedJobs.indexOf(jobTitle) !== -1) {
-    errorEl.textContent = 'You have already applied for this role.';
-    errorEl.style.display = 'block'; return;
-  }
-
-  errorEl.style.display = 'none';
-  var btn = document.getElementById('apply-submit-btn');
-  btn.textContent='Submitting...'; btn.disabled=true; btn.style.opacity='0.7';
-
-  // Save to Supabase
-  _supa.from('applications').insert({
-    user_id:    currentUser ? currentUser.id : null,
-    job_title:  jobTitle,
-    job_id:     currentJob ? (currentJob.id || jobTitle) : jobTitle,
-    full_name:  name,
-    email:      email,
-    phone:      phone      || null,
-    experience: exp        || null,
-    linkedin:   linkedin   || null,
-    portfolio:  portfolio  || null,
-    resume_link:resume,
-    message:    message,
-    status:     'Applied'
-  }).then(function(res) {
-    if (res.error) { console.error(res.error); }
-    // Add to local applied list to prevent duplicate in same session
-    appliedJobs.push(jobTitle);
-    sendEmailNotification(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
-  }).catch(function(err) {
-    console.error(err);
-    sendEmailNotification(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl);
-  });
-};
-
-function sendEmailNotification(name, email, phone, exp, linkedin, portfolio, resume, message, jobTitle, btn, errorEl) {
-  var templateParams = {
-    role:       jobTitle,
-    name:       name,
-    from_name:  name,
-    from_email: email,
-    email:      email,
-    phone:      phone      || 'Not provided',
-    experience: exp ? exp + ' years' : 'Not specified',
-    linkedin:   linkedin   || 'Not provided',
-    portfolio:  portfolio  || 'Not provided',
-    resume:     resume     || 'Not provided',
-    message:    message,
-    company:    'Nexara Cloud Labs',
-    service:    jobTitle,
-    budget:     ''
-  };
-
-  emailjs.send('service_75046rp', 'template_bskusn7', templateParams)
-    .then(function() { showSuccess(jobTitle, btn); })
-    .catch(function(err) { console.error('EmailJS error:', err); showSuccess(jobTitle, btn); });
-}
-
-function showSuccess(jobTitle, btn) {
-  document.getElementById('success-role-name').textContent = jobTitle;
-  document.getElementById('apply-form-wrap').style.display = 'none';
-  document.getElementById('apply-success').style.display   = 'block';
-  // Hide track prompt if already logged in
-  var prompt = document.getElementById('track-status-prompt');
-  if (prompt) prompt.style.display = currentUser ? 'none' : 'block';
-  btn.textContent='Submit Application →'; btn.disabled=false; btn.style.opacity='1';
-}
-
-/* -- Auth Modal -- */
-function openAuthModal() {
-  showLogin();
-  document.getElementById('auth-modal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeAuthModal() {
-  document.getElementById('auth-modal').style.display = 'none';
-  document.body.style.overflow = '';
-  pendingJobId = null; // clear pending if user dismisses
-}
-function showLogin() {
-  document.getElementById('auth-login-tab').style.display    = 'block';
-  document.getElementById('auth-register-tab').style.display = 'none';
-  document.getElementById('auth-confirm-tab').style.display  = 'none';
-  document.getElementById('login-error').style.display = 'none';
-}
-function showRegister() {
-  document.getElementById('auth-login-tab').style.display    = 'none';
-  document.getElementById('auth-register-tab').style.display = 'block';
-  document.getElementById('auth-confirm-tab').style.display  = 'none';
-  document.getElementById('reg-error').style.display = 'none';
-}
-document.getElementById('auth-modal').addEventListener('click', function(e){ if(e.target===this) closeAuthModal(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeAuthModal(); closeJobDetail(); closeMyApps(); } });
-
-function doLogin() {
-  var email = document.getElementById('login-email').value.trim();
-  var pass  = document.getElementById('login-password').value;
-  var errEl = document.getElementById('login-error');
-  var btn   = document.getElementById('login-btn');
-  if (!email||!pass) { errEl.textContent='Please enter email and password.'; errEl.style.display='block'; return; }
-  errEl.style.display='none';
-  btn.textContent='Signing in...'; btn.disabled=true;
-  _supa.auth.signInWithPassword({ email: email, password: pass })
-    .then(function(res) {
-      btn.textContent='Sign In'; btn.disabled=false;
-      if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
-      currentUser = res.data.user;
-      closeAuthModal();
-      updateNavbar();
-      loadAppliedJobs();
-      showToast('✅ Signed in successfully!', '#059669');
-      if (pendingJobId) {
-        currentJob = pendingJobId;
-        pendingJobId = null;
-        setTimeout(openApplyForm, 300);
-      }
-    });
-}
-
-function doRegister() {
-  var name  = document.getElementById('reg-name').value.trim();
-  var email = document.getElementById('reg-email').value.trim();
-  var pass  = document.getElementById('reg-password').value;
-  var errEl = document.getElementById('reg-error');
-  var btn   = document.getElementById('reg-btn');
-  if (!name||!email||!pass) { errEl.textContent='Please fill in all fields.'; errEl.style.display='block'; return; }
-  if (pass.length < 6) { errEl.textContent='Password must be at least 6 characters.'; errEl.style.display='block'; return; }
-  errEl.style.display='none';
-  btn.textContent='Creating account...'; btn.disabled=true;
-  _supa.auth.signUp({ email: email, password: pass, options: { data: { full_name: name } } })
-    .then(function(res) {
-      btn.textContent='Create Account'; btn.disabled=false;
-      if (res.error) { errEl.textContent=res.error.message; errEl.style.display='block'; return; }
-      document.getElementById('auth-login-tab').style.display    = 'none';
-      document.getElementById('auth-register-tab').style.display = 'none';
-      document.getElementById('auth-confirm-tab').style.display  = 'block';
-    });
-}
-
-/* -- My Applications -- */
-function openMyApps() {
-  if (!currentUser) { openAuthModal(); return; }
-  document.getElementById('my-apps-modal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  loadMyApplications();
-}
-function closeMyApps() {
-  document.getElementById('my-apps-modal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-document.getElementById('my-apps-modal').addEventListener('click', function(e){ if(e.target===this) closeMyApps(); });
-
-function loadMyApplications() {
-  var listEl = document.getElementById('my-apps-list');
-  listEl.innerHTML = '<p style="font-family:Inter,sans-serif;color:#64748B;font-size:14px;text-align:center;padding:20px 0;">Loading your applications...</p>';
-  _supa.from('applications')
-    .select('*')
-    .eq('user_id', currentUser.id)
-    .order('applied_at', { ascending: false })
-    .then(function(res) {
-      if (res.error || !res.data || !res.data.length) {
-        listEl.innerHTML = '<div style="text-align:center;padding:32px 0;"><div style="font-size:40px;margin-bottom:12px;">📋</div><p style="font-family:Inter,sans-serif;color:#64748B;font-size:14px;">No applications yet. Browse open roles and apply!</p></div>';
-        return;
-      }
-      var statusColors = {
-        'Applied':      { bg:'rgba(37,99,235,0.1)',   color:'#93c5fd', border:'rgba(37,99,235,0.3)' },
-        'Under Review': { bg:'rgba(245,158,11,0.1)',  color:'#fcd34d', border:'rgba(245,158,11,0.3)' },
-        'Shortlisted':  { bg:'rgba(16,185,129,0.1)',  color:'#6ee7b7', border:'rgba(16,185,129,0.3)' },
-        'Interviewing': { bg:'rgba(139,92,246,0.1)',  color:'#c4b5fd', border:'rgba(139,92,246,0.3)' },
-        'Offer Made':   { bg:'rgba(6,182,212,0.1)',   color:'#67e8f9', border:'rgba(6,182,212,0.3)' },
-        'Rejected':     { bg:'rgba(239,68,68,0.1)',   color:'#fca5a5', border:'rgba(239,68,68,0.3)' }
-      };
-      listEl.innerHTML = res.data.map(function(app) {
-        var sc = statusColors[app.status] || statusColors['Applied'];
-        var date = new Date(app.applied_at).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-        return '<div style="background:#0A0F1E;border:1px solid #1E2D4A;border-radius:12px;padding:20px 22px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">' +
-          '<div>' +
-            '<p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;font-size:16px;color:#fff;margin:0 0 4px;">'+app.job_title+'</p>' +
-            '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Applied on '+date+'</p>' +
-          '</div>' +
-          '<span style="background:'+sc.bg+';border:1px solid '+sc.border+';color:'+sc.color+';border-radius:9999px;padding:5px 14px;font-family:Inter,sans-serif;font-size:12px;font-weight:700;white-space:nowrap;">'+app.status+'</span>' +
-        '</div>';
-      }).join('') +
-      '<div style="margin-top:20px;padding-top:20px;border-top:1px solid #1E2D4A;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">' +
-        '<p style="font-family:Inter,sans-serif;font-size:12px;color:#475569;margin:0;">Questions? <a href="mailto:support@nexaracloudlabs.com" style="color:#06B6D4;text-decoration:none;">support@nexaracloudlabs.com</a></p>' +
-        '<button onclick="doLogout()" style="padding:8px 16px;background:transparent;color:#EF4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;font-family:Inter,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">Sign Out</button>' +
-      '</div>';
-    });
-}
-
-function doLogout() {
-  _supa.auth.signOut().then(function() {
-    currentUser = null;
-    appliedJobs = [];
-    closeMyApps();
-    updateNavbar();
-    showToast('👋 Signed out successfully', '#0F1629');
-  });
-}
-</script>
-
 </body>
 </html>
