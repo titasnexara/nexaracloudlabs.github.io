@@ -634,28 +634,35 @@ async function submitApplication() {
   btn.disabled = true;
   btn.style.opacity = '0.7';
 
+  var SUPABASE_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
+
   try {
-    var SUPABASE_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
-    var SUPABASE_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
-
-    // Upload resume to Supabase Storage
-    var fileName = Date.now() + '-' + resume.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    var uploadRes = await fetch(SUPABASE_URL + '/storage/v1/object/resumes/' + fileName, {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': resume.type,
-        'x-upsert': 'false'
-      },
-      body: resume
-    });
-
+    // Step 1: Upload resume (non-blocking — proceed even if fails)
     var resumeUrl = null;
-    if (uploadRes.ok) {
-      resumeUrl = SUPABASE_URL + '/storage/v1/object/public/resumes/' + fileName;
+    try {
+      var fileName = Date.now() + '-' + resume.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+      var uploadRes = await fetch(SUPABASE_URL + '/storage/v1/object/resumes/' + fileName, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type': resume.type,
+          'x-upsert': 'false'
+        },
+        body: resume
+      });
+      if (uploadRes.ok) {
+        resumeUrl = SUPABASE_URL + '/storage/v1/object/public/resumes/' + fileName;
+      } else {
+        var uploadErr = await uploadRes.json();
+        console.warn('Resume upload failed:', uploadErr);
+      }
+    } catch(uploadErr) {
+      console.warn('Resume upload error (continuing):', uploadErr);
     }
 
-    // Save application to Supabase
+    // Step 2: Save application to Supabase
+    var jobId = (currentJobData.id && currentJobData.id.includes('-') && currentJobData.id.length > 30) ? currentJobData.id : null;
     var appRes = await fetch(SUPABASE_URL + '/rest/v1/applications', {
       method: 'POST',
       headers: {
@@ -665,7 +672,7 @@ async function submitApplication() {
         'Prefer': 'return=representation'
       },
       body: JSON.stringify({
-        job_id:             (currentJobData.id && currentJobData.id.includes('-') && currentJobData.id.length > 30) ? currentJobData.id : null,
+        job_id:             jobId,
         job_title:          currentJobData.title,
         full_name:          name,
         email:              email,
@@ -684,8 +691,8 @@ async function submitApplication() {
     var appData = await appRes.json();
     var applicationId = appData[0] && appData[0].id;
 
-    // Trigger emails
-    await fetch('/api/send-emails', {
+    // Step 3: Send emails (non-blocking — show success regardless)
+    fetch('/api/send-emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -698,9 +705,9 @@ async function submitApplication() {
         exp_details:    expDetails,
         resume_url:     resumeUrl
       })
-    });
+    }).catch(function(e){ console.warn('Email send error:', e); });
 
-    // Show success
+    // Step 4: Show success immediately
     document.getElementById('app-form-wrap').style.display = 'none';
     document.getElementById('app-success').style.display = 'block';
 
@@ -770,11 +777,16 @@ loadJobs();
 
     <!-- Success State -->
     <div id="app-success" style="display:none;text-align:center;padding:20px 0;">
-      <div style="width:80px;height:80px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px;">✓</div>
-      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;color:#0f172a;margin:0 0 12px;">Application Submitted!</h3>
+      <div style="width:90px;height:90px;background:#059669;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 8px 24px rgba(5,150,105,0.35);">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:26px;color:#0f172a;margin:0 0 12px;">Application Submitted!</h3>
       <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 8px;">Thank you for applying for <strong id="app-success-title" style="color:#0f172a;"></strong>.</p>
-      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 24px;">We have received your application and will get back to you within <strong style="color:#0f172a;">2-3 business days</strong>. Check your email for a confirmation.</p>
-      <button onclick="closeApplicationForm()" style="padding:12px 32px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Done</button>
+      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 24px;">We have received your application and will get back to you within <strong style="color:#0f172a;">2-3 business days</strong>.</p>
+      <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:14px 20px;margin-bottom:24px;">
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#166534;margin:0;">A confirmation email has been sent to your email address.</p>
+      </div>
+      <button onclick="closeApplicationForm()" style="padding:13px 40px;background:#059669;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#047857'" onmouseout="this.style.background='#059669'">Done</button>
     </div>
   </div>
 </div>
