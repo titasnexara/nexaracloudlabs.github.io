@@ -275,11 +275,11 @@
     <button onclick="closeJobDetail()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #1E2D4A;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;display:flex;align-items:center;justify-content:center;line-height:1;">&times;</button>
     <div id="job-detail-content"></div>
     <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
-      <a id="jd-apply-btn" href="https://forms.gle/d28nqpuh4GMMT9QU7" target="_blank"
-        style="flex:1;padding:13px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;min-width:140px;text-align:center;text-decoration:none;display:inline-block;"
+      <button id="jd-apply-btn" onclick="openApplicationForm()"
+        style="flex:1;padding:13px 24px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;min-width:140px;text-align:center;"
         onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
         Apply Now →
-      </a>
+      </button>
       <button onclick="shareJob()"
         style="padding:13px 20px;background:transparent;color:#94A3B8;border:1px solid #1E2D4A;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;"
         onmouseover="this.style.borderColor='#2563EB';this.style.color='#93c5fd'" onmouseout="this.style.borderColor='#1E2D4A';this.style.color='#94A3B8'">
@@ -416,10 +416,10 @@
 })();
 
 /* Jobs */
-var JOBS_API = 'https://script.google.com/macros/s/AKfycbxcYnyXJ7AUA4ceF6aw_NHxsmCWeSSUgGDdXdhaTsvsRj0uFREZjqtx0qkISQZeFlSRXA/exec';
+var JOBS_API = '/api/get-jobs';
 var allJobs = [];
 var currentJob = null;
-var APPLY_FORM_URL = 'https://forms.gle/d28nqpuh4GMMT9QU7';
+
 
 function loadJobs(){
   fetch(JOBS_API)
@@ -520,5 +520,253 @@ function shareJob(){
 
 loadJobs();
 </script>
+
+<!-- APPLICATION MODAL -->
+<div id="application-modal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);">
+  <div style="position:relative;background:#fff;border-radius:20px;padding:40px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.4);">
+    <button onclick="closeApplicationForm()" style="position:absolute;top:16px;right:16px;background:none;border:1px solid #E2E8F0;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;color:#64748B;display:flex;align-items:center;justify-content:center;">&times;</button>
+
+    <!-- Form -->
+    <div id="app-form-wrap">
+      <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#2563EB;text-transform:uppercase;margin:0 0 6px;">APPLYING FOR</p>
+      <h3 id="app-job-title" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:#0f172a;margin:0 0 4px;line-height:1.2;"></h3>
+      <p style="font-family:'Inter',sans-serif;font-size:13px;color:#64748B;margin:0 0 24px;">Nexara Cloud Labs</p>
+      <hr style="border:none;border-top:1px solid #E2E8F0;margin:0 0 24px;">
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <!-- Name & Email -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div>
+            <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Full Name *</label>
+            <input id="app-name" type="text" placeholder="Jane Smith" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+          </div>
+          <div>
+            <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Email Address *</label>
+            <input id="app-email" type="email" placeholder="jane@email.com" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Phone Number</label>
+          <input id="app-phone" type="tel" placeholder="+91 9876543210" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+
+        <!-- Dynamic experience fields -->
+        <div id="app-exp-fields"></div>
+
+        <!-- Resume Upload -->
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Upload Resume * (PDF or DOC, max 5MB)</label>
+          <input id="app-resume" type="file" accept=".pdf,.doc,.docx" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;cursor:pointer;" onchange="validateFileSize(this)">
+          <p id="file-error" style="display:none;font-size:12px;color:#EF4444;margin:4px 0 0;font-family:'Inter',sans-serif;">File size must be under 5MB</p>
+        </div>
+
+        <p id="app-error" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#EF4444;margin:0;"></p>
+
+        <button id="app-submit-btn" onclick="submitApplication()" style="width:100%;padding:14px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">
+          Submit Application →
+        </button>
+        <p style="font-family:'Inter',sans-serif;font-size:11px;color:#94A3B8;text-align:center;margin:0;">Your details are safe. We respond to every application within 48 hours.</p>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="app-success" style="display:none;text-align:center;padding:20px 0;">
+      <div style="width:80px;height:80px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px;">✓</div>
+      <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;color:#0f172a;margin:0 0 12px;">Application Submitted!</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 8px;">Thank you for applying for <strong id="app-success-title" style="color:#0f172a;"></strong>.</p>
+      <p style="font-family:'Inter',sans-serif;font-size:15px;color:#64748B;line-height:1.7;margin:0 0 24px;">We have received your application and will get back to you within <strong style="color:#0f172a;">2-3 business days</strong>. Check your email for a confirmation.</p>
+      <button onclick="closeApplicationForm()" style="padding:12px 32px;background:#2563EB;color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Application Form ──────────────────────────────────────────
+var currentJobData = null;
+
+var SUPABASE_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
+
+function openApplicationForm() {
+  if (!currentJob) return;
+  currentJobData = currentJob;
+
+  document.getElementById('app-job-title').textContent = currentJob.title;
+  document.getElementById('app-success-title').textContent = currentJob.title;
+  document.getElementById('app-form-wrap').style.display = 'block';
+  document.getElementById('app-success').style.display = 'none';
+  document.getElementById('app-error').style.display = 'none';
+  document.getElementById('file-error').style.display = 'none';
+
+  // Reset form
+  ['app-name','app-email','app-phone','app-resume'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  // Build dynamic experience fields from job requirements
+  buildExpFields(currentJob);
+
+  // Close job detail modal first
+  closeJobDetail();
+
+  // Open application modal
+  var modal = document.getElementById('application-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function buildExpFields(job) {
+  var container = document.getElementById('app-exp-fields');
+  container.innerHTML = '';
+
+  // Standard experience fields
+  var fields = [
+    { id: 'exp-primary',   label: 'Years of experience in ' + job.title },
+    { id: 'exp-secondary', label: 'Total years of relevant experience' }
+  ];
+
+  // If job has requirements, add skill-specific fields
+  if (job.requirements && Array.isArray(job.requirements)) {
+    fields = job.requirements.slice(0, 4).map(function(req, i) {
+      return { id: 'exp-' + i, label: 'Years of experience in ' + req };
+    });
+  }
+
+  var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
+  fields.forEach(function(f) {
+    html += '<div>' +
+      '<label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:Inter,sans-serif;">' + f.label + '</label>' +
+      '<input id="' + f.id + '" type="number" min="0" max="30" placeholder="0" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:Inter,sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">' +
+    '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function closeApplicationForm() {
+  document.getElementById('application-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function validateFileSize(input) {
+  var errEl = document.getElementById('file-error');
+  if (input.files[0] && input.files[0].size > 5 * 1024 * 1024) {
+    errEl.style.display = 'block';
+    input.value = '';
+  } else {
+    errEl.style.display = 'none';
+  }
+}
+
+async function submitApplication() {
+  var name    = document.getElementById('app-name').value.trim();
+  var email   = document.getElementById('app-email').value.trim();
+  var phone   = document.getElementById('app-phone').value.trim();
+  var resume  = document.getElementById('app-resume').files[0];
+  var errEl   = document.getElementById('app-error');
+  var btn     = document.getElementById('app-submit-btn');
+
+  // Validate
+  if (!name)  { errEl.textContent='Please enter your full name.'; errEl.style.display='block'; return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent='Please enter a valid email address.'; errEl.style.display='block'; return; }
+  if (!resume) { errEl.textContent='Please upload your resume.'; errEl.style.display='block'; return; }
+  errEl.style.display = 'none';
+
+  // Collect experience details
+  var expDetails = {};
+  document.querySelectorAll('#app-exp-fields input').forEach(function(input) {
+    if (input.previousElementSibling) {
+      expDetails[input.previousElementSibling.textContent] = input.value || '0';
+    }
+  });
+
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  try {
+    // Upload resume to Supabase Storage directly from browser
+    var fileName = Date.now() + '-' + resume.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+
+    var uploadRes = await fetch(SUPABASE_URL + '/storage/v1/object/resumes/' + fileName, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': resume.type,
+        'x-upsert': 'false'
+      },
+      body: resume
+    });
+
+    var resumeUrl = null;
+    if (uploadRes.ok) {
+      resumeUrl = SUPABASE_URL + '/storage/v1/object/public/resumes/' + fileName;
+    }
+
+    // Save application to Supabase
+    var appRes = await fetch(SUPABASE_URL + '/rest/v1/applications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        job_id:             currentJobData.id,
+        job_title:          currentJobData.title,
+        full_name:          name,
+        email:              email,
+        phone:              phone || null,
+        experience_details: expDetails,
+        resume_url:         resumeUrl,
+        status:             'Applied'
+      })
+    });
+
+    if (!appRes.ok) throw new Error('Failed to save application');
+
+    var appData = await appRes.json();
+    var applicationId = appData[0]?.id;
+
+    // Trigger emails via API
+    await fetch('/api/send-emails', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type:           'new_application',
+        application_id: applicationId,
+        full_name:      name,
+        email:          email,
+        phone:          phone,
+        job_title:      currentJobData.title,
+        exp_details:    expDetails,
+        resume_url:     resumeUrl
+      })
+    });
+
+    // Show success
+    document.getElementById('app-form-wrap').style.display = 'none';
+    document.getElementById('app-success').style.display = 'block';
+
+  } catch(err) {
+    console.error(err);
+    errEl.textContent = 'Something went wrong. Please try again or email us at titas.datta@nexaracloudlabs.com';
+    errEl.style.display = 'block';
+  } finally {
+    btn.textContent = 'Submit Application →';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+// Close on backdrop click & Escape
+document.getElementById('application-modal').addEventListener('click', function(e){ if(e.target===this) closeApplicationForm(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeApplicationForm(); } });
+</script>
+
 </body>
 </html>

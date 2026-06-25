@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NCL Dashboard | Nexara Cloud Labs</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0A0F1E; color: #F0F4FF; min-height: 100vh; }
+
+    /* LOGIN */
+    #login-screen { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; }
+    .login-card { background:#0F1629; border:1px solid #1E2D4A; border-radius:20px; padding:48px 40px; max-width:420px; width:100%; }
+    .login-card h1 { font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:#fff; margin:0 0 6px; }
+    .login-card p { font-size:13px; color:#64748B; margin:0 0 28px; }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; font-size:12px; font-weight:600; color:#64748B; margin-bottom:6px; }
+    .form-input { width:100%; padding:11px 14px; background:#0A0F1E; border:1px solid #1E2D4A; border-radius:8px; font-size:14px; color:#fff; font-family:'Inter',sans-serif; outline:none; transition:border-color 0.2s; }
+    .form-input:focus { border-color:#2563EB; }
+    .btn-primary { width:100%; padding:13px; background:#2563EB; color:#fff; border:none; border-radius:10px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px; cursor:pointer; transition:background 0.2s; }
+    .btn-primary:hover { background:#1d4ed8; }
+    .btn-primary:disabled { opacity:0.6; cursor:not-allowed; }
+    #login-error { display:none; font-size:13px; color:#EF4444; margin-top:12px; }
+
+    /* DASHBOARD */
+    #dashboard { display:none; }
+
+    /* SIDEBAR */
+    .sidebar { position:fixed; top:0; left:0; width:240px; height:100vh; background:#0F1629; border-right:1px solid #1E2D4A; padding:24px 0; z-index:100; }
+    .sidebar-logo { padding:0 20px 24px; border-bottom:1px solid #1E2D4A; margin-bottom:16px; }
+    .sidebar-logo span { font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:18px; color:#fff; }
+    .sidebar-logo small { display:block; font-size:11px; color:#06B6D4; margin-top:2px; }
+    .nav-item { display:flex; align-items:center; gap:10px; padding:10px 20px; font-size:14px; color:#64748B; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
+    .nav-item:hover { color:#fff; background:rgba(255,255,255,0.04); }
+    .nav-item.active { color:#fff; background:rgba(37,99,235,0.12); border-left-color:#2563EB; }
+    .nav-item svg { width:18px; height:18px; flex-shrink:0; }
+    .sidebar-footer { position:absolute; bottom:0; left:0; right:0; padding:16px 20px; border-top:1px solid #1E2D4A; }
+
+    /* MAIN */
+    .main { margin-left:240px; min-height:100vh; padding:32px; }
+    .page { display:none; }
+    .page.active { display:block; }
+
+    /* HEADER */
+    .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; flex-wrap:wrap; gap:16px; }
+    .page-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:#fff; }
+    .page-subtitle { font-size:13px; color:#64748B; margin-top:4px; }
+
+    /* STATS */
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px; }
+    @media(max-width:900px){ .stats-grid{grid-template-columns:repeat(2,1fr)} }
+    .stat-card { background:#0F1629; border:1px solid #1E2D4A; border-radius:14px; padding:20px 24px; }
+    .stat-label { font-size:12px; color:#64748B; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+    .stat-value { font-family:'Plus Jakarta Sans',sans-serif; font-size:32px; font-weight:800; color:#fff; margin:6px 0 0; }
+    .stat-sub { font-size:12px; color:#64748B; margin-top:4px; }
+
+    /* TABLE */
+    .table-wrap { background:#0F1629; border:1px solid #1E2D4A; border-radius:14px; overflow:hidden; }
+    .table-header { padding:16px 20px; border-bottom:1px solid #1E2D4A; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+    .table-search { padding:8px 14px; background:#0A0F1E; border:1px solid #1E2D4A; border-radius:8px; font-size:13px; color:#fff; font-family:'Inter',sans-serif; outline:none; width:250px; }
+    .table-search:focus { border-color:#2563EB; }
+    table { width:100%; border-collapse:collapse; }
+    th { padding:12px 16px; text-align:left; font-size:11px; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #1E2D4A; }
+    td { padding:14px 16px; font-size:13px; color:#94A3B8; border-bottom:1px solid rgba(30,45,74,0.5); vertical-align:middle; }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:rgba(255,255,255,0.02); }
+    .td-name { color:#fff; font-weight:600; }
+    .td-email { color:#64748B; }
+
+    /* BADGES */
+    .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:9999px; font-size:11px; font-weight:700; }
+    .badge-applied     { background:rgba(37,99,235,0.12); color:#93c5fd; border:1px solid rgba(37,99,235,0.3); }
+    .badge-reviewing   { background:rgba(245,158,11,0.12); color:#fcd34d; border:1px solid rgba(245,158,11,0.3); }
+    .badge-shortlisted { background:rgba(16,185,129,0.12); color:#6ee7b7; border:1px solid rgba(16,185,129,0.3); }
+    .badge-rejected    { background:rgba(239,68,68,0.12); color:#fca5a5; border:1px solid rgba(239,68,68,0.3); }
+
+    /* BUTTONS */
+    .btn { padding:7px 14px; border-radius:7px; font-size:12px; font-weight:600; cursor:pointer; border:none; font-family:'Inter',sans-serif; transition:all 0.2s; }
+    .btn-blue  { background:#2563EB; color:#fff; }
+    .btn-blue:hover { background:#1d4ed8; }
+    .btn-green { background:rgba(16,185,129,0.15); color:#6ee7b7; border:1px solid rgba(16,185,129,0.3); }
+    .btn-green:hover { background:rgba(16,185,129,0.25); }
+    .btn-red   { background:rgba(239,68,68,0.15); color:#fca5a5; border:1px solid rgba(239,68,68,0.3); }
+    .btn-red:hover { background:rgba(239,68,68,0.25); }
+    .btn-ghost { background:transparent; color:#64748B; border:1px solid #1E2D4A; }
+    .btn-ghost:hover { border-color:#2563EB; color:#93c5fd; }
+
+    /* MODAL */
+    .modal-overlay { display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.8); backdrop-filter:blur(6px); }
+    .modal-overlay.open { display:flex; }
+    .modal-box { background:#0F1629; border:1px solid #1E2D4A; border-radius:20px; padding:32px; max-width:560px; width:100%; max-height:90vh; overflow-y:auto; }
+    .modal-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:20px; font-weight:800; color:#fff; margin:0 0 20px; }
+    .modal-field { margin-bottom:14px; }
+    .modal-label { font-size:12px; color:#64748B; font-weight:600; margin-bottom:5px; display:block; }
+    .modal-value { font-size:14px; color:#fff; }
+    .modal-input { width:100%; padding:10px 14px; background:#0A0F1E; border:1px solid #1E2D4A; border-radius:8px; font-size:14px; color:#fff; font-family:'Inter',sans-serif; outline:none; }
+    .modal-input:focus { border-color:#2563EB; }
+    .modal-select { width:100%; padding:10px 14px; background:#0A0F1E; border:1px solid #1E2D4A; border-radius:8px; font-size:14px; color:#fff; font-family:'Inter',sans-serif; outline:none; cursor:pointer; }
+    .modal-textarea { width:100%; padding:10px 14px; background:#0A0F1E; border:1px solid #1E2D4A; border-radius:8px; font-size:14px; color:#fff; font-family:'Inter',sans-serif; outline:none; resize:vertical; min-height:80px; }
+
+    /* JOBS */
+    .job-card { background:#0A0F1E; border:1px solid #1E2D4A; border-radius:12px; padding:20px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; gap:16px; transition:border-color 0.2s; }
+    .job-card:hover { border-color:rgba(37,99,235,0.4); }
+    .job-card-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; color:#fff; margin:0 0 6px; }
+    .job-meta { display:flex; gap:8px; flex-wrap:wrap; }
+    .job-actions { display:flex; gap:8px; flex-shrink:0; }
+
+    /* FORM */
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:600px){ .form-grid{grid-template-columns:1fr} }
+
+    /* TOAST */
+    #toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); padding:12px 24px; border-radius:10px; font-size:14px; font-weight:600; z-index:99999; display:none; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,0.4); }
+
+    .empty-state { text-align:center; padding:60px 20px; color:#64748B; }
+    .empty-state h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; color:#94A3B8; margin:0 0 8px; }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ───────────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px;">
+      <svg width="36" height="36" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="ng1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs><rect width="44" height="44" rx="10" fill="url(#ng1)"/><path d="M13 31 L13 13 L31 31 L31 13" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="13" cy="13" r="2.5" fill="white"/><circle cx="31" cy="13" r="2.5" fill="white"/><circle cx="13" cy="31" r="2.5" fill="white"/><circle cx="31" cy="31" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+      <div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;color:#fff;">Nexara</div>
+        <div style="font-size:11px;color:#06B6D4;">Cloud Labs</div>
+      </div>
+    </div>
+    <h1>Admin Dashboard</h1>
+    <p>Sign in to manage jobs and applications</p>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input id="login-email" class="form-input" type="email" placeholder="titas.datta@nexaracloudlabs.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input id="login-password" class="form-input" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <p id="login-error"></p>
+    <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ───────────────────────────────────────────── -->
+<div id="dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <span>NCL Dashboard</span>
+      <small>Nexara Cloud Labs</small>
+    </div>
+    <nav>
+      <div class="nav-item active" onclick="showPage('overview')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        Overview
+      </div>
+      <div class="nav-item" onclick="showPage('applications')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Applications
+      </div>
+      <div class="nav-item" onclick="showPage('jobs')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Job Listings
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div style="font-size:12px;color:#64748B;margin-bottom:8px;" id="admin-email-display"></div>
+      <button class="btn btn-ghost" style="width:100%;" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- OVERVIEW PAGE -->
+    <div id="page-overview" class="page active">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Overview</div>
+          <div class="page-subtitle">Welcome back, Titas</div>
+        </div>
+        <button class="btn btn-blue" onclick="showPage('jobs');openJobModal()">+ Add New Job</button>
+      </div>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card"><div class="stat-label">Total Applications</div><div class="stat-value" id="stat-total">—</div></div>
+        <div class="stat-card"><div class="stat-label">New (Applied)</div><div class="stat-value" id="stat-applied" style="color:#93c5fd;">—</div></div>
+        <div class="stat-card"><div class="stat-label">Shortlisted</div><div class="stat-value" id="stat-shortlisted" style="color:#6ee7b7;">—</div></div>
+        <div class="stat-card"><div class="stat-label">Active Jobs</div><div class="stat-value" id="stat-jobs" style="color:#06B6D4;">—</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div style="font-size:14px;font-weight:600;color:#fff;">Recent Applications</div>
+          <button class="btn btn-ghost" onclick="showPage('applications')">View All →</button>
+        </div>
+        <table>
+          <thead><tr><th>Candidate</th><th>Position</th><th>Applied</th><th>Status</th></tr></thead>
+          <tbody id="recent-apps-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- APPLICATIONS PAGE -->
+    <div id="page-applications" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Applications</div>
+          <div class="page-subtitle" id="apps-count-label">Loading...</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <select id="status-filter" class="table-search" style="width:auto;" onchange="filterApplications()">
+            <option value="">All Status</option>
+            <option value="Applied">Applied</option>
+            <option value="Reviewing">Reviewing</option>
+            <option value="Shortlisted">Shortlisted</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+          <input id="app-search" class="table-search" placeholder="Search candidates..." oninput="filterApplications()">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Candidate</th><th>Position</th><th>Experience</th><th>Applied</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="apps-table-body"></tbody>
+        </table>
+        <div id="apps-empty" class="empty-state" style="display:none;">
+          <h3>No applications yet</h3>
+          <p>Applications will appear here once candidates apply</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOBS PAGE -->
+    <div id="page-jobs" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Job Listings</div>
+          <div class="page-subtitle">Manage your open positions</div>
+        </div>
+        <button class="btn btn-blue" onclick="openJobModal()">+ Add New Job</button>
+      </div>
+      <div id="jobs-list"></div>
+      <div id="jobs-empty" class="empty-state" style="display:none;">
+        <h3>No jobs posted yet</h3>
+        <p>Click "Add New Job" to post your first opening</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- APPLICATION DETAIL MODAL -->
+<div id="app-detail-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:20px;">
+      <h3 class="modal-title" style="margin:0;">Application Details</h3>
+      <button onclick="closeModal('app-detail-modal')" style="background:none;border:1px solid #1E2D4A;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#64748B;font-size:18px;display:flex;align-items:center;justify-content:center;">&times;</button>
+    </div>
+    <div id="app-detail-content"></div>
+    <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+      <select id="status-select" class="modal-select" style="flex:1;">
+        <option value="Applied">Applied</option>
+        <option value="Reviewing">Reviewing</option>
+        <option value="Shortlisted">Shortlisted</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+      <button class="btn btn-blue" onclick="updateApplicationStatus()">Update Status</button>
+    </div>
+    <div style="margin-top:12px;">
+      <textarea id="app-notes" class="modal-textarea" placeholder="Add notes about this candidate..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- JOB MODAL -->
+<div id="job-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:20px;">
+      <h3 class="modal-title" style="margin:0;" id="job-modal-title">Add New Job</h3>
+      <button onclick="closeModal('job-modal')" style="background:none;border:1px solid #1E2D4A;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#64748B;font-size:18px;display:flex;align-items:center;justify-content:center;">&times;</button>
+    </div>
+    <input type="hidden" id="job-edit-id">
+    <div class="form-grid" style="margin-bottom:14px;">
+      <div>
+        <label class="modal-label">Job Title *</label>
+        <input id="job-title" class="modal-input" placeholder="e.g. SAP CAP Developer">
+      </div>
+      <div>
+        <label class="modal-label">Department</label>
+        <input id="job-dept" class="modal-input" placeholder="e.g. Engineering">
+      </div>
+      <div>
+        <label class="modal-label">Location</label>
+        <input id="job-location" class="modal-input" placeholder="e.g. Remote">
+      </div>
+      <div>
+        <label class="modal-label">Job Type</label>
+        <select id="job-type" class="modal-select">
+          <option>Full-Time</option>
+          <option>Part-Time</option>
+          <option>Contract</option>
+          <option>Internship</option>
+        </select>
+      </div>
+      <div>
+        <label class="modal-label">Experience Required</label>
+        <input id="job-exp" class="modal-input" placeholder="e.g. 4+ Years">
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label class="modal-label">Job Description *</label>
+      <textarea id="job-desc" class="modal-textarea" style="min-height:100px;" placeholder="Describe the role and responsibilities..."></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label class="modal-label">Key Requirements (one per line)</label>
+      <textarea id="job-reqs" class="modal-textarea" placeholder="SAP CAP & SAP BTP&#10;SAP Fiori / UI5&#10;JavaScript / Node.js"></textarea>
+    </div>
+    <div style="margin-bottom:20px;">
+      <label class="modal-label">Nice to Have (one per line)</label>
+      <textarea id="job-nice" class="modal-textarea" placeholder="SAP HANA&#10;SAP ABAP&#10;BTP Certifications"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-blue" style="flex:1;" onclick="saveJob()">Save Job</button>
+      <button class="btn btn-ghost" onclick="closeModal('job-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPA_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
+const SUPA_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
+const _supa    = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+var allApplications = [];
+var allJobs         = [];
+var currentAppId    = null;
+
+// ── AUTH ────────────────────────────────────────────────────
+async function doLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var pass  = document.getElementById('login-password').value;
+  var errEl = document.getElementById('login-error');
+  var btn   = document.getElementById('login-btn');
+
+  if (!email || !pass) { errEl.style.display='block'; errEl.textContent='Please enter email and password.'; return; }
+
+  btn.textContent = 'Signing in...'; btn.disabled = true;
+  errEl.style.display = 'none';
+
+  const { data, error } = await _supa.auth.signInWithPassword({ email, password: pass });
+
+  if (error) {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Invalid email or password.';
+    btn.textContent = 'Sign In'; btn.disabled = false;
+    return;
+  }
+
+  // Verify admin
+  const { data: adminCheck } = await _supa.from('admin_users').select('email').eq('email', email).single();
+  if (!adminCheck) {
+    await _supa.auth.signOut();
+    errEl.style.display = 'block';
+    errEl.textContent = 'Access denied. Not an admin account.';
+    btn.textContent = 'Sign In'; btn.disabled = false;
+    return;
+  }
+
+  showDashboard(email);
+}
+
+async function doLogout() {
+  await _supa.auth.signOut();
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+function showDashboard(email) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('admin-email-display').textContent = email;
+  loadAll();
+}
+
+// Check existing session
+_supa.auth.getSession().then(({ data: { session } }) => {
+  if (session) {
+    _supa.from('admin_users').select('email').eq('email', session.user.email).single().then(({ data }) => {
+      if (data) showDashboard(session.user.email);
+    });
+  }
+});
+
+// ── DATA ─────────────────────────────────────────────────────
+async function loadAll() {
+  await Promise.all([loadApplications(), loadJobs()]);
+  renderOverview();
+}
+
+async function loadApplications() {
+  const { data, error } = await _supa.from('applications').select('*').order('applied_at', { ascending: false });
+  if (!error) { allApplications = data || []; renderApplications(); }
+}
+
+async function loadJobs() {
+  const { data, error } = await _supa.from('jobs').select('*').order('created_at', { ascending: false });
+  if (!error) { allJobs = data || []; renderJobs(); }
+}
+
+// ── OVERVIEW ──────────────────────────────────────────────────
+function renderOverview() {
+  var total       = allApplications.length;
+  var applied     = allApplications.filter(a => a.status === 'Applied').length;
+  var shortlisted = allApplications.filter(a => a.status === 'Shortlisted').length;
+  var activeJobs  = allJobs.filter(j => j.is_active).length;
+
+  document.getElementById('stat-total').textContent       = total;
+  document.getElementById('stat-applied').textContent     = applied;
+  document.getElementById('stat-shortlisted').textContent = shortlisted;
+  document.getElementById('stat-jobs').textContent        = activeJobs;
+
+  var recent = allApplications.slice(0, 5);
+  document.getElementById('recent-apps-body').innerHTML = recent.length ? recent.map(a =>
+    '<tr>' +
+      '<td><div class="td-name">' + esc(a.full_name) + '</div><div class="td-email">' + esc(a.email) + '</div></td>' +
+      '<td>' + esc(a.job_title) + '</td>' +
+      '<td>' + formatDate(a.applied_at) + '</td>' +
+      '<td><span class="badge badge-' + a.status.toLowerCase() + '">' + a.status + '</span></td>' +
+    '</tr>'
+  ).join('') : '<tr><td colspan="4" style="text-align:center;color:#64748B;padding:32px;">No applications yet</td></tr>';
+}
+
+// ── APPLICATIONS ──────────────────────────────────────────────
+function renderApplications(apps) {
+  apps = apps || allApplications;
+  var body  = document.getElementById('apps-table-body');
+  var empty = document.getElementById('apps-empty');
+  var label = document.getElementById('apps-count-label');
+
+  label.textContent = apps.length + ' application' + (apps.length !== 1 ? 's' : '');
+
+  if (!apps.length) { body.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  body.innerHTML = apps.map(a => {
+    var expSummary = a.experience_details ? Object.values(a.experience_details).slice(0,2).join(' / ') + ' yrs' : '—';
+    return '<tr>' +
+      '<td><div class="td-name">' + esc(a.full_name) + '</div><div class="td-email">' + esc(a.email) + '</div></td>' +
+      '<td>' + esc(a.job_title) + '</td>' +
+      '<td style="font-size:12px;">' + expSummary + '</td>' +
+      '<td>' + formatDate(a.applied_at) + '</td>' +
+      '<td><span class="badge badge-' + a.status.toLowerCase() + '">' + a.status + '</span></td>' +
+      '<td><button class="btn btn-ghost" onclick="openAppDetail(\'' + a.id + '\')">View</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function filterApplications() {
+  var q      = document.getElementById('app-search').value.toLowerCase();
+  var status = document.getElementById('status-filter').value;
+  var filtered = allApplications.filter(a =>
+    (!status || a.status === status) &&
+    (!q || a.full_name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q) || a.job_title.toLowerCase().includes(q))
+  );
+  renderApplications(filtered);
+}
+
+function openAppDetail(id) {
+  var app = allApplications.find(a => a.id === id);
+  if (!app) return;
+  currentAppId = id;
+
+  var expHtml = app.experience_details ? Object.entries(app.experience_details).map(([k,v]) =>
+    '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1E2D4A;"><span style="color:#64748B;font-size:13px;">' + esc(k) + '</span><span style="color:#fff;font-size:13px;font-weight:600;">' + esc(v) + ' yrs</span></div>'
+  ).join('') : '<p style="color:#64748B;font-size:13px;">Not provided</p>';
+
+  document.getElementById('app-detail-content').innerHTML =
+    '<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #1E2D4A;">' +
+      '<div style="font-family:Plus Jakarta Sans,sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:4px;">' + esc(app.full_name) + '</div>' +
+      '<div style="font-size:13px;color:#64748B;">' + esc(app.email) + ' ' + (app.phone ? '· ' + esc(app.phone) : '') + '</div>' +
+    '</div>' +
+    '<div class="modal-field"><span class="modal-label">Position</span><span class="modal-value">' + esc(app.job_title) + '</span></div>' +
+    '<div class="modal-field"><span class="modal-label">Applied</span><span class="modal-value">' + formatDate(app.applied_at) + '</span></div>' +
+    '<div class="modal-field"><span class="modal-label">Experience</span>' + expHtml + '</div>' +
+    (app.resume_url ? '<div class="modal-field"><a href="' + app.resume_url + '" target="_blank" class="btn btn-blue" style="display:inline-block;text-decoration:none;">Download Resume</a></div>' : '') +
+    (app.notes ? '<div class="modal-field"><span class="modal-label">Notes</span><div style="font-size:13px;color:#94A3B8;">' + esc(app.notes) + '</div></div>' : '');
+
+  document.getElementById('status-select').value = app.status;
+  document.getElementById('app-notes').value = app.notes || '';
+  document.getElementById('app-detail-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+async function updateApplicationStatus() {
+  var newStatus = document.getElementById('status-select').value;
+  var notes     = document.getElementById('app-notes').value;
+  var app       = allApplications.find(a => a.id === currentAppId);
+  if (!app) return;
+
+  try {
+    // Update in Supabase
+    const { error } = await _supa.from('applications')
+      .update({ status: newStatus, notes, updated_at: new Date().toISOString() })
+      .eq('id', currentAppId);
+
+    if (error) throw error;
+
+    // Trigger email via API
+    var emailType = newStatus === 'Rejected' ? 'rejection' : newStatus === 'Shortlisted' ? 'shortlisted' : null;
+    if (emailType) {
+      await fetch('/api/send-emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type:      emailType,
+          full_name: app.full_name,
+          email:     app.email,
+          job_title: app.job_title
+        })
+      });
+    }
+
+    // Update local state
+    app.status = newStatus;
+    app.notes  = notes;
+
+    showToast('Status updated to ' + newStatus + (emailType ? ' — Email sent!' : ''), '#059669');
+    closeModal('app-detail-modal');
+    renderApplications();
+    renderOverview();
+
+  } catch(err) {
+    showToast('Failed to update status', '#EF4444');
+  }
+}
+
+// ── JOBS ─────────────────────────────────────────────────────
+function renderJobs() {
+  var list  = document.getElementById('jobs-list');
+  var empty = document.getElementById('jobs-empty');
+
+  if (!allJobs.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  list.innerHTML = allJobs.map(job => `
+    <div class="job-card">
+      <div>
+        <div class="job-card-title">${esc(job.title)}</div>
+        <div class="job-meta">
+          <span class="badge badge-applied">${esc(job.department || 'General')}</span>
+          <span class="badge badge-reviewing">${esc(job.location || 'Remote')}</span>
+          <span class="badge badge-shortlisted">${esc(job.type || 'Full-Time')}</span>
+          ${!job.is_active ? '<span class="badge badge-rejected">Inactive</span>' : ''}
+        </div>
+      </div>
+      <div class="job-actions">
+        <button class="btn btn-ghost" onclick="editJob('${job.id}')">Edit</button>
+        <button class="btn ${job.is_active ? 'btn-red' : 'btn-green'}" onclick="toggleJob('${job.id}', ${job.is_active})">${job.is_active ? 'Deactivate' : 'Activate'}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openJobModal(jobId) {
+  document.getElementById('job-modal-title').textContent = 'Add New Job';
+  document.getElementById('job-edit-id').value = '';
+  ['job-title','job-dept','job-location','job-exp','job-desc','job-reqs','job-nice'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('job-type').value = 'Full-Time';
+  document.getElementById('job-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function editJob(id) {
+  var job = allJobs.find(j => j.id === id);
+  if (!job) return;
+
+  document.getElementById('job-modal-title').textContent = 'Edit Job';
+  document.getElementById('job-edit-id').value     = job.id;
+  document.getElementById('job-title').value       = job.title || '';
+  document.getElementById('job-dept').value        = job.department || '';
+  document.getElementById('job-location').value    = job.location || '';
+  document.getElementById('job-type').value        = job.type || 'Full-Time';
+  document.getElementById('job-exp').value         = job.experience || '';
+  document.getElementById('job-desc').value        = job.description || '';
+  document.getElementById('job-reqs').value        = (job.requirements || []).join('\n');
+  document.getElementById('job-nice').value        = (job.nice_to_have || []).join('\n');
+  document.getElementById('job-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+async function saveJob() {
+  var title    = document.getElementById('job-title').value.trim();
+  var editId   = document.getElementById('job-edit-id').value;
+
+  if (!title) { showToast('Job title is required', '#EF4444'); return; }
+
+  var payload = {
+    title,
+    department:   document.getElementById('job-dept').value.trim(),
+    location:     document.getElementById('job-location').value.trim(),
+    type:         document.getElementById('job-type').value,
+    experience:   document.getElementById('job-exp').value.trim(),
+    description:  document.getElementById('job-desc').value.trim(),
+    requirements: document.getElementById('job-reqs').value.trim().split('\n').filter(Boolean),
+    nice_to_have: document.getElementById('job-nice').value.trim().split('\n').filter(Boolean),
+    updated_at:   new Date().toISOString()
+  };
+
+  try {
+    if (editId) {
+      const { error } = await _supa.from('jobs').update(payload).eq('id', editId);
+      if (error) throw error;
+      showToast('Job updated successfully!', '#059669');
+    } else {
+      payload.is_active = true;
+      const { error } = await _supa.from('jobs').insert(payload);
+      if (error) throw error;
+      showToast('Job posted successfully!', '#059669');
+    }
+    closeModal('job-modal');
+    await loadJobs();
+    renderOverview();
+  } catch(err) {
+    showToast('Failed to save job', '#EF4444');
+  }
+}
+
+async function toggleJob(id, currentlyActive) {
+  try {
+    const { error } = await _supa.from('jobs')
+      .update({ is_active: !currentlyActive, updated_at: new Date().toISOString() })
+      .eq('id', id);
+    if (error) throw error;
+    showToast(currentlyActive ? 'Job deactivated' : 'Job activated!', '#059669');
+    await loadJobs();
+    renderOverview();
+  } catch(err) {
+    showToast('Failed to update job', '#EF4444');
+  }
+}
+
+// ── UI HELPERS ────────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-item')[['overview','applications','jobs'].indexOf(name)].classList.add('active');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showToast(msg, color) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:99999;display:block;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,0.4);background:' + (color||'#2563EB') + ';color:#fff;';
+  setTimeout(function(){ t.style.display = 'none'; }, 3000);
+}
+
+function formatDate(d) {
+  return d ? new Date(d).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : '—';
+}
+
+function esc(str) {
+  if (!str) return '';
+  return str.toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Close modals on backdrop click
+['app-detail-modal','job-modal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', function(e){ if(e.target===this) closeModal(id); });
+});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal('app-detail-modal'); closeModal('job-modal'); } });
+</script>
+</body>
+</html>
