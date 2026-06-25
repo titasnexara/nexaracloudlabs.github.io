@@ -638,21 +638,19 @@ async function submitApplication() {
   var SUPABASE_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
 
   try {
-    // Step 1: Upload resume (non-blocking — proceed even if fails)
+    // Step 1: Upload resume via server API (non-blocking)
     var resumeUrl = null;
     try {
-      var fileName = Date.now() + '-' + resume.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-      var uploadRes = await fetch(SUPABASE_URL + '/storage/v1/object/resumes/' + fileName, {
+      var formData = new FormData();
+      formData.append('resume', resume);
+      var uploadRes = await fetch('/api/upload-resume', {
         method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + SUPABASE_KEY,
-          'Content-Type': resume.type,
-          'x-upsert': 'false'
-        },
-        body: resume
+        body: formData
       });
       if (uploadRes.ok) {
-        resumeUrl = SUPABASE_URL + '/storage/v1/object/public/resumes/' + fileName;
+        var uploadData = await uploadRes.json();
+        resumeUrl = uploadData.url;
+        console.log('Resume uploaded:', resumeUrl);
       } else {
         var uploadErr = await uploadRes.json();
         console.warn('Resume upload failed:', uploadErr);
