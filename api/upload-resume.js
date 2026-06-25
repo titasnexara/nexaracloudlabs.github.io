@@ -8,24 +8,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-
-    // Debug: log env vars presence
-    console.log('SUPABASE_URL present:', !!supabaseUrl);
-    console.log('SUPABASE_SERVICE_KEY present:', !!supabaseKey);
-    console.log('SUPABASE_URL value:', supabaseUrl);
-
-    if (!supabaseUrl || !supabaseKey) {
-      return res.status(500).json({ error: 'Missing environment variables' });
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    // Test: list buckets first
-    const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets();
-    console.log('Buckets:', JSON.stringify(buckets));
-    console.log('Buckets error:', bucketsError);
+    const supabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_KEY
+    );
 
     const { fileName, fileType, fileData } = req.body;
 
@@ -33,26 +19,42 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing file data' });
     }
 
-    const buffer    = Buffer.from(fileData, 'base64');
+    const buffer     = Buffer.from(fileData, 'base64');
     const uniqueName = Date.now() + '-' + fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
 
-    const { error: uploadError } = await supabase.storage
+    console.log('Uploading:', uniqueName, 'size:', buffer.length, 'type:', fileType);
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from('resumes')
       .upload(uniqueName, buffer, {
         contentType: fileType || 'application/octet-stream',
         upsert: false
       });
 
+    console.log('Upload data:', JSON.stringify(uploadData));
+    console.log('Upload error:', JSON.stringify(uploadError));
+
     if (uploadError) {
-      console.error('Upload error:', JSON.stringify(uploadError));
-      return res.status(500).json({ error: uploadError.message, details: uploadError });
+      return res.status(500).json({ 
+        error: uploadError.message, 
+        details: uploadError,
+        bucket: 'resumes',
+        file: uniqueName
+      });
     }
 
-    const { data: urlData } = supabase.storage
+    // Use signed URL instead of public URL since bucket is private
+    const { data: signedData, error: signedError } = await supabase.storage
       .from('resumes')
-      .getPublicUrl(uniqueName);
+      .createSignedUrl(uniqueName, 60 * 60 * 24 * 365); // 1 year expiry
 
-    return res.status(200).json({ url: urlData.publicUrl, fileName: uniqueName });
+    console.log('Signed URL:', signedData?.signedUrl);
+    console.log('Signed error:', JSON.stringify(signedError));
+
+    return res.status(200).json({ 
+      url: signedData?.signedUrl || uploadData?.path,
+      fileName: uniqueName 
+    });
 
   } catch (error) {
     console.error('Upload catch error:', error);
