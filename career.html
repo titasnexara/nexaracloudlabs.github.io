@@ -541,6 +541,180 @@ function shareJob(){
   copyToClipboard(url);
 }
 
+
+// ── Application Form Global Reference ──────────────────────────
+var currentJobData = null;
+
+function openApplicationForm() {
+  if (!currentJob) return;
+  currentJobData = currentJob;
+
+  document.getElementById('app-job-title').textContent = currentJob.title;
+  document.getElementById('app-success-title').textContent = currentJob.title;
+  document.getElementById('app-form-wrap').style.display = 'block';
+  document.getElementById('app-success').style.display = 'none';
+  document.getElementById('app-error').style.display = 'none';
+  document.getElementById('file-error').style.display = 'none';
+
+  ['app-name','app-email','app-phone','app-resume'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  buildExpFields(currentJob);
+  document.getElementById('job-detail-modal').style.display = 'none';
+
+  var modal = document.getElementById('application-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeApplicationForm() {
+  document.getElementById('application-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function buildExpFields(job) {
+  var container = document.getElementById('app-exp-fields');
+  if (!container) return;
+  container.innerHTML = '';
+
+  var fields = [
+    { id: 'exp-primary',   label: 'Total years of relevant experience' },
+    { id: 'exp-secondary', label: 'Years in current/similar role' }
+  ];
+
+  if (job.requirements && Array.isArray(job.requirements) && job.requirements.length > 0) {
+    fields = job.requirements.slice(0, 4).map(function(req, i) {
+      return { id: 'exp-' + i, label: 'Years of experience in ' + req };
+    });
+  }
+
+  var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
+  fields.forEach(function(f) {
+    html += '<div>' +
+      '<label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:Inter,sans-serif;">' + f.label + '</label>' +
+      '<input id="' + f.id + '" type="number" min="0" max="30" placeholder="0" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:Inter,sans-serif;color:#0f172a;outline:none;box-sizing:border-box;">' +
+    '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function validateFileSize(input) {
+  var errEl = document.getElementById('file-error');
+  if (input.files[0] && input.files[0].size > 5 * 1024 * 1024) {
+    errEl.style.display = 'block';
+    input.value = '';
+  } else {
+    errEl.style.display = 'none';
+  }
+}
+
+async function submitApplication() {
+  var name    = document.getElementById('app-name').value.trim();
+  var email   = document.getElementById('app-email').value.trim();
+  var phone   = document.getElementById('app-phone').value.trim();
+  var resume  = document.getElementById('app-resume').files[0];
+  var errEl   = document.getElementById('app-error');
+  var btn     = document.getElementById('app-submit-btn');
+
+  if (!name)  { errEl.textContent='Please enter your full name.'; errEl.style.display='block'; return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent='Please enter a valid email address.'; errEl.style.display='block'; return; }
+  if (!resume) { errEl.textContent='Please upload your resume.'; errEl.style.display='block'; return; }
+  errEl.style.display = 'none';
+
+  var expDetails = {};
+  document.querySelectorAll('#app-exp-fields input').forEach(function(input) {
+    var lbl = input.previousElementSibling;
+    if (lbl) expDetails[lbl.textContent] = input.value || '0';
+  });
+
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  try {
+    var SUPABASE_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
+    var SUPABASE_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
+
+    // Upload resume to Supabase Storage
+    var fileName = Date.now() + '-' + resume.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+    var uploadRes = await fetch(SUPABASE_URL + '/storage/v1/object/resumes/' + fileName, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': resume.type,
+        'x-upsert': 'false'
+      },
+      body: resume
+    });
+
+    var resumeUrl = null;
+    if (uploadRes.ok) {
+      resumeUrl = SUPABASE_URL + '/storage/v1/object/public/resumes/' + fileName;
+    }
+
+    // Save application to Supabase
+    var appRes = await fetch(SUPABASE_URL + '/rest/v1/applications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        job_id:             (currentJobData.id && currentJobData.id.includes('-') && currentJobData.id.length > 30) ? currentJobData.id : null,
+        job_title:          currentJobData.title,
+        full_name:          name,
+        email:              email,
+        phone:              phone || null,
+        experience_details: expDetails,
+        resume_url:         resumeUrl,
+        status:             'Applied'
+      })
+    });
+
+    if (!appRes.ok) {
+      var errData = await appRes.json();
+      throw new Error(errData.message || 'Failed to save application');
+    }
+
+    var appData = await appRes.json();
+    var applicationId = appData[0] && appData[0].id;
+
+    // Trigger emails
+    await fetch('/api/send-emails', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type:           'new_application',
+        application_id: applicationId,
+        full_name:      name,
+        email:          email,
+        phone:          phone,
+        job_title:      currentJobData.title,
+        exp_details:    expDetails,
+        resume_url:     resumeUrl
+      })
+    });
+
+    // Show success
+    document.getElementById('app-form-wrap').style.display = 'none';
+    document.getElementById('app-success').style.display = 'block';
+
+  } catch(err) {
+    console.error('Submit error:', err);
+    errEl.textContent = 'Something went wrong: ' + err.message + '. Please email titas.datta@nexaracloudlabs.com';
+    errEl.style.display = 'block';
+  } finally {
+    btn.textContent = 'Submit Application →';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
 loadJobs();
 </script>
 
@@ -606,189 +780,8 @@ loadJobs();
 </div>
 
 <script>
-// ── Application Form ──────────────────────────────────────────
-var currentJobData = null;
-
-var SUPABASE_URL = 'https://uvdxzpakufkljltmchia.supabase.co';
-var SUPABASE_KEY = 'sb_publishable_ZUqZ3BoBfITa4vE1Bqherg_zjphBdp9';
-
-function openApplicationForm() {
-  if (!currentJob) return;
-  currentJobData = currentJob;
-
-  document.getElementById('app-job-title').textContent = currentJob.title;
-  document.getElementById('app-success-title').textContent = currentJob.title;
-  document.getElementById('app-form-wrap').style.display = 'block';
-  document.getElementById('app-success').style.display = 'none';
-  document.getElementById('app-error').style.display = 'none';
-  document.getElementById('file-error').style.display = 'none';
-
-  // Reset form
-  ['app-name','app-email','app-phone','app-resume'].forEach(function(id){
-    var el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-
-  // Build dynamic experience fields from job requirements
-  buildExpFields(currentJob);
-
-  // Close job detail modal first
-  closeJobDetail();
-
-  // Open application modal
-  var modal = document.getElementById('application-modal');
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function buildExpFields(job) {
-  var container = document.getElementById('app-exp-fields');
-  container.innerHTML = '';
-
-  // Standard experience fields
-  var fields = [
-    { id: 'exp-primary',   label: 'Years of experience in ' + job.title },
-    { id: 'exp-secondary', label: 'Total years of relevant experience' }
-  ];
-
-  // If job has requirements, add skill-specific fields
-  if (job.requirements && Array.isArray(job.requirements)) {
-    fields = job.requirements.slice(0, 4).map(function(req, i) {
-      return { id: 'exp-' + i, label: 'Years of experience in ' + req };
-    });
-  }
-
-  var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
-  fields.forEach(function(f) {
-    html += '<div>' +
-      '<label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:Inter,sans-serif;">' + f.label + '</label>' +
-      '<input id="' + f.id + '" type="number" min="0" max="30" placeholder="0" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:Inter,sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">' +
-    '</div>';
-  });
-  html += '</div>';
-  container.innerHTML = html;
-}
-
-function closeApplicationForm() {
-  document.getElementById('application-modal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function validateFileSize(input) {
-  var errEl = document.getElementById('file-error');
-  if (input.files[0] && input.files[0].size > 5 * 1024 * 1024) {
-    errEl.style.display = 'block';
-    input.value = '';
-  } else {
-    errEl.style.display = 'none';
-  }
-}
-
-async function submitApplication() {
-  var name    = document.getElementById('app-name').value.trim();
-  var email   = document.getElementById('app-email').value.trim();
-  var phone   = document.getElementById('app-phone').value.trim();
-  var resume  = document.getElementById('app-resume').files[0];
-  var errEl   = document.getElementById('app-error');
-  var btn     = document.getElementById('app-submit-btn');
-
-  // Validate
-  if (!name)  { errEl.textContent='Please enter your full name.'; errEl.style.display='block'; return; }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent='Please enter a valid email address.'; errEl.style.display='block'; return; }
-  if (!resume) { errEl.textContent='Please upload your resume.'; errEl.style.display='block'; return; }
-  errEl.style.display = 'none';
-
-  // Collect experience details
-  var expDetails = {};
-  document.querySelectorAll('#app-exp-fields input').forEach(function(input) {
-    if (input.previousElementSibling) {
-      expDetails[input.previousElementSibling.textContent] = input.value || '0';
-    }
-  });
-
-  btn.textContent = 'Submitting...';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
-
-  try {
-    // Upload resume to Supabase Storage directly from browser
-    var fileName = Date.now() + '-' + resume.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-
-    var uploadRes = await fetch(SUPABASE_URL + '/storage/v1/object/resumes/' + fileName, {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': resume.type,
-        'x-upsert': 'false'
-      },
-      body: resume
-    });
-
-    var resumeUrl = null;
-    if (uploadRes.ok) {
-      resumeUrl = SUPABASE_URL + '/storage/v1/object/public/resumes/' + fileName;
-    }
-
-    // Save application to Supabase
-    var appRes = await fetch(SUPABASE_URL + '/rest/v1/applications', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Prefer': 'return=representation'
-      },
-      body: JSON.stringify({
-        job_id:             currentJobData.id,
-        job_title:          currentJobData.title,
-        full_name:          name,
-        email:              email,
-        phone:              phone || null,
-        experience_details: expDetails,
-        resume_url:         resumeUrl,
-        status:             'Applied'
-      })
-    });
-
-    if (!appRes.ok) throw new Error('Failed to save application');
-
-    var appData = await appRes.json();
-    var applicationId = appData[0]?.id;
-
-    // Trigger emails via API
-    await fetch('/api/send-emails', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type:           'new_application',
-        application_id: applicationId,
-        full_name:      name,
-        email:          email,
-        phone:          phone,
-        job_title:      currentJobData.title,
-        exp_details:    expDetails,
-        resume_url:     resumeUrl
-      })
-    });
-
-    // Show success
-    document.getElementById('app-form-wrap').style.display = 'none';
-    document.getElementById('app-success').style.display = 'block';
-
-  } catch(err) {
-    console.error(err);
-    errEl.textContent = 'Something went wrong. Please try again or email us at titas.datta@nexaracloudlabs.com';
-    errEl.style.display = 'block';
-  } finally {
-    btn.textContent = 'Submit Application →';
-    btn.disabled = false;
-    btn.style.opacity = '1';
-  }
-}
-
-// Close on backdrop click & Escape
+// Close application modal on backdrop click & Escape
 document.getElementById('application-modal').addEventListener('click', function(e){ if(e.target===this) closeApplicationForm(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeApplicationForm(); });
 </script>
 
 </body>
