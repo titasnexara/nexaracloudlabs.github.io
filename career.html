@@ -641,12 +641,24 @@ async function submitApplication() {
     // Step 1: Upload resume via server API (non-blocking)
     var resumeUrl = null;
     try {
-      var formData = new FormData();
-      formData.append('resume', resume);
+      // Convert file to base64
+      var base64 = await new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function() { resolve(reader.result.split(',')[1]); };
+        reader.onerror = reject;
+        reader.readAsDataURL(resume);
+      });
+
       var uploadRes = await fetch('/api/upload-resume', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: resume.name,
+          fileType: resume.type,
+          fileData: base64
+        })
       });
+
       if (uploadRes.ok) {
         var uploadData = await uploadRes.json();
         resumeUrl = uploadData.url;

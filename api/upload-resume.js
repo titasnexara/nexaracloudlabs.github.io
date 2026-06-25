@@ -1,8 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-import formidable from 'formidable';
-import fs from 'fs';
 
-export const config = { api: { bodyParser: false } };
+export const config = { api: { bodyParser: { sizeLimit: '5mb' } } };
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -15,34 +13,36 @@ export default async function handler(req, res) {
       process.env.SUPABASE_SERVICE_KEY
     );
 
-    const form = formidable({ maxFileSize: 5 * 1024 * 1024 });
-    const [, files] = await form.parse(req);
-    const resumeFile = files.resume?.[0];
+    const { fileName, fileType, fileData } = req.body;
 
-    if (!resumeFile) {
-      return res.status(400).json({ error: 'No file uploaded' });
+    if (!fileName || !fileData) {
+      return res.status(400).json({ error: 'Missing file data' });
     }
 
-    const fileBuffer = fs.readFileSync(resumeFile.filepath);
-    const fileName   = Date.now() + '-' + resumeFile.originalFilename.replace(/[^a-zA-Z0-9.-]/g, '_');
+    // Convert base64 to buffer
+    const buffer = Buffer.from(fileData, 'base64');
+    const uniqueName = Date.now() + '-' + fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
 
     const { error: uploadError } = await supabase.storage
       .from('resumes')
-      .upload(fileName, fileBuffer, {
-        contentType: resumeFile.mimetype,
+      .upload(uniqueName, buffer, {
+        contentType: fileType || 'application/octet-stream',
         upsert: false
       });
 
-    if (uploadError) throw uploadError;
+    if (uploadError) {
+      console.error('Upload error:', uploadError);
+      return res.status(500).json({ error: uploadError.message });
+    }
 
     const { data: urlData } = supabase.storage
       .from('resumes')
-      .getPublicUrl(fileName);
+      .getPublicUrl(uniqueName);
 
-    return res.status(200).json({ url: urlData.publicUrl, fileName });
+    return res.status(200).json({ url: urlData.publicUrl, fileName: uniqueName });
 
   } catch (error) {
     console.error('Upload error:', error);
-    return res.status(500).json({ error: 'Upload failed: ' + error.message });
+    return res.status(500).json({ error: error.message });
   }
 }
