@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { type, full_name, email, phone, job_title, exp_details, resume_url } = req.body;
+    const { type, full_name, email, phone, linkedin_url, job_title, exp_details, resume_url } = req.body;
     const firstName = full_name ? full_name.trim().split(' ')[0] : 'there';
 
     if (type === 'new_application') {
@@ -35,6 +35,7 @@ export default async function handler(req, res) {
                 <tr><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;background:#F8FAFC;width:38%;">Full Name</td><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;color:#0f172a;">${full_name}</td></tr>
                 <tr><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;background:#F8FAFC;">Email</td><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;color:#0f172a;"><a href="mailto:${email}" style="color:#2563EB;">${email}</a></td></tr>
                 <tr><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;background:#F8FAFC;">Phone</td><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;color:#0f172a;">${phone || 'Not provided'}</td></tr>
+                ${linkedin_url ? `<tr><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;background:#F8FAFC;">LinkedIn</td><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;color:#0f172a;"><a href="${linkedin_url}" style="color:#2563EB;">${linkedin_url}</a></td></tr>` : ''}
                 <tr><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;background:#F8FAFC;">Position</td><td style="padding:10px 12px;border:1px solid #E2E8F0;font-size:13px;color:#0f172a;">${job_title}</td></tr>
                 ${expRows}
               </table>

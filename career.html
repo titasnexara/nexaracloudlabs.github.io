@@ -215,11 +215,11 @@
         <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#ffffff;margin:0 0 10px;">Rapid Career Growth</h3>
         <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Fast-growing startup means real ownership, real impact, and promotions based on merit not tenure.</p>
       </div>
-      <div class="why-card">
+      <!-- <div class="why-card">
         <div class="why-icon" style="background:linear-gradient(135deg,#059669,#06B6D4);">💰</div>
         <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;color:#ffffff;margin:0 0 10px;">Competitive Compensation</h3>
         <p style="font-family:'Inter',sans-serif;font-size:14px;color:#64748B;line-height:1.65;margin:0;">Market-rate salaries, ESOPs, health insurance, and generous learning and development budgets.</p>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -322,14 +322,7 @@
         <a href="career.html"             class="footer-link" style="color:#06B6D4;">Careers</a>
         <a href="index.html#contact"      class="footer-link">Contact Us</a>
       </div>
-      <div>
-        <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Resources</p>
-        <a href="#" class="footer-link">Documentation</a>
-        <a href="#" class="footer-link">API Docs</a>
-        <a href="#" class="footer-link">Privacy Policy</a>
-        <a href="#" class="footer-link">Terms of Service</a>
-        <a href="#" class="footer-link">Cookie Policy</a>
-      </div>
+      
       <div>
         <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
         <a href="mailto:titas.datta@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;">titas.datta@nexaracloudlabs.com</a>
@@ -615,6 +608,7 @@ async function submitApplication() {
   var name    = document.getElementById('app-name').value.trim();
   var email   = document.getElementById('app-email').value.trim();
   var phone   = document.getElementById('app-phone').value.trim();
+  var linkedin = document.getElementById('app-linkedin').value.trim();
   var resume  = document.getElementById('app-resume').files[0];
   var errEl   = document.getElementById('app-error');
   var btn     = document.getElementById('app-submit-btn');
@@ -687,6 +681,7 @@ async function submitApplication() {
         full_name:          name,
         email:              email,
         phone:              phone || null,
+        linkedin_url:       linkedin || null,
         experience_details: expDetails,
         resume_url:         resumeUrl,
         status:             'Applied'
@@ -711,6 +706,7 @@ async function submitApplication() {
         full_name:      name,
         email:          email,
         phone:          phone,
+        linkedin_url:   linkedin,
         job_title:      currentJobData.title,
         exp_details:    expDetails,
         resume_url:     resumeUrl
@@ -765,7 +761,11 @@ loadJobs();
           <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">Phone Number</label>
           <input id="app-phone" type="tel" placeholder="+91 9876543210" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
-
+        <!-- LinkedIn -->
+        <div>
+          <label style="display:block;font-size:12px;color:#64748B;font-weight:600;margin-bottom:5px;font-family:'Inter',sans-serif;">LinkedIn Profile URL</label>
+          <input id="app-linkedin" type="url" placeholder="https://linkedin.com/in/yourprofile" style="width:100%;padding:10px 14px;border:1px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#0f172a;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
         <!-- Dynamic experience fields -->
         <div id="app-exp-fields"></div>
 
