@@ -332,7 +332,7 @@
       </div>
       <div>
         <p class="font-inter font-bold text-white" style="font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">Contact</p>
-        <a href="mailto:titas@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;">titas@nexaracloudlabs.com</a>
+        <a href="mailto:titas.datta@nexaracloudlabs.com" class="font-inter" style="display:block;font-size:13px;color:#06B6D4;margin-bottom:10px;text-decoration:none;word-break:break-word;">titas.datta@nexaracloudlabs.com</a>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Bangalore, India</p>
         <p class="font-inter" style="font-size:13px;color:#64748B;margin:0 0 10px;">Mon-Fri, 9am-6pm IST</p>
       </div>
@@ -431,7 +431,7 @@ function loadJobs(){
       renderJobs(allJobs);
     })
     .catch(function(){
-      document.getElementById('jobs-loading').innerHTML='<p style="font-family:Inter,sans-serif;color:#EF4444;font-size:14px;">Could not load jobs. Please refresh or contact titas@nexaracloudlabs.com</p>';
+      document.getElementById('jobs-loading').innerHTML='<p style="font-family:Inter,sans-serif;color:#EF4444;font-size:14px;">Could not load jobs. Please refresh or contact titas.datta@nexaracloudlabs.com</p>';
     });
 }
 
@@ -502,20 +502,43 @@ function closeJobDetail(){
 document.getElementById('job-detail-modal').addEventListener('click',function(e){if(e.target===this)closeJobDetail();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeJobDetail();});
 
+function showShareToast(msg,color){
+  var t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:'+(color||'#2563EB')+';color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);white-space:nowrap;';
+  document.body.appendChild(t);
+  setTimeout(function(){t.style.opacity='0';t.style.transition='opacity 0.3s';setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},300);},2700);
+}
+function copyToClipboard(url){
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(url)
+      .then(function(){showShareToast('Link copied to clipboard!','#2563EB');})
+      .catch(function(){fallbackCopy(url);});
+  } else { fallbackCopy(url); }
+}
+function fallbackCopy(url){
+  try{
+    var el=document.createElement('textarea');
+    el.value=url;el.setAttribute('readonly','');
+    el.style.cssText='position:absolute;left:-9999px;top:-9999px;';
+    document.body.appendChild(el);el.focus();el.select();
+    var ok=document.execCommand('copy');
+    document.body.removeChild(el);
+    showShareToast(ok?'Link copied to clipboard!':'Could not copy link.',ok?'#2563EB':'#EF4444');
+  }catch(e){showShareToast('Could not copy. Please copy manually.','#EF4444');}
+}
 function shareJob(){
   if(!currentJob)return;
-  var url='https://nexaracloudlabs.com/career#open-roles';
-  var text=currentJob.title+' - Open Position at Nexara Cloud Labs\n'+url;
+  var url='https://nexaracloudlabs.com/career.html#open-roles';
+  var title=currentJob.title+' - Open Position at Nexara Cloud Labs';
+  var text='Check out this job opening at Nexara Cloud Labs: '+currentJob.title;
   if(navigator.share){
-    navigator.share({title:currentJob.title+' - Nexara Cloud Labs',text:'Check out this job opening at Nexara Cloud Labs!',url:url}).catch(function(){});
-  } else {
-    var temp=document.createElement('textarea');
-    temp.value=text;document.body.appendChild(temp);temp.select();document.execCommand('copy');document.body.removeChild(temp);
-    var t=document.createElement('div');
-    t.textContent='✅ Link copied to clipboard!';
-    t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#2563EB;color:#fff;padding:12px 24px;border-radius:10px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);';
-    document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},3000);
+    navigator.share({title:title,text:text,url:url})
+      .then(function(){showShareToast('Shared successfully!','#059669');})
+      .catch(function(err){if(err.name!=='AbortError')copyToClipboard(url);});
+    return;
   }
+  copyToClipboard(url);
 }
 
 loadJobs();
@@ -765,7 +788,7 @@ async function submitApplication() {
 
 // Close on backdrop click & Escape
 document.getElementById('application-modal').addEventListener('click', function(e){ if(e.target===this) closeApplicationForm(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeApplicationForm(); } });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeApplicationForm(); });
 </script>
 
 </body>

@@ -618,13 +618,13 @@ async function saveJob() {
 
   try {
     if (editId) {
-      const { error } = await _supa.from('jobs').update(payload).eq('id', editId);
-      if (error) throw error;
+      const { data, error } = await _supa.from('jobs').update(payload).eq('id', editId);
+      if (error) { console.error('Update error:', error); showToast('Error: ' + error.message, '#EF4444'); return; }
       showToast('Job updated successfully!', '#059669');
     } else {
       payload.is_active = true;
-      const { error } = await _supa.from('jobs').insert(payload);
-      if (error) throw error;
+      const { data, error } = await _supa.from('jobs').insert(payload);
+      if (error) { console.error('Insert error:', error); showToast('Error: ' + error.message, '#EF4444'); return; }
       showToast('Job posted successfully!', '#059669');
     }
     closeModal('job-modal');
@@ -679,7 +679,7 @@ function esc(str) {
 }
 
 // Close modals on backdrop click
-['app-detail-modal','job-modal'].forEach(id => {
+['app-detail-modal','job-modal'].forEach(function(id) {
   document.getElementById(id).addEventListener('click', function(e){ if(e.target===this) closeModal(id); });
 });
 document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal('app-detail-modal'); closeModal('job-modal'); } });
