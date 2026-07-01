@@ -471,6 +471,27 @@ function openJobDetail(idx){
   if(!job)return;
   currentJob=job;
   var desc=job.description||'Please apply to find out more about this exciting opportunity.';
+
+  // Build requirements list
+  var reqHtml = '';
+  if (job.requirements && job.requirements.length > 0) {
+    reqHtml = '<div style="margin-top:20px;">' +
+      '<p style="font-family:Plus Jakarta Sans,sans-serif;font-weight:700;font-size:14px;color:#fff;margin:0 0 10px;">Key Requirements</p>' +
+      '<ul style="padding-left:18px;margin:0;">' +
+      job.requirements.map(function(r){ return '<li style="font-family:Inter,sans-serif;font-size:13px;color:#94A3B8;line-height:1.8;margin-bottom:4px;">' + r + '</li>'; }).join('') +
+      '</ul></div>';
+  }
+
+  // Build nice to have list
+  var niceHtml = '';
+  if (job.nice_to_have && job.nice_to_have.length > 0) {
+    niceHtml = '<div style="margin-top:16px;">' +
+      '<p style="font-family:Plus Jakarta Sans,sans-serif;font-weight:700;font-size:14px;color:#fff;margin:0 0 10px;">Nice to Have</p>' +
+      '<ul style="padding-left:18px;margin:0;">' +
+      job.nice_to_have.map(function(r){ return '<li style="font-family:Inter,sans-serif;font-size:13px;color:#94A3B8;line-height:1.8;margin-bottom:4px;">' + r + '</li>'; }).join('') +
+      '</ul></div>';
+  }
+
   document.getElementById('job-detail-content').innerHTML=
     '<p style="font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:#06B6D4;text-transform:uppercase;margin:0 0 10px;">OPEN POSITION</p>'+
     '<h2 style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:800;font-size:26px;color:#fff;margin:0 0 12px;line-height:1.2;">'+job.title+'</h2>'+
@@ -478,9 +499,11 @@ function openJobDetail(idx){
       '<span class="badge-dept">'+(job.department||'General')+'</span>'+
       '<span class="badge-loc">'+job.location+'</span>'+
       '<span class="badge-type">'+job.type+'</span>'+
+      (job.experience ? '<span class="badge-type">'+job.experience+'</span>' : '')+
     '</div>'+
     '<hr style="border:none;border-top:1px solid #1E2D4A;margin:0 0 20px;">'+
-    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.9;white-space:pre-line;">'+desc+'</div>';
+    '<div style="font-family:Inter,sans-serif;font-size:14px;color:#94A3B8;line-height:1.9;white-space:pre-line;">'+desc+'</div>'+
+    reqHtml + niceHtml;
 
   var modal=document.getElementById('job-detail-modal');
   modal.style.display='flex';
