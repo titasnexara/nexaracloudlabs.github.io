@@ -415,7 +415,7 @@ var currentJob = null;
 
 
 function loadJobs(){
-  fetch(JOBS_API)
+  return fetch(JOBS_API)
     .then(function(r){return r.json();})
     .then(function(data){
       allJobs=data.jobs||[];
@@ -545,7 +545,7 @@ function fallbackCopy(url){
 }
 function shareJob(){
   if(!currentJob)return;
-  var url='https://nexaracloudlabs.com/career.html#open-roles';
+  var url='https://nexaracloudlabs.com/career.html?job='+currentJob.id;
   var title=currentJob.title+' - Open Position at Nexara Cloud Labs';
   var text='Check out this job opening at Nexara Cloud Labs: '+currentJob.title;
   if(navigator.share){
@@ -751,7 +751,17 @@ async function submitApplication() {
   }
 }
 
-loadJobs();
+loadJobs().then(function(){
+  // Auto-open job from URL parameter e.g. ?job=uuid
+  var params = new URLSearchParams(window.location.search);
+  var jobId  = params.get('job');
+  if (jobId && window._jobsStore) {
+    var idx = window._jobsStore.findIndex(function(j){ return j.id === jobId; });
+    if (idx >= 0) {
+      setTimeout(function(){ openJobDetail(idx); }, 500);
+    }
+  }
+});
 </script>
 
 <!-- APPLICATION MODAL -->
